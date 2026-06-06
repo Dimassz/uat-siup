@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - E-Learning Universitas Pertamina</title>
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* Branding colors matching the main app */
+            --pertamina-navy: #002f6c;
+            --pertamina-blue: #0d47a1;
+            --pertamina-light-blue: #e3f2fd;
+            
+            --primary-purple: #6f42c1;
+            --primary-purple-hover: #5a32a3;
+            --primary-purple-glow: rgba(111, 66, 193, 0.1);
+            
+            --accent-neon-green: #00c853; /* Darker neon green for light background readability */
+            --accent-neon-blue: #00b0ff;  /* Darker neon blue */
+            --bg-color: #f8fafc; /* Premium clean light background */
+            --card-bg: #ffffff;  /* Pure white cards */
+            --card-border: rgba(0, 0, 0, 0.08);
+            --text-main: #0f172a;  /* Very dark slate for readability */
+            --text-muted: #64748b; /* Medium slate for description text */
+            --input-border: #cbd5e1;
+        }
+
+        /* Custom scrollbar for friendly look and feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(111, 66, 193, 0.3);
+            border-radius: 8px;
+            border: 2px solid #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(111, 66, 193, 0.6);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(111, 66, 193, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(13, 71, 161, 0.05) 0px, transparent 50%);
+        }
+
+        /* Top Bar Styling */
+        .admin-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--card-border);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .brand-link {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--pertamina-navy) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+        }
+        
+        .brand-link i {
+            color: var(--primary-purple);
+            filter: drop-shadow(0 0 6px rgba(111, 66, 193, 0.2));
+        }
+
+        /* Glass Card Design */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            border-color: rgba(111, 66, 193, 0.2);
+            box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.09);
+        }
+
+        .stat-card {
+            padding: 26px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--theme-color);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--theme-color, var(--primary-purple));
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: #f8fafc;
+            color: var(--theme-color, var(--primary-purple));
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .stat-card:hover .stat-icon {
+            background: var(--theme-color);
+            color: #ffffff;
+            box-shadow: 0 0 12px var(--theme-color);
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs-admin {
+            border-bottom: 2px solid var(--card-border);
+            gap: 6px;
+        }
+
+        .nav-tabs-admin .nav-link {
+            color: var(--text-muted);
+            border: none;
+            padding: 14px 22px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        .nav-tabs-admin .nav-link:hover {
+            color: var(--text-main);
+            background: #f1f5f9;
+        }
+
+        .nav-tabs-admin .nav-link.active {
+            color: var(--primary-purple);
+            background: #f8fafc;
+        }
+
+        .nav-tabs-admin .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--pertamina-blue));
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Form Controls */
+        .form-label {
+            font-weight: 600;
+            color: #334155;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            background-color: #ffffff;
+            border: 1px solid var(--input-border);
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 12px 18px;
+            transition: all 0.25s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background-color: #ffffff;
+            border-color: var(--primary-purple);
+            color: var(--text-main);
+            box-shadow: 0 0 0 4px var(--primary-purple-glow);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--pertamina-blue) 100%);
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 14px 28px;
+            box-shadow: 0 4px 18px rgba(111, 66, 193, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(111, 66, 193, 0.4);
+            background: linear-gradient(135deg, #7c4fe1 0%, #1157c4 100%);
+        }
+
+        /* Console log encryption terminal */
+        .terminal-container {
+            background-color: #0f172a;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .terminal-header {
+            background-color: #1e293b;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 7px;
+            display: inline-block;
+        }
+
+        .dot-red { background-color: #ef4444; }
+        .dot-yellow { background-color: #f59e0b; }
+        .dot-green { background-color: #10b981; }
+
+        .terminal-body {
+            padding: 18px;
+            height: 320px;
+            overflow-y: auto;
+            color: #38bdf8; /* Light sky blue console output */
+            font-size: 0.88rem;
+            line-height: 1.6;
+            background: #090d16;
+        }
+
+        .terminal-line {
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+
+        .text-info-term { color: #38bdf8; }
+        .text-success-term { color: #4ade80; }
+        .text-warning-term { color: #fb923c; }
+        .text-hash-term { color: #f472b6; font-weight: 600; text-shadow: 0 0 5px rgba(244, 114, 182, 0.3); }
+
+        /* Tables */
+        .table-responsive {
+            border-radius: 14px;
+            border: 1px solid var(--card-border);
+            background: #ffffff;
+        }
+
+        .table-admin {
+            margin-bottom: 0;
+            color: var(--text-main);
+        }
+
+        .table-admin th {
+            background-color: #f1f5f9 !important;
+            color: #475569;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 2px solid var(--card-border);
+            padding: 16px 20px;
+        }
+
+        .table-admin td {
+            background-color: transparent !important;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            vertical-align: middle;
+            color: #334155;
+        }
+
+        .table-admin tr:hover td {
+            background-color: #f8fafc !important;
+        }
+
+        .badge-student {
+            background-color: rgba(111, 66, 193, 0.1);
+            color: #5b37a6;
+            border: 1px solid rgba(111, 66, 193, 0.25);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        .badge-lecturer {
+            background-color: rgba(13, 71, 161, 0.08);
+            color: #0d47a1;
+            border: 1px solid rgba(13, 71, 161, 0.2);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        /* Avatar overlay for user list */
+        .admin-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        .admin-footer {
+            border-top: 1px solid var(--card-border);
+            padding: 24px 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+            background: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header class="admin-header">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="/" class="brand-link">
+                <i class="fa-solid fa-screwdriver-wrench me-2"></i>
+                <span>E-Learning Admin Console</span>
+            </a>
+            
+            <div class="d-flex align-items-center gap-3">
+                <a href="/" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                    <i class="fa-solid fa-right-from-bracket me-1"></i> Dashboard Mahasiswa
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="fw-bold mb-1">Papan Kendali Admin</h2>
+                <p class="text-muted">Kelola akun mahasiswa, dosen, pembuatan kelas, dan alokasi kelas terintegrasi.</p>
+            </div>
+        </div>
+
+        <!-- STATS ROW -->
+        <div class="row g-4 mb-4">
+            <!-- 1. Total Pengguna -->
+            <div class="col-6 col-lg-3">
+                <div class="glass-card stat-card h-100" style="--theme-color: #6f42c1;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small fw-semibold">Total Pengguna</span>
+                        <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-0" id="statUsers">-</h3>
+                </div>
+            </div>
+            
+            <!-- 2. Dosen Pengampu -->
+            <div class="col-6 col-lg-3">
+                <div class="glass-card stat-card h-100" style="--theme-color: #00e5ff;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small fw-semibold">Dosen Pengampu</span>
+                        <div class="stat-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-0" id="statLecturers">-</h3>
+                </div>
+            </div>
+
+            <!-- 3. Total Kelas -->
+            <div class="col-6 col-lg-3">
+                <div class="glass-card stat-card h-100" style="--theme-color: #ffab91;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small fw-semibold">Total Kelas</span>
+                        <div class="stat-icon"><i class="fa-solid fa-school"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-0" id="statClasses">-</h3>
+                </div>
+            </div>
+
+            <!-- 4. Pendaftaran Kelas -->
+            <div class="col-6 col-lg-3">
+                <div class="glass-card stat-card h-100" style="--theme-color: #00e676;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small fw-semibold">Alokasi Kelas</span>
+                        <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+                    </div>
+                    <h3 class="fw-bold mb-0" id="statEnrollments">-</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN TABS CONTROL -->
+        <div class="row">
+            <div class="col-12 col-xl-8 mb-4">
+                <div class="glass-card p-4">
+                    <!-- Tab Headers -->
+                    <ul class="nav nav-tabs nav-tabs-admin mb-4" id="adminTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="summary-tab" data-bs-toggle="tab" data-bs-target="#tab-summary" type="button" role="tab"><i class="fa-solid fa-chart-pie me-2"></i>Ringkasan</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="user-tab" data-bs-toggle="tab" data-bs-target="#tab-user" type="button" role="tab"><i class="fa-solid fa-user-plus me-2"></i>Buat Pengguna</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="class-tab" data-bs-toggle="tab" data-bs-target="#tab-class" type="button" role="tab"><i class="fa-solid fa-folder-plus me-2"></i>Buat Kelas</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="enroll-tab" data-bs-toggle="tab" data-bs-target="#tab-enroll" type="button" role="tab"><i class="fa-solid fa-user-check me-2"></i>Alokasi Kelas</button>
+                        </li>
+                    </ul>
+
+                    <!-- Tab Content Panel -->
+                    <div class="tab-content" id="adminTabsContent">
+                        
+                        <!-- TAB 1: SUMMARY TABLE (LOGS) -->
+                        <div class="tab-pane fade show active" id="tab-summary" role="tabpanel">
+                            <h5 class="fw-bold mb-3 d-flex align-items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-primary"></i> Log Aktivitas Sistem Terbaru</h5>
+                            <div class="table-responsive">
+                                <table class="table table-admin table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Aksi</th>
+                                            <th>Rincian Operasi</th>
+                                            <th>Waktu Kejadian</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="logsTableBody">
+                                        <!-- Dynamic rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: CREATE USER -->
+                        <div class="tab-pane fade" id="tab-user" role="tabpanel">
+                            <h5 class="fw-bold mb-3">Buat Akun Pengguna Baru</h5>
+                            <form id="formUser">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="userName" class="form-label">Nama Lengkap</label>
+                                        <input type="text" class="form-control" id="userName" placeholder="Contoh: Budi Hermawan, Ph.D" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="userRole" class="form-label">Peran Pengguna</label>
+                                        <select class="form-select" id="userRole" required>
+                                            <option value="Mahasiswa" selected>Mahasiswa</option>
+                                            <option value="Dosen">Dosen</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <!-- Dinamis: NIM (Mahasiswa) -->
+                                    <div class="col-md-6" id="containerNim">
+                                        <label for="userNim" class="form-label">NIM (Nomor Induk Mahasiswa)</label>
+                                        <input type="text" class="form-control" id="userNim" placeholder="Contoh: 10201210009">
+                                    </div>
+                                    
+                                    <!-- Email (Selalu Terlihat) -->
+                                    <div class="col-md-6" id="containerEmail">
+                                        <label for="userEmail" class="form-label">Email Pengguna</label>
+                                        <input type="email" class="form-control" id="userEmail" placeholder="Contoh: user@universitaspertamina.ac.id">
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="userPassword" class="form-label">Password Akun</label>
+                                        <input type="password" class="form-control" id="userPassword" placeholder="Masukkan password awal" required>
+                                    </div>
+
+                                    <!-- Frame Avatar (Mahasiswa) -->
+                                    <div class="col-md-6" id="containerFrame">
+                                        <label for="userFrame" class="form-label">Dekorasi Bingkai Avatar</label>
+                                        <select class="form-select" id="userFrame">
+                                            <option value="">Tanpa Bingkai (Normal)</option>
+                                            <option value="avatar-frame-gold-decorated">🥇 Gold Laurel Crown (Rank 1)</option>
+                                            <option value="avatar-frame-silver-decorated">🥈 Silver Diamond Gem (Rank 2)</option>
+                                            <option value="avatar-frame-bronze-decorated">🥉 Bronze Star (Rank 3)</option>
+                                            <option value="avatar-frame-purple-glow-decorated">🔮 Purple Neon Glow (Spesial)</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-premium w-100">
+                                            <i class="fa-solid fa-shield-halved me-2"></i> Buat Akun & Hash Password
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- TAB 3: CREATE CLASS -->
+                        <div class="tab-pane fade" id="tab-class" role="tabpanel">
+                            <h5 class="fw-bold mb-3">Buat Kelas Baru</h5>
+                            <form id="formClass">
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label for="className" class="form-label">Nama Mata Kuliah / Kelas</label>
+                                        <input type="text" class="form-control" id="className" placeholder="Contoh: Audit Keamanan Sistem Informasi-A" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="classCode" class="form-label">Kode Kelas</label>
+                                        <input type="text" class="form-control" id="classCode" placeholder="Contoh: AKSI-2026" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="classLecturer" class="form-label">Dosen Pengampu</label>
+                                        <select class="form-select" id="classLecturer" required>
+                                            <option value="" disabled selected>Pilih Dosen Pengajar</option>
+                                            <!-- Dynamically filled with lecturers -->
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="classSemester" class="form-label">Semester</label>
+                                        <input type="text" class="form-control" id="classSemester" value="Semester Genap 2025-2026" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="classType" class="form-label">Kategori Kelas</label>
+                                        <select class="form-select" id="classType">
+                                            <option value="Wajib">Mata Kuliah Wajib</option>
+                                            <option value="Pilihan">Mata Kuliah Pilihan</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-premium w-100">
+                                            <i class="fa-solid fa-plus me-2"></i> Buat Kelas Baru
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- TAB 4: ENROLL STUDENT -->
+                        <div class="tab-pane fade" id="tab-enroll" role="tabpanel">
+                            <h5 class="fw-bold mb-3">Alokasikan Mahasiswa ke Kelas</h5>
+                            <form id="formEnroll">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="enrollStudent" class="form-label">Mahasiswa</label>
+                                        <select class="form-select" id="enrollStudent" required>
+                                            <option value="" disabled selected>Pilih Mahasiswa</option>
+                                            <!-- Dynamically filled with students -->
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="enrollClass" class="form-label">Kelas Tujuan</label>
+                                        <select class="form-select" id="enrollClass" required>
+                                            <option value="" disabled selected>Pilih Kelas</option>
+                                            <!-- Dynamically filled with classes -->
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn btn-premium w-100">
+                                            <i class="fa-solid fa-user-check me-2"></i> Daftarkan Mahasiswa ke Kelas
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENCRYPTION LOG TERMINAL (KOLOM KANAN) -->
+            <div class="col-12 col-xl-4 mb-4">
+                <div class="terminal-container h-100 d-flex flex-column">
+                    <div class="terminal-header">
+                        <span class="terminal-dot dot-red"></span>
+                        <span class="terminal-dot dot-yellow"></span>
+                        <span class="terminal-dot dot-green"></span>
+                        <span class="text-white small fw-bold ms-2"><i class="fa-solid fa-terminal me-2"></i>Konsol Enkripsi Bcryptjs</span>
+                    </div>
+                    <div class="terminal-body flex-grow-1" id="encryptionTerminal">
+                        <div class="terminal-line text-info-term">[SYSTEM] Konsol pemantau bcryptjs terhubung.</div>
+                        <div class="terminal-line text-info-term">[SYSTEM] Menunggu operasi hashing password...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK DATA TABLES -->
+        <div class="row mt-4">
+            <div class="col-md-6 mb-4">
+                <div class="glass-card p-4">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-user-graduate text-primary me-2"></i>Daftar Pengguna Terbaru</h5>
+                    <div class="table-responsive" style="max-height: 480px;">
+                        <table class="table table-admin table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Pengguna</th>
+                                    <th>Peran</th>
+                                    <th>NIM/Email</th>
+                                    <th>Progres Gamifikasi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quickUsersTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-4">
+                <div class="glass-card p-4">
+                    <h5 class="fw-bold mb-3"><i class="fa-solid fa-graduation-cap text-primary me-2"></i>Daftar Kelas Tersedia</h5>
+                    <div class="table-responsive" style="max-height: 480px;">
+                        <table class="table table-admin table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Nama Kelas</th>
+                                    <th>Dosen Pengajar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="quickClassesTableBody">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toastNotification" class="toast align-items-center text-white bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-success fs-5" id="toastIcon"></i>
+                    <span id="toastMessage">Notifikasi berhasil!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="admin-footer text-center">
+        <div class="container">
+            <p class="mb-1">E-Learning Console &copy; 2026 Universitas Pertamina. All rights reserved.</p>
+            <p class="small text-white-50">Dibuat dengan ❤️ untuk SIM Gamifikasi Dashboard</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Admin JS Logic -->
+    <script>
+        let toastObj = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            toastObj = new bootstrap.Toast(document.getElementById('toastNotification'));
+            
+            // Toggle form fields based on selected role
+            const userRoleSelect = document.getElementById('userRole');
+            userRoleSelect.addEventListener('change', () => {
+                const role = userRoleSelect.value;
+                if (role === 'Mahasiswa') {
+                    document.getElementById('containerNim').classList.remove('d-none');
+                    document.getElementById('containerFrame').classList.remove('d-none');
+                    document.getElementById('userNim').required = true;
+                    document.getElementById('userEmail').required = false;
+                } else {
+                    document.getElementById('containerNim').classList.add('d-none');
+                    document.getElementById('containerFrame').classList.add('d-none');
+                    document.getElementById('userNim').required = false;
+                    document.getElementById('userEmail').required = true;
+                }
+            });
+
+            // Forms Submit Handlers
+            document.getElementById('formUser').addEventListener('submit', handleCreateUser);
+            document.getElementById('formClass').addEventListener('submit', handleCreateClass);
+            document.getElementById('formEnroll').addEventListener('submit', handleEnrollStudent);
+
+            // Load all database dynamic elements
+            loadDashboardData();
+        });
+
+        // Helper untuk memprint di terminal
+        function logToTerminal(message, type = 'info') {
+            const terminal = document.getElementById('encryptionTerminal');
+            const timestamp = new Date().toLocaleTimeString();
+            let colorClass = 'text-info-term';
+            
+            if (type === 'success') colorClass = 'text-success-term';
+            else if (type === 'warning') colorClass = 'text-warning-term';
+            else if (type === 'hash') colorClass = 'text-hash-term';
+            
+            terminal.innerHTML += `
+                <div class="terminal-line">
+                    <span class="text-white-50">[${timestamp}]</span> 
+                    <span class="${colorClass}">${message}</span>
+                </div>
+            `;
+            // Scroll to bottom
+            terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        // Show Toast
+        function showNotification(message, isSuccess = true) {
+            document.getElementById('toastMessage').innerText = message;
+            const icon = document.getElementById('toastIcon');
+            if (isSuccess) {
+                icon.className = 'fa-solid fa-circle-check text-success fs-5';
+            } else {
+                icon.className = 'fa-solid fa-circle-xmark text-danger fs-5';
+            }
+            toastObj.show();
+        }
+
+        // Load dashboard statistical summary, select options, and logs
+        function loadDashboardData() {
+            // Fetch stats and logs
+            fetch('/api/dashboard-summary')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('statUsers').innerText = data.totalUsers;
+                    document.getElementById('statLecturers').innerText = data.totalLecturers;
+                    document.getElementById('statClasses').innerText = data.totalClasses;
+                    document.getElementById('statEnrollments').innerText = data.totalEnrollments;
+
+                    // Render Logs Table
+                    const logsTbody = document.getElementById('logsTableBody');
+                    logsTbody.innerHTML = '';
+                    data.logs.forEach(log => {
+                        const tr = document.createElement('tr');
+                        const time = new Date(log.timestamp).toLocaleString('id-ID');
+                        tr.innerHTML = `
+                            <td><span class="badge bg-secondary">${log.action}</span></td>
+                            <td>${log.detail}</td>
+                            <td class="text-muted small">${time}</td>
+                        `;
+                        logsTbody.appendChild(tr);
+                    });
+                })
+                .catch(err => console.error('Gagal mengambil summary dashboard', err));
+
+            // Fetch users list (for table and dropdowns)
+            fetch('/api/users')
+                .then(res => res.json())
+                .then(users => {
+                    // 1. Render user lists table
+                    const tbody = document.getElementById('quickUsersTableBody');
+                    tbody.innerHTML = '';
+                    
+                    const selectEnrollStudent = document.getElementById('enrollStudent');
+                    const selectClassLecturer = document.getElementById('classLecturer');
+                    
+                    // Reset dropdowns but keep disabled placeholder
+                    selectEnrollStudent.innerHTML = '<option value="" disabled selected>Pilih Mahasiswa</option>';
+                    selectClassLecturer.innerHTML = '<option value="" disabled selected>Pilih Dosen Pengajar</option>';
+                    
+                    users.forEach(user => {
+                        // Render quick table row
+                        const tr = document.createElement('tr');
+                        const labelBadge = user.role === 'Mahasiswa' ? 'badge-student' : 'badge-lecturer';
+                        const ident = user.role === 'Mahasiswa' ? `NIM: ${user.NIM}` : user.email;
+                        
+                        const gamificationInfo = user.role === 'Mahasiswa'
+                            ? `<div class="d-flex flex-column">
+                                  <span class="text-info fw-bold small">${user.level || 'Level 1'}</span>
+                                  <span class="text-muted extra-small" style="font-size: 0.75rem;">${user.xp || 0} XP • ${user.status || 'Apprentice'}</span>
+                               </div>`
+                            : `<span class="text-muted small">-</span>`;
+
+                        tr.innerHTML = `
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <img src="${user.avatar}" class="admin-avatar" alt="${user.name}">
+                                    <span class="fw-semibold text-white">${user.name}</span>
+                                </div>
+                            </td>
+                            <td><span class="badge ${labelBadge}">${user.role}</span></td>
+                            <td class="text-muted small">${ident}</td>
+                            <td>${gamificationInfo}</td>
+                        `;
+                        tbody.appendChild(tr);
+
+                        // Fill dropdowns
+                        if (user.role === 'Mahasiswa') {
+                            const opt = document.createElement('option');
+                            opt.value = user.NIM;
+                            opt.innerText = `${user.name} (NIM: ${user.NIM})`;
+                            selectEnrollStudent.appendChild(opt);
+                        } else if (user.role === 'Dosen') {
+                            const opt = document.createElement('option');
+                            opt.value = user.name; // Keep name as values since class lecturer holds name string
+                            opt.innerText = `${user.name} (${user.email})`;
+                            selectClassLecturer.appendChild(opt);
+                        }
+                    });
+                })
+                .catch(err => console.error('Gagal mengambil data user', err));
+
+            // Fetch classes list (for table and dropdowns)
+            fetch('/api/classes')
+                .then(res => res.json())
+                .then(classes => {
+                    // 1. Render class list table
+                    const tbody = document.getElementById('quickClassesTableBody');
+                    tbody.innerHTML = '';
+                    
+                    const selectEnrollClass = document.getElementById('enrollClass');
+                    selectEnrollClass.innerHTML = '<option value="" disabled selected>Pilih Kelas</option>';
+
+                    classes.forEach(cls => {
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong class="text-info">${cls.code}</strong></td>
+                            <td class="fw-semibold">${cls.name}</td>
+                            <td class="text-muted">${cls.lecturer}</td>
+                        `;
+                        tbody.appendChild(tr);
+
+                        // Fill dropdown
+                        const opt = document.createElement('option');
+                        opt.value = cls.id;
+                        opt.innerText = `${cls.name} (${cls.code})`;
+                        selectEnrollClass.appendChild(opt);
+                    });
+                })
+                .catch(err => console.error('Gagal mengambil data kelas', err));
+        }
+
+        // Action: Create User Account
+        function handleCreateUser(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const role = document.getElementById('userRole').value;
+            const password = document.getElementById('userPassword').value;
+            const nim = document.getElementById('userNim').value;
+            const email = document.getElementById('userEmail').value;
+            const frame = document.getElementById('userFrame').value;
+
+            logToTerminal(`[BCRYPT] Menginisialisasi password hashing untuk user: ${name}...`, 'info');
+            logToTerminal(`[BCRYPT] Password Plain: "${password}"`, 'info');
+            logToTerminal(`[BCRYPT] Melakukan salt generation (rounds: 10)...`, 'info');
+
+            const payload = { name, role, password, nim, email, frame };
+
+            fetch('/api/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(data => { throw new Error(data.error); });
+                }
+                return res.json();
+            })
+            .then(resData => {
+                logToTerminal(`[BCRYPT] Enkripsi password berhasil!`, 'success');
+                logToTerminal(`[BCRYPT] Hash password dihasilkan:`, 'success');
+                logToTerminal(`${resData.hash}`, 'hash');
+                logToTerminal(`[SYSTEM] Akun ${role} '${name}' berhasil disimpan ke database.`, 'success');
+
+                showNotification(`Akun ${role} berhasil dibuat & di-hash!`);
+                document.getElementById('formUser').reset();
+                
+                // Reset required values
+                document.getElementById('containerNim').classList.remove('d-none');
+                document.getElementById('containerFrame').classList.remove('d-none');
+                
+                loadDashboardData();
+            })
+            .catch(err => {
+                logToTerminal(`[ERROR] Gagal membuat user: ${err.message}`, 'warning');
+                showNotification(err.message, false);
+            });
+        }
+
+        // Action: Create Class
+        function handleCreateClass(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('className').value;
+            const code = document.getElementById('classCode').value;
+            const lecturer = document.getElementById('classLecturer').value;
+            const semester = document.getElementById('classSemester').value;
+            const type = document.getElementById('classType').value;
+
+            const payload = { name, code, lecturer, semester, type };
+
+            fetch('/api/classes', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(data => { throw new Error(data.error); });
+                }
+                return res.json();
+            })
+            .then(resData => {
+                logToTerminal(`[SYSTEM] Kelas baru '${name}' (${code}) berhasil dibuat dengan dosen ${lecturer}.`, 'success');
+                showNotification('Kelas baru berhasil dibuat!');
+                document.getElementById('formClass').reset();
+                loadDashboardData();
+            })
+            .catch(err => {
+                logToTerminal(`[ERROR] Gagal membuat kelas: ${err.message}`, 'warning');
+                showNotification(err.message, false);
+            });
+        }
+
+        // Action: Enroll Student
+        function handleEnrollStudent(e) {
+            e.preventDefault();
+
+            const studentNim = document.getElementById('enrollStudent').value;
+            const classId = document.getElementById('enrollClass').value;
+
+            const payload = { studentNim, classId };
+
+            fetch('/api/enroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(data => { throw new Error(data.error); });
+                }
+                return res.json();
+            })
+            .then(resData => {
+                logToTerminal(`[SYSTEM] Mahasiswa (NIM: ${studentNim}) berhasil didaftarkan ke kelas ID ${classId}.`, 'success');
+                showNotification('Mahasiswa berhasil didaftarkan ke kelas!');
+                document.getElementById('formEnroll').reset();
+                loadDashboardData();
+            })
+            .catch(err => {
+                logToTerminal(`[ERROR] Gagal melakukan pendaftaran: ${err.message}`, 'warning');
+                showNotification(err.message, false);
+            });
+        }
+    </script>
+</body>
+</html>

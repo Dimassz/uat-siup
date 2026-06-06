@@ -1,0 +1,2353 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Learning Universitas Pertamina - Gamifikasi Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 CDN (Game Themes & Icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS untuk Gamifikasi & Redesain UI/UX Premium -->
+    <style>
+        :root {
+            /* Branding Universitas Pertamina (Navy & Blue tones) */
+            --pertamina-navy: #002f6c;
+            --pertamina-blue: #0d47a1;
+            --pertamina-light-blue: #e3f2fd;
+            
+            /* Gamification Accents */
+            --primary-purple: #6f42c1;
+            --primary-purple-hover: #5a32a3;
+            --primary-purple-light: rgba(111, 66, 193, 0.08);
+            --primary-purple-glow: rgba(111, 66, 193, 0.3);
+            
+            --gold-color: #ffd700;
+            --gold-glow: rgba(255, 215, 0, 0.4);
+            
+            --streak-color: #ff4757;
+            --streak-glow: rgba(255, 71, 87, 0.4);
+            
+            --bg-color: #f4f6fc;
+            --card-border-radius: 16px;
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: #2c3e50;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* Utilities & Animations */
+        .pulse-effect {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* DOUBLE NAVBAR STYLING */
+        /* 1. Top Bar (Branding & User Profile) */
+        .navbar-top {
+            background-color: var(--pertamina-navy);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 0;
+            color: #ffffff;
+        }
+
+        .navbar-top-brand {
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #ffffff !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar-top-brand i {
+            color: #00bcd4;
+            filter: drop-shadow(0 0 5px rgba(0, 188, 212, 0.4));
+        }
+
+        .navbar-search-box {
+            position: relative;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .navbar-search-box input {
+            background-color: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 6px 16px 6px 36px;
+            color: #ffffff;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .navbar-search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .navbar-search-box input:focus {
+            background-color: rgba(255, 255, 255, 0.22);
+            border-color: #00bcd4;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+        }
+
+        .navbar-search-box i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .navbar-top-user {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .navbar-icon-btn {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .navbar-icon-btn:hover {
+            color: #ffffff;
+        }
+
+        .navbar-icon-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            font-size: 0.65rem;
+            background-color: var(--streak-color);
+            color: white;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-user-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #ffffff;
+            max-width: 180px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .navbar-profile-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-purple);
+            transition: all var(--transition-speed);
+            box-shadow: 0 0 10px rgba(111, 66, 193, 0.2);
+        }
+
+        .profile-avatar-link:hover .navbar-profile-avatar {
+            border-color: var(--gold-color);
+            box-shadow: 0 0 15px var(--gold-glow);
+            transform: scale(1.08);
+        }
+
+        /* 2. Main Nav (Menu & Gamified Badges) */
+        .navbar-main {
+            background-color: var(--pertamina-blue);
+            padding: 8px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
+            background-color: rgba(255, 255, 255, 0.12);
+            color: #ffffff !important;
+        }
+
+        .status-pill {
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition-speed);
+        }
+
+        .status-streak {
+            background-color: rgba(255, 71, 87, 0.15);
+            border: 1px solid var(--streak-color);
+            color: #ff6b81;
+        }
+
+        .status-streak:hover {
+            box-shadow: 0 0 15px var(--streak-glow);
+            transform: scale(1.03);
+        }
+
+        .status-coin {
+            background-color: rgba(255, 215, 0, 0.15);
+            border: 1px solid var(--gold-color);
+            color: var(--gold-color);
+        }
+
+        .status-coin:hover {
+            box-shadow: 0 0 15px var(--gold-glow);
+            transform: scale(1.03);
+        }
+
+        /* ANNOUNCEMENTS BAR */
+        .announcement-bar {
+            background-color: #ffffff;
+            border-radius: 8px;
+            border-left: 4px solid var(--pertamina-blue);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 18px;
+            margin-bottom: 24px;
+        }
+
+        .announcement-title {
+            background-color: var(--pertamina-blue);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+
+        .announcement-content {
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-bottom: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .announcement-controls {
+            display: flex;
+            gap: 8px;
+            color: #a0aec0;
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-left: 14px;
+        }
+
+        .announcement-controls i:hover {
+            color: #4a5568;
+        }
+
+        /* HERO SECTION (STUDENT PROGRESS) */
+        .hero-section {
+            background: linear-gradient(135deg, #002f6c 0%, #0d47a1 50%, #4a154b 100%);
+            color: #ffffff;
+            border-radius: var(--card-border-radius);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 47, 108, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 20% 80%, rgba(111, 66, 193, 0.2) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .class-code-pill {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .class-code-pill:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: var(--gold-color);
+            color: var(--gold-color);
+        }
+
+        .level-badge-container {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-custom {
+            height: 14px;
+            border-radius: 50px;
+            background-color: rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .progress-bar-custom {
+            background: linear-gradient(90deg, #ff007f, #8b5cf6, #3b82f6);
+            background-size: 200% 200%;
+            animation: wave 4s ease infinite;
+        }
+
+        /* CARD CUSTOM STYLING */
+        .custom-card {
+            border: none;
+            border-radius: var(--card-border-radius);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.03);
+            background: #ffffff;
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 24px;
+            border: 1px solid rgba(13, 71, 161, 0.06);
+            overflow: hidden;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 47, 108, 0.08);
+        }
+
+        .card-header-game {
+            background: transparent;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 18px 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Course Overview Filters */
+        .overview-filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .filter-btn-group .btn {
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-color: #cbd5e1;
+            color: #64748b;
+        }
+
+        .filter-btn-group .btn.active {
+            background-color: var(--pertamina-blue);
+            border-color: var(--pertamina-blue);
+            color: white;
+        }
+
+        /* Quest / Tasks list inside Course cards */
+        .quest-item {
+            border: 1px solid #eef2f5;
+            border-left-width: 6px !important;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            transition: all var(--transition-speed);
+            background-color: #ffffff;
+        }
+
+        .quest-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .quest-completed {
+            border-left-color: #2ecc71 !important;
+            background-color: #fafffa;
+        }
+
+        .quest-active {
+            border-left-color: var(--primary-purple) !important;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.05);
+        }
+
+        .quest-locked {
+            border-left-color: #cbd5e1 !important;
+            opacity: 0.6;
+            background-color: #fcfdfe;
+        }
+
+        .quest-title-strike {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
+
+        .btn-quest {
+            background-color: var(--primary-purple);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 6px 16px;
+            border: none;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+        }
+
+        .btn-quest:hover {
+            background-color: var(--primary-purple-hover);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .xp-text {
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* NAVIGATION SIDEBAR (Collapsible tree style but gamified) */
+        .nav-tree-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #64748b;
+            font-weight: 700;
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        .nav-tree-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+
+        .nav-tree-item {
+            margin-bottom: 4px;
+        }
+
+        .nav-tree-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            color: #4a5568;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-tree-link:hover {
+            background-color: var(--pertamina-light-blue);
+            color: var(--pertamina-blue);
+        }
+
+        .nav-tree-link.active {
+            background-color: var(--pertamina-light-blue);
+            color: var(--pertamina-blue);
+            font-weight: 600;
+        }
+
+        .nav-tree-submenu {
+            list-style: none;
+            padding-left: 24px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+
+        .nav-tree-sublink {
+            display: block;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            color: #718096;
+            text-decoration: none;
+            border-radius: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.15s;
+        }
+
+        .nav-tree-sublink:hover {
+            background-color: #f1f5f9;
+            color: var(--pertamina-blue);
+        }
+
+        /* Leaderboard Widget */
+        .leaderboard-list {
+            padding: 0;
+            margin: 0;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            transition: all var(--transition-speed);
+            border: 1px solid #f1f5f9;
+        }
+
+        .leaderboard-item:hover {
+            transform: scale(1.02);
+            background-color: #f8fafc;
+        }
+
+        .rank-number-container {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+
+        .rank-gold {
+            background: linear-gradient(135deg, #ffe066 0%, #f59e0b 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 8px rgba(245, 158, 11, 0.25);
+        }
+
+        .rank-silver {
+            background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+            color: #ffffff;
+        }
+
+        .rank-bronze {
+            background: linear-gradient(135deg, #ffedd5 0%, #ca8a04 100%);
+            color: #ffffff;
+        }
+
+        .rank-other {
+            background-color: #f1f5f9;
+            color: #64748b;
+        }
+
+        .leaderboard-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 10px;
+            object-fit: cover;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .leaderboard-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #334155;
+            margin-bottom: 0;
+        }
+
+        .leaderboard-xp {
+            margin-left: auto;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--primary-purple);
+        }
+
+        .leaderboard-item-current {
+            background: linear-gradient(90deg, rgba(111, 66, 193, 0.12) 0%, rgba(111, 66, 193, 0.02) 100%) !important;
+            border: 2px solid rgba(111, 66, 193, 0.3) !important;
+        }
+
+        .leaderboard-item-current .leaderboard-name {
+            color: #4c1d95;
+            font-weight: 700;
+        }
+
+        /* Achievements Widget Grid */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            text-align: center;
+        }
+
+        .achievement-mini-card {
+            padding: 10px 4px;
+            border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            transition: all 0.2s;
+        }
+
+        .achievement-mini-card:hover {
+            transform: scale(1.05);
+            border-color: var(--gold-color);
+        }
+
+        .achievement-mini-card i {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+            display: inline-block;
+        }
+
+        .achievement-mini-name {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #334155;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Modal styling */
+        .modal-content-game {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .modal-header-game {
+            background: linear-gradient(135deg, var(--pertamina-blue) 0%, #4a219b 100%);
+            color: #ffffff;
+            border-bottom: none;
+            padding: 20px;
+        }
+
+        .modal-header-game .btn-close {
+            filter: invert(1) grayscale(1) brightness(2);
+        }
+
+        /* Toast Styling */
+        .toast-container-custom {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1060;
+        }
+
+        .toast-game {
+            background: #1e1b4b;
+            color: #ffffff;
+            border-radius: 12px;
+            border-left: 5px solid var(--gold-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        /* Card (Box) Grid & List View Customizations */
+        .course-card-wrapper {
+            transition: all var(--transition-speed) ease;
+        }
+
+        /* List View Styling (Dense list item style) */
+        .list-view .course-card-wrapper {
+            width: 100% !important;
+        }
+
+        .list-view .custom-card {
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding: 10px;
+            align-items: center;
+        }
+
+        .list-view .custom-card .card-header-game {
+            border-bottom: none;
+            padding: 15px 24px 8px;
+            flex: 1 1 100%;
+        }
+
+        .list-view .custom-card .card-body {
+            padding: 8px 24px !important;
+            flex: 1 1 100%;
+        }
+
+        .list-view .custom-card .card-footer {
+            padding: 8px 24px 15px !important;
+            flex: 1 1 100%;
+        }
+
+        .list-view .quest-item {
+            padding: 10px 14px;
+            margin-bottom: 8px;
+        }
+
+        .hover-primary-link {
+            transition: color 0.2s;
+        }
+
+        .hover-primary-link:hover {
+            color: var(--pertamina-blue) !important;
+        }
+
+        /* ========================================== */
+        /* AVATAR FRAMES & DECORATIONS FOR LEADERBOARD*/
+        /* ========================================== */
+        .avatar-container {
+            position: relative;
+            margin-right: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .avatar-frame-gold-decorated {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, #ffe066 0%, #f59e0b 50%, #d97706 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+            position: relative;
+        }
+
+        /* Laurel Wreath for Rangga */
+        .avatar-frame-gold-decorated .laurel-left {
+            position: absolute;
+            left: -12px;
+            top: 10px;
+            color: #f59e0b;
+            font-size: 0.72rem;
+            transform: rotate(-25deg);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            animation: laurelSwayLeft 3s infinite ease-in-out;
+        }
+        .avatar-frame-gold-decorated .laurel-right {
+            position: absolute;
+            right: -12px;
+            top: 10px;
+            color: #f59e0b;
+            font-size: 0.72rem;
+            transform: rotate(25deg);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            animation: laurelSwayRight 3s infinite ease-in-out;
+        }
+
+        @keyframes laurelSwayLeft {
+            0%, 100% { transform: rotate(-25deg) scale(1); }
+            50% { transform: rotate(-30deg) scale(1.08); }
+        }
+        @keyframes laurelSwayRight {
+            0%, 100% { transform: rotate(25deg) scale(1); }
+            50% { transform: rotate(30deg) scale(1.08); }
+        }
+
+        .avatar-frame-silver-decorated {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 50%, #cbd5e1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 8px rgba(148, 163, 184, 0.3);
+            position: relative;
+        }
+        .avatar-frame-silver-decorated .gem-indicator {
+            position: absolute;
+            bottom: -5px;
+            font-size: 0.55rem;
+            color: #0ea5e9;
+            text-shadow: 0 0 4px #0ea5e9;
+            animation: gemSparkle 2s infinite ease-in-out;
+        }
+        @keyframes gemSparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+            50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+        }
+
+        .avatar-frame-bronze-decorated {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(135deg, #ffedd5 0%, #d97706 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 8px rgba(217, 119, 6, 0.25);
+            position: relative;
+        }
+        .avatar-frame-bronze-decorated .star-indicator {
+            position: absolute;
+            bottom: -5px;
+            font-size: 0.55rem;
+            color: #ca8a04;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Animated neon gradient frame for Dimas */
+        .avatar-frame-purple-glow-decorated {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            padding: 2.5px;
+            background: linear-gradient(135deg, #a78bfa 0%, #6f42c1 50%, #db2777 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(111, 66, 193, 0.6);
+            position: relative;
+            animation: pulseGlowDecorated 2s infinite ease-in-out;
+        }
+        .avatar-frame-purple-glow-decorated .bolt-left {
+            position: absolute;
+            left: -10px;
+            top: 12px;
+            color: #eab308;
+            font-size: 0.65rem;
+            animation: boltFlicker 1.5s infinite ease-in-out;
+        }
+        .avatar-frame-purple-glow-decorated .bolt-right {
+            position: absolute;
+            right: -10px;
+            top: 12px;
+            color: #eab308;
+            font-size: 0.65rem;
+            animation: boltFlicker 1.5s infinite ease-in-out 0.75s;
+        }
+
+        @keyframes pulseGlowDecorated {
+            0% { box-shadow: 0 0 5px rgba(111, 66, 193, 0.4); }
+            50% { box-shadow: 0 0 15px rgba(111, 66, 193, 0.8), 0 0 5px rgba(219, 39, 119, 0.5); }
+            100% { box-shadow: 0 0 5px rgba(111, 66, 193, 0.4); }
+        }
+        @keyframes boltFlicker {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .leaderboard-avatar-framed {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid #ffffff;
+        }
+
+        .crown-overlay {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(-12deg);
+            color: #ffd700;
+            font-size: 0.82rem;
+            filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+            z-index: 10;
+            animation: crownBounce 2.5s infinite ease-in-out;
+        }
+        @keyframes crownBounce {
+            0% { transform: translateX(-50%) rotate(-12deg) translateY(0); }
+            50% { transform: translateX(-50%) rotate(-12deg) translateY(-2px); }
+            100% { transform: translateX(-50%) rotate(-12deg) translateY(0); }
+        }
+
+        /* MINI BADGES STYLE */
+        .leaderboard-mini-badges {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        .mini-badge-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .mini-badge-dot:hover {
+            transform: scale(1.3) translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 5;
+        }
+        .bg-badge-database { background: linear-gradient(135deg, #ffe082, #ffb300); color: #7f5f00; }
+        .bg-badge-analyst { background: linear-gradient(135deg, #ce93d8, #8e24aa); color: #ffffff; }
+        .bg-badge-vocal { background: linear-gradient(135deg, #90caf9, #1e88e5); color: #ffffff; }
+        .bg-badge-style { background: linear-gradient(135deg, #ffab91, #d84315); color: #ffffff; }
+        .bg-badge-api { background: linear-gradient(135deg, #a5d6a7, #2e7d32); color: #ffffff; }
+        .bg-badge-security { background: linear-gradient(135deg, #b0bec5, #37474f); color: #ffffff; }
+        .bg-badge-grand { background: linear-gradient(135deg, #ff8a80, #c62828); color: #ffffff; }
+
+        /* MODAL STYLING FOR STUDENT PROFILE */
+        .profile-banner-grad {
+            height: 100px;
+            background: linear-gradient(135deg, #6610f2 0%, #db2777 100%);
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            position: relative;
+        }
+        .profile-modal-avatar-wrapper {
+            position: absolute;
+            bottom: -35px;
+            left: 24px;
+        }
+        .profile-modal-avatar-large {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            border: 3.5px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            object-fit: cover;
+        }
+        .profile-modal-avatar-wrapper .avatar-frame-gold-decorated,
+        .profile-modal-avatar-wrapper .avatar-frame-silver-decorated,
+        .profile-modal-avatar-wrapper .avatar-frame-bronze-decorated,
+        .profile-modal-avatar-wrapper .avatar-frame-purple-glow-decorated {
+            width: 82px;
+            height: 82px;
+            padding: 3px;
+        }
+        .profile-modal-avatar-wrapper .avatar-frame-gold-decorated .laurel-left {
+            left: -18px; top: 22px; font-size: 1.1rem;
+        }
+        .profile-modal-avatar-wrapper .avatar-frame-gold-decorated .laurel-right {
+            right: -18px; top: 22px; font-size: 1.1rem;
+        }
+        .profile-modal-avatar-wrapper .crown-overlay {
+            font-size: 1.4rem;
+            top: -20px;
+        }
+        .profile-modal-avatar-wrapper .avatar-frame-purple-glow-decorated .bolt-left {
+            left: -14px; top: 26px; font-size: 0.9rem;
+        }
+        .profile-modal-avatar-wrapper .avatar-frame-purple-glow-decorated .bolt-right {
+            right: -14px; top: 26px; font-size: 0.9rem;
+        }
+        
+        .student-modal-badge-card {
+            background: #f8fafc;
+            border: 1.5px solid #f1f5f9;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            opacity: 0.45;
+            filter: grayscale(100%);
+            transition: all 0.2s;
+        }
+        .student-modal-badge-card.unlocked {
+            opacity: 1;
+            filter: grayscale(0%);
+            background: #ffffff;
+            border-color: #e2e8f0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+        }
+        .student-modal-badge-card.unlocked:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+        .student-modal-badge-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            margin-bottom: 6px;
+        }
+        .student-modal-badge-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #334155;
+        }
+
+        /* radar-like skill bars styling */
+        .skill-bar-container {
+            margin-bottom: 10px;
+        }
+        .skill-bar-label {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #475569;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2px;
+        }
+        .skill-bar-bg {
+            height: 6px;
+            background-color: #f1f5f9;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 1s ease-in-out;
+        }
+
+        .clickable-student-name {
+            cursor: pointer;
+            text-decoration: underline dotted #6f42c1;
+            font-weight: 700;
+        }
+        .clickable-student-name:hover {
+            color: #6f42c1 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- DOUBLE NAVBAR: TOP BAR (Branding & User)    -->
+    <!-- ========================================== -->
+    <header class="navbar-top">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Left Branding -->
+            <a href="/" class="navbar-top-brand">
+                <i class="fa-solid fa-graduation-cap me-2 text-info"></i>
+                <span>E-Learning Universitas Pertamina</span>
+            </a>
+            
+            <!-- Middle Search Box -->
+            <div class="navbar-search-box d-none d-md-block">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Cari mata kuliah...">
+            </div>
+            
+            <!-- Right User Info & Utilities -->
+            <div class="navbar-top-user">
+                <!-- Notifications & Messages -->
+                <a href="#" class="navbar-icon-btn" title="Notifikasi">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="navbar-icon-badge">3</span>
+                </a>
+                <a href="#" class="navbar-icon-btn d-none d-sm-inline" title="Pesan">
+                    <i class="fa-regular fa-comments"></i>
+                </a>
+                <a href="#" class="navbar-icon-btn d-none d-sm-inline" style="font-size: 0.82rem; font-weight: 500;" title="Ganti Bahasa">
+                    <i class="fa-solid fa-globe me-1 text-info"></i> English (en) <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.65rem;"></i>
+                </a>
+                
+                <!-- Profile Avatar & Name (with popup) -->
+                <div class="d-flex align-items-center gap-2" style="position:relative;">
+                    <span class="navbar-user-name d-none d-lg-inline" id="navbarUserName">Memuat...</span>
+                    <a href="#" class="profile-avatar-link" id="profileAvatarBtn" title="Lihat Profil Anda">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80"
+                             alt="Avatar Profil" class="navbar-profile-avatar" id="navbarProfileAvatar">
+                    </a>
+
+                    <!-- Profile popup -->
+                    <div id="profilePopup" style="
+                        display:none;
+                        position:absolute;
+                        top:calc(100% + 10px);
+                        right:0;
+                        width:240px;
+                        background:#fff;
+                        border-radius:12px;
+                        box-shadow:0 10px 30px rgba(0,0,0,0.15);
+                        z-index:9999;
+                        overflow:hidden;
+                    ">
+                        <div style="background:linear-gradient(135deg,#002f6c,#4a219b);padding:14px 16px;color:#fff;">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <img id="popupAvatar" src="" alt="" style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);object-fit:cover;">
+                                <div>
+                                    <div style="font-weight:700;font-size:0.88rem;" id="popupName">&mdash;</div>
+                                    <div style="font-size:0.72rem;opacity:0.8;" id="popupRole">&mdash;</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding:12px 16px;font-size:0.82rem;color:#334155;">
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">NIM</span> &nbsp;<strong id="popupNim">&mdash;</strong></div>
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">Level</span> &nbsp;<strong id="popupLevel">&mdash;</strong></div>
+                            <div><span style="color:#94a3b8;">XP</span> &nbsp;<strong id="popupXp">&mdash;</strong></div>
+                        </div>
+                        <div style="padding:0 16px 14px;">
+                            <a href="/logout" style="
+                                display:block;
+                                text-align:center;
+                                background:linear-gradient(135deg,#ef4444,#dc2626);
+                                color:#fff;
+                                border-radius:8px;
+                                padding:8px;
+                                font-size:0.85rem;
+                                font-weight:600;
+                                text-decoration:none;
+                                transition:opacity 0.2s;
+                            " onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+                                <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================== -->
+    <!-- DOUBLE NAVBAR: MAIN NAV (Tabs & Stats)     -->
+    <!-- ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-main sticky-top">
+        <div class="container">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="/"><i class="fa-solid fa-house"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom active" href="/"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="#"><i class="fa-regular fa-calendar-days"></i> Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link-custom" href="#"><i class="fa-solid fa-book"></i> My Courses</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Student Status Widgets (Kanan) -->
+            <div class="d-flex align-items-center gap-2">
+                <div class="status-pill status-coin" title="Koin yang dapat ditukarkan dengan reward!">
+                    <i class="fa-solid fa-coins"></i>
+                    <span class="current-coins-display">420 Koin</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        
+        <!-- ========================================== -->
+        <!-- ANNOUNCEMENTS BAR                          -->
+        <!-- ========================================== -->
+        <section class="announcement-bar">
+            <div class="d-flex align-items-center overflow-hidden">
+                <span class="announcement-title">Announcements</span>
+                <p class="announcement-content">Selamat! Turnamen Gamifikasi Pekan UTS Universitas Pertamina telah dibuka. Selesaikan modul kelas untuk merebut ganjaran +500 XP tambahan!</p>
+            </div>
+            <div class="announcement-controls">
+                <i class="fa-solid fa-pause" title="Jeda Pengumuman"></i>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- HERO SECTION: LEVEL PROGRESS GLOBAL        -->
+        <!-- ========================================== -->
+        <header class="hero-section p-4 p-md-5 rounded-4">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-4 mb-lg-0">
+                    <span class="badge bg-warning text-dark mb-2 fw-bold px-3 py-2 rounded-pill">
+                        <i class="fa-solid fa-crown me-1"></i> Mahasiswa Aktif
+                    </span>
+                    <h1 class="display-6 fw-extrabold mb-1" id="heroWelcome">Selamat Datang Kembali!</h1>
+                    <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Mari selesaikan misi belajar hari ini dan klaim koin emas untuk ditukarkan di toko hadiah.</p>
+                    <div class="class-code-pill" title="NIM / ID Siswa Anda">
+                        <span>NIM Petualang:</span>
+                        <strong class="text-warning" id="heroNim">&mdash;</strong>
+                    </div>
+                </div>
+                
+                <!-- Global Coin Progress Widget -->
+                <div class="col-lg-5">
+                    <div class="level-badge-container">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4 class="mb-0 fw-bold d-flex align-items-center gap-2" style="font-size: 1.15rem;">
+                                <i class="fa-solid fa-coins text-warning animate-bounce"></i> KOIN GLOBAL
+                            </h4>
+                            <span class="badge bg-warning text-dark fw-bold"><span class="global-coins-display">420</span> / 1000 Koin</span>
+                        </div>
+                        
+                        <!-- Progress Bar Koin -->
+                        <div class="progress progress-custom mb-3">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+                                 id="globalCoinProgress"
+                                 role="progressbar" 
+                                 style="width: 42%" 
+                                 aria-valuenow="42" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100"></div>
+                        </div>
+                        
+                        <p class="small mb-0 text-white-50 text-end" style="font-size: 0.75rem;">
+                            <i class="fa-solid fa-gift me-1 text-warning"></i> Kumpulkan <strong id="coinsNeededText">580 Koin</strong> lagi untuk klaim Reward Hadiah Premium!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- ========================================== -->
+        <!-- LAYOUT UTAMA (GRID SYSTEM BOOTSTRAP)       -->
+        <!-- ========================================== -->
+        <div class="row">
+            
+            <!-- ========================================== -->
+            <!-- KOLOM KIRI: COURSE OVERVIEW (col-lg-8)     -->
+            <!-- ========================================== -->
+            <main class="col-lg-8">
+                
+                <!-- Course Overview Header & Filters -->
+                <div class="overview-filter-bar">
+                    <h4 class="fw-bold mb-0 text-dark d-flex align-items-center gap-2" style="font-size: 1.3rem;">
+                        <i class="fa-solid fa-compass text-primary"></i> Course overview
+                    </h4>
+                    <div class="d-flex gap-2">
+                        <div class="filter-btn-group btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary active btn-sm" id="btnFilterAll">All (except removed)</button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSortName">Course name</button>
+                        </div>
+                        <button class="btn btn-light btn-sm border" id="btnToggleLayout" title="Ganti Tampilan Kotak/Daftar">
+                            <i class="fa-solid fa-grip-vertical" id="layoutIcon"></i> <span id="layoutText" class="small fw-semibold ms-1">Card</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Courses Grid Container (Default: 2 Columns Card Layout) -->
+                <div class="row row-cols-1 row-cols-md-2 g-4" id="coursesGrid">
+                    <!-- Kelas akan di-render secara dinamis dari /api/my-classes -->
+                    <div class="col-12 text-center py-5" id="coursesLoading">
+                        <div class="spinner-border text-primary" role="status" style="width:2.5rem;height:2.5rem;"></div>
+                        <p class="mt-3 text-muted">Memuat kelas Anda...</p>
+                    </div>
+                </div>
+            </main>
+
+            <!-- ========================================== -->
+            <!-- KOLOM KANAN: NAVIGATION SIDEBAR & WIDGETS  -->
+            <!-- ========================================== -->
+            <aside class="col-lg-4">
+                
+                <!-- A. Navigation Tree Widget -->
+                <section class="card custom-card">
+                    <div class="card-header-game">
+                        <span class="d-flex align-items-center gap-2">
+                            <i class="fa-solid fa-network-wired text-primary"></i> Navigation
+                        </span>
+                        <i class="fa-solid fa-bars text-secondary" style="font-size: 0.9rem;"></i>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="nav-tree-title">LMS Menu</div>
+                        <ul class="nav-tree-list">
+                            <li class="nav-tree-item">
+                                <a href="#" class="nav-tree-link"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+                            </li>
+                            <li class="nav-tree-item">
+                                <a href="#" class="nav-tree-link"><i class="fa-solid fa-house-user"></i> Site home</a>
+                            </li>
+                            <li class="nav-tree-item">
+                                <a href="#" class="nav-tree-link"><i class="fa-solid fa-file-invoice"></i> Site pages</a>
+                            </li>
+                            <li class="nav-tree-item">
+                                <a href="#" class="nav-tree-link active"><i class="fa-solid fa-graduation-cap"></i> My courses</a>
+                                <!-- Submenu My Courses -->
+                                <ul class="nav-tree-submenu">
+                                    <li><a href="#" class="nav-tree-sublink" title="Lembaga dan Pasar Keuangan-MN8-2025">Lembaga &amp; Pasar Keuangan</a></li>
+                                    <li><a href="#" class="nav-tree-sublink" title="Perpajakan-MN8A-2025">Perpajakan-MN8A</a></li>
+                                    <li><a href="#" class="nav-tree-sublink" title="Sistem Informasi Manajemen-MN8-2025">Sistem Informasi Manajemen</a></li>
+                                    <li><a href="#" class="nav-tree-sublink" title="Teknologi Keuangan (Financial Technology)-MN8-2025">Teknologi Keuangan</a></li>
+                                    <li><a href="#" class="nav-tree-sublink" title="PRAKTIKUM BAHASA INGGRIS II">PRAKTIKUM BAHASA INGGRIS II</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL POPUP INTERAKTIF: BRIEFING MISI      -->
+    <!-- ========================================== -->
+    <div class="modal fade" id="questModal" tabindex="-1" aria-labelledby="questModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-game">
+                <div class="modal-header modal-header-game">
+                    <h5 class="modal-title fw-bold" id="questModalLabel"><i class="fa-solid fa-compass me-2"></i> Detail Misi Petualangan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
+                            <i class="fa-solid fa-scroll fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold" id="modalQuestTitle">Nama Misi</h4>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h6 class="fw-bold text-muted uppercase" style="font-size: 0.8rem;">Deskripsi Misi:</h6>
+                        <p class="text-secondary" id="modalQuestDesc" style="font-size: 0.85rem; line-height: 1.5;">Deskripsi detail mengenai misi yang harus Anda kerjakan akan ditampilkan di sini.</p>
+                    </div>
+
+                    <div class="row text-center g-3 mb-4">
+                        <div class="col-12">
+                            <div class="p-3 border border-primary-subtle rounded-3 bg-light-subtle">
+                                <h4 class="fw-bold text-primary mb-1" id="modalQuestXp">+250 XP</h4>
+                                <span class="small text-muted" style="font-size: 0.72rem;">Ganjaran XP</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info d-flex align-items-start gap-3 border-0 bg-light-subtle" role="alert">
+                        <i class="fa-solid fa-circle-info text-info mt-1 fs-5"></i>
+                        <div class="small" style="font-size: 0.78rem;">
+                            <strong>Aturan Main:</strong> Menekan tombol "Mulai Misi" akan menandai misi ini sebagai sedang dikerjakan. Selesaikan dan unggah berkas tugas Anda sebelum tenggat berakhir!
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-3 bg-light d-flex justify-content-between">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Nanti Saja</button>
+                    <button type="button" class="btn btn-quest px-4" id="btnStartQuest">Mulai Misi Sekarang <i class="fa-solid fa-chevron-right ms-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL: DAFTAR ANGGOTA KELAS (PARTICIPANTS) -->
+    <!-- ========================================== -->
+    <div class="modal fade" id="participantsModal" tabindex="-1" aria-labelledby="participantsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-game">
+                <div class="modal-header modal-header-game">
+                    <h5 class="modal-title fw-bold" id="participantsModalLabel"><i class="fa-solid fa-users me-2 text-primary"></i> Daftar Anggota Kelas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="small text-muted" id="participantsSubtitle">Anggota yang terdaftar dalam kelas ini.</span>
+                        <span class="badge bg-primary rounded-pill" id="participantsCountText">8 Mahasiswa</span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr class="text-muted" style="font-size: 0.8rem;">
+                                    <th scope="col" style="width: 80px;">Peringkat</th>
+                                    <th scope="col">Nama Mahasiswa</th>
+                                    <th scope="col">Peran</th>
+                                    <th scope="col">Pencapaian Kelas (Badges)</th>
+                                    <th scope="col" class="text-end">Total XP</th>
+                                </tr>
+                            </thead>
+                            <tbody id="participantsTableBody">
+                                <!-- Will be rendered dynamically via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-3 bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL: PROFILE MAHASISWA INTERAKTIF        -->
+    <!-- ========================================== -->
+    <div class="modal fade" id="studentProfileModal" tabindex="-1" aria-labelledby="studentProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-game overflow-hidden">
+                <div class="modal-body p-0 position-relative">
+                    <!-- Banner Gradien -->
+                    <div class="profile-banner-grad" id="studentProfileBanner">
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Avatar Wrapper -->
+                    <div class="profile-modal-avatar-wrapper" id="profileModalAvatarArea">
+                        <!-- Will be dynamically filled to support decorated frame -->
+                    </div>
+                    
+                    <!-- Content Area -->
+                    <div class="p-4 pt-5">
+                        <div class="mb-3">
+                            <h4 class="fw-extrabold text-dark mb-0" id="profileModalName">Nama Mahasiswa</h4>
+                            <span class="text-muted small" style="font-size: 0.75rem;" id="profileModalNim">NIM: 10201210045</span>
+                            <span class="mx-1 text-muted">|</span>
+                            <span class="text-muted small" style="font-size: 0.75rem;" id="profileModalEmail">email@student.universitaspertamina.ac.id</span>
+                        </div>
+
+                        <!-- Stats Strip -->
+                        <div class="row g-2 text-center mb-4 bg-light p-2 rounded-3 border border-light-subtle">
+                            <div class="col-4">
+                                <div class="small text-muted" style="font-size: 0.65rem;">PERINGKAT</div>
+                                <div class="fw-bold text-dark" id="profileModalRank">#1</div>
+                            </div>
+                            <div class="col-4 border-start border-end">
+                                <div class="small text-muted" style="font-size: 0.65rem;">TOTAL XP</div>
+                                <div class="fw-bold text-primary" id="profileModalXp">980 XP</div>
+                            </div>
+                            <div class="col-4">
+                                <div class="small text-muted" style="font-size: 0.65rem;">STATUS</div>
+                                <div class="fw-bold text-success" style="font-size: 0.8rem;" id="profileModalLevel">SIM Master</div>
+                            </div>
+                        </div>
+
+                        <!-- Badges Shelf -->
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-medal text-warning me-1"></i> Lemari Lencana SIM:</h6>
+                        <div class="row row-cols-4 g-2 mb-4" id="profileModalBadgesGrid">
+                            <!-- Dynamically generated 7 badges (active or grayscale) -->
+                        </div>
+
+                        <!-- Skill Strengths -->
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-chart-column text-primary me-1"></i> Penguasaan Bidang Keahlian:</h6>
+                        <div class="bg-light p-3 rounded-3 border border-light-subtle" id="profileModalSkillsArea">
+                            <!-- Skill bars will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-3 bg-light">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup Profil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TOAST NOTIFICATION CONTAINER               -->
+    <!-- ========================================== -->
+    <div class="toast-container-custom">
+        <div id="gameToast" class="toast toast-game hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex align-items-center p-3">
+                <div class="toast-body d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-warning fs-5"></i>
+                    <span id="toastMessage">Pencapaian Berhasil!</span>
+                </div>
+                <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle CDN (Popper included) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vanilla Javascript Interaktivitas Game -->
+    <script>
+        let questModal;
+        let gameToast;
+        let participantsModal;
+        let studentProfileModal;
+        let coins = 420;
+        let currentActiveQuestId = null;
+
+        // Render all classes dynamically from the server
+        async function loadAndRenderCourses() {
+            const coursesGrid = document.getElementById('coursesGrid');
+            if (!coursesGrid) return;
+            
+            try {
+                const res = await fetch('/api/classes');
+                const classes = await res.json();
+                
+                coursesGrid.innerHTML = '';
+                
+                classes.forEach(cls => {
+                    const col = document.createElement('div');
+                    col.className = 'col course-card-wrapper';
+                    col.setAttribute('data-name', cls.name);
+                    
+                    // Get quests for this class
+                    let quests = classQuests[cls.id] || classQuests[cls.name];
+                    if (!quests) {
+                        quests = defaultQuestForClass(cls.id);
+                    }
+                    
+                    let questsHtml = '';
+                    quests.forEach(q => {
+                        if (q.status === 'completed') {
+                            questsHtml += `
+                                <article class="quest-item quest-completed">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                        <div>
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <h6 class="mb-0 text-muted quest-title-strike" style="font-size: 0.8rem;">${q.num}. ${q.title}</h6>
+                                                <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill" style="font-size: 0.6rem;">Selesai</span>
+                                            </div>
+                                            <p class="small text-muted mb-0" style="font-size: 0.72rem;">Selesai: ${q.date || 'Baru-baru ini'}</p>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="xp-text text-success" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
+                                            <span class="text-success fs-5"><i class="fa-solid fa-circle-check"></i></span>
+                                        </div>
+                                    </div>
+                                </article>
+                            `;
+                        } else if (q.status === 'active') {
+                            questsHtml += `
+                                <article class="quest-item quest-active" id="${q.id}" data-coin-reward="${q.coin || 30}">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <h6 class="mb-0 fw-bold text-dark" style="font-size: 0.8rem;">${q.num}. ${q.title}</h6>
+                                                <span class="badge bg-warning text-dark border border-warning-subtle rounded-pill" style="font-size: 0.6rem;">Aktif</span>
+                                            </div>
+                                            <p class="small mb-0 text-muted" style="font-size: 0.72rem;">
+                                                <i class="fa-regular fa-clock me-1 text-danger"></i> Tenggat: <span class="text-danger fw-semibold">${q.deadline || '7 Hari lagi'}</span>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                                            <div class="text-end">
+                                                <span class="xp-text text-primary d-block" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
+                                            </div>
+                                            <button class="btn btn-quest btn-sm py-1 px-2.5" onclick="openQuestModal('${q.id}', '${q.title}', '${q.xp} XP', '${q.desc || ''}')">
+                                                Mulai Misi <i class="fa-solid fa-play ms-1" style="font-size: 0.75rem;"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </article>
+                            `;
+                        } else if (q.status === 'locked') {
+                            questsHtml += `
+                                <article class="quest-item quest-locked">
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                        <div>
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <h6 class="mb-0 text-secondary fw-semibold" style="font-size: 0.8rem;">
+                                                    <i class="fa-solid fa-lock me-2 text-muted"></i>${q.num}. ${q.title}
+                                                </h6>
+                                            </div>
+                                            <p class="small text-muted mb-0" style="font-size: 0.72rem;">Prasyarat: Selesaikan Misi Sebelumnya</p>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="xp-text text-muted" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
+                                            <button class="btn btn-secondary btn-sm rounded-pill px-3" style="font-size: 0.7rem;" disabled>
+                                                Terkunci
+                                            </button>
+                                        </div>
+                                    </div>
+                                </article>
+                            `;
+                        }
+                    });
+                    
+                    col.innerHTML = `
+                        <section class="card custom-card h-100">
+                            <div class="card-header-game">
+                                <div>
+                                    <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1 rounded-pill mb-2 small d-inline-block" style="font-size: 0.65rem;">${cls.semester}</span>
+                                    <h5 class="fw-bold mb-1" style="font-size: 0.95rem; line-height: 1.4;">
+                                        <a href="/detail" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
+                                    </h5>
+                                    <p class="small text-muted mb-0" style="font-size: 0.75rem;">Pengajar: <strong class="text-dark">${cls.lecturer}</strong></p>
+                                </div>
+                            </div>
+                            
+                            <div class="card-body p-4">
+                                <!-- Progress Kelas -->
+                                <div class="mb-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <span class="small text-muted fw-semibold" style="font-size: 0.7rem;">Progres Kelas: ${cls.progressPercent}% (${cls.completedCount}/${cls.totalQuests} Misi Selesai)</span>
+                                        <span class="small text-primary fw-bold" style="font-size: 0.7rem;">${cls.progressPercent}%</span>
+                                    </div>
+                                    <div class="progress" style="height: 6px; border-radius: 4px; background-color: #e2e8f0;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: ${cls.progressPercent}%" aria-valuenow="${cls.progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold text-dark mb-3" style="font-size: 0.8rem;"><i class="fa-solid fa-list-check me-2 text-primary"></i> Misi Terkini di Kelas Ini:</h6>
+                                
+                                ${questsHtml}
+                            </div>
+                            <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0 mt-auto d-flex gap-2">
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;" onclick="showParticipantsModal('${cls.name}')">
+                                    <i class="fa-solid fa-users me-1"></i> Anggota Kelas
+                                </button>
+                                <a href="/detail" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;">
+                                    Masuk Kelas Lengkap <i class="fa-solid fa-arrow-right ms-1"></i>
+                                </a>
+                            </div>
+                        </section>
+                    `;
+                    coursesGrid.appendChild(col);
+                });
+            } catch (err) {
+                console.error('Gagal mengambil data kelas dari server', err);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inisialisasi Modal dan Toast
+            questModal = new bootstrap.Modal(document.getElementById('questModal'));
+            gameToast = new bootstrap.Toast(document.getElementById('gameToast'), { delay: 3500 });
+            participantsModal = new bootstrap.Modal(document.getElementById('participantsModal'));
+            studentProfileModal = new bootstrap.Modal(document.getElementById('studentProfileModal'));
+            
+            // Muat kelas secara dinamis dari database
+            loadAndRenderCourses();
+            
+            // Event Listener Salin Kode Kelas Dinamis
+            const copyButtons = document.querySelectorAll('.btn-copy-code-dynamic');
+            copyButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const code = btn.getAttribute('data-code');
+                    copyClassCode(btn, code);
+                });
+            });
+            
+            // Event Listener Mulai Misi di Modal
+            const btnStartQuest = document.getElementById('btnStartQuest');
+            if (btnStartQuest) {
+                btnStartQuest.addEventListener('click', startActiveQuest);
+            }
+
+            // Play/Pause Announcement simulation
+            const pauseBtn = document.querySelector('.announcement-controls i');
+            if (pauseBtn) {
+                pauseBtn.addEventListener('click', () => {
+                    if (pauseBtn.classList.contains('fa-pause')) {
+                        pauseBtn.classList.remove('fa-pause');
+                        pauseBtn.classList.add('fa-play');
+                        showToast("Pengumuman dijeda");
+                    } else {
+                        pauseBtn.classList.remove('fa-play');
+                        pauseBtn.classList.add('fa-pause');
+                        showToast("Pengumuman dijalankan");
+                    }
+                });
+            }
+
+            // Layout Toggling Functionality (Card/Box Grid vs List View)
+            const btnToggleLayout = document.getElementById('btnToggleLayout');
+            const coursesGrid = document.getElementById('coursesGrid');
+            const layoutIcon = document.getElementById('layoutIcon');
+            const layoutText = document.getElementById('layoutText');
+
+            if (btnToggleLayout && coursesGrid) {
+                btnToggleLayout.addEventListener('click', () => {
+                    if (coursesGrid.classList.contains('row-cols-md-2')) {
+                        // Switch to List View
+                        coursesGrid.classList.remove('row-cols-md-2');
+                        coursesGrid.classList.add('row-cols-1');
+                        coursesGrid.classList.add('list-view');
+                        layoutIcon.className = 'fa-solid fa-table-cells'; // Show grid icon for toggle
+                        layoutText.innerText = 'List';
+                        showToast("Tampilan diubah ke Daftar (List View)");
+                    } else {
+                        // Switch to Card (Box) View
+                        coursesGrid.classList.remove('row-cols-1');
+                        coursesGrid.classList.remove('list-view');
+                        coursesGrid.classList.add('row-cols-md-2');
+                        layoutIcon.className = 'fa-solid fa-grip-vertical'; // Show list icon for toggle
+                        layoutText.innerText = 'Card';
+                        showToast("Tampilan diubah ke Kotak (Card View)");
+                    }
+                });
+            }
+
+            // Search Filter Functionality
+            const searchInput = document.querySelector('.navbar-search-box input');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    const courseCards = document.querySelectorAll('.course-card-wrapper');
+                    
+                    courseCards.forEach(card => {
+                        const title = card.getAttribute('data-name').toLowerCase();
+                        if (title.includes(query)) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Sorting Functionality (Alphabetical)
+            const btnSortName = document.getElementById('btnSortName');
+            const btnFilterAll = document.getElementById('btnFilterAll');
+            if (btnSortName && coursesGrid) {
+                btnSortName.addEventListener('click', () => {
+                    btnFilterAll.classList.remove('active');
+                    btnSortName.classList.add('active');
+                    
+                    // Sort children
+                    const wrappers = Array.from(coursesGrid.querySelectorAll('.course-card-wrapper'));
+                    wrappers.sort((a, b) => {
+                        return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
+                    });
+                    
+                    // Re-append
+                    wrappers.forEach(w => coursesGrid.appendChild(w));
+                    showToast("Kelas diurutkan secara Alfabetis");
+                });
+            }
+
+            if (btnFilterAll && coursesGrid) {
+                btnFilterAll.addEventListener('click', () => {
+                    btnSortName.classList.remove('active');
+                    btnFilterAll.classList.add('active');
+                    
+                    // Revert to original database ID ordering
+                    const wrappers = Array.from(coursesGrid.querySelectorAll('.course-card-wrapper'));
+                    // We can just keep the original order based on data-name list index or re-append in original hardcoded order
+                    // Since it's mockup, let's just reverse sort or reload default order
+                    location.reload(); // Simple reload to reset state or we can store original order in an array
+                });
+            }
+            
+            // My Courses sidebar filter
+            const sublinks = document.querySelectorAll('.nav-tree-sublink');
+            sublinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const titleFilter = link.getAttribute('title').toLowerCase();
+                    const courseCards = document.querySelectorAll('.course-card-wrapper');
+                    
+                    courseCards.forEach(card => {
+                        const title = card.getAttribute('data-name').toLowerCase();
+                        if (title.includes(titleFilter)) {
+                            card.style.display = '';
+                            card.querySelector('.custom-card').classList.add('glow-purple');
+                            setTimeout(() => {
+                                card.querySelector('.custom-card').classList.remove('glow-purple');
+                            }, 2000);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                    showToast(`Memfilter kelas: ${link.innerText}`);
+                });
+            });
+        });
+
+        // Fungsi Menyalin Kode Kelas Dinamis
+        function copyClassCode(element, code) {
+            navigator.clipboard.writeText(code).then(() => {
+                showToast(`Kode Kelas '${code}' berhasil disalin ke papan klip!`);
+                
+                const originalHtml = element.innerHTML;
+                element.innerHTML = `<span>Kode:</span><strong class="text-success">${code}</strong><i class="fa-solid fa-check text-success"></i>`;
+                element.style.borderColor = "#2ecc71";
+                element.style.backgroundColor = "rgba(46, 204, 113, 0.15)";
+                
+                setTimeout(() => {
+                    element.innerHTML = originalHtml;
+                    element.style.borderColor = "";
+                    element.style.backgroundColor = "";
+                }, 2000);
+            }).catch(err => {
+                console.error("Gagal menyalin: ", err);
+                alert("Gagal menyalin kode.");
+            });
+        }
+
+        // Fungsi Membuka Briefing Misi
+        function openQuestModal(questId, title, xp, desc) {
+            currentActiveQuestId = questId;
+            document.getElementById('modalQuestTitle').innerText = title;
+            document.getElementById('modalQuestXp').innerText = "+" + xp;
+            document.getElementById('modalQuestDesc').innerText = desc;
+            
+            questModal.show();
+        }
+
+        // Fungsi Memulai Misi dari Modal & Mengubah State Menjadi Selesai (Interactive Gamification)
+        function startActiveQuest() {
+            questModal.hide();
+            
+            if (currentActiveQuestId) {
+                const questElement = document.getElementById(currentActiveQuestId);
+                if (questElement && !questElement.classList.contains('quest-completed')) {
+                    // 1. Ubah visual tugas menjadi Selesai (Green border, strikethrough, check icon)
+                    questElement.className = 'quest-item quest-completed';
+                    
+                    const badge = questElement.querySelector('.badge');
+                    if (badge) {
+                        badge.className = 'badge bg-success-subtle text-success border border-success-subtle rounded-pill';
+                        badge.innerText = 'Selesai';
+                        badge.style.fontSize = '0.6rem';
+                    }
+                    
+                    const flexDiv = questElement.querySelector('.d-flex.align-items-center.gap-2.flex-wrap');
+                    if (flexDiv) {
+                        flexDiv.innerHTML = '<span class="text-success fs-5"><i class="fa-solid fa-circle-check"></i></span>';
+                    }
+                    
+                    const title = questElement.querySelector('h6');
+                    if (title) {
+                        title.classList.add('quest-title-strike');
+                    }
+
+                    // 2. Berikan Koin reward ke dompet global
+                    const coinAmount = parseInt(questElement.getAttribute('data-coin-reward')) || 30;
+                    addCoins(coinAmount);
+                    
+                    // 3. Update Progress Bar Kelas bersangkutan secara dinamis
+                    const parentCard = questElement.closest('.custom-card');
+                    if (parentCard) {
+                        const progressText = parentCard.querySelector('.small.text-muted.fw-semibold');
+                        const progressPercent = parentCard.querySelector('.small.text-primary.fw-bold');
+                        const progressBar = parentCard.querySelector('.progress-bar');
+                        
+                        if (progressBar) {
+                            let currentVal = parseInt(progressBar.getAttribute('aria-valuenow')) || 0;
+                            // Tambah progress kelas (misal, tambah 25% progress)
+                            let newVal = Math.min(currentVal + 25, 100);
+                            
+                            progressBar.style.width = newVal + '%';
+                            progressBar.setAttribute('aria-valuenow', newVal);
+                            if (progressPercent) progressPercent.innerText = newVal + '%';
+                            if (progressText) {
+                                // Ganti teks hitungan
+                                const match = progressText.innerText.match(/(\d+)\/(\d+)/);
+                                if (match) {
+                                    let done = parseInt(match[1]) + 1;
+                                    let total = parseInt(match[2]);
+                                    progressText.innerText = `Progres Kelas: ${newVal}% (${done}/${total} Misi Selesai)`;
+                                }
+                            }
+                        }
+                    }
+                    
+                    setTimeout(() => {
+                        showToast(`Misi Selesai! Reward +${coinAmount} Koin ditambahkan ke dompet global!`);
+                    }, 400);
+                } else {
+                    setTimeout(() => {
+                        showToast("Petualangan dimulai! Tugas sedang dikerjakan.");
+                    }, 400);
+                }
+            }
+        }
+
+        // Fungsi Menambahkan Koin Global
+        function addCoins(amount) {
+            coins += amount;
+            if (coins > 1000) coins = 1000;
+            
+            // Update koin di navbar
+            document.querySelectorAll('.current-coins-display').forEach(el => {
+                el.innerText = coins + " Koin";
+            });
+            
+            // Update koin di hero section
+            document.querySelectorAll('.global-coins-display').forEach(el => {
+                el.innerText = coins;
+            });
+            
+            // Update bar koin
+            const progressPercent = (coins / 1000) * 100;
+            const progressBar = document.getElementById('globalCoinProgress');
+            if (progressBar) {
+                progressBar.style.width = progressPercent + '%';
+                progressBar.setAttribute('aria-valuenow', coins);
+            }
+            
+            // Update teks sisa koin
+            const needed = 1000 - coins;
+            const neededText = document.getElementById('coinsNeededText');
+            if (neededText) {
+                neededText.innerText = needed + " Koin";
+            }
+        }
+
+        }
+
+        // ==========================================
+        // DYNAMIC DATA STORAGE & FALLBACK
+        // ==========================================
+        const classQuests = {
+            'LPK-MN8-2025': [
+                { id: 'quest-lpk-1', num: 1, title: 'Struktur Lembaga Keuangan Bank & Non-Bank', status: 'active', deadline: '2 Hari lagi', xp: 150, coin: 30, desc: 'Pelajari modul struktur lembaga keuangan, buat rangkuman singkat dalam format PDF mengenai perbedaan mendasar Bank Sentral, Bank Umum, dan Lembaga Keuangan Mikro.' }
+            ],
+            'PAJAK-MN8A-2025': [
+                { id: 'quest-pajak-1', num: 1, title: 'Ketentuan Umum & Tata Cara Perpajakan', status: 'completed', date: '3 Juni 2026', xp: 100 },
+                { id: 'quest-pajak-2', num: 2, title: 'Simulasi Perhitungan PPh Pasal 21', status: 'active', deadline: '4 Hari lagi', xp: 250, coin: 50, desc: 'Hitunglah PPh Pasal 21 dari 3 skenario karyawan dengan status PTKP (Penghasilan Tidak Kena Pajak) yang berbeda menggunakan formulir resmi terbaru.' }
+            ],
+            'SIM-MN8-2025': [
+                { id: 'quest-sim-1', num: 2, title: 'Desain Database & Data Warehouse Bisnis', status: 'completed', date: '4 Juni 2026', xp: 150 },
+                { id: 'quest-sim-2', num: 3, title: 'Flexbox & Layouting Responsif Bootstrap 5', status: 'active', deadline: '3 Hari lagi', xp: 250, coin: 50, desc: 'Buatlah landing page responsif dengan memanfaatkan Bootstrap Grid, Flexbox utilities, dan media query kustom.' }
+            ],
+            'FINTECH-MN8-2025': [
+                { id: 'quest-fintech-1', num: 2, title: 'Model Bisnis Peer-to-Peer (P2P) Lending', status: 'active', deadline: '5 Hari lagi', xp: 300, coin: 60, desc: 'Analisis regulasi OJK terkait batas atas pendanaan P2P Lending dan buat laporan komparatif mitigasi risiko gagal bayar pada 3 platform terkemuka.' },
+                { id: 'quest-fintech-2', num: 3, title: 'Blockchain & Keamanan Transaksi', status: 'locked', xp: 350 }
+            ],
+            'ENG-II-2025': [
+                { id: 'quest-english-1', num: 1, title: 'Professional Elevator Pitch Video', status: 'active', deadline: '6 Hari lagi', xp: 150, coin: 30, desc: 'Rekam video berdurasi 60 detik yang mempresentasikan ide bisnis inovatif Anda dalam Bahasa Inggris formal, menekankan value proposition.' }
+            ]
+        };
+
+        const defaultQuestForClass = (classId) => [
+            { id: `quest-new-${classId}-1`, num: 1, title: 'Pengenalan & Kontrak Kuliah', status: 'active', deadline: '7 Hari lagi', xp: 100, coin: 40, desc: 'Pelajari bahan ajar pengenalan matakuliah, lalu diskusikan kontrak kuliah di forum kelas.' }
+        ];
+
+        const badgesReference = {
+            'database': { title: 'Database Rookie', icon: 'fa-solid fa-database', class: 'bg-badge-database', desc: 'Desain relasi database & data warehouse' },
+            'analyst': { title: 'System Analyst', icon: 'fa-solid fa-chart-pie', class: 'bg-badge-analyst', desc: 'Memetakan proses bisnis & use case' },
+            'vocal': { title: 'Vocal Contributor', icon: 'fa-solid fa-comments', class: 'bg-badge-vocal', desc: 'Mengunggah gagasan di forum diskusi' },
+            'style': { title: 'Style Master', icon: 'fa-brands fa-css3-alt', class: 'bg-badge-style', desc: 'Layouting responsif & flexbox utilities' },
+            'api': { title: 'API Architect', icon: 'fa-solid fa-plug', class: 'bg-badge-api', desc: 'Menghubungkan API & pertukaran data' },
+            'security': { title: 'Security Warden', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security', desc: 'Mengaudit celah keamanan sistem' },
+            'grand': { title: 'Grand Master SIM', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand', desc: 'Selesaikan seluruh modul kelas SIM' }
+        };
+
+        let activeClassParticipantsList = [];
+
+        function getParticipantsForClassFallback(className) {
+            return [
+                { name: 'Rangga Wijaya', NIM: '10201210001', rank: 1, xp: 980, level: 'Level 5', status: 'SIM Master', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-gold-decorated', badges: ['database', 'analyst', 'vocal', 'style', 'api'], skills: { db: 100, analysis: 95, layout: 80, api: 85, security: 0, vocal: 100 } },
+                { name: 'Aurelia Putri', NIM: '10201210002', rank: 2, xp: 950, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-silver-decorated', badges: ['database', 'analyst', 'vocal', 'style'], skills: { db: 90, analysis: 90, layout: 100, api: 0, security: 0, vocal: 90 } },
+                { name: 'Bobby Kertanegara', NIM: '10201210003', rank: 3, xp: 910, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-bronze-decorated', badges: ['database', 'analyst', 'vocal', 'api'], skills: { db: 85, analysis: 85, layout: 0, api: 90, security: 0, vocal: 90 } },
+                { name: 'Dimas Dwi Budi Sulistio', NIM: '10201210007', rank: 4, xp: 650, level: 'Level 4', status: 'SIM Apprentice', role: 'Mahasiswa (Anda)', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-purple-glow-decorated', badges: ['database', 'analyst', 'vocal'], skills: { db: 90, analysis: 85, layout: 0, api: 0, security: 0, vocal: 90 } }
+            ];
+        }
+
+        // Tampilkan Modal Anggota Kelas Dinamis
+        async function showParticipantsModal(className) {
+            const tableBody = document.getElementById('participantsTableBody');
+            const countText = document.getElementById('participantsCountText');
+            const subtitle = document.getElementById('participantsSubtitle');
+            const titleLabel = document.getElementById('participantsModalLabel');
+            
+            if (!tableBody) return;
+            
+            if (titleLabel) titleLabel.innerHTML = `<i class="fa-solid fa-users me-2 text-primary"></i> Anggota Kelas: ${className}`;
+            
+            tableBody.innerHTML = '<tr><td colspan="5" class="text-center p-4"><i class="fa-solid fa-spinner fa-spin text-primary fs-5"></i> Memuat data...</td></tr>';
+            participantsModal.show();
+            
+            try {
+                const res = await fetch(`/api/class-participants?className=${encodeURIComponent(className)}`);
+                activeClassParticipantsList = await res.json();
+            } catch (err) {
+                console.error('Gagal mengambil data dari server, fallback...', err);
+                activeClassParticipantsList = getParticipantsForClassFallback(className);
+            }
+            
+            if (countText) countText.innerText = `${activeClassParticipantsList.length} Mahasiswa`;
+            if (subtitle) subtitle.innerText = `Daftar mahasiswa yang terdaftar di kelas ${className}. Klik nama mahasiswa untuk melihat profil gamifikasi lengkap mereka.`;
+            
+            tableBody.innerHTML = '';
+            
+            if (activeClassParticipantsList.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted p-4">Belum ada mahasiswa terdaftar di kelas ini. Gunakan panel admin untuk menambahkan pendaftaran.</td></tr>';
+                return;
+            }
+            
+            activeClassParticipantsList.forEach(student => {
+                let badgesHtml = '';
+                student.badges.forEach(bId => {
+                    const badge = badgesReference[bId];
+                    if (badge) {
+                        badgesHtml += `
+                            <span class="mini-badge-dot ${badge.class}" title="${badge.title}">
+                                <i class="${badge.icon}"></i>
+                            </span>
+                        `;
+                    }
+                });
+                if (badgesHtml === '') badgesHtml = '<span class="text-muted small" style="font-size:0.7rem;">Belum ada lencana</span>';
+                
+                let rankClass = 'rank-other';
+                if (student.rank === 1) rankClass = 'rank-gold';
+                else if (student.rank === 2) rankClass = 'rank-silver';
+                else if (student.rank === 3) rankClass = 'rank-bronze';
+                
+                let avatarMarkup = '';
+                if (student.frame) {
+                    let decoIcons = '';
+                    if (student.frame === 'avatar-frame-gold-decorated') {
+                        decoIcons = `
+                            <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
+                            <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
+                            <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
+                        `;
+                    } else if (student.frame === 'avatar-frame-silver-decorated') {
+                        decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
+                    } else if (student.frame === 'avatar-frame-bronze-decorated') {
+                        decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
+                    } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
+                        decoIcons = `
+                            <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
+                            <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
+                        `;
+                    }
+                    avatarMarkup = `
+                        <div class="avatar-container">
+                            <div class="${student.frame}">
+                                ${decoIcons}
+                                <img src="${student.avatar}" alt="${student.name}" class="leaderboard-avatar-framed">
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    avatarMarkup = `
+                        <div class="avatar-container">
+                            <img src="${student.avatar}" alt="${student.name}" class="leaderboard-avatar" style="margin-right: 0;">
+                        </div>
+                    `;
+                }
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="rank-number-container ${rankClass}" style="width:24px; height:24px; font-size:0.75rem;">
+                            ${student.rank}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            ${avatarMarkup}
+                            <div>
+                                <a class="clickable-student-name text-dark text-decoration-none" onclick="openStudentProfile('${student.name}', '${className}')">
+                                    ${student.name}
+                                </a>
+                                <div class="text-muted small" style="font-size:0.65rem;">NIM: ${student.NIM}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="small font-semibold ${student.role.includes('Anda') ? 'text-primary fw-bold' : 'text-secondary'}">
+                            ${student.role}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="leaderboard-mini-badges">
+                            ${badgesHtml}
+                        </div>
+                    </td>
+                    <td class="text-end">
+                        <span class="fw-bold text-primary" style="font-size:0.8rem;">${student.xp} XP</span>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Buka Profil Mahasiswa Dinamis
+        function openStudentProfile(studentName, className) {
+            let student = activeClassParticipantsList.find(s => s.name === studentName);
+            if (!student) {
+                const studentsFallback = getParticipantsForClassFallback(className || 'Sistem Informasi Manajemen-MN8-2025');
+                student = studentsFallback.find(s => s.name === studentName);
+            }
+            if (!student) return;
+            
+            document.getElementById('profileModalName').innerText = student.name;
+            document.getElementById('profileModalNim').innerText = `NIM: ${student.NIM}`;
+            document.getElementById('profileModalEmail').innerText = `${student.NIM}@student.universitaspertamina.ac.id`;
+            document.getElementById('profileModalRank').innerText = `#${student.rank}`;
+            document.getElementById('profileModalXp').innerText = `${student.xp} XP`;
+            document.getElementById('profileModalLevel').innerText = student.status;
+            
+            const avatarArea = document.getElementById('profileModalAvatarArea');
+            if (avatarArea) {
+                let decoIcons = '';
+                if (student.frame === 'avatar-frame-gold-decorated') {
+                    decoIcons = `
+                        <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
+                        <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
+                        <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
+                    `;
+                } else if (student.frame === 'avatar-frame-silver-decorated') {
+                    decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
+                } else if (student.frame === 'avatar-frame-bronze-decorated') {
+                    decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
+                } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
+                    decoIcons = `
+                        <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
+                        <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
+                    `;
+                }
+                
+                if (student.frame) {
+                    avatarArea.innerHTML = `
+                        <div class="${student.frame}">
+                            ${decoIcons}
+                            <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
+                        </div>
+                    `;
+                } else {
+                    avatarArea.innerHTML = `
+                        <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
+                    `;
+                }
+            }
+            
+            const badgesGrid = document.getElementById('profileModalBadgesGrid');
+            if (badgesGrid) {
+                badgesGrid.innerHTML = '';
+                const badgeKeys = ['database', 'analyst', 'vocal', 'style', 'api', 'security', 'grand'];
+                badgeKeys.forEach(key => {
+                    const badgeInfo = badgesReference[key];
+                    const isUnlocked = student.badges.includes(key);
+                    
+                    const col = document.createElement('div');
+                    col.className = 'col';
+                    col.innerHTML = `
+                        <div class="student-modal-badge-card ${isUnlocked ? 'unlocked' : ''}" title="${isUnlocked ? 'Terbuka: ' + badgeInfo.desc : 'Terkunci: ' + badgeInfo.title}">
+                            <div class="student-modal-badge-icon ${isUnlocked ? badgeInfo.class : 'bg-secondary text-white'}">
+                                <i class="${badgeInfo.icon}"></i>
+                            </div>
+                            <div class="student-modal-badge-title text-truncate">${badgeInfo.title}</div>
+                        </div>
+                    `;
+                    badgesGrid.appendChild(col);
+                });
+            }
+            
+            const skillsArea = document.getElementById('profileModalSkillsArea');
+            if (skillsArea) {
+                skillsArea.innerHTML = '';
+                const skillLabels = {
+                    db: 'Database & Data Warehouse',
+                    analysis: 'System Analysis & Use Case',
+                    layout: 'UI Layouting & Flexbox',
+                    api: 'API Integration',
+                    security: 'Security & Audit',
+                    vocal: 'Forum Participation'
+                };
+                
+                Object.keys(student.skills).forEach(sKey => {
+                    const val = student.skills[sKey];
+                    const div = document.createElement('div');
+                    div.className = 'skill-bar-container';
+                    div.innerHTML = `
+                        <div class="skill-bar-label">
+                            <span>${skillLabels[sKey]}</span>
+                            <span>${val}%</span>
+                        </div>
+                        <div class="skill-bar-bg">
+                            <div class="skill-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    `;
+                    skillsArea.appendChild(div);
+                    
+                    setTimeout(() => {
+                        const fill = div.querySelector('.skill-bar-fill');
+                        if (fill) fill.style.width = val + '%';
+                    }, 100);
+                });
+            }
+            
+            studentProfileModal.show();
+        }
+
+        // Fungsi Helper Menampilkan Toast
+        function showToast(message) {
+            document.getElementById('toastMessage').innerText = message;
+            gameToast.show();
+        }
+    </script>
+
+    <!-- ========================================== -->
+    <!-- SESSION USER DATA HYDRATION                 -->
+    <!-- ========================================== -->
+    <script>
+        (async function() {
+            try {
+                const res = await fetch('/api/me');
+                const user = await res.json();
+
+                if (user.loggedIn) {
+                    // Update navbar
+                    const firstName = user.name ? user.name.split(' ')[0] : 'Pengguna';
+                    document.getElementById('navbarUserName').textContent = user.name || '';
+                    document.getElementById('navbarProfileAvatar').src = user.avatar || '';
+
+                    // Update hero
+                    document.getElementById('heroWelcome').textContent = `Selamat Datang Kembali, ${firstName}!`;
+                    document.getElementById('heroNim').textContent = user.nim || '&mdash;';
+
+                    // Populate popup
+                    document.getElementById('popupAvatar').src = user.avatar || '';
+                    document.getElementById('popupName').textContent = user.name || '&mdash;';
+                    document.getElementById('popupRole').textContent = user.role || '&mdash;';
+                    document.getElementById('popupNim').textContent = user.nim || '&mdash;';
+                    document.getElementById('popupLevel').textContent = user.level || '&mdash;';
+                    document.getElementById('popupXp').textContent = (user.xp || 0) + ' XP';
+                } else {
+                    // Not logged in   show guest state (dev mode: still allowed)
+                    document.getElementById('navbarUserName').textContent = 'Tamu';
+                    document.getElementById('heroNim').textContent = '-';
+                }
+            } catch(e) {
+                console.warn('[Dashboard] Gagal memuat data user:', e);
+            }
+        })();
+
+        // Profile popup toggle
+        const profileAvatarBtn = document.getElementById('profileAvatarBtn');
+        const profilePopup     = document.getElementById('profilePopup');
+        profileAvatarBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const isVisible = profilePopup.style.display === 'block';
+            profilePopup.style.display = isVisible ? 'none' : 'block';
+        });
+        // Close popup when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!profilePopup.contains(e.target) && e.target !== profileAvatarBtn) {
+                profilePopup.style.display = 'none';
+            }
+        });
+    </script>
+
+    <!-- ========================================== -->
+    <!-- DYNAMIC COURSE CARDS FROM /api/my-classes  -->
+    <!-- ========================================== -->
+    <script>
+    (async function renderMyCourses() {
+        const grid = document.getElementById('coursesGrid');
+        const loading = document.getElementById('coursesLoading');
+        try {
+            const res = await fetch('/api/my-classes');
+            const classes = await res.json();
+
+            // Remove spinner
+            if (loading) loading.remove();
+
+            if (!classes || classes.length === 0) {
+                grid.innerHTML = `<div class="col-12 text-center py-5">
+                    <i class="fa-solid fa-book-open-reader fa-3x text-muted mb-3"></i>
+                    <p class="text-muted fw-semibold">Anda belum terdaftar di kelas mana pun.</p>
+                </div>`;
+                return;
+            }
+
+            classes.forEach((cls, idx) => {
+                const pct = cls.progressPercent || 0;
+                const done = cls.completedCount || 0;
+                const total = cls.totalQuests || 1;
+                const safeId = 'quest-dyn-' + idx;
+
+                const col = document.createElement('div');
+                col.className = 'col course-card-wrapper';
+                col.dataset.name = cls.name;
+                col.innerHTML = `
+                    <section class="card custom-card h-100">
+                        <div class="card-header-game">
+                            <div>
+                                <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1 rounded-pill mb-2 small d-inline-block" style="font-size:.65rem;">${cls.semester || 'Semester Genap 2025-2026'}</span>
+                                <h5 class="fw-bold mb-1" style="font-size:.95rem;line-height:1.4;">
+                                    <a href="/detail" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
+                                </h5>
+                                <p class="small text-muted mb-0" style="font-size:.75rem;">Pengajar: <strong class="text-dark">${cls.lecturer}</strong></p>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="mb-4">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="small text-muted fw-semibold" style="font-size:.7rem;">Progres Kelas: ${pct}% (${done}/${total} Misi Selesai)</span>
+                                    <span class="small text-primary fw-bold" style="font-size:.7rem;">${pct}%</span>
+                                </div>
+                                <div class="progress" style="height:6px;border-radius:4px;background-color:#e2e8f0;">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width:${pct}%" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                            <h6 class="fw-bold text-dark mb-3" style="font-size:.8rem;">
+                                <i class="fa-solid fa-list-check me-2 text-primary"></i> Misi Terkini di Kelas Ini:
+                            </h6>
+                            <article class="quest-item ${pct > 0 ? 'quest-active' : 'quest-active'}" id="${safeId}" data-coin-reward="30">
+                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center gap-2 mb-1">
+                                            <h6 class="mb-0 fw-bold text-dark" style="font-size:.8rem;">
+                                                Misi Aktif – ${cls.name}
+                                            </h6>
+                                            <span class="badge bg-warning text-dark border border-warning-subtle rounded-pill" style="font-size:.6rem;">Aktif</span>
+                                        </div>
+                                        <p class="small mb-0 text-muted" style="font-size:.72rem;">
+                                            <i class="fa-regular fa-clock me-1 text-danger"></i>
+                                            Progress: <span class="text-primary fw-semibold">${done}/${total} selesai</span>
+                                        </p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button class="btn btn-quest btn-sm py-1" onclick="openQuestModal('${safeId}', '${cls.name.replace(/'/g, "\\'")}', '100 XP', 'Ikuti misi aktif pada kelas ini untuk mendapatkan XP.')">
+                                            Mulai Misi <i class="fa-solid fa-play ms-1" style="font-size:.75rem;"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0 mt-auto d-flex gap-2">
+                            <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size:.72rem;" onclick="showParticipantsModal('${cls.name.replace(/'/g, "\\'")}')">
+                                <i class="fa-solid fa-users me-1"></i> Anggota Kelas
+                            </button>
+                            <a href="/detail" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size:.72rem;">
+                                Masuk Kelas <i class="fa-solid fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </section>`;
+                grid.appendChild(col);
+            });
+        } catch(e) {
+            console.error('[Courses] Gagal memuat kelas:', e);
+            if (loading) loading.innerHTML = '<p class="text-danger">Gagal memuat data kelas.</p>';
+        }
+    })();
+    </script>
+</body>
+</html>

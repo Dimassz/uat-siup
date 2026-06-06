@@ -1,0 +1,405 @@
+{
+  "users": [
+    {
+      "name": "Rangga Wijaya",
+      "NIM": "10201210001",
+      "rank": 1,
+      "xp": 980,
+      "level": "Level 5",
+      "status": "SIM Master",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=60&q=80",
+      "frame": "avatar-frame-gold-decorated",
+      "badges": [
+        "database",
+        "analyst",
+        "vocal",
+        "style",
+        "api"
+      ],
+      "skills": {
+        "db": 100,
+        "analysis": 95,
+        "layout": 80,
+        "api": 85,
+        "security": 0,
+        "vocal": 100
+      },
+      "password": "$2b$10$jYzlMboC.Ec63w4wrX8VCudA8f4RRVTT1CnZGmLipxHHxjDaRZxFK"
+    },
+    {
+      "name": "Aurelia Putri",
+      "NIM": "10201210002",
+      "rank": 2,
+      "xp": 950,
+      "level": "Level 5",
+      "status": "SIM Specialist",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80",
+      "frame": "avatar-frame-silver-decorated",
+      "badges": [
+        "database",
+        "analyst",
+        "vocal",
+        "style"
+      ],
+      "skills": {
+        "db": 90,
+        "analysis": 90,
+        "layout": 100,
+        "api": 0,
+        "security": 0,
+        "vocal": 90
+      },
+      "password": "$2b$10$gWVuenXS8o5ObeOZanKBWerDzAXSzljpmHt1/ank2zmKWRF86J5Ey"
+    },
+    {
+      "name": "Bobby Kertanegara",
+      "NIM": "10201210003",
+      "rank": 3,
+      "xp": 910,
+      "level": "Level 5",
+      "status": "SIM Specialist",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80",
+      "frame": "avatar-frame-bronze-decorated",
+      "badges": [
+        "database",
+        "analyst",
+        "vocal",
+        "api"
+      ],
+      "skills": {
+        "db": 85,
+        "analysis": 85,
+        "layout": 0,
+        "api": 90,
+        "security": 0,
+        "vocal": 90
+      },
+      "password": "$2b$10$Pc9H449MkL3sVdF.n15APukKOMVfxpGMWQDT56MKxyMQBBgFNnE6q"
+    },
+    {
+      "name": "Clarissa Amanda",
+      "NIM": "10201210004",
+      "rank": 4,
+      "xp": 840,
+      "level": "Level 4",
+      "status": "SIM Senior",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&q=80",
+      "frame": "",
+      "badges": [
+        "database",
+        "analyst",
+        "vocal"
+      ],
+      "skills": {
+        "db": 80,
+        "analysis": 85,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 95
+      },
+      "password": "$2b$10$GrnOwiU0p.VRULQ3mtA3OuZOqvFSm.L50v/66n9jya11Az3xqJglq"
+    },
+    {
+      "name": "Farhan Ramadhan",
+      "NIM": "10201210005",
+      "rank": 5,
+      "xp": 780,
+      "level": "Level 4",
+      "status": "SIM Senior",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=60&q=80",
+      "frame": "",
+      "badges": [
+        "database",
+        "analyst"
+      ],
+      "skills": {
+        "db": 80,
+        "analysis": 80,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 0
+      },
+      "password": "$2b$10$x/zPRjD1LXawiQtP9Q9iPeAbD.89u8hjf8QwA4BwRsUOpELUuU7U."
+    },
+    {
+      "name": "Kevin Sanjaya",
+      "NIM": "10201210006",
+      "rank": 6,
+      "xp": 720,
+      "level": "Level 4",
+      "status": "SIM Senior",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80",
+      "frame": "",
+      "badges": [
+        "database",
+        "vocal"
+      ],
+      "skills": {
+        "db": 70,
+        "analysis": 0,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 95
+      },
+      "password": "$2b$10$H2xBBwkY14Lqhd7ZYL/lbegdyu25.8azMIY3TbjqGUXt6yE.uP.Sm"
+    },
+    {
+      "name": "Dimas Dwi Budi Sulistio",
+      "NIM": "10201210007",
+      "rank": 7,
+      "xp": 650,
+      "level": "Level 4",
+      "status": "SIM Apprentice",
+      "role": "Mahasiswa (Anda)",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80",
+      "frame": "avatar-frame-purple-glow-decorated",
+      "badges": [
+        "database",
+        "analyst",
+        "vocal"
+      ],
+      "skills": {
+        "db": 90,
+        "analysis": 85,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 90
+      },
+      "password": "$2b$10$UbLiQ458QUJM0sg6SrXb9O53rnbLhUfdb4o5EEAjW76YIxKJvawMi"
+    },
+    {
+      "name": "Siti Rahma",
+      "NIM": "10201210008",
+      "rank": 8,
+      "xp": 590,
+      "level": "Level 3",
+      "status": "SIM Junior",
+      "role": "Mahasiswa",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80",
+      "frame": "",
+      "badges": [
+        "database"
+      ],
+      "skills": {
+        "db": 75,
+        "analysis": 0,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 0
+      },
+      "password": "$2b$10$heXsI5OfhW7c/IO3gIOo4uUccslcZNNMkn.ajo9Nle.eiGZyCNHyG"
+    },
+    {
+      "name": "Prof. Hermawan Kartajaya",
+      "email": "hermawan@universitaspertamina.ac.id",
+      "role": "Dosen",
+      "password": "$2b$10$GtjBq6vGaAgkzscwKv/uvef93sITUmiZhfywZFy9i923o/p8vYU36",
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=60&q=80"
+    },
+    {
+      "name": "Sarah Wijaya, M.Si.",
+      "email": "sarah.wijaya@universitaspertamina.ac.id",
+      "role": "Dosen",
+      "password": "$2b$10$qQZxel3SNrrU5V/oFuR5zOdFdmb0LNi4SY.zo.bpUEXGO3pwpVL7K",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80"
+    },
+    {
+      "name": "Jafar Shadiq, M.Cs.",
+      "email": "jafar.shadiq@universitaspertamina.ac.id",
+      "role": "Dosen",
+      "password": "$2b$10$cfhcfSY3bT9zsOycGLym6ua4vPk3EnXxcalttqu9ihCYZDw65VUIW",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=60&q=80"
+    },
+    {
+      "name": "Dr. Irwan Prasetyo, M.E.",
+      "email": "irwan.prasetyo@universitaspertamina.ac.id",
+      "role": "Dosen",
+      "password": "$2b$10$GV8RRJ3WitC3QeOTH5i44.2CSRTgYTw3Z6tHZWObEFf6CP3nE3MFi",
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80"
+    },
+    {
+      "name": "Alice Smith, M.Hum.",
+      "email": "alice.smith@universitaspertamina.ac.id",
+      "role": "Dosen",
+      "password": "$2b$10$w9d1f6xVNx8eJcjGgusQ.u/PuDg9Rq9KShlVRAP1Mz9QYNa/4gK9q",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=60&q=80"
+    },
+    {
+      "name": "Dedy Dewanti",
+      "role": "Mahasiswa",
+      "password": "$2b$10$U8gSsHL8aE4NWmeg0t4WzexAz6vEnaq3wmupGJrkQFhqUXGtwUVxa",
+      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=60&q=80",
+      "frame": "",
+      "NIM": "10101010",
+      "rank": 8,
+      "xp": 0,
+      "level": "Level 1",
+      "status": "Apprentice",
+      "badges": [],
+      "skills": {
+        "db": 0,
+        "analysis": 0,
+        "layout": 0,
+        "api": 0,
+        "security": 0,
+        "vocal": 0
+      }
+    }
+  ],
+  "classes": [
+    {
+      "id": "LPK-MN8-2025",
+      "name": "Lembaga dan Pasar Keuangan-MN8-2025",
+      "code": "LPK-101",
+      "lecturer": "Prof. Hermawan Kartajaya",
+      "semester": "Semester Genap 2025-2026",
+      "progressPercent": 0,
+      "completedCount": 0,
+      "totalQuests": 4,
+      "type": "Wajib"
+    },
+    {
+      "id": "PAJAK-MN8A-2025",
+      "name": "Perpajakan-MN8A-2025",
+      "code": "PJK-202",
+      "lecturer": "Sarah Wijaya, M.Si.",
+      "semester": "Semester Genap 2025-2026",
+      "progressPercent": 50,
+      "completedCount": 1,
+      "totalQuests": 2,
+      "type": "Wajib"
+    },
+    {
+      "id": "SIM-MN8-2025",
+      "name": "Sistem Informasi Manajemen-MN8-2025",
+      "code": "SIM-303",
+      "lecturer": "Jafar Shadiq, M.Cs.",
+      "semester": "Semester Genap 2025-2026",
+      "progressPercent": 60,
+      "completedCount": 3,
+      "totalQuests": 5,
+      "type": "Wajib"
+    },
+    {
+      "id": "FINTECH-MN8-2025",
+      "name": "Teknologi Keuangan (Financial Technology)-MN8-2025",
+      "code": "FIN-404",
+      "lecturer": "Dr. Irwan Prasetyo, M.E.",
+      "semester": "Semester Genap 2025-2026",
+      "progressPercent": 25,
+      "completedCount": 1,
+      "totalQuests": 4,
+      "type": "Pilihan"
+    },
+    {
+      "id": "ENG-II-2025",
+      "name": "PRAKTIKUM BAHASA INGGRIS II",
+      "code": "ENG-202",
+      "lecturer": "Alice Smith, M.Hum.",
+      "semester": "Semester Genap 2025-2026",
+      "progressPercent": 0,
+      "completedCount": 0,
+      "totalQuests": 3,
+      "type": "Wajib"
+    }
+  ],
+  "enrollments": [
+    {
+      "studentNim": "10201210001",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210002",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210003",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210004",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210005",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210006",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210007",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210008",
+      "classId": "SIM-MN8-2025"
+    },
+    {
+      "studentNim": "10201210001",
+      "classId": "LPK-MN8-2025"
+    },
+    {
+      "studentNim": "10201210002",
+      "classId": "LPK-MN8-2025"
+    },
+    {
+      "studentNim": "10201210001",
+      "classId": "PAJAK-MN8A-2025"
+    },
+    {
+      "studentNim": "10201210002",
+      "classId": "PAJAK-MN8A-2025"
+    },
+    {
+      "studentNim": "10201210003",
+      "classId": "PAJAK-MN8A-2025"
+    },
+    {
+      "studentNim": "10201210001",
+      "classId": "FINTECH-MN8-2025"
+    },
+    {
+      "studentNim": "10201210003",
+      "classId": "FINTECH-MN8-2025"
+    },
+    {
+      "studentNim": "10201210001",
+      "classId": "ENG-II-2025"
+    },
+    {
+      "studentNim": "10201210003",
+      "classId": "ENG-II-2025"
+    },
+    {
+      "studentNim": "10201210007",
+      "classId": "ENG-II-2025"
+    }
+  ],
+  "logs": [
+    {
+      "id": 1,
+      "action": "Sistem Terbuka",
+      "detail": "Inisialisasi database awal dengan seed data.",
+      "timestamp": "2026-06-06T15:20:43.508Z"
+    },
+    {
+      "id": 2,
+      "action": "Buat Akun (Mahasiswa)",
+      "detail": "User Dedy Dewanti dibuat. Password di-hash menggunakan bcryptjs. Hash: $2b$10$U8gSsHL8...",
+      "timestamp": "2026-06-06T15:40:29.198Z"
+    }
+  ]
+}
