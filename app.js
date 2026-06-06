@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session middleware (secure cookies when using HTTPS)
+app.set('trust proxy', 1);
 app.use(session({
     secret: process.env.SESSION_SECRET || 'supersecretkey',
     resave: false,
