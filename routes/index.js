@@ -3,16 +3,21 @@ const router = express.Router();
 const path = require('path');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
-const auth = require('../middleware/auth');
+const { ensureAuthenticated, ensureMahasiswa, ensureDosen, redirectIfLoggedIn } = require('../middleware/auth');
 
 // Route untuk homepage / dashboard utama
-router.get('/', (req, res) => {
+router.get('/', ensureMahasiswa, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/index.html'));
 });
 
 // Route untuk detail kelas SIM
-router.get('/detail', (req, res) => {
+router.get('/detail', ensureMahasiswa, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/detail.html'));
+});
+
+// Route untuk dashboard dosen
+router.get('/lecturer', ensureDosen, (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/pages/lecturer.html'));
 });
 
 // Route untuk halaman admin (auth dinonaktifkan untuk keperluan dev)
@@ -20,20 +25,20 @@ router.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/admin.html'));
 });
 // Route untuk halaman login
-router.get('/login', (req, res) => {
+router.get('/login', redirectIfLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/pages/login.html'));
 });
 
 router.post('/login', async (req, res) => {
-    const { nim, password } = req.body;
-    if (!nim || !password) {
-        return res.redirect('/login?error=' + encodeURIComponent('NIM dan password harus diisi!'));
+    const { username, nim, password } = req.body;
+    const loginIdentifier = username || nim;
+    if (!loginIdentifier || !password) {
+        return res.redirect('/login?error=' + encodeURIComponent('Username dan password harus diisi!'));
     }
     try {
-        const users = await db.getUsers();
-        const user = users.find(u => u.NIM === nim);
+        const user = await db.getUserByNim(loginIdentifier);
         if (!user) {
-            return res.redirect('/login?error=' + encodeURIComponent('NIM tidak terdaftar.'));
+            return res.redirect('/login?error=' + encodeURIComponent('Username tidak terdaftar.'));
         }
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
@@ -41,13 +46,19 @@ router.post('/login', async (req, res) => {
         }
         req.session.user = {
             nim: user.NIM,
+            username: user.username,
             role: user.role,
             name: user.name,
             avatar: user.avatar,
             xp: user.xp,
+            coins: user.coins,
             level: user.level,
             status: user.status
         };
+        // Redirect berdasarkan role
+        if (user.role === 'Dosen') {
+            return res.redirect('/lecturer');
+        }
         return res.redirect('/');
     } catch (err) {
         console.error('[AUTH] Login error:', err);
@@ -68,8 +79,8 @@ router.get('/api/me', async (req, res) => {
         return res.json({ loggedIn: false });
     }
     try {
-        const users = await db.getUsers();
-        const user = users.find(u => u.NIM === req.session.user.nim);
+        const identifier = req.session.user.nim || req.session.user.username || req.session.user.name;
+        const user = await db.getUserByNim(identifier);
         if (!user) return res.json({ loggedIn: false });
         res.json({
             loggedIn: true,
@@ -78,6 +89,7 @@ router.get('/api/me', async (req, res) => {
             role: user.role,
             avatar: user.avatar,
             xp: user.xp || 0,
+            coins: user.coins || 0,
             level: user.level || 'Level 1',
             status: user.status || 'Apprentice'
         });
@@ -93,20 +105,7 @@ router.get('/api/me', async (req, res) => {
 router.get('/api/my-classes', async (req, res) => {
     try {
         const nim = req.session && req.session.user ? req.session.user.nim : null;
-        const classes = await db.getClasses();
-        const enrollments = await db.getEnrollments();
-
-        let myClasses;
-        if (nim) {
-            // Filter kelas berdasarkan enrollment user
-            const enrolledClassIds = enrollments
-                .filter(e => e.studentNim === nim)
-                .map(e => e.classId);
-            myClasses = classes.filter(c => enrolledClassIds.includes(c.id));
-        } else {
-            // Jika tidak login (mode dev), kembalikan semua kelas
-            myClasses = classes;
-        }
+        const myClasses = await db.getMyClasses(nim);
         res.json(myClasses);
     } catch (err) {
         console.error('[API] /api/my-classes error:', err);
@@ -325,6 +324,162 @@ router.get('/api/class-participants', async (req, res) => {
         res.json(students);
     } catch (err) {
         console.error('Error on /api/class-participants:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 9. Get learning materials for a class
+router.get('/api/classes/:classId/materials', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        const materials = await db.getClassMaterialsWithStatus(classId, studentNim);
+        res.json(materials);
+    } catch (err) {
+        console.error(`Error on /api/classes/${req.params.classId}/materials:`, err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 10. Mark learning material as read
+router.post('/api/materials/:materialId/read', async (req, res) => {
+    try {
+        const { materialId } = req.params;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        if (!studentNim) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        const result = await db.markMaterialAsRead(studentNim, materialId);
+        res.json(result);
+    } catch (err) {
+        console.error(`Error on POST /api/materials/${req.params.materialId}/read:`, err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 11. Get classes taught by a lecturer
+router.get('/api/lecturer/classes', async (req, res) => {
+    try {
+        const lecturerName = req.session && req.session.user ? req.session.user.name : null;
+        if (!lecturerName) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        const classes = await db.getClasses();
+        // Filter classes where this lecturer is the teacher
+        const filtered = classes.filter(c => c.lecturer.includes(lecturerName));
+        res.json(filtered);
+    } catch (err) {
+        console.error('Error on /api/lecturer/classes:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 12. Get quests for a class
+router.get('/api/classes/:classId/quests', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        const quests = await db.getQuestsWithStatus(classId, studentNim);
+        res.json(quests);
+    } catch (err) {
+        console.error('Error on GET /api/classes/:classId/quests:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 13. Create a quest
+router.post('/api/classes/:classId/quests', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const { title, description, xpReward, coinReward, deadline, lecturerFiles } = req.body;
+        if (!title) {
+            return res.status(400).json({ error: 'Judul tugas harus diisi.' });
+        }
+        const newQuest = await db.createQuest({
+            classId,
+            title,
+            description,
+            xpReward: parseInt(xpReward),
+            coinReward: parseInt(coinReward),
+            deadline,
+            lecturerFiles
+        });
+        res.json({ success: true, quest: newQuest });
+    } catch (err) {
+        console.error('Error on POST /api/classes/:classId/quests:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 14. Create a material
+router.post('/api/classes/:classId/materials', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const { title, fileName, fileType, fileSize, downloadUrl, description, additionalFiles } = req.body;
+        if (!title || !fileName) {
+            return res.status(400).json({ error: 'Judul dan nama berkas materi harus diisi.' });
+        }
+        const newMaterial = await db.createMaterial({
+            classId,
+            title,
+            fileName,
+            fileType,
+            fileSize,
+            downloadUrl,
+            description,
+            additionalFiles
+        });
+        res.json({ success: true, material: newMaterial });
+    } catch (err) {
+        console.error('Error on POST /api/classes/:classId/materials:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 15. Get submissions for a class
+router.get('/api/classes/:classId/submissions', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const subs = await db.getSubmissionsForClass(classId);
+        res.json(subs);
+    } catch (err) {
+        console.error('Error on GET /api/classes/:classId/submissions:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 16. Grade a student submission
+router.post('/api/submissions/:submissionId/grade', async (req, res) => {
+    try {
+        const { submissionId } = req.params;
+        const { grade, feedback } = req.body;
+        if (!grade) {
+            return res.status(400).json({ error: 'Nilai tugas harus diisi.' });
+        }
+        const result = await db.gradeSubmission(submissionId, grade, feedback);
+        res.json(result);
+    } catch (err) {
+        console.error('Error on POST /api/submissions/:submissionId/grade:', err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// 17. Submit quest (Student)
+router.post('/api/quests/:questId/submit', async (req, res) => {
+    try {
+        const { questId } = req.params;
+        const { submittedFile } = req.body;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        if (!studentNim) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        if (!submittedFile) {
+            return res.status(400).json({ error: 'Nama berkas harus disertakan.' });
+        }
+        const result = await db.submitQuest(studentNim, questId, submittedFile);
+        res.json({ success: true, submission: result });
+    } catch (err) {
+        console.error('Error on POST /api/quests/:questId/submit:', err);
         res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
     }
 });

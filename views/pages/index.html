@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -1060,6 +1060,78 @@
         .clickable-student-name:hover {
             color: #6f42c1 !important;
         }
+
+        /* LIST VIEW OVERRIDES */
+        #coursesGrid.list-view {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1.25rem !important;
+        }
+        #coursesGrid.list-view .course-card-wrapper {
+            width: 100% !important;
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+        }
+        #coursesGrid.list-view .custom-card {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            padding: 1.25rem 1.5rem !important;
+            gap: 1.5rem !important;
+            min-height: 120px !important;
+            margin-bottom: 0 !important;
+        }
+        #coursesGrid.list-view .card-header-game {
+            flex: 0 0 30% !important;
+            width: 30% !important;
+            padding: 0 !important;
+            border: none !important;
+            margin-bottom: 0 !important;
+            align-self: center !important;
+        }
+        #coursesGrid.list-view .card-body {
+            flex: 1 1 auto !important;
+            padding: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        #coursesGrid.list-view .card-body .progress {
+            margin-bottom: 0.5rem !important;
+        }
+        #coursesGrid.list-view .card-body .quest-item {
+            margin-bottom: 0 !important;
+            padding: 8px 12px !important;
+        }
+        #coursesGrid.list-view .card-footer {
+            flex: 0 0 200px !important;
+            width: 200px !important;
+            padding: 0 !important;
+            border: none !important;
+            margin-top: 0 !important;
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+            align-self: center !important;
+        }
+        #coursesGrid.list-view .card-footer .btn,
+        #coursesGrid.list-view .card-footer .btn-outline-primary {
+            width: 100% !important;
+        }
+        @media (max-width: 991px) {
+            #coursesGrid.list-view .custom-card {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 1rem !important;
+                padding: 1.5rem !important;
+            }
+            #coursesGrid.list-view .card-header-game,
+            #coursesGrid.list-view .card-footer {
+                width: 100% !important;
+                flex: 1 1 auto !important;
+            }
+            #coursesGrid.list-view .card-footer {
+                flex-direction: row !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1087,12 +1159,8 @@
                 <a href="#" class="navbar-icon-btn" title="Notifikasi">
                     <i class="fa-regular fa-bell"></i>
                     <span class="navbar-icon-badge">3</span>
-                </a>
                 <a href="#" class="navbar-icon-btn d-none d-sm-inline" title="Pesan">
                     <i class="fa-regular fa-comments"></i>
-                </a>
-                <a href="#" class="navbar-icon-btn d-none d-sm-inline" style="font-size: 0.82rem; font-weight: 500;" title="Ganti Bahasa">
-                    <i class="fa-solid fa-globe me-1 text-info"></i> English (en) <i class="fa-solid fa-chevron-down ms-1" style="font-size: 0.65rem;"></i>
                 </a>
                 
                 <!-- Profile Avatar & Name (with popup) -->
@@ -1128,7 +1196,8 @@
                         <div style="padding:12px 16px;font-size:0.82rem;color:#334155;">
                             <div style="margin-bottom:6px;"><span style="color:#94a3b8;">NIM</span> &nbsp;<strong id="popupNim">&mdash;</strong></div>
                             <div style="margin-bottom:6px;"><span style="color:#94a3b8;">Level</span> &nbsp;<strong id="popupLevel">&mdash;</strong></div>
-                            <div><span style="color:#94a3b8;">XP</span> &nbsp;<strong id="popupXp">&mdash;</strong></div>
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">XP Global</span> &nbsp;<strong id="popupXp">&mdash;</strong></div>
+                            <div><span style="color:#94a3b8;">Koin Global</span> &nbsp;<strong id="popupCoins">&mdash;</strong></div>
                         </div>
                         <div style="padding:0 16px 14px;">
                             <a href="/logout" style="
@@ -1163,9 +1232,6 @@
             
             <div class="collapse navbar-collapse" id="mainNavContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
-                    <li class="nav-item">
-                        <a class="nav-link-custom" href="/"><i class="fa-solid fa-house"></i> Home</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link-custom active" href="/"><i class="fa-solid fa-chart-line"></i> Dashboard</a>
                     </li>
@@ -1265,10 +1331,6 @@
                         <i class="fa-solid fa-compass text-primary"></i> Course overview
                     </h4>
                     <div class="d-flex gap-2">
-                        <div class="filter-btn-group btn-group" role="group">
-                            <button type="button" class="btn btn-outline-secondary active btn-sm" id="btnFilterAll">All (except removed)</button>
-                            <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSortName">Course name</button>
-                        </div>
                         <button class="btn btn-light btn-sm border" id="btnToggleLayout" title="Ganti Tampilan Kotak/Daftar">
                             <i class="fa-solid fa-grip-vertical" id="layoutIcon"></i> <span id="layoutText" class="small fw-semibold ms-1">Card</span>
                         </button>
@@ -1508,10 +1570,20 @@
             if (!coursesGrid) return;
             
             try {
-                const res = await fetch('/api/classes');
+                const res = await fetch('/api/my-classes');
                 const classes = await res.json();
                 
                 coursesGrid.innerHTML = '';
+                
+                if (!classes || classes.length === 0) {
+                    coursesGrid.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <i class="fa-solid fa-book-open-reader fa-3x text-muted mb-3"></i>
+                            <p class="text-muted fw-semibold">Anda belum terdaftar di kelas mana pun.</p>
+                        </div>
+                    `;
+                    return;
+                }
                 
                 classes.forEach(cls => {
                     const col = document.createElement('div');
@@ -1561,7 +1633,7 @@
                                             <div class="text-end">
                                                 <span class="xp-text text-primary d-block" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
                                             </div>
-                                            <button class="btn btn-quest btn-sm py-1 px-2.5" onclick="openQuestModal('${q.id}', '${q.title}', '${q.xp} XP', '${q.desc || ''}')">
+                                            <button class="btn btn-quest btn-sm py-1 px-2.5" onclick="openQuestModal('${q.id}', '${q.title.replace(/'/g, "\\'")}', '${q.xp} XP', '${q.desc || ''}')">
                                                 Mulai Misi <i class="fa-solid fa-play ms-1" style="font-size: 0.75rem;"></i>
                                             </button>
                                         </div>
@@ -1596,7 +1668,10 @@
                         <section class="card custom-card h-100">
                             <div class="card-header-game">
                                 <div>
-                                    <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1 rounded-pill mb-2 small d-inline-block" style="font-size: 0.65rem;">${cls.semester}</span>
+                                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                        <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1 rounded-pill small" style="font-size: 0.65rem;">${cls.semester}</span>
+                                        <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-pill small" style="font-size: 0.65rem;"><i class="fa-solid fa-star me-1 text-warning"></i>${cls.localXp || 0} XP Kelas</span>
+                                    </div>
                                     <h5 class="fw-bold mb-1" style="font-size: 0.95rem; line-height: 1.4;">
                                         <a href="/detail" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
                                     </h5>
@@ -1621,11 +1696,11 @@
                                 ${questsHtml}
                             </div>
                             <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0 mt-auto d-flex gap-2">
-                                <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;" onclick="showParticipantsModal('${cls.name}')">
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;" onclick="showParticipantsModal('${cls.name.replace(/'/g, "\\'")}')">
                                     <i class="fa-solid fa-users me-1"></i> Anggota Kelas
                                 </button>
                                 <a href="/detail" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;">
-                                    Masuk Kelas Lengkap <i class="fa-solid fa-arrow-right ms-1"></i>
+                                    Masuk Kelas <i class="fa-solid fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </section>
@@ -1911,8 +1986,6 @@
             if (neededText) {
                 neededText.innerText = needed + " Koin";
             }
-        }
-
         }
 
         // ==========================================
@@ -2212,6 +2285,10 @@
                 const user = await res.json();
 
                 if (user.loggedIn) {
+                    if (user.role === 'Dosen') {
+                        window.location.href = '/lecturer';
+                        return;
+                    }
                     // Update navbar
                     const firstName = user.name ? user.name.split(' ')[0] : 'Pengguna';
                     document.getElementById('navbarUserName').textContent = user.name || '';
@@ -2228,6 +2305,29 @@
                     document.getElementById('popupNim').textContent = user.nim || '&mdash;';
                     document.getElementById('popupLevel').textContent = user.level || '&mdash;';
                     document.getElementById('popupXp').textContent = (user.xp || 0) + ' XP';
+                    document.getElementById('popupCoins').textContent = (user.coins || 0) + ' Koin';
+
+                    // Hydrate coins globally
+                    const userCoins = user.coins || 0;
+                    coins = userCoins;
+                    document.querySelectorAll('.current-coins-display').forEach(el => {
+                        el.textContent = userCoins + ' Koin';
+                    });
+                    document.querySelectorAll('.global-coins-display').forEach(el => {
+                        el.textContent = userCoins;
+                    });
+                    
+                    const progressPercent = (userCoins / 1000) * 100;
+                    const progressBar = document.getElementById('globalCoinProgress');
+                    if (progressBar) {
+                        progressBar.style.width = progressPercent + '%';
+                        progressBar.setAttribute('aria-valuenow', userCoins);
+                    }
+                    const needed = 1000 - userCoins;
+                    const neededText = document.getElementById('coinsNeededText');
+                    if (neededText) {
+                        neededText.textContent = needed + ' Koin';
+                    }
                 } else {
                     // Not logged in   show guest state (dev mode: still allowed)
                     document.getElementById('navbarUserName').textContent = 'Tamu';
@@ -2253,101 +2353,27 @@
                 profilePopup.style.display = 'none';
             }
         });
-    </script>
 
-    <!-- ========================================== -->
-    <!-- DYNAMIC COURSE CARDS FROM /api/my-classes  -->
-    <!-- ========================================== -->
-    <script>
-    (async function renderMyCourses() {
-        const grid = document.getElementById('coursesGrid');
-        const loading = document.getElementById('coursesLoading');
-        try {
-            const res = await fetch('/api/my-classes');
-            const classes = await res.json();
+        // Layout toggle (Card vs List)
+        const btnToggleLayout = document.getElementById('btnToggleLayout');
+        const layoutIcon = document.getElementById('layoutIcon');
+        const layoutText = document.getElementById('layoutText');
 
-            // Remove spinner
-            if (loading) loading.remove();
-
-            if (!classes || classes.length === 0) {
-                grid.innerHTML = `<div class="col-12 text-center py-5">
-                    <i class="fa-solid fa-book-open-reader fa-3x text-muted mb-3"></i>
-                    <p class="text-muted fw-semibold">Anda belum terdaftar di kelas mana pun.</p>
-                </div>`;
-                return;
-            }
-
-            classes.forEach((cls, idx) => {
-                const pct = cls.progressPercent || 0;
-                const done = cls.completedCount || 0;
-                const total = cls.totalQuests || 1;
-                const safeId = 'quest-dyn-' + idx;
-
-                const col = document.createElement('div');
-                col.className = 'col course-card-wrapper';
-                col.dataset.name = cls.name;
-                col.innerHTML = `
-                    <section class="card custom-card h-100">
-                        <div class="card-header-game">
-                            <div>
-                                <span class="badge bg-info-subtle text-info border border-info-subtle px-2 py-1 rounded-pill mb-2 small d-inline-block" style="font-size:.65rem;">${cls.semester || 'Semester Genap 2025-2026'}</span>
-                                <h5 class="fw-bold mb-1" style="font-size:.95rem;line-height:1.4;">
-                                    <a href="/detail" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
-                                </h5>
-                                <p class="small text-muted mb-0" style="font-size:.75rem;">Pengajar: <strong class="text-dark">${cls.lecturer}</strong></p>
-                            </div>
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="mb-4">
-                                <div class="d-flex justify-content-between align-items-center mb-1">
-                                    <span class="small text-muted fw-semibold" style="font-size:.7rem;">Progres Kelas: ${pct}% (${done}/${total} Misi Selesai)</span>
-                                    <span class="small text-primary fw-bold" style="font-size:.7rem;">${pct}%</span>
-                                </div>
-                                <div class="progress" style="height:6px;border-radius:4px;background-color:#e2e8f0;">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width:${pct}%" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                            <h6 class="fw-bold text-dark mb-3" style="font-size:.8rem;">
-                                <i class="fa-solid fa-list-check me-2 text-primary"></i> Misi Terkini di Kelas Ini:
-                            </h6>
-                            <article class="quest-item ${pct > 0 ? 'quest-active' : 'quest-active'}" id="${safeId}" data-coin-reward="30">
-                                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex align-items-center gap-2 mb-1">
-                                            <h6 class="mb-0 fw-bold text-dark" style="font-size:.8rem;">
-                                                Misi Aktif – ${cls.name}
-                                            </h6>
-                                            <span class="badge bg-warning text-dark border border-warning-subtle rounded-pill" style="font-size:.6rem;">Aktif</span>
-                                        </div>
-                                        <p class="small mb-0 text-muted" style="font-size:.72rem;">
-                                            <i class="fa-regular fa-clock me-1 text-danger"></i>
-                                            Progress: <span class="text-primary fw-semibold">${done}/${total} selesai</span>
-                                        </p>
-                                    </div>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <button class="btn btn-quest btn-sm py-1" onclick="openQuestModal('${safeId}', '${cls.name.replace(/'/g, "\\'")}', '100 XP', 'Ikuti misi aktif pada kelas ini untuk mendapatkan XP.')">
-                                            Mulai Misi <i class="fa-solid fa-play ms-1" style="font-size:.75rem;"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0 mt-auto d-flex gap-2">
-                            <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size:.72rem;" onclick="showParticipantsModal('${cls.name.replace(/'/g, "\\'")}')">
-                                <i class="fa-solid fa-users me-1"></i> Anggota Kelas
-                            </button>
-                            <a href="/detail" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size:.72rem;">
-                                Masuk Kelas <i class="fa-solid fa-arrow-right ms-1"></i>
-                            </a>
-                        </div>
-                    </section>`;
-                grid.appendChild(col);
+        if (btnToggleLayout) {
+            btnToggleLayout.addEventListener('click', () => {
+                const coursesGrid = document.getElementById('coursesGrid');
+                if (coursesGrid) {
+                    const isList = coursesGrid.classList.toggle('list-view');
+                    if (isList) {
+                        layoutIcon.className = 'fa-solid fa-list';
+                        layoutText.textContent = 'List';
+                    } else {
+                        layoutIcon.className = 'fa-solid fa-grip-vertical';
+                        layoutText.textContent = 'Card';
+                    }
+                }
             });
-        } catch(e) {
-            console.error('[Courses] Gagal memuat kelas:', e);
-            if (loading) loading.innerHTML = '<p class="text-danger">Gagal memuat data kelas.</p>';
         }
-    })();
     </script>
 </body>
 </html>

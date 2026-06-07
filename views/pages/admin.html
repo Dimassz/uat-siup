@@ -802,7 +802,7 @@
                             <td>
                                 <div class="d-flex align-items-center gap-2">
                                     <img src="${user.avatar}" class="admin-avatar" alt="${user.name}">
-                                    <span class="fw-semibold text-white">${user.name}</span>
+                                    <span class="fw-semibold">${user.name}</span>
                                 </div>
                             </td>
                             <td><span class="badge ${labelBadge}">${user.role}</span></td>
@@ -812,7 +812,7 @@
                         tbody.appendChild(tr);
 
                         // Fill dropdowns
-                        if (user.role === 'Mahasiswa') {
+                        if (user.role && user.role.includes('Mahasiswa')) {
                             const opt = document.createElement('option');
                             opt.value = user.NIM;
                             opt.innerText = `${user.name} (NIM: ${user.NIM})`;

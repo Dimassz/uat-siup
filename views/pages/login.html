@@ -3,307 +3,505 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login – SIM E-Learning</title>
-    <meta name="description" content="Login ke portal SIM E-Learning menggunakan NIM dan password." />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <title>Welcome back – SIM E-Learning</title>
+    <meta name="description" content="Masuk ke portal SIM E-Learning menggunakan Username dan password." />
+    <!-- Modern Premium Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             min-height: 100vh;
+            background-color: #ffffff;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
+            color: #1e293b;
         }
 
-        /* Decorative blobs */
-        body::before {
-            content: '';
-            position: absolute;
-            top: -100px; left: -100px;
-            width: 400px; height: 400px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.08);
-            animation: drift 10s ease-in-out infinite;
-        }
-        body::after {
-            content: '';
-            position: absolute;
-            bottom: -120px; right: -80px;
-            width: 500px; height: 500px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.06);
-            animation: drift 14s ease-in-out infinite reverse;
-        }
-        @keyframes drift {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(20px); }
-        }
-
-        .login-wrapper {
-            position: relative;
-            z-index: 1;
+        /* Two Column Container */
+        .login-container {
+            display: flex;
             width: 100%;
-            max-width: 420px;
-            padding: 1rem;
+            min-height: 100vh;
         }
 
-        .login-card {
-            background: rgba(255,255,255,0.97);
-            border-radius: 20px;
-            padding: 2.5rem 2.5rem 2rem;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-            animation: slideUp 0.5s ease both;
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Brand header */
-        .brand {
-            text-align: center;
-            margin-bottom: 1.8rem;
-        }
-        .brand-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 64px; height: 64px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            margin-bottom: 0.8rem;
-            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
-        }
-        .brand-icon svg { width: 32px; height: 32px; fill: none; stroke: #fff; stroke-width: 2; }
-        .brand h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #1a202c;
-            letter-spacing: -0.3px;
-        }
-        .brand p {
-            font-size: 0.9rem;
-            color: #718096;
-            margin-top: 0.2rem;
+        /* Left Side: Form Column */
+        .form-column {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 2.5rem 4rem;
+            position: relative;
+            background-color: #ffffff;
         }
 
-        /* Error box */
-        .error-box {
-            display: none;
-            background: #fff5f5;
-            border: 1px solid #fc8181;
-            color: #c53030;
-            padding: 0.7rem 1rem;
-            border-radius: 10px;
-            margin-bottom: 1.2rem;
-            font-size: 0.9rem;
+        /* Logo Brand Style */
+        .brand-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
         }
-        .error-box.hidden { display: none; }
-        .error-box svg { flex-shrink: 0; width: 18px; height: 18px; stroke: #c53030; fill: none; stroke-width: 2; }
 
-        /* Form */
-        .form-group { margin-bottom: 1.2rem; }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            width: 28px;
+            height: 28px;
+        }
+
+        .logo-box {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background-color: #6355d8;
+        }
+
+        .logo-box.rotated {
+            border-radius: 4px;
+            background-color: #8c7ff2;
+            transform: scale(0.9);
+        }
+
+        .brand-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #0f172a;
+        }
+
+        /* Center Content Area */
+        .center-content {
+            max-width: 400px;
+            width: 100%;
+            margin: auto 0;
+        }
+
+        .welcome-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .welcome-subtitle {
+            font-size: 0.95rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        /* Error Alert Box */
+        .alert-error {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: #fef2f2;
+            border: 1px solid #fee2e2;
+            color: #b91c1c;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            animation: shake 0.4s ease;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-4px); }
+            75% { transform: translateX(4px); }
+        }
+
+        .alert-error i {
+            font-size: 1.1rem;
+            color: #ef4444;
+        }
+
+        /* Input styling */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
         .form-group label {
             display: block;
             font-size: 0.88rem;
             font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 0.45rem;
+            color: #334155;
+            margin-bottom: 0.5rem;
         }
-        .input-wrap {
+
+        .input-wrapper {
             position: relative;
         }
-        .input-wrap svg {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 18px; height: 18px;
-            stroke: #a0aec0;
-            fill: none;
-            stroke-width: 2;
-            pointer-events: none;
-        }
-        .input-wrap input {
+
+        .input-wrapper input {
             width: 100%;
-            padding: 0.7rem 0.9rem 0.7rem 2.6rem;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-family: inherit;
             font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
-            background: #f7fafc;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            color: #0f172a;
+            background-color: #ffffff;
+            transition: all 0.2s ease;
             outline: none;
         }
-        .input-wrap input:focus {
-            border-color: #667eea;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
-        }
-        .input-wrap input::placeholder { color: #a0aec0; }
 
-        /* Toggle password */
-        .toggle-pw {
+        .input-wrapper input:focus {
+            border-color: #6355d8;
+            box-shadow: 0 0 0 3px rgba(99, 85, 216, 0.12);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* Eye Icon for Password toggle */
+        .toggle-password {
             position: absolute;
-            right: 12px;
+            right: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            cursor: pointer;
             background: none;
             border: none;
-            padding: 0;
-            line-height: 1;
-        }
-        .toggle-pw svg {
-            position: static;
-            transform: none;
-            width: 18px; height: 18px;
-            stroke: #a0aec0;
-            fill: none;
-            stroke-width: 2;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
         }
 
-        /* Submit button */
-        .btn-login {
+        .toggle-password:hover {
+            color: #6355d8;
+        }
+
+        /* Extra Actions: Remember & Forgot */
+        .form-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            font-size: 0.88rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            color: #475569;
+            user-select: none;
+        }
+
+        .remember-me input {
+            accent-color: #6355d8;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            color: #6355d8;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+
+        .forgot-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Buttons Style */
+        .btn-submit {
+            display: block;
             width: 100%;
             padding: 0.85rem;
+            background-color: #6355d8;
+            color: #ffffff;
             border: none;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: #fff;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
             font-weight: 600;
-            font-family: 'Inter', sans-serif;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.1s;
-            margin-top: 0.5rem;
-            box-shadow: 0 6px 20px rgba(102,126,234,0.35);
-        }
-        .btn-login:hover  { opacity: 0.9; }
-        .btn-login:active { transform: scale(0.98); }
-
-        .footer-note {
+            transition: all 0.2s;
+            margin-bottom: 0.75rem;
             text-align: center;
-            margin-top: 1.4rem;
-            font-size: 0.82rem;
-            color: #a0aec0;
+        }
+
+        .btn-submit:hover {
+            background-color: #4f41c4;
+            box-shadow: 0 4px 12px rgba(99, 85, 216, 0.25);
+        }
+
+        .btn-submit:active {
+            transform: scale(0.99);
+        }
+
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #ffffff;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 2rem;
+        }
+
+        .btn-google:hover {
+            background-color: #f8fafc;
+            border-color: #94a3b8;
+        }
+
+        .btn-google img {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Signup bottom text */
+        .signup-footer {
+            text-align: center;
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        .signup-link {
+            color: #6355d8;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+
+        .signup-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer copyrights */
+        .copyright-footer {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-top: 2rem;
+        }
+
+        /* Right Side: Image/Banner Column */
+        .banner-column {
+            width: 50%;
+            background-color: #a78bfa;
+            background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            position: relative;
+        }
+
+        .banner-wrapper {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-wrapper img {
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 16px;
+            /* subtle premium floating drop shadow for mockup integration */
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15));
+            animation: float-slow 6s ease-in-out infinite;
+        }
+
+        @keyframes float-slow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Responsive Layout Settings */
+        @media (max-width: 992px) {
+            .form-column {
+                width: 60%;
+                padding: 2.5rem 3rem;
+            }
+            .banner-column {
+                width: 40%;
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banner-column {
+                display: none;
+            }
+            .form-column {
+                width: 100%;
+                padding: 2.5rem 2rem;
+                justify-content: center;
+            }
+            .brand-header {
+                position: absolute;
+                top: 2rem;
+                left: 2rem;
+            }
+            .copyright-footer {
+                position: absolute;
+                bottom: 2rem;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="login-wrapper">
-        <div class="login-card">
-            <!-- Brand -->
-            <div class="brand">
-                <div class="brand-icon">
-                    <!-- Graduation cap icon -->
-                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
+    <div class="login-container">
+        <!-- Left Column: Form -->
+        <main class="form-column">
+            <!-- Brand Logo Header -->
+            <div class="brand-header">
+                <div class="logo-grid">
+                    <div class="logo-box"></div>
+                    <div class="logo-box rotated"></div>
+                    <div class="logo-box rotated"></div>
+                    <div class="logo-box"></div>
                 </div>
-                <h1>SIM E-Learning</h1>
-                <p>Masuk ke portal akademik</p>
+                <span class="brand-name">SIM E-Learning</span>
             </div>
 
-            <!-- Error message -->
-            <div class="error-box hidden" id="errorBox">
-                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="12" y1="8" x2="12" y2="12"/>
-                    <line x1="12" y1="16" x2="12.01" y2="16"/>
-                </svg>
-                <span id="errorText"></span>
+            <!-- Central Form -->
+            <div class="center-content">
+                <h1 class="welcome-title">Welcome back</h1>
+                <p class="welcome-subtitle">Please enter your details</p>
+
+                <!-- Error Toast/Alert Alert -->
+                <div class="alert-error" id="errorBox">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="errorText">Username atau password salah. Silakan coba lagi.</span>
+                </div>
+
+                <!-- Form -->
+                <form id="loginForm" action="/login" method="POST" novalidate>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="username" 
+                                name="username" 
+                                placeholder="Masukkan Username Anda" 
+                                autocomplete="username" 
+                                required 
+                            />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Masukkan password" 
+                                autocomplete="current-password" 
+                                required 
+                            />
+                            <button type="button" class="toggle-password" id="togglePwBtn" aria-label="Tampilkan password">
+                                <i class="fa-solid fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Remember & Forgot -->
+                    <div class="form-actions">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember" name="remember" />
+                            <span>Remember for 30 days</span>
+                        </label>
+                        <a href="#" class="forgot-link" onclick="alert('Silakan hubungi Administrator atau Dosen Anda untuk menyetel ulang password.')">Forgot password</a>
+                    </div>
+
+                    <button type="submit" class="btn-submit" id="submitBtn">Sign in</button>
+                    
+                    <button type="button" class="btn-google" onclick="alert('Login Google sedang dinonaktifkan sementara.')">
+                        <img src="https://www.gstatic.com/images/branding/product/1x/gsa_android_64dp.png" alt="Google Logo" />
+                        <span>Sign in with Google</span>
+                    </button>
+                </form>
+
+                <p class="signup-footer">
+                    Don't have an account? <a href="#" class="signup-link" onclick="alert('Silakan daftarkan NIM Anda melalui Administrator Kampus.')">Sign up</a>
+                </p>
             </div>
 
-            <!-- Login form -->
-            <form id="loginForm" action="/login" method="POST" novalidate>
-                <div class="form-group">
-                    <label for="nim">NIM</label>
-                    <div class="input-wrap">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                        <input
-                            type="text"
-                            id="nim"
-                            name="nim"
-                            placeholder="Masukkan NIM Anda"
-                            autocomplete="username"
-                            required
-                        />
-                    </div>
-                </div>
+            <!-- Footer Copyright -->
+            <footer class="copyright-footer">
+                &copy; 2026 Universitas Pertamina. All rights reserved.
+            </footer>
+        </main>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-wrap">
-                        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                        </svg>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Masukkan password"
-                            autocomplete="current-password"
-                            required
-                        />
-                        <button type="button" class="toggle-pw" id="togglePw" aria-label="Tampilkan password">
-                            <svg id="eyeIcon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                                <circle cx="12" cy="12" r="3"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-login" id="submitBtn">Masuk</button>
-            </form>
-
-            <p class="footer-note">Sistem Informasi Manajemen &mdash; Universitas Pertamina</p>
-        </div>
+        <!-- Right Column: Visual illustration -->
+        <aside class="banner-column">
+            <div class="banner-wrapper">
+                <img src="/images/login_illustration.png" alt="Portal E-Learning SIM" />
+            </div>
+        </aside>
     </div>
 
     <script>
-        // Show error from query string
+        // Handle error parameters in URL dynamically
         const params = new URLSearchParams(window.location.search);
         const err = params.get('error');
         if (err) {
-            const box = document.getElementById('errorBox');
-            document.getElementById('errorText').textContent = err;
-            box.classList.remove('hidden');
+            const errorBox = document.getElementById('errorBox');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = err;
+            errorBox.style.display = 'flex';
         }
 
-        // Toggle password visibility
-        const togglePw = document.getElementById('togglePw');
-        const pwInput  = document.getElementById('password');
-        togglePw.addEventListener('click', () => {
-            const isHidden = pwInput.type === 'password';
-            pwInput.type = isHidden ? 'text' : 'password';
+        // Toggle Password Show/Hide
+        const togglePwBtn = document.getElementById('togglePwBtn');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        togglePwBtn.addEventListener('click', () => {
+            const isHidden = passwordInput.type === 'password';
+            passwordInput.type = isHidden ? 'text' : 'password';
+            eyeIcon.className = isHidden ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye';
         });
 
-        // Client-side basic validation (prevent empty submit)
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            const nim = document.getElementById('nim').value.trim();
-            const pw  = document.getElementById('password').value.trim();
-            if (!nim || !pw) {
+        // Basic Client Form Validation
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', (e) => {
+            const usernameVal = document.getElementById('username').value.trim();
+            const passVal = document.getElementById('password').value.trim();
+            
+            if (!usernameVal || !passVal) {
                 e.preventDefault();
-                const box = document.getElementById('errorBox');
-                document.getElementById('errorText').textContent = 'NIM dan password tidak boleh kosong.';
-                box.classList.remove('hidden');
+                const errorBox = document.getElementById('errorBox');
+                const errorText = document.getElementById('errorText');
+                errorText.textContent = 'Username dan Password tidak boleh kosong.';
+                errorBox.style.display = 'flex';
             }
         });
     </script>

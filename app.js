@@ -8,6 +8,12 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Request logging middleware
+app.use((req, res, next) => {
+    console.log(`[REQUEST] ${req.method} ${req.url}`);
+    next();
+});
+
 // Session middleware (secure cookies when using HTTPS)
 app.set('trust proxy', 1);
 app.use(session({
