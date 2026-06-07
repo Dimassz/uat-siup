@@ -87,7 +87,15 @@ const defaultQuests = [
     { id: 2, classId: 'SIM-MN8-2025', title: '2. Desain Database & Data Warehouse Bisnis', description: 'Desain sebuah database relational untuk sistem penjualan ritel (Point of Sales). Gambarkan Entity Relationship Diagram (ERD), skema tabel, dan lakukan normalisasi database hingga bentuk normal ketiga (3NF).', xpReward: 150, coinReward: 30, deadline: 'Tenggat Terlewati (4 Juni 2026)', lecturerFiles: [{ name: 'Modul_Praktikum_Desain_Database.pdf', type: 'pdf', size: '1.8 MB' }, { name: 'Slide_Pertemuan_2_Normalisasi.pptx', type: 'pptx', size: '3.6 MB' }, { name: 'POS_Sample_Data_Script.sql', type: 'code', size: '45 KB' }] },
     { id: 3, classId: 'SIM-MN8-2025', title: '3. Flexbox & Layouting Responsif Bootstrap 5', description: 'Buatlah desain landing page yang responsif dengan memanfaatkan Bootstrap Grid, Flexbox utilities, dan media query kustom. Pastikan layout dapat beradaptasi dengan baik di layar mobile, tablet, dan desktop.', xpReward: 250, coinReward: 50, deadline: 'Tenggat: 9 Juni 2026 (3 Hari lagi)', lecturerFiles: [{ name: 'Panduan_Layouting_Bootstrap5.pdf', type: 'pdf', size: '2.4 MB' }, { name: 'Slide_Pertemuan_3_Flexbox_Grid.pptx', type: 'pptx', size: '5.1 MB' }, { name: 'Asset_Landing_Page_Kopi.zip', type: 'zip', size: '12.8 MB' }] },
     { id: 4, classId: 'SIM-MN8-2025', title: '4. Integrasi API & Pertukaran Data Sistem Informasi', description: 'Integrasikan aplikasi mock-up Anda dengan RESTful API publik. Ambil data JSON, olah, dan tampilkan dalam bentuk tabel dinamis menggunakan Fetch API JavaScript secara asinkron.', xpReward: 300, coinReward: 60, deadline: 'Prasyarat: Selesaikan Modul 3', lecturerFiles: [{ name: 'REST_API_Integration_Guide.pdf', type: 'pdf', size: '1.5 MB' }, { name: 'Slide_Fetch_JSON_Parsing.pptx', type: 'pptx', size: '3.9 MB' }] },
-    { id: 5, classId: 'SIM-MN8-2025', title: '5. Keamanan Informasi & Audit Sistem Bisnis', description: 'Lakukan analisis risiko keamanan informasi pada sistem e-commerce. Identifikasi kerentanan (OWASP Top 10) dan rancang rekomendasi mitigasi risiko beserta kontrol auditnya.', xpReward: 350, coinReward: 70, deadline: 'Prasyarat: Selesaikan Modul 4', lecturerFiles: [{ name: 'Audit_Keamanan_Modul5.pdf', type: 'pdf', size: '3.1 MB' }, { name: 'Slide_OWASP_Threats_Mitigation.pptx', type: 'pptx', size: '4.8 MB' }] }
+    { id: 5, classId: 'SIM-MN8-2025', title: '5. Keamanan Informasi & Audit Sistem Bisnis', description: 'Lakukan analisis risiko keamanan informasi pada sistem e-commerce. Identifikasi kerentanan (OWASP Top 10) dan rancang rekomendasi mitigasi risiko beserta kontrol auditnya.', xpReward: 350, coinReward: 70, deadline: 'Prasyarat: Selesaikan Modul 4', lecturerFiles: [{ name: 'Audit_Keamanan_Modul5.pdf', type: 'pdf', size: '3.1 MB' }, { name: 'Slide_OWASP_Threats_Mitigation.pptx', type: 'pptx', size: '4.8 MB' }] },
+    { id: 6, classId: 'LPK-MN8-2025', title: '1. Struktur Lembaga Keuangan Bank & Non-Bank', description: 'Pelajari modul struktur lembaga keuangan, buat rangkuman singkat dalam format PDF mengenai perbedaan mendasar Bank Sentral, Bank Umum, dan Lembaga Keuangan Mikro.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 12 Juni 2026 (2 Hari lagi)', lecturerFiles: [{ name: 'Modul_LPK_Struktur_Lembaga.pdf', type: 'pdf', size: '1.4 MB' }] },
+    { id: 7, classId: 'LPK-MN8-2025', title: '2. Analisis Pasar Modal & Instrumen Keuangan', description: 'Analisis pergerakan indeks pasar modal Indonesia dan buat laporan komparatif instrumen saham, obligasi, dan reksa dana.', xpReward: 200, coinReward: 40, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Panduan_Analisis_Pasar_Modal.pdf', type: 'pdf', size: '2.0 MB' }] },
+    { id: 8, classId: 'PAJAK-MN8A-2025', title: '1. Ketentuan Umum & Tata Cara Perpajakan', description: 'Pelajari dasar-dasar sistem perpajakan Indonesia dan buat ringkasan konsep domisili, subjek pajak, serta objek pajak.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (3 Juni 2026)', lecturerFiles: [{ name: 'Panduan_Peraturan_Perppajakan.pdf', type: 'pdf', size: '1.2 MB' }] },
+    { id: 9, classId: 'PAJAK-MN8A-2025', title: '2. Simulasi Perhitungan PPh Pasal 21', description: 'Hitunglah PPh Pasal 21 dari 3 skenario karyawan dengan status PTKP yang berbeda menggunakan formulir resmi terbaru.', xpReward: 250, coinReward: 50, deadline: 'Tenggat: 11 Juni 2026 (4 Hari lagi)', lecturerFiles: [{ name: 'Kalkulator_PPh21_Excel.xlsx', type: 'code', size: '150 KB' }] },
+    { id: 10, classId: 'FINTECH-MN8-2025', title: '1. Evolusi FinTech & Sistem Pembayaran Digital', description: 'Analisis evolusi e-wallet dan payment gateway di Indonesia beserta regulasi BI/OJK yang berlaku.', xpReward: 200, coinReward: 40, deadline: 'Tenggat: 13 Juni 2026 (5 Hari lagi)', lecturerFiles: [{ name: 'FinTech_Evolution_Overview.pdf', type: 'pdf', size: '3.1 MB' }] },
+    { id: 11, classId: 'FINTECH-MN8-2025', title: '2. Model Bisnis Peer-to-Peer (P2P) Lending', description: 'Analisis regulasi OJK terkait batas atas pendanaan P2P Lending dan buat laporan komparatif mitigasi risiko gagal bayar.', xpReward: 300, coinReward: 60, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Laporan_Fintech_OJK_2025.pdf', type: 'pdf', size: '4.7 MB' }] },
+    { id: 12, classId: 'ENG-II-2025', title: '1. Professional Elevator Pitch Video', description: 'Rekam video berdurasi 60 detik yang mempresentasikan ide bisnis inovatif Anda dalam Bahasa Inggris formal.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 14 Juni 2026 (6 Hari lagi)', lecturerFiles: [{ name: 'English_II_Speaking_Guide.pdf', type: 'pdf', size: '1.2 MB' }] },
+    { id: 13, classId: 'ENG-II-2025', title: '2. Business Email & Report Writing', description: 'Tulis email bisnis formal dan laporan singkat dalam Bahasa Inggris terkait studi kasus perusahaan multinasional.', xpReward: 200, coinReward: 40, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Vocabulary_Business_English.pdf', type: 'pdf', size: '890 KB' }] }
 ];
 
 const defaultSubmissions = [
@@ -134,6 +142,15 @@ function readDb() {
             dbObj.quests = defaultQuests;
             changed = true;
             console.log('[DATABASE] Migrasi database lokal: menambahkan quests');
+        } else {
+            const existingIds = new Set(dbObj.quests.map(q => q.id));
+            defaultQuests.forEach(q => {
+                if (!existingIds.has(q.id)) {
+                    dbObj.quests.push(q);
+                    changed = true;
+                }
+            });
+            if (changed) console.log('[DATABASE] Migrasi database lokal: menambahkan quests kelas baru');
         }
         if (!dbObj.submissions) {
             dbObj.submissions = defaultSubmissions;
@@ -687,6 +704,35 @@ const db = {
         );
     },
     
+    getClassById: (classId) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query('SELECT * FROM sim_classes WHERE id = $1', [classId]);
+                return res.rows[0] ? mapClassToJs(res.rows[0]) : null;
+            },
+            () => {
+                const data = readDb();
+                return data.classes.find(c => c.id === classId) || null;
+            }
+        );
+    },
+
+    isStudentEnrolled: (studentNim, classId) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query(
+                    'SELECT 1 FROM sim_enrollments WHERE student_nim = $1 AND class_id = $2',
+                    [studentNim, classId]
+                );
+                return res.rows.length > 0;
+            },
+            () => {
+                const data = readDb();
+                return data.enrollments.some(e => e.studentNim === studentNim && e.classId === classId);
+            }
+        );
+    },
+
     // Kelas
     getClasses: () => {
         return executeQuery(

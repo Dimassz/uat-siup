@@ -1375,12 +1375,8 @@
                             <li class="nav-tree-item">
                                 <a href="#" class="nav-tree-link active"><i class="fa-solid fa-graduation-cap"></i> My courses</a>
                                 <!-- Submenu My Courses -->
-                                <ul class="nav-tree-submenu">
-                                    <li><a href="#" class="nav-tree-sublink" title="Lembaga dan Pasar Keuangan-MN8-2025">Lembaga &amp; Pasar Keuangan</a></li>
-                                    <li><a href="#" class="nav-tree-sublink" title="Perpajakan-MN8A-2025">Perpajakan-MN8A</a></li>
-                                    <li><a href="#" class="nav-tree-sublink" title="Sistem Informasi Manajemen-MN8-2025">Sistem Informasi Manajemen</a></li>
-                                    <li><a href="#" class="nav-tree-sublink" title="Teknologi Keuangan (Financial Technology)-MN8-2025">Teknologi Keuangan</a></li>
-                                    <li><a href="#" class="nav-tree-sublink" title="PRAKTIKUM BAHASA INGGRIS II">PRAKTIKUM BAHASA INGGRIS II</a></li>
+                                <ul class="nav-tree-submenu" id="navCoursesSubmenu">
+                                    <li class="text-muted small px-2">Memuat kelas...</li>
                                 </ul>
                             </li>
                         </ul>
@@ -1564,6 +1560,33 @@
         let coins = 420;
         let currentActiveQuestId = null;
 
+        function renderNavCourses(classes) {
+            const submenu = document.getElementById('navCoursesSubmenu');
+            if (!submenu) return;
+            if (!classes || classes.length === 0) {
+                submenu.innerHTML = '<li class="text-muted small px-2">Belum ada kelas</li>';
+                return;
+            }
+            submenu.innerHTML = classes.map(cls => {
+                const shortName = cls.name.split('-')[0].trim();
+                return `<li><a href="/detail?classId=${encodeURIComponent(cls.id)}" class="nav-tree-sublink" title="${cls.name}">${shortName}</a></li>`;
+            }).join('');
+        }
+
+        function mapQuestFromApi(q, idx) {
+            return {
+                id: q.id,
+                num: idx + 1,
+                title: q.title,
+                status: q.status,
+                deadline: q.deadline,
+                xp: q.xpReward,
+                coin: q.coinReward,
+                desc: q.description,
+                date: q.submittedDate
+            };
+        }
+
         // Render all classes dynamically from the server
         async function loadAndRenderCourses() {
             const coursesGrid = document.getElementById('coursesGrid');
@@ -1574,6 +1597,7 @@
                 const classes = await res.json();
                 
                 coursesGrid.innerHTML = '';
+                renderNavCourses(classes);
                 
                 if (!classes || classes.length === 0) {
                     coursesGrid.innerHTML = `
@@ -1585,15 +1609,23 @@
                     return;
                 }
                 
-                classes.forEach(cls => {
+                for (const cls of classes) {
                     const col = document.createElement('div');
                     col.className = 'col course-card-wrapper';
                     col.setAttribute('data-name', cls.name);
                     
-                    // Get quests for this class
-                    let quests = classQuests[cls.id] || classQuests[cls.name];
-                    if (!quests) {
-                        quests = defaultQuestForClass(cls.id);
+                    // Ambil quests dari database sesuai kelas
+                    let quests = [];
+                    try {
+                        const qRes = await fetch(`/api/classes/${encodeURIComponent(cls.id)}/quests`);
+                        const questsData = await qRes.json();
+                        if (Array.isArray(questsData) && questsData.length > 0) {
+                            quests = questsData.map(mapQuestFromApi);
+                        } else {
+                            quests = defaultQuestForClass(cls.id);
+                        }
+                    } catch (e) {
+                        quests = classQuests[cls.id] || defaultQuestForClass(cls.id);
                     }
                     
                     let questsHtml = '';
@@ -1673,7 +1705,7 @@
                                         <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1 rounded-pill small" style="font-size: 0.65rem;"><i class="fa-solid fa-star me-1 text-warning"></i>${cls.localXp || 0} XP Kelas</span>
                                     </div>
                                     <h5 class="fw-bold mb-1" style="font-size: 0.95rem; line-height: 1.4;">
-                                        <a href="/detail" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
+                                        <a href="/detail?classId=${encodeURIComponent(cls.id)}" class="text-decoration-none text-dark hover-primary-link">${cls.name}</a>
                                     </h5>
                                     <p class="small text-muted mb-0" style="font-size: 0.75rem;">Pengajar: <strong class="text-dark">${cls.lecturer}</strong></p>
                                 </div>
@@ -1696,17 +1728,17 @@
                                 ${questsHtml}
                             </div>
                             <div class="card-footer bg-transparent border-0 px-4 pb-4 pt-0 mt-auto d-flex gap-2">
-                                <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;" onclick="showParticipantsModal('${cls.name.replace(/'/g, "\\'")}')">
+                                <button class="btn btn-outline-secondary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;" onclick="showParticipantsModal('${cls.name.replace(/'/g, "\\'")}', '${cls.id}')">
                                     <i class="fa-solid fa-users me-1"></i> Anggota Kelas
                                 </button>
-                                <a href="/detail" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;">
+                                <a href="/detail?classId=${encodeURIComponent(cls.id)}" class="btn btn-outline-primary btn-sm rounded-pill fw-semibold flex-grow-1" style="font-size: 0.72rem;">
                                     Masuk Kelas <i class="fa-solid fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </section>
                     `;
                     coursesGrid.appendChild(col);
-                });
+                }
             } catch (err) {
                 console.error('Gagal mengambil data kelas dari server', err);
             }
@@ -2038,7 +2070,7 @@
         }
 
         // Tampilkan Modal Anggota Kelas Dinamis
-        async function showParticipantsModal(className) {
+        async function showParticipantsModal(className, classId) {
             const tableBody = document.getElementById('participantsTableBody');
             const countText = document.getElementById('participantsCountText');
             const subtitle = document.getElementById('participantsSubtitle');
@@ -2052,7 +2084,10 @@
             participantsModal.show();
             
             try {
-                const res = await fetch(`/api/class-participants?className=${encodeURIComponent(className)}`);
+                const query = classId
+                    ? `classId=${encodeURIComponent(classId)}`
+                    : `className=${encodeURIComponent(className)}`;
+                const res = await fetch(`/api/class-participants?${query}`);
                 activeClassParticipantsList = await res.json();
             } catch (err) {
                 console.error('Gagal mengambil data dari server, fallback...', err);

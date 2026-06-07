@@ -113,6 +113,33 @@ router.get('/api/my-classes', async (req, res) => {
     }
 });
 
+// API: Detail kelas (validasi alokasi mahasiswa)
+router.get('/api/classes/:classId', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        const targetClass = await db.getClassById(classId);
+        if (!targetClass) {
+            return res.status(404).json({ error: 'Kelas tidak ditemukan.' });
+        }
+        if (studentNim) {
+            const enrolled = await db.isStudentEnrolled(studentNim, classId);
+            if (!enrolled) {
+                return res.status(403).json({ error: 'Anda tidak terdaftar di kelas ini.' });
+            }
+            const myClasses = await db.getMyClasses(studentNim);
+            const enrolledClass = myClasses.find(c => c.id === classId);
+            if (enrolledClass) {
+                return res.json({ ...targetClass, localXp: enrolledClass.localXp || 0 });
+            }
+        }
+        res.json(targetClass);
+    } catch (err) {
+        console.error(`Error on /api/classes/${req.params.classId}:`, err);
+        res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
 // 1. Get dashboard summary
 router.get('/api/dashboard-summary', async (req, res) => {
     try {
@@ -279,6 +306,7 @@ router.get('/api/class-participants', async (req, res) => {
             return res.status(400).json({ error: 'Parameter className atau classId harus ditentukan!' });
         }
         
+        const currentNim = req.session && req.session.user ? req.session.user.nim : null;
         const data = await db.getUsers();
         const classes = await db.getClasses();
         const enrollments = await db.getEnrollments();
@@ -302,18 +330,21 @@ router.get('/api/class-participants', async (req, res) => {
             
         const students = data
             .filter(u => u.role === 'Mahasiswa' && studentNimsInClass.includes(u.NIM))
-            .map(student => ({
-                name: student.name,
-                NIM: student.NIM,
-                xp: student.xp || 0,
-                level: student.level || 'Level 1',
-                status: student.status || 'Apprentice',
-                role: student.name === 'Dimas Dwi Budi Sulistio' ? 'Mahasiswa (Anda)' : 'Mahasiswa',
-                avatar: student.avatar,
-                frame: student.frame || '',
-                badges: student.badges || [],
-                skills: student.skills || { db: 0, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 }
-            }));
+            .map(student => {
+                const enrollment = enrollments.find(e => e.studentNim === student.NIM && e.classId === targetClass.id);
+                return {
+                    name: student.name,
+                    NIM: student.NIM,
+                    xp: enrollment ? (enrollment.localXp || 0) : (student.xp || 0),
+                    level: student.level || 'Level 1',
+                    status: student.status || 'Apprentice',
+                    role: (currentNim && student.NIM === currentNim) ? 'Mahasiswa (Anda)' : 'Mahasiswa',
+                    avatar: student.avatar,
+                    frame: student.frame || '',
+                    badges: student.badges || [],
+                    skills: student.skills || { db: 0, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 }
+                };
+            });
             
         // Sort students by XP descending to assign rankings
         students.sort((a, b) => b.xp - a.xp);

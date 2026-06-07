@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Informasi Manajemen - Detail Kelas Gamifikasi</title>
+    <title>Detail Kelas Gamifikasi</title>
 
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -1547,14 +1547,14 @@
                     <span class="badge bg-warning text-dark mb-2 fw-bold px-3 py-2 rounded-pill">
                         <i class="fa-solid fa-graduation-cap me-1"></i> Kelas Aktif
                     </span>
-                    <h1 class="display-6 fw-extrabold mb-1">Sistem Informasi Manajemen-MN8-2025</h1>
+                    <h1 class="display-6 fw-extrabold mb-1" id="classTitleHeader">Memuat kelas...</h1>
                     <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Pengajar: <strong
-                            class="text-warning">Jafar Shadiq, M.Cs.</strong></p>
+                            class="text-warning" id="classLecturerHeader">-</strong></p>
 
-                    <div class="class-code-pill btn-copy-code" data-code="MN8-SIM"
-                        title="Klik untuk menyalin kode kelas ini">
+                    <div class="class-code-pill btn-copy-code" data-code=""
+                        title="Klik untuk menyalin kode kelas ini" id="classCodePill">
                         <span>Kode Kelas:</span>
-                        <strong class="text-warning" id="classCodeText">MN8-SIM</strong>
+                        <strong class="text-warning" id="classCodeText">-</strong>
                         <i class="fa-solid fa-copy ms-1" style="font-size: 0.75rem;"></i>
                     </div>
                 </div>
@@ -1723,20 +1723,8 @@
                                 <a href="#" class="nav-tree-link active"><i class="fa-solid fa-graduation-cap"></i> My
                                     courses</a>
                                 <!-- Submenu My Courses -->
-                                <ul class="nav-tree-submenu">
-                                    <li><a href="/" class="nav-tree-sublink"
-                                            title="Lembaga dan Pasar Keuangan-MN8-2025">Lembaga &amp; Pasar Keuangan</a>
-                                    </li>
-                                    <li><a href="/" class="nav-tree-sublink"
-                                            title="Perpajakan-MN8A-2025">Perpajakan-MN8A</a></li>
-                                    <li><a href="/detail" class="nav-tree-sublink active-course"
-                                            title="Sistem Informasi Manajemen-MN8-2025">Sistem Informasi Manajemen</a>
-                                    </li>
-                                    <li><a href="/" class="nav-tree-sublink"
-                                            title="Teknologi Keuangan (Financial Technology)-MN8-2025">Teknologi
-                                            Keuangan</a></li>
-                                    <li><a href="/" class="nav-tree-sublink"
-                                            title="PRAKTIKUM BAHASA INGGRIS II">PRAKTIKUM BAHASA INGGRIS II</a></li>
+                                <ul class="nav-tree-submenu" id="navCoursesSubmenu">
+                                    <li class="text-muted small px-2">Memuat kelas...</li>
                                 </ul>
                             </li>
                         </ul>
@@ -1744,18 +1732,18 @@
                 </section>
                 <section class="card custom-card">
                     <div class="card-header-game d-flex justify-content-between align-items-center">
-                        <span class="d-flex align-items-center gap-2 text-dark">
-                            <i class="fa-solid fa-ranking-star text-primary"></i> Leaderboard Kelas SIM
+                        <span class="d-flex align-items-center gap-2 text-dark" id="leaderboardTitle">
+                            <i class="fa-solid fa-ranking-star text-primary"></i> Leaderboard Kelas
                         </span>
                         <button class="btn btn-sm btn-link text-decoration-none text-primary fw-bold p-0"
-                            style="font-size: 0.72rem;"
-                            onclick="showParticipantsModal('Sistem Informasi Manajemen-MN8-2025')">
+                            style="font-size: 0.72rem;" id="btnShowParticipants"
+                            onclick="showParticipantsModal(activeClassName, activeClassId)">
                             <i class="fa-solid fa-users me-1"></i> Partisipan
                         </button>
                     </div>
                     <div class="card-body p-3">
-                        <p class="small text-muted mb-3"><i class="fa-solid fa-fire text-danger me-1"></i> Peringkat
-                            mahasiswa berdasarkan XP yang diperoleh khusus di kelas SIM ini.</p>
+                        <p class="small text-muted mb-3" id="leaderboardSubtitle"><i class="fa-solid fa-fire text-danger me-1"></i> Peringkat
+                            mahasiswa berdasarkan XP yang diperoleh khusus di kelas ini.</p>
 
                         <div class="leaderboard-list" id="localLeaderboard">
 
@@ -2325,12 +2313,96 @@
         let materialModalInstance;
         let classMaterialsData = [];
         let globalCoins = 420;
-        let classXP = 650;
+        let classXP = 0;
         let currentActiveQuestId = null;
         let currentUploadedFile = null;
+        let activeClassId = new URLSearchParams(window.location.search).get('classId') || 'SIM-MN8-2025';
+        let activeClassName = '';
+        let currentUserNim = null;
+        let currentUserName = null;
 
         // Basis Data Modul Tugas Lokal
         let questsData = {};
+
+        function renderNavCourses(classes) {
+            const submenu = document.getElementById('navCoursesSubmenu');
+            if (!submenu) return;
+            if (!classes || classes.length === 0) {
+                submenu.innerHTML = '<li class="text-muted small px-2">Belum ada kelas</li>';
+                return;
+            }
+            submenu.innerHTML = classes.map(cls => {
+                const shortName = cls.name.split('-')[0].trim();
+                const isActive = cls.id === activeClassId;
+                return `<li><a href="/detail?classId=${encodeURIComponent(cls.id)}" class="nav-tree-sublink ${isActive ? 'active-course' : ''}" title="${cls.name}">${shortName}</a></li>`;
+            }).join('');
+        }
+
+        function updateClassHeaderUI(cls) {
+            document.title = `${cls.name} - Detail Kelas Gamifikasi`;
+            const titleEl = document.getElementById('classTitleHeader');
+            const lecturerEl = document.getElementById('classLecturerHeader');
+            const codeEl = document.getElementById('classCodeText');
+            const codePill = document.getElementById('classCodePill');
+            const leaderboardTitle = document.getElementById('leaderboardTitle');
+            const leaderboardSubtitle = document.getElementById('leaderboardSubtitle');
+            const shortName = cls.name.split('-')[0].trim();
+
+            if (titleEl) titleEl.innerText = cls.name;
+            if (lecturerEl) lecturerEl.innerText = cls.lecturer;
+            if (codeEl) codeEl.innerText = cls.code;
+            if (codePill) codePill.setAttribute('data-code', cls.code);
+            if (leaderboardTitle) {
+                leaderboardTitle.innerHTML = `<i class="fa-solid fa-ranking-star text-primary"></i> Leaderboard ${shortName}`;
+            }
+            if (leaderboardSubtitle) {
+                leaderboardSubtitle.innerHTML = `<i class="fa-solid fa-fire text-danger me-1"></i> Peringkat mahasiswa berdasarkan XP yang diperoleh khusus di kelas ${shortName} ini.`;
+            }
+        }
+
+        async function initClassContext() {
+            try {
+                const meRes = await fetch('/api/me');
+                const meData = await meRes.json();
+                if (meData.loggedIn) {
+                    currentUserNim = meData.nim;
+                    currentUserName = meData.name;
+                    globalCoins = meData.coins || 0;
+                    document.querySelectorAll('.current-coins-display').forEach(el => {
+                        el.innerText = globalCoins + ' Koin';
+                    });
+                    document.querySelectorAll('.navbar-user-name').forEach(el => {
+                        el.innerText = meData.name;
+                        el.title = meData.name;
+                    });
+                    document.querySelectorAll('.navbar-profile-avatar').forEach(el => {
+                        el.src = meData.avatar;
+                    });
+                }
+
+                const classesRes = await fetch('/api/my-classes');
+                const classesData = await classesRes.json();
+                renderNavCourses(classesData);
+
+                let activeClass = classesData.find(c => c.id === activeClassId);
+                if (!activeClass) {
+                    if (classesData.length > 0) {
+                        window.location.href = `/detail?classId=${encodeURIComponent(classesData[0].id)}`;
+                        return false;
+                    }
+                    window.location.href = '/';
+                    return false;
+                }
+
+                activeClassName = activeClass.name;
+                classXP = activeClass.localXp || 0;
+                updateClassHeaderUI(activeClass);
+                return true;
+            } catch (err) {
+                console.error('Gagal inisialisasi konteks kelas:', err);
+                return false;
+            }
+        }
 
         // ==========================================
         // DYNAMIC BADGES & PROGRESS ROADMAP LOGIC
@@ -2357,39 +2429,15 @@
 
         async function loadUserClassXP() {
             try {
-                // Fetch user info
-                const meRes = await fetch('/api/me');
-                const meData = await meRes.json();
-                if (meData.loggedIn) {
-                    globalCoins = meData.coins;
-                    document.querySelectorAll('.current-coins-display').forEach(el => {
-                        el.innerText = globalCoins + " Koin";
-                    });
-                    document.querySelectorAll('.navbar-user-name').forEach(el => {
-                        el.innerText = meData.name;
-                        el.title = meData.name;
-                    });
-                    document.querySelectorAll('.navbar-profile-avatar').forEach(el => {
-                        el.src = meData.avatar;
-                    });
+                const classRes = await fetch(`/api/classes/${encodeURIComponent(activeClassId)}`);
+                if (classRes.ok) {
+                    const classData = await classRes.json();
+                    classXP = classData.localXp || 0;
                 }
-                
-                // Fetch classes to find classXP
-                const classesRes = await fetch('/api/my-classes');
-                const classesData = await classesRes.json();
-                const simClass = classesData.find(c => c.id === 'SIM-MN8-2025');
-                if (simClass) {
-                    classXP = simClass.localXp || 0;
-                }
-                
-                // Update Class XP Level UI
                 updateClassXpUI();
-                
-                // Load milestones/badges roadmap progression UI
                 loadMilestoneRoadmap();
             } catch (err) {
                 console.error("Gagal memuat XP kelas user:", err);
-                // Fallback
                 updateClassXpUI();
                 loadMilestoneRoadmap();
             }
@@ -2519,11 +2567,11 @@
             if (!listContainer) return;
 
             try {
-                const res = await fetch('/api/class-participants?classId=SIM-MN8-2025');
+                const res = await fetch(`/api/class-participants?classId=${encodeURIComponent(activeClassId)}`);
                 activeClassParticipantsList = await res.json();
             } catch (err) {
                 console.error('Gagal mengambil data dari server, fallback...', err);
-                activeClassParticipantsList = getParticipantsForClassFallback('Sistem Informasi Manajemen-MN8-2025');
+                activeClassParticipantsList = getParticipantsForClassFallback(activeClassName);
             }
 
             listContainer.innerHTML = '';
@@ -2576,7 +2624,7 @@
                     }
                 });
 
-                const isCurrent = student.name === 'Dimas Dwi Budi Sulistio';
+                const isCurrent = currentUserNim && student.NIM === currentUserNim;
 
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `leaderboard-item ${isCurrent ? 'leaderboard-item-current' : ''}`;
@@ -2587,12 +2635,12 @@
                 itemDiv.setAttribute('data-xp', student.xp);
 
                 itemDiv.innerHTML = `
-                    <div class="rank-number-container ${rankClass}" id="${isCurrent ? 'rank-Dimas-badge' : ''}">${student.rank}</div>
+                    <div class="rank-number-container ${rankClass}" id="${isCurrent ? 'rank-current-user-badge' : ''}">${student.rank}</div>
                     <div class="avatar-container">
                         ${avatarMarkup}
                     </div>
                     <div class="text-start">
-                        <span class="leaderboard-name d-block clickable-student-name" onclick="openStudentProfile('${student.name}', 'Sistem Informasi Manajemen-MN8-2025')">${student.name}</span>
+                        <span class="leaderboard-name d-block clickable-student-name" onclick="openStudentProfile('${student.name.replace(/'/g, "\\'")}', '${activeClassName.replace(/'/g, "\\'")}')">${student.name}</span>
                         <div class="leaderboard-mini-badges" id="${isCurrent ? 'userMiniBadgesList' : ''}">
                             ${badgesHtml}
                         </div>
@@ -2610,7 +2658,7 @@
             if (!materialsList) return;
 
             try {
-                const res = await fetch('/api/classes/SIM-MN8-2025/materials');
+                const res = await fetch(`/api/classes/${encodeURIComponent(activeClassId)}/materials`);
                 const materials = await res.json();
                 classMaterialsData = materials;
                 
@@ -2690,7 +2738,7 @@
             document.getElementById('modalMaterialDesc').innerText = mat.description || 'Tidak ada deskripsi materi.';
             
             const classText = document.getElementById('modalMaterialClass');
-            if (classText) classText.innerText = 'Sistem Informasi Manajemen-MN8-2025';
+            if (classText) classText.innerText = activeClassName;
 
             const statusBadge = document.getElementById('modalMaterialStatus');
             if (statusBadge) {
@@ -2792,7 +2840,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             // Inisialisasi Modal dan Toast
             questModal = new bootstrap.Modal(document.getElementById('questModal'));
             gameToast = new bootstrap.Toast(document.getElementById('gameToast'), { delay: 4000 });
@@ -2800,17 +2848,20 @@
             studentProfileModal = new bootstrap.Modal(document.getElementById('studentProfileModal'));
             materialModalInstance = new bootstrap.Modal(document.getElementById('materialModal'));
 
+            const ready = await initClassContext();
+            if (!ready) return;
+
             // Load local user XP first, which also updates the roadmap
-            loadUserClassXP();
+            await loadUserClassXP();
 
             // Load local leaderboard dynamically
-            loadLocalLeaderboard();
+            await loadLocalLeaderboard();
 
             // Load learning materials dynamically
-            loadClassMaterials();
+            await loadClassMaterials();
 
             // Load quests dynamically
-            loadQuests();
+            await loadQuests();
 
             // Event Listener Salin Kode Kelas
             const copyCodeBtn = document.querySelector('.btn-copy-code');
@@ -3104,7 +3155,7 @@
             if (!questsList) return;
 
             try {
-                const res = await fetch('/api/classes/SIM-MN8-2025/quests');
+                const res = await fetch(`/api/classes/${encodeURIComponent(activeClassId)}/quests`);
                 const quests = await res.json();
                 
                 // Populate questsData
@@ -3206,15 +3257,13 @@
             }
         }
 
-        // Sorting Leaderboard Lokal (Rank Shift Dimas)
+        // Sorting Leaderboard Lokal (Rank Shift user saat ini)
         function updateLeaderboard() {
-            // Update database for Dimas Dwi Budi Sulistio rank and xp
-            const dimasData = activeClassParticipantsList.find(s => s.name === 'Dimas Dwi Budi Sulistio');
-            if (dimasData) {
-                dimasData.xp = 900;
-                dimasData.rank = 4;
-                dimasData.skills.layout = 100;
-                dimasData.status = 'SIM Specialist';
+            const currentUserData = activeClassParticipantsList.find(s => currentUserNim && s.NIM === currentUserNim);
+            if (currentUserData) {
+                currentUserData.xp = (currentUserData.xp || 0) + 250;
+                if (currentUserData.skills) currentUserData.skills.layout = 100;
+                currentUserData.status = 'SIM Specialist';
             }
 
             // Re-sort our array to match rank
@@ -3275,7 +3324,7 @@
                         }
                     });
 
-                    const isCurrent = student.name === 'Dimas Dwi Budi Sulistio';
+                    const isCurrent = currentUserNim && student.NIM === currentUserNim;
 
                     const itemDiv = document.createElement('div');
                     itemDiv.className = `leaderboard-item ${isCurrent ? 'leaderboard-item-current' : ''}`;
@@ -3287,12 +3336,12 @@
                     itemDiv.setAttribute('data-xp', student.xp);
 
                     itemDiv.innerHTML = `
-                        <div class="rank-number-container ${rankClass}" id="${isCurrent ? 'rank-Dimas-badge' : ''}">${student.rank}</div>
+                        <div class="rank-number-container ${rankClass}" id="${isCurrent ? 'rank-current-user-badge' : ''}">${student.rank}</div>
                         <div class="avatar-container">
                             ${avatarMarkup}
                         </div>
                         <div class="text-start">
-                            <span class="leaderboard-name d-block clickable-student-name" onclick="openStudentProfile('${student.name}', 'Sistem Informasi Manajemen-MN8-2025')">${student.name}</span>
+                            <span class="leaderboard-name d-block clickable-student-name" onclick="openStudentProfile('${student.name.replace(/'/g, "\\'")}', '${activeClassName.replace(/'/g, "\\'")}')">${student.name}</span>
                             <div class="leaderboard-mini-badges" id="${isCurrent ? 'userMiniBadgesList' : ''}">
                                 ${badgesHtml}
                             </div>
@@ -3331,29 +3380,31 @@
         }
 
         // Tampilkan Modal Anggota Kelas Dinamis
-        async function showParticipantsModal(className) {
+        async function showParticipantsModal(className, classId) {
             const tableBody = document.getElementById('participantsTableBody');
             const countText = document.getElementById('participantsCountText');
             const subtitle = document.getElementById('participantsSubtitle');
             const titleLabel = document.getElementById('participantsModalLabel');
+            const resolvedClassId = classId || activeClassId;
+            const resolvedClassName = className || activeClassName;
 
             if (!tableBody) return;
 
-            if (titleLabel) titleLabel.innerHTML = `<i class="fa-solid fa-users me-2 text-primary"></i> Anggota Kelas: ${className}`;
+            if (titleLabel) titleLabel.innerHTML = `<i class="fa-solid fa-users me-2 text-primary"></i> Anggota Kelas: ${resolvedClassName}`;
 
             tableBody.innerHTML = '<tr><td colspan="5" class="text-center p-4"><i class="fa-solid fa-spinner fa-spin text-primary fs-5"></i> Memuat data...</td></tr>';
             participantsModal.show();
 
             try {
-                const res = await fetch(`/api/class-participants?className=${encodeURIComponent(className)}`);
+                const res = await fetch(`/api/class-participants?classId=${encodeURIComponent(resolvedClassId)}`);
                 activeClassParticipantsList = await res.json();
             } catch (err) {
                 console.error('Gagal mengambil data dari server, fallback...', err);
-                activeClassParticipantsList = getParticipantsForClassFallback(className);
+                activeClassParticipantsList = getParticipantsForClassFallback(resolvedClassName);
             }
 
             if (countText) countText.innerText = `${activeClassParticipantsList.length} Mahasiswa`;
-            if (subtitle) subtitle.innerText = `Daftar mahasiswa yang terdaftar di kelas ${className}. Klik nama mahasiswa untuk melihat profil gamifikasi lengkap mereka.`;
+            if (subtitle) subtitle.innerText = `Daftar mahasiswa yang terdaftar di kelas ${resolvedClassName}. Klik nama mahasiswa untuk melihat profil gamifikasi lengkap mereka.`;
 
             tableBody.innerHTML = '';
 
@@ -3428,7 +3479,7 @@
                         <div class="d-flex align-items-center">
                             ${avatarMarkup}
                             <div>
-                                <a class="clickable-student-name text-dark text-decoration-none" onclick="openStudentProfile('${student.name}', '${className}')">
+                                <a class="clickable-student-name text-dark text-decoration-none" onclick="openStudentProfile('${student.name.replace(/'/g, "\\'")}', '${resolvedClassName.replace(/'/g, "\\'")}')">
                                     ${student.name}
                                 </a>
                                 <div class="text-muted small" style="font-size:0.65rem;">NIM: ${student.NIM}</div>
@@ -3457,7 +3508,7 @@
         function openStudentProfile(studentName, className) {
             let student = activeClassParticipantsList.find(s => s.name === studentName);
             if (!student) {
-                const studentsFallback = getParticipantsForClassFallback(className || 'Sistem Informasi Manajemen-MN8-2025');
+                const studentsFallback = getParticipantsForClassFallback(className || activeClassName);
                 student = studentsFallback.find(s => s.name === studentName);
             }
             if (!student) return;
