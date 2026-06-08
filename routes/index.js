@@ -3,6 +3,17 @@ const router = express.Router();
 const path = require('path');
 const db = require('../db');
 const bcrypt = require('bcryptjs');
+
+// Synchronize student stats on server startup
+(async () => {
+    try {
+        console.log('[SYSTEM] Menyelaraskan data XP dan koin mahasiswa...');
+        await db.syncAllStudentStats();
+        console.log('[SYSTEM] Penyelarasan data berhasil.');
+    } catch (err) {
+        console.error('[SYSTEM] Gagal menyelaraskan data mahasiswa:', err);
+    }
+})();
 const { ensureAuthenticated, ensureMahasiswa, ensureDosen, redirectIfLoggedIn } = require('../middleware/auth');
 
 // Route untuk homepage / dashboard utama
@@ -700,6 +711,18 @@ router.get('/api/leaderboard', async (req, res) => {
     } catch (err) {
         console.error('Error on GET /api/leaderboard:', err);
         res.status(500).json({ error: 'Gagal mengambil data papan peringkat.' });
+    }
+});
+
+// API: Get point logs for a specific student
+router.get('/api/student/:nim/point-logs', async (req, res) => {
+    try {
+        const { nim } = req.params;
+        const logs = await db.getStudentPointLogs(nim);
+        res.json(logs);
+    } catch (err) {
+        console.error('Error on GET /api/student/:nim/point-logs:', err);
+        res.status(500).json({ error: 'Gagal mengambil data riwayat poin.' });
     }
 });
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Learning Universitas Pertamina - Gamifikasi Dashboard</title>
+    <title>SUPER - Sistem Pembelajaran Universitas Pertamina</title>
     
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,24 +19,27 @@
     <!-- Custom CSS untuk Gamifikasi & Redesain UI/UX Premium -->
     <style>
         :root {
-            /* Branding Universitas Pertamina (Navy & Blue tones) */
-            --pertamina-navy: #002f6c;
-            --pertamina-blue: #0d47a1;
-            --pertamina-light-blue: #e3f2fd;
+            /* Branding Universitas Pertamina (New Clean Cyber Theme) */
+            --pertamina-navy: #5B21B6; /* Deep Cyber Purple */
+            --pertamina-blue: #06B6D4; /* Electric Turquoise */
+            --pertamina-light-blue: rgba(6, 182, 212, 0.08); /* Transparent Electric Turquoise */
             
             /* Gamification Accents */
-            --primary-purple: #6f42c1;
-            --primary-purple-hover: #5a32a3;
-            --primary-purple-light: rgba(111, 66, 193, 0.08);
-            --primary-purple-glow: rgba(111, 66, 193, 0.3);
+            --primary-purple: #5B21B6; /* Deep Cyber Purple */
+            --primary-purple-hover: #4C1D95;
+            --primary-purple-light: rgba(91, 33, 182, 0.08);
+            --primary-purple-glow: rgba(91, 33, 182, 0.3);
             
-            --gold-color: #ffd700;
-            --gold-glow: rgba(255, 215, 0, 0.4);
+            --gold-color: #F59E0B; /* Level-Up Gold */
+            --gold-glow: rgba(245, 158, 11, 0.4);
             
             --streak-color: #ff4757;
             --streak-glow: rgba(255, 71, 87, 0.4);
             
-            --bg-color: #f4f6fc;
+            --success-color: #10B981; /* Neon Green */
+            --success-color-glow: rgba(16, 185, 129, 0.3);
+            
+            --bg-color: #F8FAFC; /* Clean Slate White */
             --card-border-radius: 16px;
             --transition-speed: 0.3s;
         }
@@ -69,7 +72,7 @@
         /* DOUBLE NAVBAR STYLING */
         /* 1. Top Bar (Branding & User Profile) */
         .navbar-top {
-            background-color: var(--pertamina-navy);
+            background-color: #0F172A; /* Slate 900 - Premium dark background */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 8px 0;
             color: #ffffff;
@@ -187,14 +190,15 @@
 
         /* 2. Main Nav (Menu & Gamified Badges) */
         .navbar-main {
-            background-color: var(--pertamina-blue);
+            background-color: #ffffff; /* Clean white background */
             padding: 8px 0;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
         }
 
         .nav-link-custom {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-weight: 500;
+            color: #475569 !important; /* Cool Slate for readability */
+            font-weight: 600;
             font-size: 0.9rem;
             padding: 8px 16px !important;
             border-radius: 8px;
@@ -205,8 +209,8 @@
         }
 
         .nav-link-custom:hover, .nav-link-custom.active {
-            background-color: rgba(255, 255, 255, 0.12);
-            color: #ffffff !important;
+            background-color: var(--primary-purple-light);
+            color: var(--primary-purple) !important;
         }
 
         .status-pill {
@@ -355,6 +359,11 @@
             background: linear-gradient(90deg, #ff007f, #8b5cf6, #3b82f6);
             background-size: 200% 200%;
             animation: wave 4s ease infinite;
+        }
+
+        .progress-bar-gradient {
+            background: linear-gradient(90deg, #5B21B6 0%, #06B6D4 100%) !important;
+            border-radius: 4px;
         }
 
         /* CARD CUSTOM STYLING */
@@ -930,7 +939,7 @@
             top: -10px;
             left: 50%;
             transform: translateX(-50%) rotate(-12deg);
-            color: #ffd700;
+            color: var(--gold-color);
             font-size: 0.82rem;
             filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
             z-index: 10;
@@ -1174,7 +1183,7 @@
             <!-- Left Branding -->
             <a href="/" class="navbar-top-brand">
                 <i class="fa-solid fa-graduation-cap me-2 text-info"></i>
-                <span>E-Learning Universitas Pertamina</span>
+                <span>SUPER <span class="d-none d-lg-inline" style="font-size: 0.75rem; opacity: 0.8; font-weight: normal; margin-left: 6px;">(Sistem Pembelajaran Universitas Pertamina)</span></span>
             </a>
             
             <!-- Middle Search Box -->
@@ -1186,9 +1195,34 @@
             <!-- Right User Info & Utilities -->
             <div class="navbar-top-user">
                 <!-- Notifications & Messages -->
-                <a href="#" class="navbar-icon-btn" title="Notifikasi">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="navbar-icon-badge">3</span>
+                <div style="position:relative; display:inline-block;">
+                    <a href="#" class="navbar-icon-btn" id="notificationBtn" title="Notifikasi">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="navbar-icon-badge" id="notificationBadge">0</span>
+                    </a>
+                    
+                    <!-- Notification popup -->
+                    <div id="notificationPopup" style="
+                        display:none;
+                        position:absolute;
+                        top:calc(100% + 15px);
+                        right:-50px;
+                        width:320px;
+                        background:#fff;
+                        border-radius:12px;
+                        box-shadow:0 10px 30px rgba(0,0,0,0.15);
+                        z-index:9999;
+                        overflow:hidden;
+                    ">
+                        <div style="background:var(--pertamina-blue);padding:12px 16px;color:#fff;font-weight:700;font-size:0.88rem;display:flex;justify-content:space-between;align-items:center;">
+                            <span>🔔 Misi & Materi Terbaru</span>
+                            <span class="badge bg-warning text-dark animate-pulse" id="popupNotifCount" style="font-size: 0.7rem;">0 Baru</span>
+                        </div>
+                        <div id="notificationList" style="max-height:280px; overflow-y:auto; padding:8px 0;">
+                            <div class="text-center py-4 text-muted small">Memuat notifikasi...</div>
+                        </div>
+                    </div>
+                </div>
                 <a href="#" class="navbar-icon-btn d-none d-sm-inline" title="Pesan">
                     <i class="fa-regular fa-comments"></i>
                 </a>
@@ -1230,6 +1264,23 @@
                             <div><span style="color:#94a3b8;">Koin Global</span> &nbsp;<strong id="popupCoins">&mdash;</strong></div>
                         </div>
                         <div style="padding:0 16px 14px;">
+                            <button id="btnViewMyProfile" style="
+                                display:block;
+                                width:100%;
+                                text-align:center;
+                                background:linear-gradient(135deg,#6f42c1,#4a219b);
+                                color:#fff;
+                                border-radius:8px;
+                                border:none;
+                                padding:8px;
+                                margin-bottom:8px;
+                                font-size:0.85rem;
+                                font-weight:600;
+                                transition:opacity 0.2s;
+                                cursor:pointer;
+                            " onmouseover="this.style.opacity=0.85" onmouseout="this.style.opacity=1">
+                                <i class="fa-solid fa-user me-1"></i> Lihat Profil Lengkap
+                            </button>
                             <a href="/logout" style="
                                 display:block;
                                 text-align:center;
@@ -1313,37 +1364,56 @@
                         <i class="fa-solid fa-crown me-1"></i> Mahasiswa Aktif
                     </span>
                     <h1 class="display-6 fw-extrabold mb-1" id="heroWelcome">Selamat Datang Kembali!</h1>
-                    <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Mari selesaikan misi belajar hari ini dan klaim koin emas untuk ditukarkan di toko hadiah.</p>
+                    <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Mari selesaikan tugas belajar hari ini dan klaim koin emas untuk ditukarkan di pusat penukaran.</p>
                     <div class="class-code-pill" title="NIM / ID Siswa Anda">
-                        <span>NIM Petualang:</span>
+                        <span>NIM Mahasiswa:</span>
                         <strong class="text-warning" id="heroNim">&mdash;</strong>
                     </div>
                 </div>
                 
-                <!-- Global Coin Progress Widget -->
+                <!-- Global Coin & XP Major Progress Widget -->
                 <div class="col-lg-5">
-                    <div class="level-badge-container">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h4 class="mb-0 fw-bold d-flex align-items-center gap-2" style="font-size: 1.15rem;">
-                                <i class="fa-solid fa-coins text-warning animate-bounce"></i> KOIN GLOBAL
-                            </h4>
-                            <span class="badge bg-warning text-dark fw-bold"><span class="global-coins-display">420</span> / 1000 Koin</span>
+                    <div class="level-badge-container p-3 rounded-3" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                        <!-- XP Global & Jurusan Info -->
+                        <div class="mb-3 border-bottom border-white-10 pb-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white" style="font-size: 1rem;">
+                                    <i class="fa-solid fa-star text-warning"></i> XP GLOBAL
+                                </h5>
+                                <span class="badge bg-primary text-white fw-bold" id="heroGlobalXpDisplay">0 XP</span>
+                            </div>
+                            <div class="small text-white-90" style="font-size: 0.75rem;">
+                                <i class="fa-solid fa-ranking-star text-info me-1"></i> Peringkat Jurusan: <strong class="text-warning" id="heroMajorRankText">&mdash;</strong>
+                            </div>
+                            <div class="small text-white-90 mt-1" style="font-size: 0.72rem; font-style: italic;">
+                                <i class="fa-solid fa-arrow-trend-up text-success me-1"></i> <span id="heroXpNeededText">Memuat informasi peringkat...</span>
+                            </div>
                         </div>
-                        
-                        <!-- Progress Bar Koin -->
-                        <div class="progress progress-custom mb-3">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
-                                 id="globalCoinProgress"
-                                 role="progressbar" 
-                                 style="width: 42%" 
-                                 aria-valuenow="42" 
-                                 aria-valuemin="0" 
-                                 aria-valuemax="100"></div>
+
+                        <!-- Global Coin Progress -->
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white" style="font-size: 1rem;">
+                                    <i class="fa-solid fa-coins text-warning animate-bounce"></i> KOIN GLOBAL
+                                </h5>
+                                <span class="badge bg-warning text-dark fw-bold"><span class="global-coins-display">420</span> Koin</span>
+                            </div>
+                            
+                            <!-- Progress Bar Koin -->
+                            <div class="progress progress-custom mb-1.5" style="height: 8px;">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+                                     id="globalCoinProgress"
+                                     role="progressbar" 
+                                     style="width: 42%" 
+                                     aria-valuenow="42" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100"></div>
+                            </div>
+                            
+                            <p class="small mb-0 text-white-50 text-end" style="font-size: 0.68rem;">
+                                <i class="fa-solid fa-gift me-1 text-warning"></i> Kumpulkan <strong id="coinsNeededText">580 Koin</strong> lagi untuk Premium Reward!
+                            </p>
                         </div>
-                        
-                        <p class="small mb-0 text-white-50 text-end" style="font-size: 0.75rem;">
-                            <i class="fa-solid fa-gift me-1 text-warning"></i> Kumpulkan <strong id="coinsNeededText">580 Koin</strong> lagi untuk klaim Reward Hadiah Premium!
-                        </p>
                     </div>
                 </div>
             </div>
@@ -1363,7 +1433,7 @@
                 <section class="card custom-card mb-4" id="recentTasksMaterialsCard" style="display: none;">
                     <div class="card-header-game bg-light py-2 px-3">
                         <span class="d-flex align-items-center gap-2 fw-bold text-primary" style="font-size: 0.95rem;">
-                            <i class="fa-solid fa-clock-rotate-left text-warning animate-bounce"></i> Misi & Materi Terbaru
+                            <i class="fa-solid fa-clock-rotate-left text-warning animate-bounce"></i> Tugas & Materi Terbaru
                         </span>
                         <span class="badge bg-primary rounded-pill" style="font-size: 0.65rem;">2 Terkini</span>
                     </div>
@@ -1471,7 +1541,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-content-game">
                 <div class="modal-header modal-header-game">
-                    <h5 class="modal-title fw-bold" id="questModalLabel"><i class="fa-solid fa-compass me-2"></i> Detail Misi Petualangan</h5>
+                    <h5 class="modal-title fw-bold" id="questModalLabel"><i class="fa-solid fa-compass me-2"></i> Detail Tugas & Proyek Akademik</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
@@ -1479,19 +1549,19 @@
                         <div class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
                             <i class="fa-solid fa-scroll fs-2"></i>
                         </div>
-                        <h4 class="fw-bold" id="modalQuestTitle">Nama Misi</h4>
+                        <h4 class="fw-bold" id="modalQuestTitle">Nama Tugas</h4>
                     </div>
                     
                     <div class="mb-4">
-                        <h6 class="fw-bold text-muted uppercase" style="font-size: 0.8rem;">Deskripsi Misi:</h6>
-                        <p class="text-secondary" id="modalQuestDesc" style="font-size: 0.85rem; line-height: 1.5;">Deskripsi detail mengenai misi yang harus Anda kerjakan akan ditampilkan di sini.</p>
+                        <h6 class="fw-bold text-muted uppercase" style="font-size: 0.8rem;">Deskripsi Tugas/Proyek:</h6>
+                        <p class="text-secondary" id="modalQuestDesc" style="font-size: 0.85rem; line-height: 1.5;">Deskripsi detail mengenai tugas yang harus Anda kerjakan akan ditampilkan di sini.</p>
                     </div>
 
                     <div class="row text-center g-3 mb-4">
                         <div class="col-12">
                             <div class="p-3 border border-primary-subtle rounded-3 bg-light-subtle">
                                 <h4 class="fw-bold text-primary mb-1" id="modalQuestXp">+250 XP</h4>
-                                <span class="small text-muted" style="font-size: 0.72rem;">Ganjaran XP</span>
+                                <span class="small text-muted" style="font-size: 0.72rem;">Reward XP</span>
                             </div>
                         </div>
                     </div>
@@ -1499,13 +1569,13 @@
                     <div class="alert alert-info d-flex align-items-start gap-3 border-0 bg-light-subtle" role="alert">
                         <i class="fa-solid fa-circle-info text-info mt-1 fs-5"></i>
                         <div class="small" style="font-size: 0.78rem;">
-                            <strong>Aturan Main:</strong> Menekan tombol "Mulai Misi" akan menandai misi ini sebagai sedang dikerjakan. Selesaikan dan unggah berkas tugas Anda sebelum tenggat berakhir!
+                            <strong>Ketentuan Pengerjaan:</strong> Menekan tombol "Mulai Pengerjaan" akan menandai tugas ini sebagai sedang dikerjakan. Selesaikan dan unggah berkas tugas Anda sebelum tenggat berakhir!
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-3 bg-light d-flex justify-content-between">
                     <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Nanti Saja</button>
-                    <button type="button" class="btn btn-quest px-4" id="btnStartQuest">Mulai Misi Sekarang <i class="fa-solid fa-chevron-right ms-1"></i></button>
+                    <button type="button" class="btn btn-quest px-4" id="btnStartQuest">Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i></button>
                 </div>
             </div>
         </div>
@@ -1598,8 +1668,15 @@
 
                         <!-- Skill Strengths -->
                         <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-chart-column text-primary me-1"></i> Penguasaan Bidang Keahlian:</h6>
-                        <div class="bg-light p-3 rounded-3 border border-light-subtle" id="profileModalSkillsArea">
+                        <div class="bg-light p-3 rounded-3 border border-light-subtle mb-4" id="profileModalSkillsArea">
                             <!-- Skill bars will be rendered here -->
+                        </div>
+
+                        <!-- Riwayat Aktivitas & Poin -->
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-clock-rotate-left text-success me-1"></i> Riwayat Aktivitas &amp; Poin:</h6>
+                        <div class="bg-light p-3 rounded-3 border border-light-subtle" id="profileModalLogsArea" style="max-height: 180px; overflow-y: auto; font-size: 0.78rem;">
+                            <!-- Activity point logs will be loaded dynamically here -->
+                            <div class="text-center py-3 text-muted">Memuat riwayat...</div>
                         </div>
                     </div>
                 </div>
@@ -1722,11 +1799,11 @@
             
             document.getElementById('modalQuestTitle').innerText = title;
             document.getElementById('modalQuestXp').innerText = "+" + xp + " XP";
-            document.getElementById('modalQuestDesc').innerText = desc || "Tidak ada deskripsi detail untuk misi ini.";
+            document.getElementById('modalQuestDesc').innerText = desc || "Tidak ada deskripsi detail untuk tugas ini.";
             
             const btn = document.getElementById('btnStartQuest');
             if (btn) {
-                btn.innerHTML = 'Mulai Misi Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
+                btn.innerHTML = 'Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
             }
             
             questModal.show();
@@ -1934,7 +2011,7 @@
                                                 <span class="xp-text text-primary d-block" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
                                             </div>
                                             <button class="btn btn-quest btn-sm py-1 px-2.5" onclick="openQuestModal('${q.id}', '${q.title.replace(/'/g, "\\'")}', '${q.xp} XP', '${q.desc || ''}', '${cls.id}')">
-                                                Mulai Misi <i class="fa-solid fa-play ms-1" style="font-size: 0.75rem;"></i>
+                                                Mulai Tugas <i class="fa-solid fa-play ms-1" style="font-size: 0.75rem;"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -1950,7 +2027,7 @@
                                                     <i class="fa-solid fa-lock me-2 text-muted"></i>${q.num}. ${q.title}
                                                 </h6>
                                             </div>
-                                            <p class="small text-muted mb-0" style="font-size: 0.72rem;">Prasyarat: Selesaikan Misi Sebelumnya</p>
+                                            <p class="small text-muted mb-0" style="font-size: 0.72rem;">Prasyarat: Selesaikan Tugas Sebelumnya</p>
                                         </div>
                                         <div class="d-flex align-items-center gap-3">
                                             <span class="xp-text text-muted" style="font-size: 0.78rem;"><i class="fa-solid fa-star me-1"></i> +${q.xp} XP</span>
@@ -1983,15 +2060,15 @@
                                 <!-- Progress Kelas -->
                                 <div class="mb-4">
                                     <div class="d-flex justify-content-between align-items-center mb-1">
-                                        <span class="small text-muted fw-semibold" style="font-size: 0.7rem;">Progres Kelas: ${cls.progressPercent}% (${cls.completedCount}/${cls.totalQuests} Misi Selesai)</span>
-                                        <span class="small text-primary fw-bold" style="font-size: 0.7rem;">${cls.progressPercent}%</span>
+                                        <span class="small text-muted fw-semibold" style="font-size: 0.7rem;">Progres Belajar: ${Math.min(Math.round(((cls.localXp || 0) / 2000) * 100), 100)}% (${cls.localXp || 0} / 2000 XP)</span>
+                                        <span class="small text-primary fw-bold" style="font-size: 0.7rem;">${Math.min(Math.round(((cls.localXp || 0) / 2000) * 100), 100)}%</span>
                                     </div>
                                     <div class="progress" style="height: 6px; border-radius: 4px; background-color: #e2e8f0;">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: ${cls.progressPercent}%" aria-valuenow="${cls.progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar progress-bar-gradient" role="progressbar" style="width: ${Math.min(Math.round(((cls.localXp || 0) / 2000) * 100), 100)}%" aria-valuenow="${Math.min(Math.round(((cls.localXp || 0) / 2000) * 100), 100)}" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
 
-                                <h6 class="fw-bold text-dark mb-3" style="font-size: 0.8rem;"><i class="fa-solid fa-list-check me-2 text-primary"></i> Misi Terkini di Kelas Ini:</h6>
+                                <h6 class="fw-bold text-dark mb-3" style="font-size: 0.8rem;"><i class="fa-solid fa-list-check me-2 text-primary"></i> Tugas Terkini di Kelas Ini:</h6>
                                 
                                 ${questsHtml}
                             </div>
@@ -2188,7 +2265,7 @@
             
             const btn = document.getElementById('btnStartQuest');
             if (btn) {
-                btn.innerHTML = 'Mulai Misi Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
+                btn.innerHTML = 'Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
             }
             
             questModal.show();
@@ -2438,7 +2515,9 @@
             });
         }
 
-        // Buka Profil Mahasiswa Dinamis
+
+
+        // Wrapper function for existing calls
         function openStudentProfile(studentName, className) {
             let student = activeClassParticipantsList.find(s => s.name === studentName);
             if (!student) {
@@ -2446,106 +2525,7 @@
                 student = studentsFallback.find(s => s.name === studentName);
             }
             if (!student) return;
-            
-            document.getElementById('profileModalName').innerText = student.name;
-            document.getElementById('profileModalFacultyMajor').innerText = `${student.faculty || 'Fakultas Sains dan Ilmu Komputer'} - ${student.major || 'Ilmu Komputer'}`;
-            document.getElementById('profileModalNim').innerText = `NIM: ${student.NIM}`;
-            document.getElementById('profileModalEmail').innerText = `${student.NIM}@student.universitaspertamina.ac.id`;
-            document.getElementById('profileModalRank').innerText = `#${student.rank}`;
-            document.getElementById('profileModalXp').innerText = `${student.xp} XP`;
-            document.getElementById('profileModalLevel').innerText = student.status || 'Apprentice';
-            
-            const avatarArea = document.getElementById('profileModalAvatarArea');
-            if (avatarArea) {
-                let decoIcons = '';
-                if (student.frame === 'avatar-frame-gold-decorated') {
-                    decoIcons = `
-                        <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
-                        <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
-                        <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
-                    `;
-                } else if (student.frame === 'avatar-frame-silver-decorated') {
-                    decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
-                } else if (student.frame === 'avatar-frame-bronze-decorated') {
-                    decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
-                } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
-                    decoIcons = `
-                        <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
-                        <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
-                    `;
-                }
-                
-                if (student.frame) {
-                    avatarArea.innerHTML = `
-                        <div class="${student.frame}">
-                            ${decoIcons}
-                            <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
-                        </div>
-                    `;
-                } else {
-                    avatarArea.innerHTML = `
-                        <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
-                    `;
-                }
-            }
-            
-            const badgesGrid = document.getElementById('profileModalBadgesGrid');
-            if (badgesGrid) {
-                badgesGrid.innerHTML = '';
-                const badgeKeys = ['database', 'analyst', 'vocal', 'style', 'api', 'security', 'grand'];
-                badgeKeys.forEach(key => {
-                    const badgeInfo = badgesReference[key];
-                    const isUnlocked = student.badges.includes(key);
-                    
-                    const col = document.createElement('div');
-                    col.className = 'col';
-                    col.innerHTML = `
-                        <div class="student-modal-badge-card ${isUnlocked ? 'unlocked' : ''}" title="${isUnlocked ? 'Terbuka: ' + badgeInfo.desc : 'Terkunci: ' + badgeInfo.title}">
-                            <div class="student-modal-badge-icon ${isUnlocked ? badgeInfo.class : 'bg-secondary text-white'}">
-                                <i class="${badgeInfo.icon}"></i>
-                            </div>
-                            <div class="student-modal-badge-title text-truncate">${badgeInfo.title}</div>
-                        </div>
-                    `;
-                    badgesGrid.appendChild(col);
-                });
-            }
-            
-            const skillsArea = document.getElementById('profileModalSkillsArea');
-            if (skillsArea) {
-                skillsArea.innerHTML = '';
-                const skillLabels = {
-                    db: 'Database & Data Warehouse',
-                    analysis: 'System Analysis & Use Case',
-                    layout: 'UI Layouting & Flexbox',
-                    api: 'API Integration',
-                    security: 'Security & Audit',
-                    vocal: 'Forum Participation'
-                };
-                
-                Object.keys(student.skills).forEach(sKey => {
-                    const val = student.skills[sKey];
-                    const div = document.createElement('div');
-                    div.className = 'skill-bar-container';
-                    div.innerHTML = `
-                        <div class="skill-bar-label">
-                            <span>${skillLabels[sKey]}</span>
-                            <span>${val}%</span>
-                        </div>
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 0%;"></div>
-                        </div>
-                    `;
-                    skillsArea.appendChild(div);
-                    
-                    setTimeout(() => {
-                        const fill = div.querySelector('.skill-bar-fill');
-                        if (fill) fill.style.width = val + '%';
-                    }, 100);
-                });
-            }
-            
-            studentProfileModal.show();
+            openStudentProfileByNim(student.NIM);
         }
 
         // Fungsi Helper Menampilkan Toast
@@ -2655,6 +2635,34 @@
                     `;
                     listEl.appendChild(div);
                 });
+
+                if (currentUser) {
+                    const myIndex = leaderboard.findIndex(s => s.nim === currentUser.nim);
+                    const myRank = myIndex + 1;
+                    
+                    const heroGlobalXpDisplay = document.getElementById('heroGlobalXpDisplay');
+                    if (heroGlobalXpDisplay) {
+                        heroGlobalXpDisplay.textContent = (currentUser.totalXp || 0) + ' XP';
+                    }
+
+                    const heroMajorRankText = document.getElementById('heroMajorRankText');
+                    if (heroMajorRankText) {
+                        heroMajorRankText.textContent = myRank > 0 ? `#${myRank} dari ${leaderboard.length}` : '&mdash;';
+                    }
+
+                    const heroXpNeededText = document.getElementById('heroXpNeededText');
+                    if (heroXpNeededText) {
+                        if (myIndex === 0) {
+                            heroXpNeededText.innerHTML = `Selamat! Anda memimpin papan peringkat Jurusan saat ini.`;
+                        } else if (myIndex > 0) {
+                            const aheadStudent = leaderboard[myIndex - 1];
+                            const diffXp = aheadStudent.xp - leaderboard[myIndex].xp;
+                            heroXpNeededText.innerHTML = `Butuh <strong>${diffXp} XP</strong> lagi untuk melewati <strong>${aheadStudent.name.split(' ')[0]}</strong> di papan peringkat!`;
+                        } else {
+                            heroXpNeededText.textContent = `Ikuti kelas untuk masuk ke papan peringkat.`;
+                        }
+                    }
+                }
             } catch (err) {
                 console.error('Gagal mengambil leaderboard', err);
             }
@@ -2807,7 +2815,7 @@
                                     <span class="badge bg-primary-subtle text-primary" style="font-size: 0.7rem;">${c.localXp} / 2000 XP</span>
                                 </div>
                                 <div class="progress mb-2" style="height: 6px; border-radius: 3px; background-color: #f1f5f9;">
-                                    <div class="progress-bar ${percent >= 100 ? 'bg-success' : 'bg-primary'}" role="progressbar" style="width: ${percent}%"></div>
+                                    <div class="progress-bar progress-bar-gradient" role="progressbar" style="width: ${percent}%"></div>
                                 </div>
                                 <div class="d-flex align-items-center gap-1">
                                     <span class="text-muted small" style="font-size:0.65rem;">Lencana Kelas: </span>
@@ -2816,6 +2824,54 @@
                             `;
                             classesArea.appendChild(div);
                         });
+                    }
+                }
+
+                // Fetch and render student points logs
+                const logsArea = document.getElementById('profileModalLogsArea');
+                if (logsArea) {
+                    logsArea.innerHTML = '<div class="text-center py-3 text-muted">Memuat riwayat...</div>';
+                    try {
+                        const logsRes = await fetch(`/api/student/${profile.nim}/point-logs`);
+                        const logs = await logsRes.json();
+                        
+                        if (!logs || !Array.isArray(logs) || logs.length === 0) {
+                            logsArea.innerHTML = '<div class="text-center py-3 text-muted">Belum ada riwayat aktivitas koin/XP.</div>';
+                        } else {
+                            logsArea.innerHTML = '';
+                            logs.forEach(log => {
+                                const xpVal = log.xpChange || log.xp_change || 0;
+                                const coinVal = log.coinChange || log.coin_change || 0;
+                                
+                                let xpText = '';
+                                if (xpVal > 0) xpText = `<span class="badge bg-success-subtle text-success me-1" style="font-size:0.65rem;">+${xpVal} XP</span>`;
+                                else if (xpVal < 0) xpText = `<span class="badge bg-danger-subtle text-danger me-1" style="font-size:0.65rem;">${xpVal} XP</span>`;
+                                
+                                let coinText = '';
+                                if (coinVal > 0) coinText = `<span class="badge bg-warning-subtle text-warning-emphasis me-1" style="font-size:0.65rem; color:#856404; background-color:#fff3cd;">+${coinVal} Koin</span>`;
+                                else if (coinVal < 0) coinText = `<span class="badge bg-danger-subtle text-danger me-1" style="font-size:0.65rem;">${coinVal} Koin</span>`;
+                                
+                                const dateStr = log.createdAt || log.created_at || '';
+                                const formattedDate = dateStr ? new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
+
+                                const item = document.createElement('div');
+                                item.className = 'd-flex justify-content-between align-items-center py-2 border-bottom border-light-subtle';
+                                item.innerHTML = `
+                                    <div class="text-start">
+                                        <div class="fw-semibold text-dark" style="font-size: 0.78rem;">${log.description}</div>
+                                        <small class="text-muted" style="font-size: 0.65rem;">${formattedDate}</small>
+                                    </div>
+                                    <div class="text-end" style="min-width: 100px;">
+                                        ${xpText}
+                                        ${coinText}
+                                    </div>
+                                `;
+                                logsArea.appendChild(item);
+                            });
+                        }
+                    } catch (e) {
+                        console.error('Gagal mengambil data log poin:', e);
+                        logsArea.innerHTML = '<div class="text-center py-3 text-danger">Gagal memuat riwayat poin.</div>';
                     }
                 }
 
@@ -3069,6 +3125,8 @@
                     const myClasses = await myClassesRes.json();
                     const totalXp = myClasses.reduce((sum, c) => sum + c.localXp, 0);
 
+                    user.totalXp = totalXp;
+
                     document.getElementById('popupXp').textContent = totalXp + ' XP';
                     document.querySelectorAll('.current-xp-display').forEach(el => {
                         el.textContent = totalXp + ' XP';
@@ -3119,6 +3177,7 @@
     <script>
         (async function() {
             await hydrateUserData();
+            await loadNotifications();
         })();
 
         // Profile popup toggle
@@ -3133,10 +3192,172 @@
                 e.stopPropagation();
                 const isVisible = profilePopup.style.display === 'block';
                 profilePopup.style.display = isVisible ? 'none' : 'block';
+                const notifPopup = document.getElementById('notificationPopup');
+                if (notifPopup) notifPopup.style.display = 'none';
             } else if (profilePopup && !profilePopup.contains(e.target)) {
                 profilePopup.style.display = 'none';
             }
         });
+
+        // Click event listener for "Lihat Profil Lengkap" button in popup
+        document.addEventListener('click', function(e) {
+            const viewProfileBtn = e.target.closest('#btnViewMyProfile');
+            if (viewProfileBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (currentUser && currentUser.nim) {
+                    openStudentProfileByNim(currentUser.nim);
+                }
+                if (profilePopup) {
+                    profilePopup.style.display = 'none';
+                }
+            }
+        });
+
+        // Notification popup toggle
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('#notificationBtn');
+            const notifPopup = document.getElementById('notificationPopup');
+            if (btn) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (notifPopup) {
+                    const isVisible = notifPopup.style.display === 'block';
+                    notifPopup.style.display = isVisible ? 'none' : 'block';
+                }
+                if (profilePopup) profilePopup.style.display = 'none';
+            } else if (notifPopup && !notifPopup.contains(e.target)) {
+                notifPopup.style.display = 'none';
+            }
+        });
+
+        // Load dynamic notifications
+        async function loadNotifications() {
+            const listEl = document.getElementById('notificationList');
+            const badgeEl = document.getElementById('notificationBadge');
+            const countEl = document.getElementById('popupNotifCount');
+            if (!listEl) return;
+
+            try {
+                const classesRes = await fetch('/api/my-classes');
+                const classes = await classesRes.json();
+
+                let allItems = [];
+
+                for (const cls of classes) {
+                    try {
+                        const qRes = await fetch(`/api/classes/${encodeURIComponent(cls.id)}/quests`);
+                        const quests = await qRes.json();
+                        if (Array.isArray(quests)) {
+                            quests.forEach(q => {
+                                if (q.status === 'active') {
+                                    allItems.push({
+                                        type: 'task',
+                                        id: q.id,
+                                        title: q.title,
+                                        classId: cls.id,
+                                        className: cls.name,
+                                        xp: q.xpReward,
+                                        desc: q.description || ''
+                                    });
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+
+                    try {
+                        const mRes = await fetch(`/api/classes/${encodeURIComponent(cls.id)}/materials`);
+                        const materials = await mRes.json();
+                        if (Array.isArray(materials)) {
+                            materials.forEach(m => {
+                                if (!m.isRead) {
+                                    allItems.push({
+                                        type: 'material',
+                                        id: m.id,
+                                        title: m.title,
+                                        classId: cls.id,
+                                        className: cls.name,
+                                        desc: m.description || '',
+                                        fileName: m.fileName
+                                    });
+                                }
+                            });
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                }
+
+                allItems.sort((a, b) => b.id - a.id);
+
+                if (badgeEl) badgeEl.textContent = allItems.length;
+                if (countEl) countEl.textContent = `${allItems.length} Baru`;
+
+                if (allItems.length === 0) {
+                    listEl.innerHTML = `
+                        <div class="text-center py-4 text-muted small">
+                            <i class="fa-solid fa-circle-check text-success fs-4 mb-2 d-block"></i>
+                            Semua tugas & materi telah selesai!
+                        </div>
+                    `;
+                } else {
+                    listEl.innerHTML = allItems.map(item => {
+                        if (item.type === 'task') {
+                            return `
+                                <div style="padding: 10px 16px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: background 0.2s;" 
+                                     onmouseover="this.style.background='#f8fafc'" 
+                                     onmouseout="this.style.background='transparent'"
+                                     onclick="handleNotifClick('${item.type}', '${item.id}', '${item.title.replace(/'/g, "\\'")}', '${item.xp}', '${item.desc.replace(/'/g, "\\'")}', '${item.classId}')">
+                                    <div style="display: flex; gap: 10px; align-items: start;">
+                                        <div style="background: rgba(111,66,193,0.1); color: var(--primary-purple); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <i class="fa-solid fa-scroll" style="font-size: 0.85rem;"></i>
+                                        </div>
+                                        <div style="flex-grow: 1; min-width: 0;">
+                                            <div style="font-weight: 600; font-size: 0.8rem; color: #1e293b; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${item.title}</div>
+                                            <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">Kelas: ${item.className.split('-')[0]}</div>
+                                            <div style="font-weight: 700; font-size: 0.72rem; color: var(--primary-purple); margin-top: 4px;">+${item.xp} XP</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        } else {
+                            return `
+                                <div style="padding: 10px 16px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: background 0.2s;" 
+                                     onmouseover="this.style.background='#f8fafc'" 
+                                     onmouseout="this.style.background='transparent'"
+                                     onclick="handleNotifClick('${item.type}', '${item.id}', '${item.title.replace(/'/g, "\\'")}', '', '${item.desc.replace(/'/g, "\\'")}', '${item.classId}', '${item.fileName}')">
+                                    <div style="display: flex; gap: 10px; align-items: start;">
+                                        <div style="background: rgba(14,165,233,0.1); color: #0ea5e9; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                            <i class="fa-solid fa-file-lines" style="font-size: 0.85rem;"></i>
+                                        </div>
+                                        <div style="flex-grow: 1; min-width: 0;">
+                                            <div style="font-weight: 600; font-size: 0.8rem; color: #1e293b; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">${item.title}</div>
+                                            <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">Kelas: ${item.className.split('-')[0]}</div>
+                                            <div style="font-size: 0.72rem; color: #0ea5e9; margin-top: 4px; font-weight: 600;"><i class="fa-solid fa-file-arrow-down me-1"></i> Baru diunggah</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }).join('');
+                }
+            } catch (e) {
+                console.warn('Gagal memuat notifikasi:', e);
+            }
+        }
+
+        function handleNotifClick(type, id, title, xp, desc, classId, fileName) {
+            const popup = document.getElementById('notificationPopup');
+            if (popup) popup.style.display = 'none';
+
+            if (type === 'task') {
+                openQuestModalDirect(id, title, xp, desc, classId);
+            } else {
+                openMaterialModalDirect(title, desc, fileName, classId);
+            }
+        }
 
         // Layout toggle (Card vs List)
         const btnToggleLayout = document.getElementById('btnToggleLayout');

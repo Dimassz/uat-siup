@@ -46,33 +46,22 @@ const defaultLecturers = [
 ];
 
 const defaultClasses = [
-    { id: 'LPK-MN8-2025', name: 'Lembaga dan Pasar Keuangan-MN8-2025', code: 'LPK-101', lecturer: 'Prof. Hermawan Kartajaya', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 4, type: 'Wajib' },
-    { id: 'PAJAK-MN8A-2025', name: 'Perpajakan-MN8A-2025', code: 'PJK-202', lecturer: 'Sarah Wijaya, M.Si.', semester: 'Semester Genap 2025-2026', progressPercent: 50, completedCount: 1, totalQuests: 2, type: 'Wajib' },
-    { id: 'SIM-MN8-2025', name: 'Sistem Informasi Manajemen-MN8-2025', code: 'SIM-303', lecturer: 'Jafar Shadiq, M.Cs.', semester: 'Semester Genap 2025-2026', progressPercent: 60, completedCount: 3, totalQuests: 5, type: 'Wajib' },
-    { id: 'FINTECH-MN8-2025', name: 'Teknologi Keuangan (Financial Technology)-MN8-2025', code: 'FIN-404', lecturer: 'Dr. Irwan Prasetyo, M.E.', semester: 'Semester Genap 2025-2026', progressPercent: 25, completedCount: 1, totalQuests: 4, type: 'Pilihan' },
-    { id: 'ENG-II-2025', name: 'PRAKTIKUM BAHASA INGGRIS II', code: 'ENG-202', lecturer: 'Alice Smith, M.Hum.', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 3, type: 'Wajib' }
+    { id: 'BISNIS-INTERNASIONAL', name: 'Bisnis Internasional', code: 'BI-301', lecturer: 'Prof. Hermawan Kartajaya', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 2, type: 'Wajib' },
+    { id: 'AI-FUNDAMENTAL', name: 'Artificial Intelegent Fundemental', code: 'AIF-302', lecturer: 'Jafar Shadiq, M.Cs.', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 2, type: 'Wajib' },
+    { id: 'STATISTIKA', name: 'Statistika', code: 'STAT-303', lecturer: 'Sarah Wijaya, M.Si.', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 2, type: 'Wajib' },
+    { id: 'EKONOMI-MIKRO-MAKRO', name: 'Ekonomi Mikro & Makro', code: 'EMM-304', lecturer: 'Dr. Irwan Prasetyo, M.E.', semester: 'Semester Genap 2025-2026', progressPercent: 0, completedCount: 0, totalQuests: 2, type: 'Wajib' }
 ];
 
-// Seed enrollments: Semua mahasiswa didaftarkan di 'Sistem Informasi Manajemen-MN8-2025' sebagai default
-const defaultEnrollments = defaultStudents.map((student, idx) => ({
-    studentNim: student.NIM,
-    classId: 'SIM-MN8-2025',
-    localXp: [980, 950, 910, 840, 780, 720, 650, 590][idx] || 0,
-    classBadges: idx < 3 ? ['data_explorer', 'query_master'] : (idx < 6 ? ['data_explorer'] : []),
-    isCompleted: false,
-    coinsClaimed: false
-})).concat([
-    { studentNim: '10201210001', classId: 'LPK-MN8-2025', localXp: 1800, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210002', classId: 'LPK-MN8-2025', localXp: 1200, classBadges: [], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210001', classId: 'PAJAK-MN8A-2025', localXp: 900, classBadges: [], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210002', classId: 'PAJAK-MN8A-2025', localXp: 2100, classBadges: ['data_explorer', 'query_master', 'class_champion'], isCompleted: true, coinsClaimed: true },
-    { studentNim: '10201210003', classId: 'PAJAK-MN8A-2025', localXp: 1400, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210001', classId: 'FINTECH-MN8-2025', localXp: 750, classBadges: [], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210003', classId: 'FINTECH-MN8-2025', localXp: 1600, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210001', classId: 'ENG-II-2025', localXp: 500, classBadges: [], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210003', classId: 'ENG-II-2025', localXp: 1100, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
-    { studentNim: '10201210007', classId: 'ENG-II-2025', localXp: 1500, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false }
-]);
+// Seed enrollments: Semua mahasiswa didaftarkan di keempat kelas
+const defaultEnrollments = [];
+defaultStudents.forEach((student, idx) => {
+    defaultEnrollments.push(
+        { studentNim: student.NIM, classId: 'BISNIS-INTERNASIONAL', localXp: [1200, 1100, 950, 900, 850, 750, 1300, 600][idx] || 0, classBadges: idx < 2 ? ['data_explorer'] : [], isCompleted: false, coinsClaimed: false },
+        { studentNim: student.NIM, classId: 'AI-FUNDAMENTAL', localXp: [900, 950, 800, 1200, 700, 850, 1150, 500][idx] || 0, classBadges: idx < 2 ? ['data_explorer'] : [], isCompleted: false, coinsClaimed: false },
+        { studentNim: student.NIM, classId: 'STATISTIKA', localXp: [1100, 850, 1200, 950, 800, 700, 1050, 650][idx] || 0, classBadges: idx < 2 ? ['data_explorer'] : [], isCompleted: false, coinsClaimed: false },
+        { studentNim: student.NIM, classId: 'EKONOMI-MIKRO-MAKRO', localXp: [850, 1250, 900, 750, 1100, 800, 950, 700][idx] || 0, classBadges: idx < 2 ? ['data_explorer'] : [], isCompleted: false, coinsClaimed: false }
+    );
+});
 
 // Shop items seed
 const defaultShopItems = [
@@ -91,34 +80,44 @@ const defaultShopItems = [
 ];
 
 const defaultMaterials = [
-    { id: 1, classId: 'SIM-MN8-2025', title: 'Pengantar Sistem Informasi Manajemen', fileName: 'Modul_1_Intro_to_MIS.pdf', fileType: 'pdf', fileSize: '1.8 MB', downloadUrl: '#', description: 'Materi ini membahas dasar-dasar Sistem Informasi Manajemen, sejarah perkembangannya, serta bagaimana SIM dapat membantu efisiensi bisnis perusahaan modern.', additionalFiles: [{ name: 'Slide_Intro_SIM_Tambahan.pptx', type: 'pptx', size: '2.1 MB' }, { name: 'Jurnal_Referensi_SIM_Global.pdf', type: 'pdf', size: '1.4 MB' }] },
-    { id: 2, classId: 'SIM-MN8-2025', title: 'Desain Basis Data Relasional & Normalisasi', fileName: 'Modul_2_Database_Design.pdf', fileType: 'pdf', fileSize: '2.5 MB', downloadUrl: '#', description: 'Pembahasan mendalam tentang Entity Relationship Diagram (ERD), aturan-aturan normalisasi database dari 1NF sampai 3NF, serta perancangan skema relasional yang optimal.', additionalFiles: [{ name: 'Contoh_Studi_Kasus_Normalisasi.docx', type: 'doc', size: '512 KB' }] },
-    { id: 3, classId: 'SIM-MN8-2025', title: 'Arsitektur Enterprise & E-Business', fileName: 'Modul_3_Enterprise_Architecture.pptx', fileType: 'pptx', fileSize: '4.2 MB', downloadUrl: '#', description: 'Materi ini menerangkan framework Enterprise Architecture (seperti TOGAF), integrasi aplikasi bisnis (ERP, CRM), dan transformasi bisnis menuju model E-Commerce digital.', additionalFiles: [{ name: 'Template_Analisis_Enterprise.docx', type: 'doc', size: '320 KB' }] },
-    { id: 4, classId: 'LPK-MN8-2025', title: 'Struktur Pasar Keuangan & Otoritas Jasa Keuangan', fileName: 'Materi_1_Financial_Markets.pdf', fileType: 'pdf', fileSize: '2.1 MB', downloadUrl: '#', description: 'Materi pengantar pasar modal, fungsi OJK, pasar uang, dan bagaimana pasar keuangan memfasilitasi kebutuhan modal korporasi.', additionalFiles: [{ name: 'Undang_Undang_OJK_No21.pdf', type: 'pdf', size: '1.9 MB' }] },
-    { id: 5, classId: 'PAJAK-MN8A-2025', title: 'Konsep Pajak Penghasilan (PPh) Pasal 21', fileName: 'Panduan_PPh21_Perpajakan.pdf', fileType: 'pdf', fileSize: '1.6 MB', downloadUrl: '#', description: 'Panduan tata cara pemotongan Pajak Penghasilan Pasal 21 atas penghasilan berupa gaji, upah, honorarium, tunjangan, dan pembayaran lainnya.', additionalFiles: [{ name: 'Kalkulator_PPh21_Excel.xlsx', type: 'code', size: '150 KB' }] },
-    { id: 6, classId: 'FINTECH-MN8-2025', title: 'Evolusi FinTech & Sistem Pembayaran Digital', fileName: 'FinTech_Evolution_Overview.pdf', fileType: 'pdf', fileSize: '3.1 MB', downloadUrl: '#', description: 'Evolusi industri teknologi finansial (FinTech), model peer-to-peer lending, crowdfunding, e-wallets, dan tren regulasi sistem pembayaran di Indonesia.', additionalFiles: [{ name: 'Laporan_Fintech_OJK_2025.pdf', type: 'pdf', size: '4.7 MB' }] },
-    { id: 7, classId: 'ENG-II-2025', title: 'Professional English Speaking & Writing Guide', fileName: 'English_II_Speaking_Guide.pdf', fileType: 'pdf', fileSize: '1.2 MB', downloadUrl: '#', description: 'Guidebook and exercises for enhancing speaking, presentation skills, and formal business writing inside a corporate environment.', additionalFiles: [{ name: 'Vocabulary_Business_English.pdf', type: 'pdf', size: '890 KB' }] }
+    // Bisnis Internasional
+    { id: 1, classId: 'BISNIS-INTERNASIONAL', title: 'Globalisasi & Dampaknya bagi Perekonomian', fileName: 'Modul_1_Globalisasi.pdf', fileType: 'pdf', fileSize: '1.8 MB', downloadUrl: '#', description: 'Materi ini membahas pengertian globalisasi, sejarah, serta dampaknya pada pasar tenaga kerja, investasi asing, dan budaya bisnis lokal.', additionalFiles: [{ name: 'Slide_Globalisasi_Tambahan.pptx', type: 'pptx', size: '2.1 MB' }] },
+    { id: 2, classId: 'BISNIS-INTERNASIONAL', title: 'Strategi Penetrasi Pasar Internasional', fileName: 'Modul_2_Ekspansi_Global.pdf', fileType: 'pdf', fileSize: '2.5 MB', downloadUrl: '#', description: 'Pembahasan mengenai cara-cara perusahaan melakukan ekspansi ke luar negeri (Ekspor, Lisensi, Joint Venture, FDI).', additionalFiles: [] },
+
+    // Artificial Intelegent Fundemental
+    { id: 3, classId: 'AI-FUNDAMENTAL', title: 'Pengantar Kecerdasan Buatan & Cabang Ilmu AI', fileName: 'Modul_1_Intro_AI.pdf', fileType: 'pdf', fileSize: '3.2 MB', downloadUrl: '#', description: 'Memahami dasar-dasar kecerdasan buatan, perbedaan AI, Machine Learning, dan Deep Learning, serta sejarah AI.', additionalFiles: [{ name: 'Slide_Intro_AI.pptx', type: 'pptx', size: '1.5 MB' }] },
+    { id: 4, classId: 'AI-FUNDAMENTAL', title: 'Pengenalan Machine Learning & Algoritma Klasifikasi', fileName: 'Modul_2_Machine_Learning.pdf', fileType: 'pdf', fileSize: '4.0 MB', downloadUrl: '#', description: 'Materi mengenai konsep supervised learning, unsupervised learning, dan implementasi algoritma klasifikasi sederhana.', additionalFiles: [] },
+
+    // Statistika
+    { id: 5, classId: 'STATISTIKA', title: 'Statistika Deskriptif & Distribusi Data', fileName: 'Modul_1_Statistika_Deskriptif.pdf', fileType: 'pdf', fileSize: '2.2 MB', downloadUrl: '#', description: 'Membahas mean, median, modus, standar deviasi, varians, serta pemahaman visualisasi distribusi data.', additionalFiles: [{ name: 'Kumpulan_Soal_Latihan.pdf', type: 'pdf', size: '1.1 MB' }] },
+    { id: 6, classId: 'STATISTIKA', title: 'Pengujian Hipotesis & Uji Signifikansi', fileName: 'Modul_2_Pengujian_Hipotesis.pdf', fileType: 'pdf', fileSize: '2.8 MB', downloadUrl: '#', description: 'Mempelajari cara merumuskan hipotesis nol (H0) dan alternatif (H1), serta melakukan uji-t dan uji ANOVA.', additionalFiles: [] },
+
+    // Ekonomi Mikro & Makro
+    { id: 7, classId: 'EKONOMI-MIKRO-MAKRO', title: 'Mekanisme Pasar: Permintaan & Penawaran', fileName: 'Modul_1_Permintaan_Penawaran.pdf', fileType: 'pdf', fileSize: '2.0 MB', downloadUrl: '#', description: 'Membahas hukum permintaan, penawaran, elastisitas harga, serta titik keseimbangan pasar (ekuilibrium).', additionalFiles: [] },
+    { id: 8, classId: 'EKONOMI-MIKRO-MAKRO', title: 'Kebijakan Moneter & Kebijakan Fiskal Negara', fileName: 'Modul_2_Moneter_Fiskal.pdf', fileType: 'pdf', fileSize: '3.5 MB', downloadUrl: '#', description: 'Mempelajari instrumen bank sentral dan pemerintah dalam mengontrol inflasi, pengangguran, serta pertumbuhan ekonomi.', additionalFiles: [] }
 ];
 
 const defaultQuests = [
-    { id: 1, classId: 'SIM-MN8-2025', title: '1. Konsep Dasar & Peran Sistem Informasi dalam Bisnis', description: 'Pelajari konsep dasar sistem informasi dalam konteks bisnis modern. Buat esai analisis mengenai peranan teknologi informasi dalam meningkatkan keunggulan kompetitif perusahaan.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (25 Mei 2026)', lecturerFiles: [{ name: 'Silabus_Mata_Kuliah_SIM.pdf', type: 'pdf', size: '850 KB' }, { name: 'Slide_Kuliah_Pertemuan_1_Konsep_Dasar.pptx', type: 'pptx', size: '4.2 MB' }] },
-    { id: 2, classId: 'SIM-MN8-2025', title: '2. Desain Database & Data Warehouse Bisnis', description: 'Desain sebuah database relational untuk sistem penjualan ritel (Point of Sales). Gambarkan Entity Relationship Diagram (ERD), skema tabel, dan lakukan normalisasi database hingga bentuk normal ketiga (3NF).', xpReward: 150, coinReward: 30, deadline: 'Tenggat Terlewati (4 Juni 2026)', lecturerFiles: [{ name: 'Modul_Praktikum_Desain_Database.pdf', type: 'pdf', size: '1.8 MB' }, { name: 'Slide_Pertemuan_2_Normalisasi.pptx', type: 'pptx', size: '3.6 MB' }, { name: 'POS_Sample_Data_Script.sql', type: 'code', size: '45 KB' }] },
-    { id: 3, classId: 'SIM-MN8-2025', title: '3. Flexbox & Layouting Responsif Bootstrap 5', description: 'Buatlah desain landing page yang responsif dengan memanfaatkan Bootstrap Grid, Flexbox utilities, dan media query kustom. Pastikan layout dapat beradaptasi dengan baik di layar mobile, tablet, dan desktop.', xpReward: 250, coinReward: 50, deadline: 'Tenggat: 9 Juni 2026 (3 Hari lagi)', lecturerFiles: [{ name: 'Panduan_Layouting_Bootstrap5.pdf', type: 'pdf', size: '2.4 MB' }, { name: 'Slide_Pertemuan_3_Flexbox_Grid.pptx', type: 'pptx', size: '5.1 MB' }, { name: 'Asset_Landing_Page_Kopi.zip', type: 'zip', size: '12.8 MB' }] },
-    { id: 4, classId: 'SIM-MN8-2025', title: '4. Integrasi API & Pertukaran Data Sistem Informasi', description: 'Integrasikan aplikasi mock-up Anda dengan RESTful API publik. Ambil data JSON, olah, dan tampilkan dalam bentuk tabel dinamis menggunakan Fetch API JavaScript secara asinkron.', xpReward: 300, coinReward: 60, deadline: 'Prasyarat: Selesaikan Modul 3', lecturerFiles: [{ name: 'REST_API_Integration_Guide.pdf', type: 'pdf', size: '1.5 MB' }, { name: 'Slide_Fetch_JSON_Parsing.pptx', type: 'pptx', size: '3.9 MB' }] },
-    { id: 5, classId: 'SIM-MN8-2025', title: '5. Keamanan Informasi & Audit Sistem Bisnis', description: 'Lakukan analisis risiko keamanan informasi pada sistem e-commerce. Identifikasi kerentanan (OWASP Top 10) dan rancang rekomendasi mitigasi risiko beserta kontrol auditnya.', xpReward: 350, coinReward: 70, deadline: 'Prasyarat: Selesaikan Modul 4', lecturerFiles: [{ name: 'Audit_Keamanan_Modul5.pdf', type: 'pdf', size: '3.1 MB' }, { name: 'Slide_OWASP_Threats_Mitigation.pptx', type: 'pptx', size: '4.8 MB' }] },
-    { id: 6, classId: 'LPK-MN8-2025', title: '1. Struktur Lembaga Keuangan Bank & Non-Bank', description: 'Pelajari modul struktur lembaga keuangan, buat rangkuman singkat dalam format PDF mengenai perbedaan mendasar Bank Sentral, Bank Umum, dan Lembaga Keuangan Mikro.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 12 Juni 2026 (2 Hari lagi)', lecturerFiles: [{ name: 'Modul_LPK_Struktur_Lembaga.pdf', type: 'pdf', size: '1.4 MB' }] },
-    { id: 7, classId: 'LPK-MN8-2025', title: '2. Analisis Pasar Modal & Instrumen Keuangan', description: 'Analisis pergerakan indeks pasar modal Indonesia dan buat laporan komparatif instrumen saham, obligasi, dan reksa dana.', xpReward: 200, coinReward: 40, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Panduan_Analisis_Pasar_Modal.pdf', type: 'pdf', size: '2.0 MB' }] },
-    { id: 8, classId: 'PAJAK-MN8A-2025', title: '1. Ketentuan Umum & Tata Cara Perpajakan', description: 'Pelajari dasar-dasar sistem perpajakan Indonesia dan buat ringkasan konsep domisili, subjek pajak, serta objek pajak.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (3 Juni 2026)', lecturerFiles: [{ name: 'Panduan_Peraturan_Perppajakan.pdf', type: 'pdf', size: '1.2 MB' }] },
-    { id: 9, classId: 'PAJAK-MN8A-2025', title: '2. Simulasi Perhitungan PPh Pasal 21', description: 'Hitunglah PPh Pasal 21 dari 3 skenario karyawan dengan status PTKP yang berbeda menggunakan formulir resmi terbaru.', xpReward: 250, coinReward: 50, deadline: 'Tenggat: 11 Juni 2026 (4 Hari lagi)', lecturerFiles: [{ name: 'Kalkulator_PPh21_Excel.xlsx', type: 'code', size: '150 KB' }] },
-    { id: 10, classId: 'FINTECH-MN8-2025', title: '1. Evolusi FinTech & Sistem Pembayaran Digital', description: 'Analisis evolusi e-wallet dan payment gateway di Indonesia beserta regulasi BI/OJK yang berlaku.', xpReward: 200, coinReward: 40, deadline: 'Tenggat: 13 Juni 2026 (5 Hari lagi)', lecturerFiles: [{ name: 'FinTech_Evolution_Overview.pdf', type: 'pdf', size: '3.1 MB' }] },
-    { id: 11, classId: 'FINTECH-MN8-2025', title: '2. Model Bisnis Peer-to-Peer (P2P) Lending', description: 'Analisis regulasi OJK terkait batas atas pendanaan P2P Lending dan buat laporan komparatif mitigasi risiko gagal bayar.', xpReward: 300, coinReward: 60, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Laporan_Fintech_OJK_2025.pdf', type: 'pdf', size: '4.7 MB' }] },
-    { id: 12, classId: 'ENG-II-2025', title: '1. Professional Elevator Pitch Video', description: 'Rekam video berdurasi 60 detik yang mempresentasikan ide bisnis inovatif Anda dalam Bahasa Inggris formal.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 14 Juni 2026 (6 Hari lagi)', lecturerFiles: [{ name: 'English_II_Speaking_Guide.pdf', type: 'pdf', size: '1.2 MB' }] },
-    { id: 13, classId: 'ENG-II-2025', title: '2. Business Email & Report Writing', description: 'Tulis email bisnis formal dan laporan singkat dalam Bahasa Inggris terkait studi kasus perusahaan multinasional.', xpReward: 200, coinReward: 40, deadline: 'Prasyarat: Selesaikan Modul 1', lecturerFiles: [{ name: 'Vocabulary_Business_English.pdf', type: 'pdf', size: '890 KB' }] }
+    // Bisnis Internasional
+    { id: 1, classId: 'BISNIS-INTERNASIONAL', title: '1. Analisis Dampak Globalisasi Perusahaan Lokal', description: 'Pilih satu perusahaan lokal/UMKM. Lakukan analisis bagaimana globalisasi mempengaruhi bisnis mereka, baik dari sisi persaingan maupun peluang pasar.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (25 Mei 2026)', lecturerFiles: [{ name: 'Format_Tugas_Analisis.docx', type: 'doc', size: '200 KB' }] },
+    { id: 2, classId: 'BISNIS-INTERNASIONAL', title: '2. Perencanaan Strategi Ekspansi Pasar Global', description: 'Buatlah rancangan strategi untuk perusahaan Indonesia yang ingin melakukan penetrasi ke pasar Asia Tenggara. Tentukan metode entry mode yang tepat.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 15 Juni 2026 (7 Hari lagi)', lecturerFiles: [] },
+
+    // Artificial Intelegent Fundemental
+    { id: 3, classId: 'AI-FUNDAMENTAL', title: '1. Eksplorasi Penerapan AI di Kehidupan Sehari-hari', description: 'Buat rangkuman singkat mengenai 3 aplikasi AI yang sering Anda gunakan, bagaimana cara kerjanya, serta kelebihan/kekurangannya.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (4 Juni 2026)', lecturerFiles: [] },
+    { id: 4, classId: 'AI-FUNDAMENTAL', title: '2. Desain Solusi Cerdas Berbasis Machine Learning', description: 'Pikirkan suatu masalah di kampus Anda. Rancang solusi cerdas berbasis Machine Learning untuk menyelesaikannya. Deskripsikan input, model, dan outputnya.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 16 Juni 2026 (8 Hari lagi)', lecturerFiles: [] },
+
+    // Statistika
+    { id: 5, classId: 'STATISTIKA', title: '1. Analisis Deskriptif Kumpulan Data Nilai', description: 'Diberikan sekumpulan data nilai mahasiswa. Hitunglah nilai mean, median, modus, kuartil, desil, dan simpangan bakunya.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (3 Juni 2026)', lecturerFiles: [{ name: 'Data_Nilai_Statistika.xlsx', type: 'excel', size: '150 KB' }] },
+    { id: 6, classId: 'STATISTIKA', title: '2. Pengujian Hipotesis Kasus Penelitian Lapangan', description: 'Lakukan pengujian hipotesis (Uji-t) untuk mengetahui apakah terdapat perbedaan signifikan nilai sebelum dan sesudah treatment.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 17 Juni 2026 (9 Hari lagi)', lecturerFiles: [] },
+
+    // Ekonomi Mikro & Makro
+    { id: 7, classId: 'EKONOMI-MIKRO-MAKRO', title: '1. Simulasi Kurva Permintaan & Penawaran', description: 'Gambarkan kurva permintaan dan penawaran berdasarkan tabel data transaksi pasar. Tentukan titik ekuilibrium dan analisis pergeseran kurvanya.', xpReward: 100, coinReward: 20, deadline: 'Tenggat Terlewati (1 Juni 2026)', lecturerFiles: [] },
+    { id: 8, classId: 'EKONOMI-MIKRO-MAKRO', title: '2. Analisis Efektivitas Stimulus Ekonomi Pemerintah', description: 'Buatlah esai analisis kritis mengenai efektivitas kebijakan fiskal/moneter terbaru yang dikeluarkan oleh pemerintah Indonesia.', xpReward: 150, coinReward: 30, deadline: 'Tenggat: 18 Juni 2026 (10 Hari lagi)', lecturerFiles: [] }
 ];
 
 const defaultSubmissions = [
-    { id: 1, studentNim: '10201210007', questId: 1, submittedFile: 'Tugas_1_Konsep_SIM_Dimas.pdf', submittedDate: '25 Mei 2026, 09:15 WIB', grade: '92 / 100', feedback: 'Pemahaman konsep sudah sangat baik. Esai ditulis secara analitis dan mencakup studi kasus relevan.', status: 'completed' },
-    { id: 2, studentNim: '10201210007', questId: 2, submittedFile: 'Dimas_Dwi_ERD_Normalisasi_3NF.zip', submittedDate: '4 Juni 2026, 14:30 WIB', grade: '95 / 100', feedback: 'ERD sangat komprehensif, normalisasi 3NF dilakukan dengan tepat. Penggunaan foreign key dan referential integrity didefinisikan dengan baik. Kerja bagus!', status: 'completed' }
+    { id: 1, studentNim: '10201210007', questId: 1, submittedFile: 'Tugas_1_Globalisasi_Dimas.pdf', submittedDate: '25 Mei 2026, 09:15 WIB', grade: '92 / 100', feedback: 'Pemahaman konsep globalisasi sangat baik. Esai ditulis secara terstruktur.', status: 'completed' },
+    { id: 2, studentNim: '10201210007', questId: 5, submittedFile: 'Dimas_Dwi_Statistika_Deskriptif.xlsx', submittedDate: '3 Juni 2026, 14:30 WIB', grade: '95 / 100', feedback: 'Analisis statistika deskriptif sangat teliti, hasil perhitungan mean/median tepat.', status: 'completed' }
 ];
 
 const initialDb = {
@@ -131,8 +130,12 @@ const initialDb = {
     studentMaterials: [],
     shopItems: defaultShopItems,
     purchases: [],
+    studentPointLogs: [
+        { id: 1, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Dampak Globalisasi Perusahaan Lokal', createdAt: '2026-05-25T09:15:00.000Z' },
+        { id: 2, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Deskriptif Kumpulan Data Nilai', createdAt: '2026-06-03T14:30:00.000Z' }
+    ],
     logs: [
-        { id: 1, action: 'Sistem Terbuka', detail: 'Inisialisasi database awal dengan seed data.', timestamp: new Date().toISOString() }
+        { id: 1, action: 'Sistem Terbuka', detail: 'Inisialisasi database awal dengan kelas baru.', timestamp: new Date().toISOString() }
     ]
 };
 
@@ -148,6 +151,27 @@ function readDb() {
         const data = fs.readFileSync(dbPath, 'utf-8');
         const dbObj = JSON.parse(data);
         let changed = false;
+
+        // Reset database lokal jika masih ada kelas lama agar sejalan dengan ketentuan baru
+        const hasOldClasses = dbObj.classes && dbObj.classes.some(c => !['BISNIS-INTERNASIONAL', 'AI-FUNDAMENTAL', 'STATISTIKA', 'EKONOMI-MIKRO-MAKRO'].includes(c.id));
+        if (hasOldClasses || !dbObj.classes || dbObj.classes.length === 0) {
+            dbObj.classes = defaultClasses;
+            dbObj.enrollments = defaultEnrollments;
+            dbObj.materials = defaultMaterials;
+            dbObj.quests = defaultQuests;
+            dbObj.submissions = defaultSubmissions;
+            dbObj.studentMaterials = [];
+            dbObj.studentPointLogs = [
+                { id: 1, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Dampak Globalisasi Perusahaan Lokal', createdAt: '2026-05-25T09:15:00.000Z' },
+                { id: 2, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Deskriptif Kumpulan Data Nilai', createdAt: '2026-06-03T14:30:00.000Z' }
+            ];
+            dbObj.logs = [
+                { id: 1, action: 'Sistem Terbuka', detail: 'Inisialisasi database awal dengan kelas baru.', timestamp: new Date().toISOString() }
+            ];
+            changed = true;
+            console.log('[DATABASE] Database lokal di-reset ke 4 kelas baru.');
+        }
+
         if (!dbObj.materials || !dbObj.materials[0] || !dbObj.materials[0].description) {
             dbObj.materials = defaultMaterials;
             changed = true;
@@ -176,6 +200,14 @@ function readDb() {
             dbObj.submissions = defaultSubmissions;
             changed = true;
             console.log('[DATABASE] Migrasi database lokal: menambahkan submissions');
+        }
+        if (!dbObj.studentPointLogs) {
+            dbObj.studentPointLogs = [
+                { id: 1, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Dampak Globalisasi Perusahaan Lokal', createdAt: '2026-05-25T09:15:00.000Z' },
+                { id: 2, studentNim: '10201210007', xpChange: 100, coinChange: 20, description: 'Tugas Dinilai: 1. Analisis Deskriptif Kumpulan Data Nilai', createdAt: '2026-06-03T14:30:00.000Z' }
+            ];
+            changed = true;
+            console.log('[DATABASE] Migrasi database lokal: menambahkan studentPointLogs');
         }
         let userChanged = false;
         if (dbObj.users && Array.isArray(dbObj.users)) {
@@ -319,12 +351,23 @@ function mapLogToJs(row) {
 async function seedDatabase() {
     console.log('[DATABASE] Seeding data awal ke database Supabase...');
     try {
+        // Hapus data lama agar kelas baru bersih dan sinkron
+        await pool.query(`DELETE FROM sim_submissions`);
+        await pool.query(`DELETE FROM sim_student_materials`);
+        await pool.query(`DELETE FROM sim_materials`);
+        await pool.query(`DELETE FROM sim_quests`);
+        await pool.query(`DELETE FROM sim_enrollments`);
+        await pool.query(`DELETE FROM sim_class_logs`);
+        await pool.query(`DELETE FROM sim_student_point_logs`);
+        await pool.query(`DELETE FROM sim_classes`);
+
         // Seed users
         for (const u of initialDb.users) {
+            const conflictTarget = u.NIM ? 'nim' : 'email';
             await pool.query(
                 `INSERT INTO sim_users (name, nim, email, password, role, avatar, frame, rank, global_coins, owned_frames, owned_badges, username, faculty, major) 
                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
-                 ON CONFLICT (nim) DO NOTHING`,
+                 ON CONFLICT (${conflictTarget}) DO NOTHING`,
                 [
                     u.name, 
                     u.NIM || null, 
@@ -431,6 +474,17 @@ async function seedDatabase() {
                 [item.itemId, item.itemType, item.name, item.description, item.price, item.icon, item.cssClass]
             );
         }
+
+        // Seed student point logs
+        for (const log of initialDb.studentPointLogs || []) {
+            await pool.query(
+                `INSERT INTO sim_student_point_logs (id, student_nim, xp_change, coin_change, description, created_at) 
+                 VALUES ($1, $2, $3, $4, $5, $6)
+                 ON CONFLICT (id) DO NOTHING`,
+                [log.id, log.studentNim, log.xpChange, log.coinChange, log.description, log.createdAt]
+            );
+        }
+        await pool.query(`SELECT setval('sim_student_point_logs_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_student_point_logs), 1), false)`);
 
         // Sinkronkan sequence ID log
         await pool.query(`SELECT setval('sim_logs_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_logs), 1), false)`);
@@ -591,6 +645,15 @@ async function checkAndInitPg() {
                 activity_text TEXT NOT NULL,
                 created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
             );
+
+            CREATE TABLE IF NOT EXISTS sim_student_point_logs (
+                id SERIAL PRIMARY KEY,
+                student_nim VARCHAR(50) NOT NULL REFERENCES sim_users(nim) ON DELETE CASCADE,
+                xp_change INTEGER DEFAULT 0,
+                coin_change INTEGER DEFAULT 0,
+                description VARCHAR(255) NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+            );
         `);
 
         // Sync shop items seed data
@@ -629,9 +692,14 @@ async function checkAndInitPg() {
             }
         }
         
-        // Periksa apakah data kosong
+        // Periksa apakah data kosong atau kelas belum ter-reset ke 4 kelas baru
         const userCountRes = await pool.query('SELECT COUNT(*) FROM sim_users');
-        if (parseInt(userCountRes.rows[0].count) === 0) {
+        const checkClassesRes = await pool.query("SELECT id FROM sim_classes");
+        const classIdsInDb = checkClassesRes.rows.map(r => r.id);
+        const expectedClassIds = ['BISNIS-INTERNASIONAL', 'AI-FUNDAMENTAL', 'STATISTIKA', 'EKONOMI-MIKRO-MAKRO'];
+        const needsReset = classIdsInDb.length !== expectedClassIds.length || !expectedClassIds.every(id => classIdsInDb.includes(id));
+
+        if (parseInt(userCountRes.rows[0].count) === 0 || needsReset) {
             await seedDatabase();
         } else {
             // Sinkronkan sequence ID log agar tidak terjadi error duplicate key
@@ -800,6 +868,25 @@ function calculateXpBonus(submittedDateStr, deadlineStr, grade, precedingCount, 
     }
     
     return { timeBonus, gradeBonus, totalBonus: timeBonus + gradeBonus };
+}
+
+function isDeadlinePassed(deadlineStr) {
+    if (!deadlineStr) return false;
+    const monthMap = {
+        'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'mei': 4, 'jun': 5,
+        'jul': 6, 'agu': 7, 'sep': 8, 'okt': 9, 'nov': 10, 'des': 11,
+        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+    };
+    const match = deadlineStr.match(/(\d+)\s+([A-Za-z]+)\s+(\d{4})/);
+    if (!match) return false;
+    const day = parseInt(match[1]);
+    const monthStr = match[2].toLowerCase();
+    const year = parseInt(match[3]);
+    const month = monthMap[monthStr] !== undefined ? monthMap[monthStr] : 0;
+    const deadlineDate = new Date(year, month, day);
+    deadlineDate.setHours(23, 59, 59, 999);
+    return new Date().getTime() > deadlineDate.getTime();
 }
 
 function calculateClassBadges(localXp) {
@@ -1618,6 +1705,17 @@ const db = {
                     [totalXp, sub.student_nim, quest.class_id]
                 );
 
+                await pool.query(
+                    `UPDATE sim_users SET global_coins = COALESCE(global_coins, 0) + $1 WHERE nim = $2`,
+                    [quest.coin_reward || 0, sub.student_nim]
+                );
+
+                await pool.query(
+                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description) 
+                     VALUES ($1, $2, $3, $4)`,
+                    [sub.student_nim, totalXp, quest.coin_reward || 0, `Tugas Dinilai: ${quest.title}`]
+                );
+
                 // Fetch new local_xp to compute badges and completeness
                 const enrollRes = await pool.query(
                     `SELECT local_xp FROM sim_enrollments WHERE student_nim = $1 AND class_id = $2`,
@@ -1678,15 +1776,30 @@ const db = {
                 sub.feedback = feedback;
                 sub.status = 'completed';
 
-                let enrollment = data.enrollments.find(e => e.studentNim === sub.studentNim && e.classId === (quest ? quest.classId : 'SIM-MN8-2025'));
+                let enrollment = data.enrollments.find(e => e.studentNim === sub.studentNim && e.classId === (quest ? quest.classId : 'BISNIS-INTERNASIONAL'));
                 if (!enrollment) {
-                    enrollment = { studentNim: sub.studentNim, classId: quest ? quest.classId : 'SIM-MN8-2025', localXp: 0, classBadges: [], isCompleted: false, coinsClaimed: false };
+                    enrollment = { studentNim: sub.studentNim, classId: quest ? quest.classId : 'BISNIS-INTERNASIONAL', localXp: 0, classBadges: [], isCompleted: false, coinsClaimed: false };
                     data.enrollments.push(enrollment);
                 }
 
                 enrollment.localXp = (enrollment.localXp || 0) + totalXp;
                 enrollment.classBadges = calculateClassBadges(enrollment.localXp);
                 enrollment.isCompleted = enrollment.localXp >= 2000;
+
+                const user = data.users.find(u => u.NIM === sub.studentNim);
+                if (user) {
+                    user.global_coins = (user.global_coins || 0) + (quest ? quest.coinReward : 0);
+                }
+
+                if (!data.studentPointLogs) data.studentPointLogs = [];
+                data.studentPointLogs.push({
+                    id: data.studentPointLogs.length + 1,
+                    studentNim: sub.studentNim,
+                    xpChange: totalXp,
+                    coinChange: quest ? quest.coinReward : 0,
+                    description: `Tugas Dinilai: ${quest ? quest.title : ''}`,
+                    createdAt: new Date().toISOString()
+                });
 
                 if (quest) {
                     const cls = data.classes.find(c => c.id === quest.classId);
@@ -1768,6 +1881,12 @@ const db = {
                     [studentNim, itemId]
                 );
 
+                await pool.query(
+                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description) 
+                     VALUES ($1, $2, $3, $4)`,
+                    [studentNim, 0, -item.price, `Membeli item dari toko: ${item.name}`]
+                );
+
                 return { success: true };
             },
             () => {
@@ -1796,6 +1915,16 @@ const db = {
                 user.global_coins = (user.global_coins || 0) - item.price;
                 if (!data.purchases) data.purchases = [];
                 data.purchases.push({ studentNim, itemId, purchasedAt: new Date().toISOString() });
+
+                if (!data.studentPointLogs) data.studentPointLogs = [];
+                data.studentPointLogs.push({
+                    id: data.studentPointLogs.length + 1,
+                    studentNim: studentNim,
+                    xpChange: 0,
+                    coinChange: -item.price,
+                    description: `Membeli item dari toko: ${item.name}`,
+                    createdAt: new Date().toISOString()
+                });
 
                 writeDb(data);
                 return { success: true };
@@ -1864,6 +1993,12 @@ const db = {
                     [totalCoinsClaimed, studentNim]
                 );
 
+                await pool.query(
+                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description) 
+                     VALUES ($1, $2, $3, $4)`,
+                    [studentNim, 0, totalCoinsClaimed, `Klaim koin penyelesaian kelas: ${classId}`]
+                );
+
                 return { success: true, coinsClaimed: totalCoinsClaimed };
             },
             () => {
@@ -1889,6 +2024,16 @@ const db = {
                 if (user) {
                     user.global_coins = (user.global_coins || 0) + totalCoinsClaimed;
                 }
+
+                if (!data.studentPointLogs) data.studentPointLogs = [];
+                data.studentPointLogs.push({
+                    id: data.studentPointLogs.length + 1,
+                    studentNim: studentNim,
+                    xpChange: 0,
+                    coinChange: totalCoinsClaimed,
+                    description: `Klaim koin penyelesaian kelas: ${classId}`,
+                    createdAt: new Date().toISOString()
+                });
 
                 writeDb(data);
                 return { success: true, coinsClaimed: totalCoinsClaimed };
@@ -2090,6 +2235,233 @@ const db = {
                 data.classLogs.push(newLog);
                 writeDb(data);
                 return newLog;
+            }
+        );
+    },
+
+    createStudentPointLog: (studentNim, xpChange, coinChange, description) => {
+        return executeQuery(
+            async () => {
+                await pool.query(
+                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description) VALUES ($1, $2, $3, $4)`,
+                    [studentNim, xpChange, coinChange, description]
+                );
+                return { success: true };
+            },
+            () => {
+                const data = readDb();
+                if (!data.studentPointLogs) data.studentPointLogs = [];
+                const newId = data.studentPointLogs.length + 1;
+                data.studentPointLogs.push({
+                    id: newId,
+                    studentNim,
+                    xpChange,
+                    coinChange,
+                    description,
+                    createdAt: new Date().toISOString()
+                });
+                writeDb(data);
+                return { success: true };
+            }
+        );
+    },
+
+    getStudentPointLogs: (studentNim) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query(
+                    `SELECT id, student_nim as "studentNim", xp_change as "xpChange", coin_change as "coinChange", description, created_at as "createdAt"
+                     FROM sim_student_point_logs 
+                     WHERE student_nim = $1 
+                     ORDER BY id DESC`,
+                    [studentNim]
+                );
+                return res.rows;
+            },
+            () => {
+                const data = readDb();
+                if (!data.studentPointLogs) data.studentPointLogs = [];
+                return data.studentPointLogs
+                    .filter(l => l.studentNim === studentNim)
+                    .slice()
+                    .reverse();
+            }
+        );
+    },
+
+    syncAllStudentStats: () => {
+        return executeQuery(
+            async () => {
+                const usersRes = await pool.query("SELECT nim FROM sim_users WHERE role = 'Mahasiswa'");
+                const students = usersRes.rows;
+
+                for (const student of students) {
+                    const studentNim = student.nim;
+                    if (!studentNim) continue;
+
+                    await pool.query("UPDATE sim_enrollments SET local_xp = 0, class_badges = '[]', is_completed = false WHERE student_nim = $1", [studentNim]);
+
+                    const enrollRes = await pool.query("SELECT class_id FROM sim_enrollments WHERE student_nim = $1", [studentNim]);
+                    const classIds = enrollRes.rows.map(r => r.class_id);
+
+                    let calculatedGlobalCoins = 100;
+                    const purchaseRes = await pool.query(
+                        `SELECT i.price 
+                         FROM sim_purchases p 
+                         JOIN sim_shop_items i ON p.item_id = i.item_id 
+                         WHERE p.student_nim = $1`, 
+                        [studentNim]
+                    );
+                    const spentCoins = purchaseRes.rows.reduce((sum, p) => sum + p.price, 0);
+                    calculatedGlobalCoins -= spentCoins;
+
+                    await pool.query("DELETE FROM sim_student_point_logs WHERE student_nim = $1", [studentNim]);
+
+                    const classXPMap = {};
+                    classIds.forEach(cid => { classXPMap[cid] = 0; });
+
+                    for (const cid of classIds) {
+                        const questsRes = await pool.query("SELECT * FROM sim_quests WHERE class_id = $1", [cid]);
+                        for (const quest of questsRes.rows) {
+                            const subRes = await pool.query(
+                                "SELECT * FROM sim_submissions WHERE student_nim = $1 AND quest_id = $2",
+                                [studentNim, quest.id]
+                            );
+                            const sub = subRes.rows[0];
+
+                            if (sub && sub.status === 'completed') {
+                                const orderRes = await pool.query(
+                                    `SELECT COUNT(*) FROM sim_submissions WHERE quest_id = $1 AND id < $2`,
+                                    [quest.id, sub.id]
+                                );
+                                const precedingCount = parseInt(orderRes.rows[0].count);
+
+                                const bonus = calculateXpBonus(sub.submitted_date, quest.deadline, sub.grade, precedingCount, quest.late_penalty);
+                                const earnedXp = Math.max(0, quest.xp_reward + bonus.totalBonus);
+                                const earnedCoins = quest.coin_reward || 0;
+
+                                calculatedGlobalCoins += earnedCoins;
+                                classXPMap[cid] = (classXPMap[cid] || 0) + earnedXp;
+
+                                await pool.query(
+                                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description, created_at) 
+                                     VALUES ($1, $2, $3, $4, NOW())`,
+                                    [studentNim, earnedXp, earnedCoins, `Tugas Dinilai: ${quest.title}`]
+                                );
+                            } else if (!sub && isDeadlinePassed(quest.deadline)) {
+                                const penaltyXp = quest.late_penalty || 30;
+                                classXPMap[cid] = (classXPMap[cid] || 0) - penaltyXp;
+
+                                await pool.query(
+                                    `INSERT INTO sim_student_point_logs (student_nim, xp_change, coin_change, description, created_at) 
+                                     VALUES ($1, $2, $3, $4, NOW())`,
+                                    [studentNim, -penaltyXp, 0, `Tidak Mengumpulkan Tugas: ${quest.title}`]
+                                );
+                            }
+                        }
+                    }
+
+                    for (const [classId, totalXp] of Object.entries(classXPMap)) {
+                        const finalXp = Math.max(0, totalXp);
+                        const badges = calculateClassBadges(finalXp);
+                        const isCompleted = finalXp >= 2000;
+
+                        await pool.query(
+                            `UPDATE sim_enrollments 
+                             SET local_xp = $1, class_badges = $2, is_completed = $3 
+                             WHERE student_nim = $4 AND class_id = $5`,
+                            [finalXp, JSON.stringify(badges), isCompleted, studentNim, classId]
+                        );
+                    }
+
+                    await pool.query("UPDATE sim_users SET global_coins = $1 WHERE nim = $2", [Math.max(0, calculatedGlobalCoins), studentNim]);
+                }
+                return { success: true };
+            },
+            () => {
+                const data = readDb();
+                data.users.forEach(user => {
+                    if (user.role !== 'Mahasiswa') return;
+                    const studentNim = user.NIM;
+                    if (!studentNim) return;
+
+                    data.enrollments.forEach(e => {
+                        if (e.studentNim === studentNim) {
+                            e.localXp = 0;
+                            e.classBadges = [];
+                            e.isCompleted = false;
+                        }
+                    });
+
+                    let calculatedGlobalCoins = 100;
+                    const spentCoins = (data.purchases || []).filter(p => p.studentNim === studentNim).reduce((sum, p) => {
+                        const item = (data.shopItems || []).find(i => i.itemId === p.itemId);
+                        return sum + (item ? item.price : 0);
+                    }, 0);
+                    calculatedGlobalCoins -= spentCoins;
+
+                    data.studentPointLogs = (data.studentPointLogs || []).filter(log => log.studentNim !== studentNim);
+
+                    const classXPMap = {};
+                    const studentEnrollments = data.enrollments.filter(e => e.studentNim === studentNim);
+                    studentEnrollments.forEach(e => {
+                        classXPMap[e.classId] = 0;
+                    });
+
+                    studentEnrollments.forEach(e => {
+                        const classQuests = (data.quests || []).filter(q => q.classId === e.classId);
+                        classQuests.forEach(quest => {
+                            const sub = (data.submissions || []).find(s => s.studentNim === studentNim && s.questId === quest.id);
+                            if (sub && sub.status === 'completed') {
+                                const questSubmissions = data.submissions.filter(s => s.questId === quest.id).sort((a, b) => a.id - b.id);
+                                const myIndex = questSubmissions.findIndex(s => s.id === sub.id);
+                                const precedingCount = myIndex >= 0 ? myIndex : questSubmissions.length;
+
+                                const bonus = calculateXpBonus(sub.submittedDate, quest.deadline, sub.grade, precedingCount, quest.latePenalty);
+                                const earnedXp = Math.max(0, quest.xpReward + bonus.totalBonus);
+                                const earnedCoins = quest.coinReward || 0;
+
+                                calculatedGlobalCoins += earnedCoins;
+                                classXPMap[e.classId] = (classXPMap[e.classId] || 0) + earnedXp;
+
+                                data.studentPointLogs.push({
+                                    id: data.studentPointLogs.length + 1,
+                                    studentNim: studentNim,
+                                    xpChange: earnedXp,
+                                    coinChange: earnedCoins,
+                                    description: `Tugas Dinilai: ${quest.title}`,
+                                    createdAt: new Date().toISOString()
+                                });
+                            } else if (!sub && isDeadlinePassed(quest.deadline)) {
+                                const penaltyXp = quest.latePenalty || 30;
+                                classXPMap[e.classId] = (classXPMap[e.classId] || 0) - penaltyXp;
+
+                                data.studentPointLogs.push({
+                                    id: data.studentPointLogs.length + 1,
+                                    studentNim: studentNim,
+                                    xpChange: -penaltyXp,
+                                    coinChange: 0,
+                                    description: `Tidak Mengumpulkan Tugas: ${quest.title}`,
+                                    createdAt: new Date().toISOString()
+                                });
+                            }
+                        });
+                    });
+
+                    for (const [classId, totalXp] of Object.entries(classXPMap)) {
+                        const enrollment = data.enrollments.find(e => e.studentNim === studentNim && e.classId === classId);
+                        if (enrollment) {
+                            const finalXp = Math.max(0, totalXp);
+                            enrollment.localXp = finalXp;
+                            enrollment.classBadges = calculateClassBadges(finalXp);
+                            enrollment.isCompleted = finalXp >= 2000;
+                        }
+                    }
+
+                    user.global_coins = Math.max(0, calculatedGlobalCoins);
+                });
+                writeDb(data);
+                return { success: true };
             }
         );
     }

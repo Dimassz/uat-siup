@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecturer Portal - Sistem Informasi Manajemen</title>
+    <title>SUPER - Portal Dosen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,16 +14,16 @@
         :root {
             --navy: #0f172a;
             --navy-light: #1e293b;
-            --purple: #7c3aed;
-            --purple-hover: #6d28d9;
-            --purple-light: rgba(124, 58, 237, 0.08);
-            --purple-glow: rgba(124, 58, 237, 0.15);
+            --purple: #5B21B6;
+            --purple-hover: #4C1D95;
+            --purple-light: rgba(91, 33, 182, 0.08);
+            --purple-glow: rgba(91, 33, 182, 0.15);
             --blue: #3b82f6;
-            --teal: #14b8a6;
-            --amber: #f59e0b;
+            --teal: #06B6D4;
+            --amber: #F59E0B;
             --rose: #f43f5e;
-            --emerald: #10b981;
-            --bg: #f8fafc;
+            --emerald: #10B981;
+            --bg: #F8FAFC;
             --card-bg: #ffffff;
             --border: rgba(0,0,0,0.06);
             --radius: 16px;
@@ -383,7 +383,7 @@
         <div class="container d-flex align-items-center justify-content-between">
             <a href="/lecturer" class="navbar-top-brand">
                 <i class="fa-solid fa-graduation-cap"></i>
-                <span>Portal Dosen Universitas Pertamina</span>
+                <span>SUPER (Portal Dosen)</span>
             </a>
             <div class="d-flex align-items-center gap-3">
                 <span id="lecturerNavName" class="d-none d-md-inline fw-semibold text-white">Dosen</span>
@@ -483,7 +483,7 @@
                 <div class="tab-panel d-none" id="panelQuests">
                     <section class="custom-card fade-in">
                         <div class="card-header-game">
-                            <span><i class="fa-solid fa-scroll text-warning me-2"></i> Rilis Misi Tugas (Quest)</span>
+                            <span><i class="fa-solid fa-scroll text-warning me-2"></i> Rilis Tugas Baru (Quest)</span>
                         </div>
                         <div class="card-body p-4">
                             <form id="questForm" onsubmit="handleQuestUpload(event)">
@@ -558,7 +558,7 @@
                                 </div>
 
                                 <button type="submit" class="btn btn-amber w-100 py-2 rounded-pill">
-                                    <i class="fa-solid fa-bullhorn me-2"></i> Rilis Misi Tugas ke Kelas
+                                    <i class="fa-solid fa-bullhorn me-2"></i> Rilis Tugas ke Kelas
                                 </button>
                             </form>
                         </div>
@@ -1110,7 +1110,7 @@
                 });
                 const result = await res.json();
                 if (result.success) {
-                    alert("⚔️ Misi tugas berhasil dirilis ke kelas!");
+                    alert("Tugas baru berhasil dirilis ke kelas!");
                     document.getElementById('questForm').reset();
                     document.getElementById('questAllowLate').checked = true;
                     document.getElementById('questLatePenalty').value = '30';
