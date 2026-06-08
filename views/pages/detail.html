@@ -445,9 +445,10 @@
             background-color: #fcfdfe;
         }
 
-        .quest-title-strike {
-            text-decoration: line-through;
-            color: #94a3b8;
+        .quest-title-done {
+            text-decoration: none;
+            color: #10B981;
+            font-weight: 600;
         }
 
         .btn-quest {
@@ -3005,7 +3006,7 @@
                     const itemClass = mat.isRead ? 'quest-completed' : 'quest-active';
                     const badgeClass = mat.isRead ? 'bg-success-subtle text-success border border-success-subtle' : 'bg-primary-subtle text-primary border border-primary-subtle';
                     const badgeText = mat.isRead ? 'Sudah Dibaca' : 'Belum Dibaca';
-                    const titleClass = mat.isRead ? 'quest-title-strike text-muted' : 'fw-bold text-dark';
+                    const titleClass = mat.isRead ? 'quest-title-done' : 'fw-bold text-dark';
 
                     materialsList.innerHTML += `
                         <article class="quest-item ${itemClass} w-100" id="material-item-${mat.id}" onclick="openMaterialDetail(${mat.id})">
@@ -3638,7 +3639,7 @@
                             </div>
                             <span class="text-success fs-5 ms-3"><i class="fa-solid fa-circle-check"></i></span>
                         `;
-                        titleMarkup = `<h6 class="mb-0 text-muted quest-title-strike" style="font-size: 0.9rem;">${quest.title}</h6>`;
+                        titleMarkup = `<h6 class="mb-0 quest-title-done" style="font-size: 0.9rem;">${quest.title}</h6>`;
                     } else if (isPendingGrade) {
                         itemClass = 'quest-active';
                         statusBadgeMarkup = `<span class="badge bg-primary text-white border border-primary-subtle rounded-pill" style="font-size: 0.65rem;">Telah terkumpul</span>`;

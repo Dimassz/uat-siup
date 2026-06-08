@@ -1,45 +1,54 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUPER - Sistem Pembelajaran Universitas Pertamina</title>
-    
+
     <!-- Bootstrap 5 CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome 6 CDN (Game Themes & Icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-    
+
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Custom CSS untuk Gamifikasi & Redesain UI/UX Premium -->
     <style>
         :root {
             /* Branding Universitas Pertamina (New Clean Cyber Theme) */
-            --pertamina-navy: #5B21B6; /* Deep Cyber Purple */
-            --pertamina-blue: #06B6D4; /* Electric Turquoise */
-            --pertamina-light-blue: rgba(6, 182, 212, 0.08); /* Transparent Electric Turquoise */
-            
+            --pertamina-navy: #5B21B6;
+            /* Deep Cyber Purple */
+            --pertamina-blue: #06B6D4;
+            /* Electric Turquoise */
+            --pertamina-light-blue: rgba(6, 182, 212, 0.08);
+            /* Transparent Electric Turquoise */
+
             /* Gamification Accents */
-            --primary-purple: #5B21B6; /* Deep Cyber Purple */
+            --primary-purple: #5B21B6;
+            /* Deep Cyber Purple */
             --primary-purple-hover: #4C1D95;
             --primary-purple-light: rgba(91, 33, 182, 0.08);
             --primary-purple-glow: rgba(91, 33, 182, 0.3);
-            
-            --gold-color: #F59E0B; /* Level-Up Gold */
+
+            --gold-color: #F59E0B;
+            /* Level-Up Gold */
             --gold-glow: rgba(245, 158, 11, 0.4);
-            
+
             --streak-color: #ff4757;
             --streak-glow: rgba(255, 71, 87, 0.4);
-            
-            --success-color: #10B981; /* Neon Green */
+
+            --success-color: #10B981;
+            /* Neon Green */
             --success-color-glow: rgba(16, 185, 129, 0.3);
-            
-            --bg-color: #F8FAFC; /* Clean Slate White */
+
+            --bg-color: #F8FAFC;
+            /* Clean Slate White */
             --card-border-radius: 16px;
             --transition-speed: 0.3s;
         }
@@ -58,21 +67,38 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         @keyframes wave {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* DOUBLE NAVBAR STYLING */
         /* 1. Top Bar (Branding & User Profile) */
         .navbar-top {
-            background-color: #0F172A; /* Slate 900 - Premium dark background */
+            background-color: #0F172A;
+            /* Slate 900 - Premium dark background */
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 8px 0;
             color: #ffffff;
@@ -190,14 +216,16 @@
 
         /* 2. Main Nav (Menu & Gamified Badges) */
         .navbar-main {
-            background-color: #ffffff; /* Clean white background */
+            background-color: #ffffff;
+            /* Clean white background */
             padding: 8px 0;
             border-bottom: 1px solid #e2e8f0;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
         }
 
         .nav-link-custom {
-            color: #475569 !important; /* Cool Slate for readability */
+            color: #475569 !important;
+            /* Cool Slate for readability */
             font-weight: 600;
             font-size: 0.9rem;
             padding: 8px 16px !important;
@@ -208,7 +236,8 @@
             gap: 8px;
         }
 
-        .nav-link-custom:hover, .nav-link-custom.active {
+        .nav-link-custom:hover,
+        .nav-link-custom.active {
             background-color: var(--primary-purple-light);
             color: var(--primary-purple) !important;
         }
@@ -251,7 +280,7 @@
             background-color: #ffffff;
             border-radius: 8px;
             border-left: 4px solid var(--pertamina-blue);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -315,7 +344,7 @@
             right: 0;
             bottom: 0;
             background-image: radial-gradient(circle at 80% 20%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
-                              radial-gradient(circle at 20% 80%, rgba(111, 66, 193, 0.2) 0%, transparent 60%);
+                radial-gradient(circle at 20% 80%, rgba(111, 66, 193, 0.2) 0%, transparent 60%);
             pointer-events: none;
         }
 
@@ -432,7 +461,7 @@
 
         .quest-item:hover {
             transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .quest-completed {
@@ -611,7 +640,7 @@
             margin-right: 0 !important;
             object-fit: cover;
             border: 2px solid #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
             flex-shrink: 0;
         }
 
@@ -680,7 +709,7 @@
             border: none;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
         }
 
         .modal-header-game {
@@ -707,7 +736,7 @@
             color: #ffffff;
             border-radius: 12px;
             border-left: 5px solid var(--gold-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
         }
 
         /* Card (Box) Grid & List View Customizations */
@@ -792,9 +821,10 @@
             color: #f59e0b;
             font-size: 0.75rem;
             transform: rotate(-25deg);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             animation: laurelSwayLeft 3s infinite ease-in-out;
         }
+
         .avatar-frame-gold-decorated .laurel-right {
             position: absolute;
             right: -12px;
@@ -802,17 +832,32 @@
             color: #f59e0b;
             font-size: 0.75rem;
             transform: rotate(25deg);
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             animation: laurelSwayRight 3s infinite ease-in-out;
         }
 
         @keyframes laurelSwayLeft {
-            0%, 100% { transform: rotate(-25deg) scale(1); }
-            50% { transform: rotate(-30deg) scale(1.08); }
+
+            0%,
+            100% {
+                transform: rotate(-25deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(-30deg) scale(1.08);
+            }
         }
+
         @keyframes laurelSwayRight {
-            0%, 100% { transform: rotate(25deg) scale(1); }
-            50% { transform: rotate(30deg) scale(1.08); }
+
+            0%,
+            100% {
+                transform: rotate(25deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(30deg) scale(1.08);
+            }
         }
 
         .avatar-frame-silver-decorated {
@@ -828,6 +873,7 @@
             position: relative;
             flex-shrink: 0;
         }
+
         .avatar-frame-silver-decorated .gem-indicator {
             position: absolute;
             bottom: -5px;
@@ -836,9 +882,19 @@
             text-shadow: 0 0 4px #0ea5e9;
             animation: gemSparkle 2s infinite ease-in-out;
         }
+
         @keyframes gemSparkle {
-            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
-            50% { transform: scale(1.3) rotate(180deg); opacity: 1; }
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.3) rotate(180deg);
+                opacity: 1;
+            }
         }
 
         .avatar-frame-bronze-decorated {
@@ -854,12 +910,13 @@
             position: relative;
             flex-shrink: 0;
         }
+
         .avatar-frame-bronze-decorated .star-indicator {
             position: absolute;
             bottom: -5px;
             font-size: 0.55rem;
             color: #ca8a04;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         /* Animated neon gradient frame for Dimas */
@@ -877,6 +934,7 @@
             animation: pulseGlowDecorated 2s infinite ease-in-out;
             flex-shrink: 0;
         }
+
         .avatar-frame-purple-glow-decorated .bolt-left {
             position: absolute;
             left: -10px;
@@ -885,6 +943,7 @@
             font-size: 0.65rem;
             animation: boltFlicker 1.5s infinite ease-in-out;
         }
+
         .avatar-frame-purple-glow-decorated .bolt-right {
             position: absolute;
             right: -10px;
@@ -907,6 +966,7 @@
             position: relative;
             flex-shrink: 0;
         }
+
         .avatar-frame-emerald-decorated .star-indicator {
             position: absolute;
             bottom: -5px;
@@ -916,13 +976,31 @@
         }
 
         @keyframes pulseGlowDecorated {
-            0% { box-shadow: 0 0 5px rgba(111, 66, 193, 0.4); }
-            50% { box-shadow: 0 0 15px rgba(111, 66, 193, 0.8), 0 0 5px rgba(219, 39, 119, 0.5); }
-            100% { box-shadow: 0 0 5px rgba(111, 66, 193, 0.4); }
+            0% {
+                box-shadow: 0 0 5px rgba(111, 66, 193, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(111, 66, 193, 0.8), 0 0 5px rgba(219, 39, 119, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 0 5px rgba(111, 66, 193, 0.4);
+            }
         }
+
         @keyframes boltFlicker {
-            0%, 100% { opacity: 0.3; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); }
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.9);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
         }
 
         .leaderboard-avatar-framed {
@@ -945,10 +1023,19 @@
             z-index: 10;
             animation: crownBounce 2.5s infinite ease-in-out;
         }
+
         @keyframes crownBounce {
-            0% { transform: translateX(-50%) rotate(-12deg) translateY(0); }
-            50% { transform: translateX(-50%) rotate(-12deg) translateY(-2px); }
-            100% { transform: translateX(-50%) rotate(-12deg) translateY(0); }
+            0% {
+                transform: translateX(-50%) rotate(-12deg) translateY(0);
+            }
+
+            50% {
+                transform: translateX(-50%) rotate(-12deg) translateY(-2px);
+            }
+
+            100% {
+                transform: translateX(-50%) rotate(-12deg) translateY(0);
+            }
         }
 
         /* MINI BADGES STYLE */
@@ -957,6 +1044,7 @@
             gap: 5px;
             margin-top: 5px;
         }
+
         .mini-badge-dot {
             width: 18px;
             height: 18px;
@@ -966,22 +1054,51 @@
             justify-content: center;
             font-size: 0.55rem;
             color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
             transition: all 0.2s ease;
             cursor: pointer;
         }
+
         .mini-badge-dot:hover {
             transform: scale(1.3) translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             z-index: 5;
         }
-        .bg-badge-database { background: linear-gradient(135deg, #ffe082, #ffb300); color: #7f5f00; }
-        .bg-badge-analyst { background: linear-gradient(135deg, #ce93d8, #8e24aa); color: #ffffff; }
-        .bg-badge-vocal { background: linear-gradient(135deg, #90caf9, #1e88e5); color: #ffffff; }
-        .bg-badge-style { background: linear-gradient(135deg, #ffab91, #d84315); color: #ffffff; }
-        .bg-badge-api { background: linear-gradient(135deg, #a5d6a7, #2e7d32); color: #ffffff; }
-        .bg-badge-security { background: linear-gradient(135deg, #b0bec5, #37474f); color: #ffffff; }
-        .bg-badge-grand { background: linear-gradient(135deg, #ff8a80, #c62828); color: #ffffff; }
+
+        .bg-badge-database {
+            background: linear-gradient(135deg, #ffe082, #ffb300);
+            color: #7f5f00;
+        }
+
+        .bg-badge-analyst {
+            background: linear-gradient(135deg, #ce93d8, #8e24aa);
+            color: #ffffff;
+        }
+
+        .bg-badge-vocal {
+            background: linear-gradient(135deg, #90caf9, #1e88e5);
+            color: #ffffff;
+        }
+
+        .bg-badge-style {
+            background: linear-gradient(135deg, #ffab91, #d84315);
+            color: #ffffff;
+        }
+
+        .bg-badge-api {
+            background: linear-gradient(135deg, #a5d6a7, #2e7d32);
+            color: #ffffff;
+        }
+
+        .bg-badge-security {
+            background: linear-gradient(135deg, #b0bec5, #37474f);
+            color: #ffffff;
+        }
+
+        .bg-badge-grand {
+            background: linear-gradient(135deg, #ff8a80, #c62828);
+            color: #ffffff;
+        }
 
         /* MODAL STYLING FOR STUDENT PROFILE */
         .profile-banner-grad {
@@ -991,19 +1108,22 @@
             border-top-right-radius: 12px;
             position: relative;
         }
+
         .profile-modal-avatar-wrapper {
             position: absolute;
             bottom: -35px;
             left: 24px;
         }
+
         .profile-modal-avatar-large {
             width: 76px;
             height: 76px;
             border-radius: 50%;
             border: 3.5px solid #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
             object-fit: cover;
         }
+
         .profile-modal-avatar-wrapper .avatar-frame-gold-decorated,
         .profile-modal-avatar-wrapper .avatar-frame-silver-decorated,
         .profile-modal-avatar-wrapper .avatar-frame-bronze-decorated,
@@ -1012,23 +1132,36 @@
             height: 82px;
             padding: 3px;
         }
+
         .profile-modal-avatar-wrapper .avatar-frame-gold-decorated .laurel-left {
-            left: -18px; top: 22px; font-size: 1.1rem;
+            left: -18px;
+            top: 22px;
+            font-size: 1.1rem;
         }
+
         .profile-modal-avatar-wrapper .avatar-frame-gold-decorated .laurel-right {
-            right: -18px; top: 22px; font-size: 1.1rem;
+            right: -18px;
+            top: 22px;
+            font-size: 1.1rem;
         }
+
         .profile-modal-avatar-wrapper .crown-overlay {
             font-size: 1.4rem;
             top: -20px;
         }
+
         .profile-modal-avatar-wrapper .avatar-frame-purple-glow-decorated .bolt-left {
-            left: -14px; top: 26px; font-size: 0.9rem;
+            left: -14px;
+            top: 26px;
+            font-size: 0.9rem;
         }
+
         .profile-modal-avatar-wrapper .avatar-frame-purple-glow-decorated .bolt-right {
-            right: -14px; top: 26px; font-size: 0.9rem;
+            right: -14px;
+            top: 26px;
+            font-size: 0.9rem;
         }
-        
+
         .student-modal-badge-card {
             background: #f8fafc;
             border: 1.5px solid #f1f5f9;
@@ -1039,17 +1172,20 @@
             filter: grayscale(100%);
             transition: all 0.2s;
         }
+
         .student-modal-badge-card.unlocked {
             opacity: 1;
             filter: grayscale(0%);
             background: #ffffff;
             border-color: #e2e8f0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
         }
+
         .student-modal-badge-card.unlocked:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
         }
+
         .student-modal-badge-icon {
             width: 36px;
             height: 36px;
@@ -1060,6 +1196,7 @@
             font-size: 1rem;
             margin-bottom: 6px;
         }
+
         .student-modal-badge-title {
             font-size: 0.65rem;
             font-weight: 700;
@@ -1070,6 +1207,7 @@
         .skill-bar-container {
             margin-bottom: 10px;
         }
+
         .skill-bar-label {
             font-size: 0.68rem;
             font-weight: 600;
@@ -1078,12 +1216,14 @@
             justify-content: space-between;
             margin-bottom: 2px;
         }
+
         .skill-bar-bg {
             height: 6px;
             background-color: #f1f5f9;
             border-radius: 3px;
             overflow: hidden;
         }
+
         .skill-bar-fill {
             height: 100%;
             border-radius: 3px;
@@ -1096,6 +1236,7 @@
             text-decoration: underline dotted #6f42c1;
             font-weight: 700;
         }
+
         .clickable-student-name:hover {
             color: #6f42c1 !important;
         }
@@ -1106,11 +1247,13 @@
             flex-direction: column !important;
             gap: 1.25rem !important;
         }
+
         #coursesGrid.list-view .course-card-wrapper {
             width: 100% !important;
             max-width: 100% !important;
             flex: 0 0 100% !important;
         }
+
         #coursesGrid.list-view .custom-card {
             display: flex !important;
             flex-direction: row !important;
@@ -1121,6 +1264,7 @@
             min-height: 120px !important;
             margin-bottom: 0 !important;
         }
+
         #coursesGrid.list-view .card-header-game {
             flex: 0 0 30% !important;
             width: 30% !important;
@@ -1129,18 +1273,22 @@
             margin-bottom: 0 !important;
             align-self: center !important;
         }
+
         #coursesGrid.list-view .card-body {
             flex: 1 1 auto !important;
             padding: 0 !important;
             margin-bottom: 0 !important;
         }
+
         #coursesGrid.list-view .card-body .progress {
             margin-bottom: 0.5rem !important;
         }
+
         #coursesGrid.list-view .card-body .quest-item {
             margin-bottom: 0 !important;
             padding: 8px 12px !important;
         }
+
         #coursesGrid.list-view .card-footer {
             flex: 0 0 200px !important;
             width: 200px !important;
@@ -1151,10 +1299,12 @@
             gap: 0.5rem !important;
             align-self: center !important;
         }
+
         #coursesGrid.list-view .card-footer .btn,
         #coursesGrid.list-view .card-footer .btn-outline-primary {
             width: 100% !important;
         }
+
         @media (max-width: 991px) {
             #coursesGrid.list-view .custom-card {
                 flex-direction: column !important;
@@ -1162,17 +1312,20 @@
                 gap: 1rem !important;
                 padding: 1.5rem !important;
             }
+
             #coursesGrid.list-view .card-header-game,
             #coursesGrid.list-view .card-footer {
                 width: 100% !important;
                 flex: 1 1 auto !important;
             }
+
             #coursesGrid.list-view .card-footer {
                 flex-direction: row !important;
             }
         }
     </style>
 </head>
+
 <body>
 
     <!-- ========================================== -->
@@ -1183,15 +1336,17 @@
             <!-- Left Branding -->
             <a href="/" class="navbar-top-brand">
                 <i class="fa-solid fa-graduation-cap me-2 text-info"></i>
-                <span>SUPER <span class="d-none d-lg-inline" style="font-size: 0.75rem; opacity: 0.8; font-weight: normal; margin-left: 6px;">(Sistem Pembelajaran Universitas Pertamina)</span></span>
+                <span>SUPER <span class="d-none d-lg-inline"
+                        style="font-size: 0.75rem; opacity: 0.8; font-weight: normal; margin-left: 6px;">(Sistem
+                        Pembelajaran Universitas Pertamina)</span></span>
             </a>
-            
+
             <!-- Middle Search Box -->
             <div class="navbar-search-box d-none d-md-block">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" placeholder="Cari mata kuliah...">
             </div>
-            
+
             <!-- Right User Info & Utilities -->
             <div class="navbar-top-user">
                 <!-- Notifications & Messages -->
@@ -1200,7 +1355,7 @@
                         <i class="fa-regular fa-bell"></i>
                         <span class="navbar-icon-badge" id="notificationBadge">0</span>
                     </a>
-                    
+
                     <!-- Notification popup -->
                     <div id="notificationPopup" style="
                         display:none;
@@ -1214,9 +1369,11 @@
                         z-index:9999;
                         overflow:hidden;
                     ">
-                        <div style="background:var(--pertamina-blue);padding:12px 16px;color:#fff;font-weight:700;font-size:0.88rem;display:flex;justify-content:space-between;align-items:center;">
+                        <div
+                            style="background:var(--pertamina-blue);padding:12px 16px;color:#fff;font-weight:700;font-size:0.88rem;display:flex;justify-content:space-between;align-items:center;">
                             <span>🔔 Misi & Materi Terbaru</span>
-                            <span class="badge bg-warning text-dark animate-pulse" id="popupNotifCount" style="font-size: 0.7rem;">0 Baru</span>
+                            <span class="badge bg-warning text-dark animate-pulse" id="popupNotifCount"
+                                style="font-size: 0.7rem;">0 Baru</span>
                         </div>
                         <div id="notificationList" style="max-height:280px; overflow-y:auto; padding:8px 0;">
                             <div class="text-center py-4 text-muted small">Memuat notifikasi...</div>
@@ -1226,13 +1383,13 @@
                 <a href="#" class="navbar-icon-btn d-none d-sm-inline" title="Pesan">
                     <i class="fa-regular fa-comments"></i>
                 </a>
-                
+
                 <!-- Profile Avatar & Name (with popup) -->
                 <div class="d-flex align-items-center gap-2" style="position:relative;">
                     <span class="navbar-user-name d-none d-lg-inline" id="navbarUserName">Memuat...</span>
                     <a href="#" class="profile-avatar-link" id="profileAvatarBtn" title="Lihat Profil Anda">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80"
-                             alt="Avatar Profil" class="navbar-profile-avatar" id="navbarProfileAvatar">
+                            alt="Avatar Profil" class="navbar-profile-avatar" id="navbarProfileAvatar">
                     </a>
 
                     <!-- Profile popup -->
@@ -1250,7 +1407,8 @@
                     ">
                         <div style="background:linear-gradient(135deg,#002f6c,#4a219b);padding:14px 16px;color:#fff;">
                             <div style="display:flex;align-items:center;gap:10px;">
-                                <img id="popupAvatar" src="" alt="" style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);object-fit:cover;">
+                                <img id="popupAvatar" src="" alt=""
+                                    style="width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,0.5);object-fit:cover;">
                                 <div>
                                     <div style="font-weight:700;font-size:0.88rem;" id="popupName">&mdash;</div>
                                     <div style="font-size:0.72rem;opacity:0.8;" id="popupRole">&mdash;</div>
@@ -1258,10 +1416,14 @@
                             </div>
                         </div>
                         <div style="padding:12px 16px;font-size:0.82rem;color:#334155;">
-                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">NIM</span> &nbsp;<strong id="popupNim">&mdash;</strong></div>
-                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">Level</span> &nbsp;<strong id="popupLevel">&mdash;</strong></div>
-                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">XP Global</span> &nbsp;<strong id="popupXp">&mdash;</strong></div>
-                            <div><span style="color:#94a3b8;">Koin Global</span> &nbsp;<strong id="popupCoins">&mdash;</strong></div>
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">NIM</span> &nbsp;<strong
+                                    id="popupNim">&mdash;</strong></div>
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">Level</span> &nbsp;<strong
+                                    id="popupLevel">&mdash;</strong></div>
+                            <div style="margin-bottom:6px;"><span style="color:#94a3b8;">XP Global</span> &nbsp;<strong
+                                    id="popupXp">&mdash;</strong></div>
+                            <div><span style="color:#94a3b8;">Koin Global</span> &nbsp;<strong
+                                    id="popupCoins">&mdash;</strong></div>
                         </div>
                         <div style="padding:0 16px 14px;">
                             <button id="btnViewMyProfile" style="
@@ -1307,10 +1469,12 @@
     <!-- ========================================== -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-main sticky-top">
         <div class="container">
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNavContent" aria-controls="mainNavContent" aria-expanded="false"
+                aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="mainNavContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-1">
                     <li class="nav-item">
@@ -1324,10 +1488,12 @@
                     </li>
                 </ul>
             </div>
-            
+
             <!-- Student Status Widgets (Kanan) -->
             <div class="d-flex align-items-center gap-2">
-                <div class="status-pill bg-light text-primary border px-3 py-1.5 rounded-pill d-flex align-items-center gap-1.5" title="XP Global Anda dari semua kelas!" style="font-size: 0.85rem; font-weight: 600; background: rgba(111, 66, 193, 0.1) !important; border-color: rgba(111, 66, 193, 0.2) !important; color: #6f42c1 !important;">
+                <div class="status-pill bg-light text-primary border px-3 py-1.5 rounded-pill d-flex align-items-center gap-1.5"
+                    title="XP Global Anda dari semua kelas!"
+                    style="font-size: 0.85rem; font-weight: 600; background: rgba(111, 66, 193, 0.1) !important; border-color: rgba(111, 66, 193, 0.2) !important; color: #6f42c1 !important;">
                     <i class="fa-solid fa-star text-warning"></i>
                     <span class="current-xp-display">0 XP</span>
                 </div>
@@ -1340,14 +1506,15 @@
     </nav>
 
     <div class="container mt-4">
-        
+
         <!-- ========================================== -->
         <!-- ANNOUNCEMENTS BAR                          -->
         <!-- ========================================== -->
         <section class="announcement-bar">
             <div class="d-flex align-items-center overflow-hidden">
                 <span class="announcement-title">Announcements</span>
-                <p class="announcement-content">Selamat! Turnamen Gamifikasi Pekan UTS Universitas Pertamina telah dibuka. Selesaikan modul kelas untuk merebut ganjaran +500 XP tambahan!</p>
+                <p class="announcement-content">Selamat! Turnamen Gamifikasi Pekan UTS Universitas Pertamina telah
+                    dibuka. Selesaikan modul kelas untuk merebut ganjaran +500 XP tambahan!</p>
             </div>
             <div class="announcement-controls">
                 <i class="fa-solid fa-pause" title="Jeda Pengumuman"></i>
@@ -1363,55 +1530,60 @@
                     <span class="badge bg-warning text-dark mb-2 fw-bold px-3 py-2 rounded-pill">
                         <i class="fa-solid fa-crown me-1"></i> Mahasiswa Aktif
                     </span>
-                    <h1 class="display-6 fw-extrabold mb-1" id="heroWelcome">Selamat Datang Kembali!</h1>
-                    <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Mari selesaikan tugas belajar hari ini dan klaim koin emas untuk ditukarkan di pusat penukaran.</p>
+                    <h1 class="display-6 fw-extrabold mb-1" id="heroWelcome"><strong>Selamat Datang Kembali!</strong>
+                    </h1>
+                    <p class="lead opacity-90 mb-3" style="font-size: 1.05rem;">Mari selesaikan tugas belajar hari ini
+                        dan klaim koin emas untuk ditukarkan di pusat penukaran.</p>
                     <div class="class-code-pill" title="NIM / ID Siswa Anda">
                         <span>NIM Mahasiswa:</span>
                         <strong class="text-warning" id="heroNim">&mdash;</strong>
                     </div>
                 </div>
-                
+
                 <!-- Global Coin & XP Major Progress Widget -->
                 <div class="col-lg-5">
-                    <div class="level-badge-container p-3 rounded-3" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
+                    <div class="level-badge-container p-3 rounded-3"
+                        style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(5px);">
                         <!-- XP Global & Jurusan Info -->
                         <div class="mb-3 border-bottom border-white-10 pb-2">
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white" style="font-size: 1rem;">
+                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white"
+                                    style="font-size: 1rem;">
                                     <i class="fa-solid fa-star text-warning"></i> XP GLOBAL
                                 </h5>
                                 <span class="badge bg-primary text-white fw-bold" id="heroGlobalXpDisplay">0 XP</span>
                             </div>
                             <div class="small text-white-90" style="font-size: 0.75rem;">
-                                <i class="fa-solid fa-ranking-star text-info me-1"></i> Peringkat Jurusan: <strong class="text-warning" id="heroMajorRankText">&mdash;</strong>
+                                <i class="fa-solid fa-ranking-star text-info me-1"></i> Peringkat Jurusan: <strong
+                                    class="text-warning" id="heroMajorRankText">&mdash;</strong>
                             </div>
                             <div class="small text-white-90 mt-1" style="font-size: 0.72rem; font-style: italic;">
-                                <i class="fa-solid fa-arrow-trend-up text-success me-1"></i> <span id="heroXpNeededText">Memuat informasi peringkat...</span>
+                                <i class="fa-solid fa-arrow-trend-up text-success me-1"></i> <span
+                                    id="heroXpNeededText">Memuat informasi peringkat...</span>
                             </div>
                         </div>
 
                         <!-- Global Coin Progress -->
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-1">
-                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white" style="font-size: 1rem;">
+                                <h5 class="mb-0 fw-bold d-flex align-items-center gap-2 text-white"
+                                    style="font-size: 1rem;">
                                     <i class="fa-solid fa-coins text-warning animate-bounce"></i> KOIN GLOBAL
                                 </h5>
-                                <span class="badge bg-warning text-dark fw-bold"><span class="global-coins-display">420</span> Koin</span>
+                                <span class="badge bg-warning text-dark fw-bold"><span
+                                        class="global-coins-display">420</span> Koin</span>
                             </div>
-                            
+
                             <!-- Progress Bar Koin -->
                             <div class="progress progress-custom mb-1.5" style="height: 8px;">
-                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
-                                     id="globalCoinProgress"
-                                     role="progressbar" 
-                                     style="width: 42%" 
-                                     aria-valuenow="42" 
-                                     aria-valuemin="0" 
-                                     aria-valuemax="100"></div>
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
+                                    id="globalCoinProgress" role="progressbar" style="width: 42%" aria-valuenow="42"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
-                            
+
                             <p class="small mb-0 text-white-50 text-end" style="font-size: 0.68rem;">
-                                <i class="fa-solid fa-gift me-1 text-warning"></i> Kumpulkan <strong id="coinsNeededText">580 Koin</strong> lagi untuk Premium Reward!
+                                <i class="fa-solid fa-gift me-1 text-warning"></i> Kumpulkan <strong
+                                    id="coinsNeededText">580 Koin</strong> lagi untuk Premium Reward!
                             </p>
                         </div>
                     </div>
@@ -1423,17 +1595,18 @@
         <!-- LAYOUT UTAMA (GRID SYSTEM BOOTSTRAP)       -->
         <!-- ========================================== -->
         <div class="row">
-            
+
             <!-- ========================================== -->
             <!-- KOLOM KIRI: COURSE OVERVIEW (col-lg-8)     -->
             <!-- ========================================== -->
             <main class="col-lg-8">
-                
+
                 <!-- Misi & Materi Terbaru Section -->
                 <section class="card custom-card mb-4" id="recentTasksMaterialsCard" style="display: none;">
                     <div class="card-header-game bg-light py-2 px-3">
                         <span class="d-flex align-items-center gap-2 fw-bold text-primary" style="font-size: 0.95rem;">
-                            <i class="fa-solid fa-clock-rotate-left text-warning animate-bounce"></i> Tugas & Materi Terbaru
+                            <i class="fa-solid fa-clock-rotate-left text-warning animate-bounce"></i> Tugas & Materi
+                            Terbaru
                         </span>
                         <span class="badge bg-primary rounded-pill" style="font-size: 0.65rem;">2 Terkini</span>
                     </div>
@@ -1448,8 +1621,10 @@
                         <i class="fa-solid fa-compass text-primary"></i> Course overview
                     </h4>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-light btn-sm border" id="btnToggleLayout" title="Ganti Tampilan Kotak/Daftar">
-                            <i class="fa-solid fa-grip-vertical" id="layoutIcon"></i> <span id="layoutText" class="small fw-semibold ms-1">Card</span>
+                        <button class="btn btn-light btn-sm border" id="btnToggleLayout"
+                            title="Ganti Tampilan Kotak/Daftar">
+                            <i class="fa-solid fa-grip-vertical" id="layoutIcon"></i> <span id="layoutText"
+                                class="small fw-semibold ms-1">Card</span>
                         </button>
                     </div>
                 </div>
@@ -1458,7 +1633,8 @@
                 <div class="row row-cols-1 row-cols-md-2 g-4" id="coursesGrid">
                     <!-- Kelas akan di-render secara dinamis dari /api/my-classes -->
                     <div class="col-12 text-center py-5" id="coursesLoading">
-                        <div class="spinner-border text-primary" role="status" style="width:2.5rem;height:2.5rem;"></div>
+                        <div class="spinner-border text-primary" role="status" style="width:2.5rem;height:2.5rem;">
+                        </div>
                         <p class="mt-3 text-muted">Memuat kelas Anda...</p>
                     </div>
                 </div>
@@ -1468,7 +1644,7 @@
             <!-- KOLOM KANAN: NAVIGATION SIDEBAR & WIDGETS  -->
             <!-- ========================================== -->
             <aside class="col-lg-4">
-                
+
                 <!-- A. Navigation Tree Widget -->
                 <section class="card custom-card">
                     <div class="card-header-game">
@@ -1487,10 +1663,12 @@
                                 <a href="#" class="nav-tree-link"><i class="fa-solid fa-house-user"></i> Site home</a>
                             </li>
                             <li class="nav-tree-item">
-                                <a href="#" class="nav-tree-link"><i class="fa-solid fa-file-invoice"></i> Site pages</a>
+                                <a href="#" class="nav-tree-link"><i class="fa-solid fa-file-invoice"></i> Site
+                                    pages</a>
                             </li>
                             <li class="nav-tree-item">
-                                <a href="#" class="nav-tree-link active"><i class="fa-solid fa-graduation-cap"></i> My courses</a>
+                                <a href="#" class="nav-tree-link active"><i class="fa-solid fa-graduation-cap"></i> My
+                                    courses</a>
                                 <!-- Submenu My Courses -->
                                 <ul class="nav-tree-submenu" id="navCoursesSubmenu">
                                     <li class="text-muted small px-2">Memuat kelas...</li>
@@ -1512,7 +1690,8 @@
                 <!-- Leaderboard Jurusan Widget -->
                 <section class="card custom-card animate-fade-in">
                     <div class="card-header-game flex-column align-items-start gap-1">
-                        <span class="d-flex align-items-center gap-2 text-muted uppercase fw-bold" style="letter-spacing: 0.5px; font-size: 0.72rem;">
+                        <span class="d-flex align-items-center gap-2 text-muted uppercase fw-bold"
+                            style="letter-spacing: 0.5px; font-size: 0.72rem;">
                             <i class="fa-solid fa-ranking-star text-warning animate-bounce"></i> Papan Peringkat
                         </span>
                         <h5 class="fw-extrabold mb-0 text-dark" style="font-size: 1.05rem; line-height: 1.2;">
@@ -1520,7 +1699,8 @@
                         </h5>
                     </div>
                     <div class="card-body p-3">
-                        <p class="small text-muted mb-3">Peringkat dihitung berdasarkan total XP yang didapatkan dari semua kelas yang diikuti.</p>
+                        <p class="small text-muted mb-3">Peringkat dihitung berdasarkan total XP yang didapatkan dari
+                            semua kelas yang diikuti.</p>
                         <div class="leaderboard-list" id="globalLeaderboardList">
                             <!-- Leaderboard items will be rendered here dynamically -->
                             <div class="text-center py-3">
@@ -1541,20 +1721,23 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-content-game">
                 <div class="modal-header modal-header-game">
-                    <h5 class="modal-title fw-bold" id="questModalLabel"><i class="fa-solid fa-compass me-2"></i> Detail Tugas & Proyek Akademik</h5>
+                    <h5 class="modal-title fw-bold" id="questModalLabel"><i class="fa-solid fa-compass me-2"></i> Detail
+                        Tugas & Proyek Akademik</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="text-center mb-4">
-                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle p-3 mb-3" style="width: 70px; height: 70px;">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-circle p-3 mb-3"
+                            style="width: 70px; height: 70px;">
                             <i class="fa-solid fa-scroll fs-2"></i>
                         </div>
                         <h4 class="fw-bold" id="modalQuestTitle">Nama Tugas</h4>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h6 class="fw-bold text-muted uppercase" style="font-size: 0.8rem;">Deskripsi Tugas/Proyek:</h6>
-                        <p class="text-secondary" id="modalQuestDesc" style="font-size: 0.85rem; line-height: 1.5;">Deskripsi detail mengenai tugas yang harus Anda kerjakan akan ditampilkan di sini.</p>
+                        <p class="text-secondary" id="modalQuestDesc" style="font-size: 0.85rem; line-height: 1.5;">
+                            Deskripsi detail mengenai tugas yang harus Anda kerjakan akan ditampilkan di sini.</p>
                     </div>
 
                     <div class="row text-center g-3 mb-4">
@@ -1569,13 +1752,17 @@
                     <div class="alert alert-info d-flex align-items-start gap-3 border-0 bg-light-subtle" role="alert">
                         <i class="fa-solid fa-circle-info text-info mt-1 fs-5"></i>
                         <div class="small" style="font-size: 0.78rem;">
-                            <strong>Ketentuan Pengerjaan:</strong> Menekan tombol "Mulai Pengerjaan" akan menandai tugas ini sebagai sedang dikerjakan. Selesaikan dan unggah berkas tugas Anda sebelum tenggat berakhir!
+                            <strong>Ketentuan Pengerjaan:</strong> Menekan tombol "Mulai Pengerjaan" akan menandai tugas
+                            ini sebagai sedang dikerjakan. Selesaikan dan unggah berkas tugas Anda sebelum tenggat
+                            berakhir!
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-3 bg-light d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Nanti Saja</button>
-                    <button type="button" class="btn btn-quest px-4" id="btnStartQuest">Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i></button>
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4"
+                        data-bs-dismiss="modal">Nanti Saja</button>
+                    <button type="button" class="btn btn-quest px-4" id="btnStartQuest">Mulai Pengerjaan Sekarang <i
+                            class="fa-solid fa-chevron-right ms-1"></i></button>
                 </div>
             </div>
         </div>
@@ -1584,16 +1771,19 @@
     <!-- ========================================== -->
     <!-- MODAL: DAFTAR ANGGOTA KELAS (PARTICIPANTS) -->
     <!-- ========================================== -->
-    <div class="modal fade" id="participantsModal" tabindex="-1" aria-labelledby="participantsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="participantsModal" tabindex="-1" aria-labelledby="participantsModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-content-game">
                 <div class="modal-header modal-header-game">
-                    <h5 class="modal-title fw-bold" id="participantsModalLabel"><i class="fa-solid fa-users me-2 text-primary"></i> Daftar Anggota Kelas</h5>
+                    <h5 class="modal-title fw-bold" id="participantsModalLabel"><i
+                            class="fa-solid fa-users me-2 text-primary"></i> Daftar Anggota Kelas</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="small text-muted" id="participantsSubtitle">Anggota yang terdaftar dalam kelas ini.</span>
+                        <span class="small text-muted" id="participantsSubtitle">Anggota yang terdaftar dalam kelas
+                            ini.</span>
                         <span class="badge bg-primary rounded-pill" id="participantsCountText">8 Mahasiswa</span>
                     </div>
                     <div class="table-responsive">
@@ -1614,7 +1804,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-3 bg-light">
-                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-4"
+                        data-bs-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -1623,24 +1814,27 @@
     <!-- ========================================== -->
     <!-- MODAL: PROFILE MAHASISWA INTERAKTIF        -->
     <!-- ========================================== -->
-    <div class="modal fade" id="studentProfileModal" tabindex="-1" aria-labelledby="studentProfileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="studentProfileModal" tabindex="-1" aria-labelledby="studentProfileModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-content-game overflow-hidden">
                 <div class="modal-body p-0 position-relative">
                     <!-- Banner Gradien -->
                     <div class="profile-banner-grad" id="studentProfileBanner">
-                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Avatar Wrapper -->
                     <div class="profile-modal-avatar-wrapper" id="profileModalAvatarArea">
                         <!-- Will be dynamically filled to support decorated frame -->
                     </div>
-                    
+
                     <!-- Content Area -->
                     <div class="p-4 pt-5">
                         <div class="mb-3">
                             <h4 class="fw-extrabold text-dark mb-0" id="profileModalName">Nama Mahasiswa</h4>
-                            <div class="text-primary small fw-bold mt-1" style="font-size: 0.8rem;" id="profileModalFacultyMajor">Fakultas - Jurusan</div>
+                            <div class="text-primary small fw-bold mt-1" style="font-size: 0.8rem;"
+                                id="profileModalFacultyMajor">Fakultas - Jurusan</div>
                             <div class="mt-1 d-flex flex-wrap gap-1 text-muted small" style="font-size: 0.75rem;">
                                 <span id="profileModalNim">NIM: 10201210045</span>
                                 <span class="mx-1 text-muted">|</span>
@@ -1661,27 +1855,33 @@
                         </div>
 
                         <!-- Badges Shelf -->
-                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-medal text-warning me-1"></i> Lemari Lencana SIM:</h6>
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i
+                                class="fa-solid fa-medal text-warning me-1"></i> Lemari Lencana SIM:</h6>
                         <div class="row row-cols-4 g-2 mb-4" id="profileModalBadgesGrid">
                             <!-- Dynamically generated 7 badges (active or grayscale) -->
                         </div>
 
                         <!-- Skill Strengths -->
-                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-chart-column text-primary me-1"></i> Penguasaan Bidang Keahlian:</h6>
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i
+                                class="fa-solid fa-chart-column text-primary me-1"></i> Penguasaan Bidang Keahlian:</h6>
                         <div class="bg-light p-3 rounded-3 border border-light-subtle mb-4" id="profileModalSkillsArea">
                             <!-- Skill bars will be rendered here -->
                         </div>
 
                         <!-- Riwayat Aktivitas & Poin -->
-                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i class="fa-solid fa-clock-rotate-left text-success me-1"></i> Riwayat Aktivitas &amp; Poin:</h6>
-                        <div class="bg-light p-3 rounded-3 border border-light-subtle" id="profileModalLogsArea" style="max-height: 180px; overflow-y: auto; font-size: 0.78rem;">
+                        <h6 class="fw-bold text-dark mb-2" style="font-size: 0.8rem;"><i
+                                class="fa-solid fa-clock-rotate-left text-success me-1"></i> Riwayat Aktivitas &amp;
+                            Poin:</h6>
+                        <div class="bg-light p-3 rounded-3 border border-light-subtle" id="profileModalLogsArea"
+                            style="max-height: 180px; overflow-y: auto; font-size: 0.78rem;">
                             <!-- Activity point logs will be loaded dynamically here -->
                             <div class="text-center py-3 text-muted">Memuat riwayat...</div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-3 bg-light">
-                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup Profil</button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup
+                        Profil</button>
                 </div>
             </div>
         </div>
@@ -1694,28 +1894,36 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content modal-content-game">
                 <div class="modal-header modal-header-game">
-                    <h5 class="modal-title fw-bold" id="shopModalLabel"><i class="fa-solid fa-store me-2"></i> Toko Hadiah & Kustomisasi</h5>
+                    <h5 class="modal-title fw-bold" id="shopModalLabel"><i class="fa-solid fa-store me-2"></i> Toko
+                        Hadiah & Kustomisasi</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
-                        <span class="text-secondary small">Belanjakan koin global untuk membeli bingkai avatar dan lencana prestisius!</span>
+                        <span class="text-secondary small">Belanjakan koin global untuk membeli bingkai avatar dan
+                            lencana prestisius!</span>
                         <div class="status-pill status-coin">
                             <i class="fa-solid fa-coins"></i>
                             <span class="current-coins-display">0 Koin</span>
                         </div>
                     </div>
-                    
+
                     <!-- Tab Navigation -->
                     <ul class="nav nav-pills mb-3 gap-2" id="shopTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active btn btn-outline-primary rounded-pill px-4" id="frames-tab" data-bs-toggle="pill" data-bs-target="#frames" type="button" role="tab" aria-controls="frames" aria-selected="true"><i class="fa-solid fa-circle-user me-1"></i> Bingkai Avatar</button>
+                            <button class="nav-link active btn btn-outline-primary rounded-pill px-4" id="frames-tab"
+                                data-bs-toggle="pill" data-bs-target="#frames" type="button" role="tab"
+                                aria-controls="frames" aria-selected="true"><i class="fa-solid fa-circle-user me-1"></i>
+                                Bingkai Avatar</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link btn btn-outline-primary rounded-pill px-4" id="badges-tab" data-bs-toggle="pill" data-bs-target="#badges" type="button" role="tab" aria-controls="badges" aria-selected="false"><i class="fa-solid fa-medal me-1"></i> Lencana Global</button>
+                            <button class="nav-link btn btn-outline-primary rounded-pill px-4" id="badges-tab"
+                                data-bs-toggle="pill" data-bs-target="#badges" type="button" role="tab"
+                                aria-controls="badges" aria-selected="false"><i class="fa-solid fa-medal me-1"></i>
+                                Lencana Global</button>
                         </li>
                     </ul>
-                    
+
                     <!-- Tab Content -->
                     <div class="tab-content" id="shopTabContent">
                         <div class="tab-pane fade show active" id="frames" role="tabpanel" aria-labelledby="frames-tab">
@@ -1731,7 +1939,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-3 bg-light">
-                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup Toko</button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Tutup
+                        Toko</button>
                 </div>
             </div>
         </div>
@@ -1747,7 +1956,8 @@
                     <i class="fa-solid fa-circle-check text-warning fs-5"></i>
                     <span id="toastMessage">Pencapaian Berhasil!</span>
                 </div>
-                <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast"
+                    aria-label="Close"></button>
             </div>
         </div>
     </div>
@@ -1796,22 +2006,22 @@
         function openQuestModalDirect(questId, title, xp, desc, classId) {
             currentActiveQuestId = questId;
             currentClassId = classId;
-            
+
             document.getElementById('modalQuestTitle').innerText = title;
             document.getElementById('modalQuestXp').innerText = "+" + xp + " XP";
             document.getElementById('modalQuestDesc').innerText = desc || "Tidak ada deskripsi detail untuk tugas ini.";
-            
+
             const btn = document.getElementById('btnStartQuest');
             if (btn) {
                 btn.innerHTML = 'Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
             }
-            
+
             questModal.show();
         }
 
         function openMaterialModalDirect(title, desc, fileName, classId) {
             currentClassId = classId;
-            
+
             document.getElementById('modalQuestTitle').innerText = title;
             document.getElementById('modalQuestXp').innerText = "MATERI PEMBELAJARAN";
             document.getElementById('modalQuestDesc').innerHTML = `
@@ -1820,12 +2030,12 @@
                     <i class="fa-solid fa-file-pdf text-danger me-1"></i> <strong>Berkas:</strong> ${fileName}
                 </div>
             `;
-            
+
             const btn = document.getElementById('btnStartQuest');
             if (btn) {
                 btn.innerHTML = 'Lihat Materi Lengkap <i class="fa-solid fa-chevron-right ms-1"></i>';
             }
-            
+
             questModal.show();
         }
 
@@ -1932,17 +2142,17 @@
         async function loadAndRenderCourses() {
             const coursesGrid = document.getElementById('coursesGrid');
             if (!coursesGrid) return;
-            
+
             try {
                 const res = await fetch('/api/my-classes');
                 const classes = await res.json();
-                
+
                 coursesGrid.innerHTML = '';
                 renderNavCourses(classes);
-                
+
                 // Fetch and render the 2 latest tasks/materials feed
                 renderRecentTasksAndMaterials(classes);
-                
+
                 if (!classes || classes.length === 0) {
                     coursesGrid.innerHTML = `
                         <div class="col-12 text-center py-5">
@@ -1952,12 +2162,12 @@
                     `;
                     return;
                 }
-                
+
                 for (const cls of classes) {
                     const col = document.createElement('div');
                     col.className = 'col course-card-wrapper';
                     col.setAttribute('data-name', cls.name);
-                    
+
                     // Ambil quests dari database sesuai kelas
                     let quests = [];
                     try {
@@ -1971,7 +2181,7 @@
                     } catch (e) {
                         quests = classQuests[cls.id] || defaultQuestForClass(cls.id);
                     }
-                    
+
                     let questsHtml = '';
                     // Limit quests displayed inside each class card to 2 items
                     quests.slice(0, 2).forEach(q => {
@@ -2040,7 +2250,7 @@
                             `;
                         }
                     });
-                    
+
                     col.innerHTML = `
                         <section class="card custom-card h-100">
                             <div class="card-header-game">
@@ -2088,17 +2298,17 @@
                 console.error('Gagal mengambil data kelas dari server', err);
             }
         }
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             // Inisialisasi Modal dan Toast
             questModal = new bootstrap.Modal(document.getElementById('questModal'));
             gameToast = new bootstrap.Toast(document.getElementById('gameToast'), { delay: 3500 });
             participantsModal = new bootstrap.Modal(document.getElementById('participantsModal'));
             studentProfileModal = new bootstrap.Modal(document.getElementById('studentProfileModal'));
-            
+
             // Muat kelas secara dinamis dari database
             loadAndRenderCourses();
-            
+
             // Event Listener Salin Kode Kelas Dinamis
             const copyButtons = document.querySelectorAll('.btn-copy-code-dynamic');
             copyButtons.forEach(btn => {
@@ -2107,7 +2317,7 @@
                     copyClassCode(btn, code);
                 });
             });
-            
+
             // Event Listener Mulai Misi di Modal
             const btnStartQuest = document.getElementById('btnStartQuest');
             if (btnStartQuest) {
@@ -2164,7 +2374,7 @@
                 searchInput.addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase().trim();
                     const courseCards = document.querySelectorAll('.course-card-wrapper');
-                    
+
                     courseCards.forEach(card => {
                         const title = card.getAttribute('data-name').toLowerCase();
                         if (title.includes(query)) {
@@ -2183,13 +2393,13 @@
                 btnSortName.addEventListener('click', () => {
                     btnFilterAll.classList.remove('active');
                     btnSortName.classList.add('active');
-                    
+
                     // Sort children
                     const wrappers = Array.from(coursesGrid.querySelectorAll('.course-card-wrapper'));
                     wrappers.sort((a, b) => {
                         return a.getAttribute('data-name').localeCompare(b.getAttribute('data-name'));
                     });
-                    
+
                     // Re-append
                     wrappers.forEach(w => coursesGrid.appendChild(w));
                     showToast("Kelas diurutkan secara Alfabetis");
@@ -2200,7 +2410,7 @@
                 btnFilterAll.addEventListener('click', () => {
                     btnSortName.classList.remove('active');
                     btnFilterAll.classList.add('active');
-                    
+
                     // Revert to original database ID ordering
                     const wrappers = Array.from(coursesGrid.querySelectorAll('.course-card-wrapper'));
                     // We can just keep the original order based on data-name list index or re-append in original hardcoded order
@@ -2208,7 +2418,7 @@
                     location.reload(); // Simple reload to reset state or we can store original order in an array
                 });
             }
-            
+
             // My Courses sidebar filter
             const sublinks = document.querySelectorAll('.nav-tree-sublink');
             sublinks.forEach(link => {
@@ -2216,7 +2426,7 @@
                     e.preventDefault();
                     const titleFilter = link.getAttribute('title').toLowerCase();
                     const courseCards = document.querySelectorAll('.course-card-wrapper');
-                    
+
                     courseCards.forEach(card => {
                         const title = card.getAttribute('data-name').toLowerCase();
                         if (title.includes(titleFilter)) {
@@ -2238,12 +2448,12 @@
         function copyClassCode(element, code) {
             navigator.clipboard.writeText(code).then(() => {
                 showToast(`Kode Kelas '${code}' berhasil disalin ke papan klip!`);
-                
+
                 const originalHtml = element.innerHTML;
                 element.innerHTML = `<span>Kode:</span><strong class="text-success">${code}</strong><i class="fa-solid fa-check text-success"></i>`;
                 element.style.borderColor = "#2ecc71";
                 element.style.backgroundColor = "rgba(46, 204, 113, 0.15)";
-                
+
                 setTimeout(() => {
                     element.innerHTML = originalHtml;
                     element.style.borderColor = "";
@@ -2262,12 +2472,12 @@
             document.getElementById('modalQuestTitle').innerText = title;
             document.getElementById('modalQuestXp').innerText = "+" + xp;
             document.getElementById('modalQuestDesc').innerText = desc;
-            
+
             const btn = document.getElementById('btnStartQuest');
             if (btn) {
                 btn.innerHTML = 'Mulai Pengerjaan Sekarang <i class="fa-solid fa-chevron-right ms-1"></i>';
             }
-            
+
             questModal.show();
         }
 
@@ -2285,17 +2495,17 @@
         function addCoins(amount) {
             coins += amount;
             if (coins > 1000) coins = 1000;
-            
+
             // Update koin di navbar
             document.querySelectorAll('.current-coins-display').forEach(el => {
                 el.innerText = coins + " Koin";
             });
-            
+
             // Update koin di hero section
             document.querySelectorAll('.global-coins-display').forEach(el => {
                 el.innerText = coins;
             });
-            
+
             // Update bar koin
             const progressPercent = (coins / 1000) * 100;
             const progressBar = document.getElementById('globalCoinProgress');
@@ -2303,7 +2513,7 @@
                 progressBar.style.width = progressPercent + '%';
                 progressBar.setAttribute('aria-valuenow', coins);
             }
-            
+
             // Update teks sisa koin
             const needed = 1000 - coins;
             const neededText = document.getElementById('coinsNeededText');
@@ -2381,14 +2591,14 @@
             const countText = document.getElementById('participantsCountText');
             const subtitle = document.getElementById('participantsSubtitle');
             const titleLabel = document.getElementById('participantsModalLabel');
-            
+
             if (!tableBody) return;
-            
+
             if (titleLabel) titleLabel.innerHTML = `<i class="fa-solid fa-users me-2 text-primary"></i> Anggota Kelas: ${className}`;
-            
+
             tableBody.innerHTML = '<tr><td colspan="5" class="text-center p-4"><i class="fa-solid fa-spinner fa-spin text-primary fs-5"></i> Memuat data...</td></tr>';
             participantsModal.show();
-            
+
             try {
                 const query = classId
                     ? `classId=${encodeURIComponent(classId)}`
@@ -2409,17 +2619,17 @@
                 console.error('Gagal mengambil data dari server, fallback...', err);
                 activeClassParticipantsList = getParticipantsForClassFallback(className);
             }
-            
+
             if (countText) countText.innerText = `${activeClassParticipantsList.length} Mahasiswa`;
             if (subtitle) subtitle.innerText = `Daftar mahasiswa yang terdaftar di kelas ${className}. Klik nama mahasiswa untuk melihat profil gamifikasi lengkap mereka.`;
-            
+
             tableBody.innerHTML = '';
-            
+
             if (activeClassParticipantsList.length === 0) {
                 tableBody.innerHTML = '<tr><td colspan="5" class="text-center text-muted p-4">Belum ada mahasiswa terdaftar di kelas ini. Gunakan panel admin untuk menambahkan pendaftaran.</td></tr>';
                 return;
             }
-            
+
             activeClassParticipantsList.forEach(student => {
                 let badgesHtml = '';
                 const milestones = [
@@ -2438,12 +2648,12 @@
                     }
                 });
                 if (badgesHtml === '') badgesHtml = '<span class="text-muted small" style="font-size:0.7rem;">Belum ada lencana</span>';
-                
+
                 let rankClass = 'rank-other';
                 if (student.rank === 1) rankClass = 'rank-gold';
                 else if (student.rank === 2) rankClass = 'rank-silver';
                 else if (student.rank === 3) rankClass = 'rank-bronze';
-                
+
                 let avatarMarkup = '';
                 if (student.frame) {
                     let decoIcons = '';
@@ -2478,7 +2688,7 @@
                         </div>
                     `;
                 }
-                
+
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>
@@ -2639,7 +2849,7 @@
                 if (currentUser) {
                     const myIndex = leaderboard.findIndex(s => s.nim === currentUser.nim);
                     const myRank = myIndex + 1;
-                    
+
                     const heroGlobalXpDisplay = document.getElementById('heroGlobalXpDisplay');
                     if (heroGlobalXpDisplay) {
                         heroGlobalXpDisplay.textContent = (currentUser.totalXp || 0) + ' XP';
@@ -2681,7 +2891,7 @@
                 document.getElementById('profileModalFacultyMajor').innerText = `${profile.faculty || 'Fakultas Sains dan Ilmu Komputer'} - ${profile.major || 'Ilmu Komputer'}`;
                 document.getElementById('profileModalNim').innerText = `NIM: ${profile.nim}`;
                 document.getElementById('profileModalEmail').innerText = `${profile.nim}@student.universitaspertamina.ac.id`;
-                
+
                 // Hitung total XP
                 const totalXp = profile.classes.reduce((sum, c) => sum + c.localXp, 0);
                 document.getElementById('profileModalXp').innerText = `${totalXp} XP`;
@@ -2834,7 +3044,7 @@
                     try {
                         const logsRes = await fetch(`/api/student/${profile.nim}/point-logs`);
                         const logs = await logsRes.json();
-                        
+
                         if (!logs || !Array.isArray(logs) || logs.length === 0) {
                             logsArea.innerHTML = '<div class="text-center py-3 text-muted">Belum ada riwayat aktivitas koin/XP.</div>';
                         } else {
@@ -2842,15 +3052,15 @@
                             logs.forEach(log => {
                                 const xpVal = log.xpChange || log.xp_change || 0;
                                 const coinVal = log.coinChange || log.coin_change || 0;
-                                
+
                                 let xpText = '';
                                 if (xpVal > 0) xpText = `<span class="badge bg-success-subtle text-success me-1" style="font-size:0.65rem;">+${xpVal} XP</span>`;
                                 else if (xpVal < 0) xpText = `<span class="badge bg-danger-subtle text-danger me-1" style="font-size:0.65rem;">${xpVal} XP</span>`;
-                                
+
                                 let coinText = '';
                                 if (coinVal > 0) coinText = `<span class="badge bg-warning-subtle text-warning-emphasis me-1" style="font-size:0.65rem; color:#856404; background-color:#fff3cd;">+${coinVal} Koin</span>`;
                                 else if (coinVal < 0) coinText = `<span class="badge bg-danger-subtle text-danger me-1" style="font-size:0.65rem;">${coinVal} Koin</span>`;
-                                
+
                                 const dateStr = log.createdAt || log.created_at || '';
                                 const formattedDate = dateStr ? new Date(dateStr).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
 
@@ -3012,7 +3222,7 @@
                 }
 
                 showToast('Pembelian berhasil! Item ditambahkan ke inventaris Anda.');
-                
+
                 // Refresh coins globally and local UI state
                 await hydrateUserData();
                 loadShopItems();
@@ -3036,7 +3246,7 @@
                 }
 
                 showToast('Bingkai avatar berhasil dipasang!');
-                
+
                 await hydrateUserData();
                 loadShopItems();
                 loadGlobalLeaderboard();
@@ -3061,7 +3271,7 @@
                     // Update navbar
                     const firstName = user.name ? user.name.split(' ')[0] : 'Pengguna';
                     document.getElementById('navbarUserName').textContent = user.name || '';
-                    
+
                     // Render avatar with active frame in navbar
                     const navAvatarBtn = document.getElementById('profileAvatarBtn');
                     if (navAvatarBtn) {
@@ -3104,7 +3314,7 @@
                     }
 
                     // Update hero
-                    document.getElementById('heroWelcome').textContent = `Selamat Datang Kembali, ${firstName}!`;
+                    document.getElementById('heroWelcome').innerHTML = `<strong>Selamat Datang Kembali, ${firstName}!</strong>`;
                     document.getElementById('heroNim').textContent = user.nim || '&mdash;';
 
                     // Populate popup
@@ -3112,7 +3322,7 @@
                     document.getElementById('popupName').textContent = user.name || '&mdash;';
                     document.getElementById('popupRole').textContent = user.role || '&mdash;';
                     document.getElementById('popupNim').textContent = user.nim || '&mdash;';
-                    
+
                     // Hide Level row from top-right user profile popup dynamically (V2 gamification requirement)
                     const popupLevelEl = document.getElementById('popupLevel');
                     if (popupLevelEl) {
@@ -3142,7 +3352,7 @@
                     document.querySelectorAll('.global-coins-display').forEach(el => {
                         el.textContent = userCoins;
                     });
-                    
+
                     const progressPercent = Math.min((userCoins / 1000) * 100, 100);
                     const progressBar = document.getElementById('globalCoinProgress');
                     if (progressBar) {
@@ -3165,7 +3375,7 @@
                     document.getElementById('navbarUserName').textContent = 'Tamu';
                     document.getElementById('heroNim').textContent = '-';
                 }
-            } catch(e) {
+            } catch (e) {
                 console.warn('[Dashboard] Gagal memuat data user:', e);
             }
         }
@@ -3175,17 +3385,17 @@
     <!-- SESSION USER DATA HYDRATION                 -->
     <!-- ========================================== -->
     <script>
-        (async function() {
+        (async function () {
             await hydrateUserData();
             await loadNotifications();
         })();
 
         // Profile popup toggle
         const profileAvatarBtn = document.getElementById('profileAvatarBtn');
-        const profilePopup     = document.getElementById('profilePopup');
-        
+        const profilePopup = document.getElementById('profilePopup');
+
         // Use event delegation for profileAvatarBtn since it is dynamically recreated inside hydrateUserData
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const btn = e.target.closest('#profileAvatarBtn');
             if (btn) {
                 e.preventDefault();
@@ -3200,7 +3410,7 @@
         });
 
         // Click event listener for "Lihat Profil Lengkap" button in popup
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const viewProfileBtn = e.target.closest('#btnViewMyProfile');
             if (viewProfileBtn) {
                 e.preventDefault();
@@ -3215,7 +3425,7 @@
         });
 
         // Notification popup toggle
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const btn = e.target.closest('#notificationBtn');
             const notifPopup = document.getElementById('notificationPopup');
             if (btn) {
@@ -3381,4 +3591,5 @@
         }
     </script>
 </body>
+
 </html>
