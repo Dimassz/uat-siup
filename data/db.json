@@ -25,7 +25,8 @@
         "security": 0,
         "vocal": 100
       },
-      "password": "$2b$10$jYzlMboC.Ec63w4wrX8VCudA8f4RRVTT1CnZGmLipxHHxjDaRZxFK"
+      "password": "$2b$10$jYzlMboC.Ec63w4wrX8VCudA8f4RRVTT1CnZGmLipxHHxjDaRZxFK",
+      "username": "r.wijaya"
     },
     {
       "name": "Aurelia Putri",
@@ -51,7 +52,8 @@
         "security": 0,
         "vocal": 90
       },
-      "password": "$2b$10$gWVuenXS8o5ObeOZanKBWerDzAXSzljpmHt1/ank2zmKWRF86J5Ey"
+      "password": "$2b$10$gWVuenXS8o5ObeOZanKBWerDzAXSzljpmHt1/ank2zmKWRF86J5Ey",
+      "username": "a.putri"
     },
     {
       "name": "Bobby Kertanegara",
@@ -77,7 +79,8 @@
         "security": 0,
         "vocal": 90
       },
-      "password": "$2b$10$Pc9H449MkL3sVdF.n15APukKOMVfxpGMWQDT56MKxyMQBBgFNnE6q"
+      "password": "$2b$10$Pc9H449MkL3sVdF.n15APukKOMVfxpGMWQDT56MKxyMQBBgFNnE6q",
+      "username": "b.kertanegara"
     },
     {
       "name": "Clarissa Amanda",
@@ -102,7 +105,8 @@
         "security": 0,
         "vocal": 95
       },
-      "password": "$2b$10$GrnOwiU0p.VRULQ3mtA3OuZOqvFSm.L50v/66n9jya11Az3xqJglq"
+      "password": "$2b$10$GrnOwiU0p.VRULQ3mtA3OuZOqvFSm.L50v/66n9jya11Az3xqJglq",
+      "username": "c.amanda"
     },
     {
       "name": "Farhan Ramadhan",
@@ -126,7 +130,8 @@
         "security": 0,
         "vocal": 0
       },
-      "password": "$2b$10$x/zPRjD1LXawiQtP9Q9iPeAbD.89u8hjf8QwA4BwRsUOpELUuU7U."
+      "password": "$2b$10$x/zPRjD1LXawiQtP9Q9iPeAbD.89u8hjf8QwA4BwRsUOpELUuU7U.",
+      "username": "f.ramadhan"
     },
     {
       "name": "Kevin Sanjaya",
@@ -150,7 +155,8 @@
         "security": 0,
         "vocal": 95
       },
-      "password": "$2b$10$H2xBBwkY14Lqhd7ZYL/lbegdyu25.8azMIY3TbjqGUXt6yE.uP.Sm"
+      "password": "$2b$10$H2xBBwkY14Lqhd7ZYL/lbegdyu25.8azMIY3TbjqGUXt6yE.uP.Sm",
+      "username": "k.sanjaya"
     },
     {
       "name": "Dimas Dwi Budi Sulistio",
@@ -159,7 +165,7 @@
       "xp": 650,
       "level": "Level 4",
       "status": "SIM Apprentice",
-      "role": "Mahasiswa (Anda)",
+      "role": "Mahasiswa",
       "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80",
       "frame": "avatar-frame-purple-glow-decorated",
       "badges": [
@@ -175,7 +181,8 @@
         "security": 0,
         "vocal": 90
       },
-      "password": "$2b$10$UbLiQ458QUJM0sg6SrXb9O53rnbLhUfdb4o5EEAjW76YIxKJvawMi"
+      "password": "$2b$10$UbLiQ458QUJM0sg6SrXb9O53rnbLhUfdb4o5EEAjW76YIxKJvawMi",
+      "username": "d.sulistio"
     },
     {
       "name": "Siti Rahma",
@@ -198,42 +205,48 @@
         "security": 0,
         "vocal": 0
       },
-      "password": "$2b$10$heXsI5OfhW7c/IO3gIOo4uUccslcZNNMkn.ajo9Nle.eiGZyCNHyG"
+      "password": "$2b$10$heXsI5OfhW7c/IO3gIOo4uUccslcZNNMkn.ajo9Nle.eiGZyCNHyG",
+      "username": "s.rahma"
     },
     {
       "name": "Prof. Hermawan Kartajaya",
       "email": "hermawan@universitaspertamina.ac.id",
       "role": "Dosen",
       "password": "$2b$10$GtjBq6vGaAgkzscwKv/uvef93sITUmiZhfywZFy9i923o/p8vYU36",
-      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=60&q=80"
+      "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=60&q=80",
+      "username": "h.kartajaya"
     },
     {
       "name": "Sarah Wijaya, M.Si.",
       "email": "sarah.wijaya@universitaspertamina.ac.id",
       "role": "Dosen",
       "password": "$2b$10$qQZxel3SNrrU5V/oFuR5zOdFdmb0LNi4SY.zo.bpUEXGO3pwpVL7K",
-      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80"
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80",
+      "username": "s.wijaya"
     },
     {
       "name": "Jafar Shadiq, M.Cs.",
       "email": "jafar.shadiq@universitaspertamina.ac.id",
       "role": "Dosen",
       "password": "$2b$10$cfhcfSY3bT9zsOycGLym6ua4vPk3EnXxcalttqu9ihCYZDw65VUIW",
-      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=60&q=80"
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=60&q=80",
+      "username": "j.shadiq"
     },
     {
       "name": "Dr. Irwan Prasetyo, M.E.",
       "email": "irwan.prasetyo@universitaspertamina.ac.id",
       "role": "Dosen",
       "password": "$2b$10$GV8RRJ3WitC3QeOTH5i44.2CSRTgYTw3Z6tHZWObEFf6CP3nE3MFi",
-      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80"
+      "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80",
+      "username": "i.prasetyo"
     },
     {
       "name": "Alice Smith, M.Hum.",
       "email": "alice.smith@universitaspertamina.ac.id",
       "role": "Dosen",
       "password": "$2b$10$w9d1f6xVNx8eJcjGgusQ.u/PuDg9Rq9KShlVRAP1Mz9QYNa/4gK9q",
-      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=60&q=80"
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=60&q=80",
+      "username": "a.smith"
     },
     {
       "name": "Dedy Dewanti",
@@ -254,7 +267,8 @@
         "api": 0,
         "security": 0,
         "vocal": 0
-      }
+      },
+      "username": "d.dewanti"
     }
   ],
   "classes": [
@@ -400,6 +414,400 @@
       "action": "Buat Akun (Mahasiswa)",
       "detail": "User Dedy Dewanti dibuat. Password di-hash menggunakan bcryptjs. Hash: $2b$10$U8gSsHL8...",
       "timestamp": "2026-06-06T15:40:29.198Z"
+    }
+  ],
+  "materials": [
+    {
+      "id": 1,
+      "classId": "SIM-MN8-2025",
+      "title": "Pengantar Sistem Informasi Manajemen",
+      "fileName": "Modul_1_Intro_to_MIS.pdf",
+      "fileType": "pdf",
+      "fileSize": "1.8 MB",
+      "downloadUrl": "#",
+      "description": "Materi ini membahas dasar-dasar Sistem Informasi Manajemen, sejarah perkembangannya, serta bagaimana SIM dapat membantu efisiensi bisnis perusahaan modern.",
+      "additionalFiles": [
+        {
+          "name": "Slide_Intro_SIM_Tambahan.pptx",
+          "type": "pptx",
+          "size": "2.1 MB"
+        },
+        {
+          "name": "Jurnal_Referensi_SIM_Global.pdf",
+          "type": "pdf",
+          "size": "1.4 MB"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "classId": "SIM-MN8-2025",
+      "title": "Desain Basis Data Relasional & Normalisasi",
+      "fileName": "Modul_2_Database_Design.pdf",
+      "fileType": "pdf",
+      "fileSize": "2.5 MB",
+      "downloadUrl": "#",
+      "description": "Pembahasan mendalam tentang Entity Relationship Diagram (ERD), aturan-aturan normalisasi database dari 1NF sampai 3NF, serta perancangan skema relasional yang optimal.",
+      "additionalFiles": [
+        {
+          "name": "Contoh_Studi_Kasus_Normalisasi.docx",
+          "type": "doc",
+          "size": "512 KB"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "classId": "SIM-MN8-2025",
+      "title": "Arsitektur Enterprise & E-Business",
+      "fileName": "Modul_3_Enterprise_Architecture.pptx",
+      "fileType": "pptx",
+      "fileSize": "4.2 MB",
+      "downloadUrl": "#",
+      "description": "Materi ini menerangkan framework Enterprise Architecture (seperti TOGAF), integrasi aplikasi bisnis (ERP, CRM), dan transformasi bisnis menuju model E-Commerce digital.",
+      "additionalFiles": [
+        {
+          "name": "Template_Analisis_Enterprise.docx",
+          "type": "doc",
+          "size": "320 KB"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "classId": "LPK-MN8-2025",
+      "title": "Struktur Pasar Keuangan & Otoritas Jasa Keuangan",
+      "fileName": "Materi_1_Financial_Markets.pdf",
+      "fileType": "pdf",
+      "fileSize": "2.1 MB",
+      "downloadUrl": "#",
+      "description": "Materi pengantar pasar modal, fungsi OJK, pasar uang, dan bagaimana pasar keuangan memfasilitasi kebutuhan modal korporasi.",
+      "additionalFiles": [
+        {
+          "name": "Undang_Undang_OJK_No21.pdf",
+          "type": "pdf",
+          "size": "1.9 MB"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "classId": "PAJAK-MN8A-2025",
+      "title": "Konsep Pajak Penghasilan (PPh) Pasal 21",
+      "fileName": "Panduan_PPh21_Perpajakan.pdf",
+      "fileType": "pdf",
+      "fileSize": "1.6 MB",
+      "downloadUrl": "#",
+      "description": "Panduan tata cara pemotongan Pajak Penghasilan Pasal 21 atas penghasilan berupa gaji, upah, honorarium, tunjangan, dan pembayaran lainnya.",
+      "additionalFiles": [
+        {
+          "name": "Kalkulator_PPh21_Excel.xlsx",
+          "type": "code",
+          "size": "150 KB"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "classId": "FINTECH-MN8-2025",
+      "title": "Evolusi FinTech & Sistem Pembayaran Digital",
+      "fileName": "FinTech_Evolution_Overview.pdf",
+      "fileType": "pdf",
+      "fileSize": "3.1 MB",
+      "downloadUrl": "#",
+      "description": "Evolusi industri teknologi finansial (FinTech), model peer-to-peer lending, crowdfunding, e-wallets, dan tren regulasi sistem pembayaran di Indonesia.",
+      "additionalFiles": [
+        {
+          "name": "Laporan_Fintech_OJK_2025.pdf",
+          "type": "pdf",
+          "size": "4.7 MB"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "classId": "ENG-II-2025",
+      "title": "Professional English Speaking & Writing Guide",
+      "fileName": "English_II_Speaking_Guide.pdf",
+      "fileType": "pdf",
+      "fileSize": "1.2 MB",
+      "downloadUrl": "#",
+      "description": "Guidebook and exercises for enhancing speaking, presentation skills, and formal business writing inside a corporate environment.",
+      "additionalFiles": [
+        {
+          "name": "Vocabulary_Business_English.pdf",
+          "type": "pdf",
+          "size": "890 KB"
+        }
+      ]
+    }
+  ],
+  "studentMaterials": [],
+  "quests": [
+    {
+      "id": 1,
+      "classId": "SIM-MN8-2025",
+      "title": "1. Konsep Dasar & Peran Sistem Informasi dalam Bisnis",
+      "description": "Pelajari konsep dasar sistem informasi dalam konteks bisnis modern. Buat esai analisis mengenai peranan teknologi informasi dalam meningkatkan keunggulan kompetitif perusahaan.",
+      "xpReward": 100,
+      "coinReward": 20,
+      "deadline": "Tenggat Terlewati (25 Mei 2026)",
+      "lecturerFiles": [
+        {
+          "name": "Silabus_Mata_Kuliah_SIM.pdf",
+          "type": "pdf",
+          "size": "850 KB"
+        },
+        {
+          "name": "Slide_Kuliah_Pertemuan_1_Konsep_Dasar.pptx",
+          "type": "pptx",
+          "size": "4.2 MB"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "classId": "SIM-MN8-2025",
+      "title": "2. Desain Database & Data Warehouse Bisnis",
+      "description": "Desain sebuah database relational untuk sistem penjualan ritel (Point of Sales). Gambarkan Entity Relationship Diagram (ERD), skema tabel, dan lakukan normalisasi database hingga bentuk normal ketiga (3NF).",
+      "xpReward": 150,
+      "coinReward": 30,
+      "deadline": "Tenggat Terlewati (4 Juni 2026)",
+      "lecturerFiles": [
+        {
+          "name": "Modul_Praktikum_Desain_Database.pdf",
+          "type": "pdf",
+          "size": "1.8 MB"
+        },
+        {
+          "name": "Slide_Pertemuan_2_Normalisasi.pptx",
+          "type": "pptx",
+          "size": "3.6 MB"
+        },
+        {
+          "name": "POS_Sample_Data_Script.sql",
+          "type": "code",
+          "size": "45 KB"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "classId": "SIM-MN8-2025",
+      "title": "3. Flexbox & Layouting Responsif Bootstrap 5",
+      "description": "Buatlah desain landing page yang responsif dengan memanfaatkan Bootstrap Grid, Flexbox utilities, dan media query kustom. Pastikan layout dapat beradaptasi dengan baik di layar mobile, tablet, dan desktop.",
+      "xpReward": 250,
+      "coinReward": 50,
+      "deadline": "Tenggat: 9 Juni 2026 (3 Hari lagi)",
+      "lecturerFiles": [
+        {
+          "name": "Panduan_Layouting_Bootstrap5.pdf",
+          "type": "pdf",
+          "size": "2.4 MB"
+        },
+        {
+          "name": "Slide_Pertemuan_3_Flexbox_Grid.pptx",
+          "type": "pptx",
+          "size": "5.1 MB"
+        },
+        {
+          "name": "Asset_Landing_Page_Kopi.zip",
+          "type": "zip",
+          "size": "12.8 MB"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "classId": "SIM-MN8-2025",
+      "title": "4. Integrasi API & Pertukaran Data Sistem Informasi",
+      "description": "Integrasikan aplikasi mock-up Anda dengan RESTful API publik. Ambil data JSON, olah, dan tampilkan dalam bentuk tabel dinamis menggunakan Fetch API JavaScript secara asinkron.",
+      "xpReward": 300,
+      "coinReward": 60,
+      "deadline": "Prasyarat: Selesaikan Modul 3",
+      "lecturerFiles": [
+        {
+          "name": "REST_API_Integration_Guide.pdf",
+          "type": "pdf",
+          "size": "1.5 MB"
+        },
+        {
+          "name": "Slide_Fetch_JSON_Parsing.pptx",
+          "type": "pptx",
+          "size": "3.9 MB"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "classId": "SIM-MN8-2025",
+      "title": "5. Keamanan Informasi & Audit Sistem Bisnis",
+      "description": "Lakukan analisis risiko keamanan informasi pada sistem e-commerce. Identifikasi kerentanan (OWASP Top 10) dan rancang rekomendasi mitigasi risiko beserta kontrol auditnya.",
+      "xpReward": 350,
+      "coinReward": 70,
+      "deadline": "Prasyarat: Selesaikan Modul 4",
+      "lecturerFiles": [
+        {
+          "name": "Audit_Keamanan_Modul5.pdf",
+          "type": "pdf",
+          "size": "3.1 MB"
+        },
+        {
+          "name": "Slide_OWASP_Threats_Mitigation.pptx",
+          "type": "pptx",
+          "size": "4.8 MB"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "classId": "LPK-MN8-2025",
+      "title": "1. Struktur Lembaga Keuangan Bank & Non-Bank",
+      "description": "Pelajari modul struktur lembaga keuangan, buat rangkuman singkat dalam format PDF mengenai perbedaan mendasar Bank Sentral, Bank Umum, dan Lembaga Keuangan Mikro.",
+      "xpReward": 150,
+      "coinReward": 30,
+      "deadline": "Tenggat: 12 Juni 2026 (2 Hari lagi)",
+      "lecturerFiles": [
+        {
+          "name": "Modul_LPK_Struktur_Lembaga.pdf",
+          "type": "pdf",
+          "size": "1.4 MB"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "classId": "LPK-MN8-2025",
+      "title": "2. Analisis Pasar Modal & Instrumen Keuangan",
+      "description": "Analisis pergerakan indeks pasar modal Indonesia dan buat laporan komparatif instrumen saham, obligasi, dan reksa dana.",
+      "xpReward": 200,
+      "coinReward": 40,
+      "deadline": "Prasyarat: Selesaikan Modul 1",
+      "lecturerFiles": [
+        {
+          "name": "Panduan_Analisis_Pasar_Modal.pdf",
+          "type": "pdf",
+          "size": "2.0 MB"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "classId": "PAJAK-MN8A-2025",
+      "title": "1. Ketentuan Umum & Tata Cara Perpajakan",
+      "description": "Pelajari dasar-dasar sistem perpajakan Indonesia dan buat ringkasan konsep domisili, subjek pajak, serta objek pajak.",
+      "xpReward": 100,
+      "coinReward": 20,
+      "deadline": "Tenggat Terlewati (3 Juni 2026)",
+      "lecturerFiles": [
+        {
+          "name": "Panduan_Peraturan_Perppajakan.pdf",
+          "type": "pdf",
+          "size": "1.2 MB"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "classId": "PAJAK-MN8A-2025",
+      "title": "2. Simulasi Perhitungan PPh Pasal 21",
+      "description": "Hitunglah PPh Pasal 21 dari 3 skenario karyawan dengan status PTKP yang berbeda menggunakan formulir resmi terbaru.",
+      "xpReward": 250,
+      "coinReward": 50,
+      "deadline": "Tenggat: 11 Juni 2026 (4 Hari lagi)",
+      "lecturerFiles": [
+        {
+          "name": "Kalkulator_PPh21_Excel.xlsx",
+          "type": "code",
+          "size": "150 KB"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "classId": "FINTECH-MN8-2025",
+      "title": "1. Evolusi FinTech & Sistem Pembayaran Digital",
+      "description": "Analisis evolusi e-wallet dan payment gateway di Indonesia beserta regulasi BI/OJK yang berlaku.",
+      "xpReward": 200,
+      "coinReward": 40,
+      "deadline": "Tenggat: 13 Juni 2026 (5 Hari lagi)",
+      "lecturerFiles": [
+        {
+          "name": "FinTech_Evolution_Overview.pdf",
+          "type": "pdf",
+          "size": "3.1 MB"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "classId": "FINTECH-MN8-2025",
+      "title": "2. Model Bisnis Peer-to-Peer (P2P) Lending",
+      "description": "Analisis regulasi OJK terkait batas atas pendanaan P2P Lending dan buat laporan komparatif mitigasi risiko gagal bayar.",
+      "xpReward": 300,
+      "coinReward": 60,
+      "deadline": "Prasyarat: Selesaikan Modul 1",
+      "lecturerFiles": [
+        {
+          "name": "Laporan_Fintech_OJK_2025.pdf",
+          "type": "pdf",
+          "size": "4.7 MB"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "classId": "ENG-II-2025",
+      "title": "1. Professional Elevator Pitch Video",
+      "description": "Rekam video berdurasi 60 detik yang mempresentasikan ide bisnis inovatif Anda dalam Bahasa Inggris formal.",
+      "xpReward": 150,
+      "coinReward": 30,
+      "deadline": "Tenggat: 14 Juni 2026 (6 Hari lagi)",
+      "lecturerFiles": [
+        {
+          "name": "English_II_Speaking_Guide.pdf",
+          "type": "pdf",
+          "size": "1.2 MB"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "classId": "ENG-II-2025",
+      "title": "2. Business Email & Report Writing",
+      "description": "Tulis email bisnis formal dan laporan singkat dalam Bahasa Inggris terkait studi kasus perusahaan multinasional.",
+      "xpReward": 200,
+      "coinReward": 40,
+      "deadline": "Prasyarat: Selesaikan Modul 1",
+      "lecturerFiles": [
+        {
+          "name": "Vocabulary_Business_English.pdf",
+          "type": "pdf",
+          "size": "890 KB"
+        }
+      ]
+    }
+  ],
+  "submissions": [
+    {
+      "id": 1,
+      "studentNim": "10201210007",
+      "questId": 1,
+      "submittedFile": "Tugas_1_Konsep_SIM_Dimas.pdf",
+      "submittedDate": "25 Mei 2026, 09:15 WIB",
+      "grade": "92 / 100",
+      "feedback": "Pemahaman konsep sudah sangat baik. Esai ditulis secara analitis dan mencakup studi kasus relevan.",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "studentNim": "10201210007",
+      "questId": 2,
+      "submittedFile": "Dimas_Dwi_ERD_Normalisasi_3NF.zip",
+      "submittedDate": "4 Juni 2026, 14:30 WIB",
+      "grade": "95 / 100",
+      "feedback": "ERD sangat komprehensif, normalisasi 3NF dilakukan dengan tepat. Penggunaan foreign key dan referential integrity didefinisikan dengan baik. Kerja bagus!",
+      "status": "completed"
     }
   ]
 }

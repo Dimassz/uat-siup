@@ -82,16 +82,33 @@ router.get('/api/me', async (req, res) => {
         const identifier = req.session.user.nim || req.session.user.username || req.session.user.name;
         const user = await db.getUserByNim(identifier);
         if (!user) return res.json({ loggedIn: false });
+
+        let totalXp = 0;
+        if (user.role === 'Mahasiswa') {
+            try {
+                const profile = await db.getStudentProfile(user.NIM);
+                if (profile && profile.classes) {
+                    totalXp = profile.classes.reduce((sum, c) => sum + (c.localXp || 0), 0);
+                }
+            } catch (e) {
+                console.error('Error fetching global XP for /api/me:', e);
+            }
+        }
+
         res.json({
             loggedIn: true,
             nim: user.NIM,
             name: user.name,
             role: user.role,
             avatar: user.avatar,
-            xp: user.xp || 0,
-            coins: user.coins || 0,
-            level: user.level || 'Level 1',
-            status: user.status || 'Apprentice'
+            global_coins: user.global_coins || 0,
+            owned_frames: user.owned_frames || [],
+            owned_badges: user.owned_badges || [],
+            active_frame: user.active_frame || '',
+            username: user.username,
+            faculty: user.faculty || '',
+            major: user.major || '',
+            global_xp: totalXp
         });
     } catch (err) {
         res.json({ loggedIn: false });
@@ -176,7 +193,7 @@ router.get('/api/users', async (req, res) => {
 // 3. Create a new user (Mahasiswa / Dosen)
 router.post('/api/users', async (req, res) => {
     try {
-        const { name, role, password, nim, email, avatar, frame } = req.body;
+        const { name, role, password, nim, email, avatar, frame, faculty, major } = req.body;
         
         if (!name || !role || !password) {
             return res.status(400).json({ error: 'Nama, Peran, dan Password harus diisi!' });
@@ -210,7 +227,9 @@ router.post('/api/users', async (req, res) => {
             avatar: avatar || defaultAvatar,
             frame: role === 'Mahasiswa' ? (frame || '') : undefined,
             NIM: role === 'Mahasiswa' ? nim : undefined,
-            email: role === 'Dosen' ? email : undefined
+            email: role === 'Dosen' ? email : undefined,
+            faculty: faculty || '',
+            major: major || ''
         };
         
         const result = await db.createUser(userData);
@@ -340,9 +359,11 @@ router.get('/api/class-participants', async (req, res) => {
                     status: student.status || 'Apprentice',
                     role: (currentNim && student.NIM === currentNim) ? 'Mahasiswa (Anda)' : 'Mahasiswa',
                     avatar: student.avatar,
-                    frame: student.frame || '',
-                    badges: student.badges || [],
-                    skills: student.skills || { db: 0, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 }
+                    frame: student.active_frame || student.frame || '',
+                    badges: student.owned_badges || [],
+                    skills: student.skills || { db: 0, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 },
+                    faculty: student.faculty || '',
+                    major: student.major || ''
                 };
             });
             
@@ -422,7 +443,7 @@ router.get('/api/classes/:classId/quests', async (req, res) => {
 router.post('/api/classes/:classId/quests', async (req, res) => {
     try {
         const { classId } = req.params;
-        const { title, description, xpReward, coinReward, deadline, lecturerFiles } = req.body;
+        const { title, description, xpReward, coinReward, deadline, lecturerFiles, allowLateSubmission, latePenalty } = req.body;
         if (!title) {
             return res.status(400).json({ error: 'Judul tugas harus diisi.' });
         }
@@ -433,8 +454,12 @@ router.post('/api/classes/:classId/quests', async (req, res) => {
             xpReward: parseInt(xpReward),
             coinReward: parseInt(coinReward),
             deadline,
-            lecturerFiles
+            lecturerFiles,
+            allowLateSubmission: allowLateSubmission !== false,
+            latePenalty: latePenalty !== undefined ? parseInt(latePenalty) : 30
         });
+        // Log activity
+        await db.createClassLog(classId, `Tugas baru diunggah oleh Dosen: ${title}`);
         res.json({ success: true, quest: newQuest });
     } catch (err) {
         console.error('Error on POST /api/classes/:classId/quests:', err);
@@ -460,6 +485,8 @@ router.post('/api/classes/:classId/materials', async (req, res) => {
             description,
             additionalFiles
         });
+        // Log activity
+        await db.createClassLog(classId, `Materi baru diunggah oleh Dosen: ${title}`);
         res.json({ success: true, material: newMaterial });
     } catch (err) {
         console.error('Error on POST /api/classes/:classId/materials:', err);
@@ -507,11 +534,172 @@ router.post('/api/quests/:questId/submit', async (req, res) => {
         if (!submittedFile) {
             return res.status(400).json({ error: 'Nama berkas harus disertakan.' });
         }
+
+        const quest = await db.getQuestById(questId);
+        if (!quest) {
+            return res.status(404).json({ error: 'Tugas tidak ditemukan.' });
+        }
+
+        const monthMap = {
+            'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'mei': 4, 'jun': 5,
+            'jul': 6, 'agu': 7, 'sep': 8, 'okt': 9, 'nov': 10, 'des': 11,
+            'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+            'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+        };
+
+        const parseDate = (str) => {
+            if (!str) return null;
+            const match = str.match(/(\d+)\s+([A-Za-z]+)\s+(\d{4})/);
+            if (!match) return null;
+            const day = parseInt(match[1]);
+            const monthStr = match[2].toLowerCase();
+            const year = parseInt(match[3]);
+            const month = monthMap[monthStr] !== undefined ? monthMap[monthStr] : 0;
+            return new Date(year, month, day);
+        };
+
+        const now = new Date();
+        const deadlineDate = parseDate(quest.deadline);
+        
+        let isLate = false;
+        if (deadlineDate) {
+            const checkNow = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            deadlineDate.setHours(0, 0, 0, 0);
+            if (checkNow.getTime() > deadlineDate.getTime()) {
+                isLate = true;
+            }
+        }
+
+        if (isLate && !quest.allowLateSubmission) {
+            return res.status(400).json({ error: 'Tenggat waktu tugas telah terlewati dan pengumpulan terlambat dinonaktifkan oleh Dosen.' });
+        }
+
         const result = await db.submitQuest(studentNim, questId, submittedFile);
+        if (result.error) {
+            return res.status(400).json({ error: result.error });
+        }
+
+        const student = await db.getUserByNim(studentNim);
+        const studentName = student ? student.name : studentNim;
+        await db.createClassLog(quest.classId, `Mahasiswa ${studentName} mengumpulkan tugas: ${quest.title}`);
+
         res.json({ success: true, submission: result });
     } catch (err) {
         console.error('Error on POST /api/quests/:questId/submit:', err);
         res.status(500).json({ error: 'Terjadi kesalahan pada server.' });
+    }
+});
+
+// GET logs for class
+router.get('/api/classes/:classId/logs', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const logs = await db.getClassLogs(classId);
+        res.json(logs);
+    } catch (err) {
+        console.error('Error on GET /api/classes/:classId/logs:', err);
+        res.status(500).json({ error: 'Gagal mengambil log aktivitas kelas.' });
+    }
+});
+
+// Gamification V2: Shop & Customization API
+router.get('/api/shop', async (req, res) => {
+    try {
+        const items = await db.getShopItems();
+        res.json(items);
+    } catch (err) {
+        console.error('Error on GET /api/shop:', err);
+        res.status(500).json({ error: 'Gagal mengambil data toko.' });
+    }
+});
+
+router.post('/api/shop/purchase', async (req, res) => {
+    try {
+        const { itemId } = req.body;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        if (!studentNim) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        if (!itemId) {
+            return res.status(400).json({ error: 'ID Item harus disertakan.' });
+        }
+        const result = await db.purchaseItem(studentNim, itemId);
+        if (result.error) {
+            return res.status(400).json({ error: result.error });
+        }
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error on POST /api/shop/purchase:', err);
+        res.status(500).json({ error: 'Gagal melakukan pembelian.' });
+    }
+});
+
+router.post('/api/shop/equip', async (req, res) => {
+    try {
+        const { frameId } = req.body;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        if (!studentNim) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        const result = await db.equipFrame(studentNim, frameId || '');
+        if (result.error) {
+            return res.status(400).json({ error: result.error });
+        }
+        res.json({ success: true });
+    } catch (err) {
+        console.error('Error on POST /api/shop/equip:', err);
+        res.status(500).json({ error: 'Gagal memasang bingkai.' });
+    }
+});
+
+router.post('/api/classes/:classId/claim-coins', async (req, res) => {
+    try {
+        const { classId } = req.params;
+        const studentNim = req.session && req.session.user ? req.session.user.nim : null;
+        if (!studentNim) {
+            return res.status(401).json({ error: 'Anda harus login terlebih dahulu.' });
+        }
+        const result = await db.claimClassCoins(studentNim, classId);
+        if (result.error) {
+            return res.status(400).json({ error: result.error });
+        }
+        res.json({ success: true, coinsClaimed: result.coinsClaimed });
+    } catch (err) {
+        console.error('Error on POST /api/classes/:classId/claim-coins:', err);
+        res.status(500).json({ error: 'Gagal mengklaim koin kelas.' });
+    }
+});
+
+router.get('/api/student/:nim/profile', async (req, res) => {
+    try {
+        const { nim } = req.params;
+        const profile = await db.getStudentProfile(nim);
+        if (!profile) {
+            return res.status(404).json({ error: 'Profil mahasiswa tidak ditemukan.' });
+        }
+        res.json(profile);
+    } catch (err) {
+        console.error('Error on GET /api/student/:nim/profile:', err);
+        res.status(500).json({ error: 'Gagal mengambil data profil.' });
+    }
+});
+
+router.get('/api/leaderboard', async (req, res) => {
+    try {
+        const { classId } = req.query;
+        let major = null;
+        if (!classId && req.session && req.session.user) {
+            const identifier = req.session.user.nim || req.session.user.username;
+            const user = await db.getUserByNim(identifier);
+            if (user) {
+                major = user.major;
+            }
+        }
+        const leaderboard = await db.getLeaderboard(classId, major);
+        res.json(leaderboard);
+    } catch (err) {
+        console.error('Error on GET /api/leaderboard:', err);
+        res.status(500).json({ error: 'Gagal mengambil data papan peringkat.' });
     }
 });
 

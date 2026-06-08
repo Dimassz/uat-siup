@@ -747,13 +747,14 @@
         }
 
         .leaderboard-avatar {
-            width: 32px;
-            height: 32px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            margin-right: 10px;
+            margin-right: 0 !important;
             object-fit: cover;
             border: 2px solid #ffffff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
         }
 
         .leaderboard-name {
@@ -850,28 +851,32 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
         }
 
         .avatar-frame-gold-decorated {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            padding: 2px;
+            padding: 3px;
             background: linear-gradient(135deg, #ffe066 0%, #f59e0b 50%, #d97706 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
             position: relative;
+            flex-shrink: 0;
         }
 
         /* Laurel Wreath for Rangga */
         .avatar-frame-gold-decorated .laurel-left {
             position: absolute;
             left: -12px;
-            top: 10px;
+            top: 12px;
             color: #f59e0b;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             transform: rotate(-25deg);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             animation: laurelSwayLeft 3s infinite ease-in-out;
@@ -880,9 +885,9 @@
         .avatar-frame-gold-decorated .laurel-right {
             position: absolute;
             right: -12px;
-            top: 10px;
+            top: 12px;
             color: #f59e0b;
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             transform: rotate(25deg);
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
             animation: laurelSwayRight 3s infinite ease-in-out;
@@ -913,16 +918,17 @@
         }
 
         .avatar-frame-silver-decorated {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            padding: 2px;
+            padding: 3px;
             background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 50%, #cbd5e1 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 8px rgba(148, 163, 184, 0.3);
             position: relative;
+            flex-shrink: 0;
         }
 
         .avatar-frame-silver-decorated .gem-indicator {
@@ -949,16 +955,17 @@
         }
 
         .avatar-frame-bronze-decorated {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            padding: 2px;
+            padding: 3px;
             background: linear-gradient(135deg, #ffedd5 0%, #d97706 100%);
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 0 8px rgba(217, 119, 6, 0.25);
             position: relative;
+            flex-shrink: 0;
         }
 
         .avatar-frame-bronze-decorated .star-indicator {
@@ -971,10 +978,10 @@
 
         /* Animated neon gradient frame for Dimas */
         .avatar-frame-purple-glow-decorated {
-            width: 38px;
-            height: 38px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            padding: 2.5px;
+            padding: 3px;
             background: linear-gradient(135deg, #a78bfa 0%, #6f42c1 50%, #db2777 100%);
             display: flex;
             align-items: center;
@@ -982,12 +989,13 @@
             box-shadow: 0 0 12px rgba(111, 66, 193, 0.6);
             position: relative;
             animation: pulseGlowDecorated 2s infinite ease-in-out;
+            flex-shrink: 0;
         }
 
         .avatar-frame-purple-glow-decorated .bolt-left {
             position: absolute;
             left: -10px;
-            top: 12px;
+            top: 14px;
             color: #eab308;
             font-size: 0.65rem;
             animation: boltFlicker 1.5s infinite ease-in-out;
@@ -996,10 +1004,31 @@
         .avatar-frame-purple-glow-decorated .bolt-right {
             position: absolute;
             right: -10px;
-            top: 12px;
+            top: 14px;
             color: #eab308;
             font-size: 0.65rem;
             animation: boltFlicker 1.5s infinite ease-in-out 0.75s;
+        }
+
+        .avatar-frame-emerald-decorated {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, #6ee7b7 0%, #059669 50%, #047857 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(5, 150, 105, 0.4);
+            position: relative;
+            flex-shrink: 0;
+        }
+        .avatar-frame-emerald-decorated .star-indicator {
+            position: absolute;
+            bottom: -5px;
+            font-size: 0.55rem;
+            color: #10b981;
+            text-shadow: 0 0 4px #10b981;
         }
 
         @keyframes pulseGlowDecorated {
@@ -1031,11 +1060,12 @@
         }
 
         .leaderboard-avatar-framed {
-            width: 100%;
-            height: 100%;
+            width: 38px !important;
+            height: 38px !important;
             border-radius: 50%;
             object-fit: cover;
-            border: 1.5px solid #ffffff;
+            border: 2px solid #ffffff;
+            background-color: #ffffff;
         }
 
         .crown-overlay {
@@ -1462,9 +1492,9 @@
                 <div class="d-flex align-items-center gap-2">
                     <span class="navbar-user-name d-none d-lg-inline" title="DIMAS DWI BUDI SULISTIO">DIMAS DWI BUDI
                         SULISTIO</span>
-                    <a href="/" class="profile-avatar-link" title="Kembali ke Dashboard">
+                    <a href="/" class="profile-avatar-link" id="profileAvatarBtn" title="Kembali ke Dashboard" style="position:relative; display:inline-block;">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80"
-                            alt="Avatar Profil" class="navbar-profile-avatar">
+                            alt="Avatar Profil" class="navbar-profile-avatar" id="navbarProfileAvatar">
                     </a>
                 </div>
             </div>
@@ -1501,6 +1531,10 @@
 
             <!-- Student Status Widgets (Coins display) -->
             <div class="d-flex align-items-center gap-2">
+                <div class="status-pill bg-light text-primary border px-3 py-1.5 rounded-pill d-flex align-items-center gap-1.5" title="XP Global Anda dari semua kelas!" style="font-size: 0.85rem; font-weight: 600; background: rgba(111, 66, 193, 0.1) !important; border-color: rgba(111, 66, 193, 0.2) !important; color: #6f42c1 !important; padding: 6px 14px; border-radius: 50px;">
+                    <i class="fa-solid fa-star text-warning"></i>
+                    <span class="current-xp-display">0 XP</span>
+                </div>
                 <div class="status-pill status-coin" title="Koin global Anda. Selesaikan misi untuk menambah koin!">
                     <span>🪙</span>
                     <span class="current-coins-display">420 Koin</span>
@@ -1961,6 +1995,24 @@
                     </div>
                 </section>
 
+                <!-- Class Activity Logs Widget -->
+                <section class="card custom-card animate-fade-in mt-3">
+                    <div class="card-header-game">
+                        <span class="d-flex align-items-center gap-2 text-dark fw-bold">
+                            <i class="fa-solid fa-list-check text-primary"></i> Aktivitas Kelas
+                        </span>
+                        <i class="fa-solid fa-circle-info text-secondary" style="font-size: 0.9rem;" title="Log aktivitas terkini di kelas ini"></i>
+                    </div>
+                    <div class="card-body p-3">
+                        <div id="classLogsList" style="max-height: 250px; overflow-y: auto; font-size: 0.8rem;">
+                            <div class="text-center py-3">
+                                <div class="spinner-border spinner-border-sm text-primary" role="status"></div>
+                                <span class="ms-2 small text-muted">Memuat aktivitas...</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </aside>
         </div>
     </div>
@@ -2016,6 +2068,9 @@
                             <!-- Populated dynamically -->
                         </div>
                     </div>
+
+                    <!-- Section: Overdue Alert -->
+                    <div id="overdueAlertContainer" class="mb-3 d-none"></div>
 
                     <!-- Section: Pengumpulan Tugas (User Submission Area) -->
                     <div class="mb-2 text-start">
@@ -2238,11 +2293,12 @@
                     <div class="p-4 pt-5">
                         <div class="mb-3">
                             <h4 class="fw-extrabold text-dark mb-0" id="profileModalName">Nama Mahasiswa</h4>
-                            <span class="text-muted small" style="font-size: 0.75rem;" id="profileModalNim">NIM:
-                                10201210045</span>
-                            <span class="mx-1 text-muted">|</span>
-                            <span class="text-muted small" style="font-size: 0.75rem;"
-                                id="profileModalEmail">email@student.universitaspertamina.ac.id</span>
+                            <div class="text-primary small fw-bold mt-1" style="font-size: 0.8rem;" id="profileModalFacultyMajor">Fakultas - Jurusan</div>
+                            <div class="mt-1 d-flex flex-wrap gap-1 text-muted small" style="font-size: 0.75rem;">
+                                <span id="profileModalNim">NIM: 10201210045</span>
+                                <span class="mx-1 text-muted">|</span>
+                                <span id="profileModalEmail">email@student.universitaspertamina.ac.id</span>
+                            </div>
                         </div>
 
                         <!-- Stats Strip -->
@@ -2251,14 +2307,13 @@
                                 <div class="small text-muted" style="font-size: 0.65rem;">PERINGKAT</div>
                                 <div class="fw-bold text-dark" id="profileModalRank">#1</div>
                             </div>
-                            <div class="col-4 border-start border-end">
+                            <div class="col-4 border-start">
+                                <div class="small text-muted" style="font-size: 0.65rem;">XP KELAS</div>
+                                <div class="fw-bold text-success" id="profileModalClassXp">0 XP</div>
+                            </div>
+                            <div class="col-4 border-start">
                                 <div class="small text-muted" style="font-size: 0.65rem;">TOTAL XP</div>
                                 <div class="fw-bold text-primary" id="profileModalXp">980 XP</div>
-                            </div>
-                            <div class="col-4">
-                                <div class="small text-muted" style="font-size: 0.65rem;">STATUS</div>
-                                <div class="fw-bold text-success" style="font-size: 0.8rem;" id="profileModalLevel">SIM
-                                    Master</div>
                             </div>
                         </div>
 
@@ -2306,6 +2361,7 @@
 
     <!-- Vanilla Javascript Interaktivitas Game Detail Kelas -->
     <script>
+        let activeClassParticipantsList = [];
         let questModal;
         let gameToast;
         let participantsModal;
@@ -2320,6 +2376,50 @@
         let activeClassName = '';
         let currentUserNim = null;
         let currentUserName = null;
+
+        function getAvatarMarkup(avatarUrl, frameId, name) {
+            if (!frameId) {
+                return `<img src="${avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=60&q=80'}" alt="Avatar ${name}" class="leaderboard-avatar" style="margin-right: 0;">`;
+            }
+            
+            const cssClassMap = {
+                'frame_gold_crown': 'avatar-frame-gold-decorated',
+                'frame_silver_diamond': 'avatar-frame-silver-decorated',
+                'frame_neon_purple': 'avatar-frame-purple-glow-decorated',
+                'frame_emerald_ring': 'avatar-frame-emerald-decorated',
+                'avatar-frame-gold-decorated': 'avatar-frame-gold-decorated',
+                'avatar-frame-silver-decorated': 'avatar-frame-silver-decorated',
+                'avatar-frame-purple-glow-decorated': 'avatar-frame-purple-glow-decorated',
+                'avatar-frame-emerald-decorated': 'avatar-frame-emerald-decorated'
+            };
+            
+            const frameCss = cssClassMap[frameId] || frameId;
+            let decoIcons = '';
+            
+            if (frameId === 'frame_gold_crown' || frameId === 'avatar-frame-gold-decorated') {
+                decoIcons = `
+                    <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
+                    <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
+                    <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
+                `;
+            } else if (frameId === 'frame_silver_diamond' || frameId === 'avatar-frame-silver-decorated') {
+                decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
+            } else if (frameId === 'frame_emerald_ring' || frameId === 'avatar-frame-emerald-decorated') {
+                decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
+            } else if (frameId === 'frame_neon_purple' || frameId === 'avatar-frame-purple-glow-decorated') {
+                decoIcons = `
+                    <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
+                    <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
+                `;
+            }
+            
+            return `
+                <div class="${frameCss}">
+                    ${decoIcons}
+                    <img src="${avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=60&q=80'}" alt="Avatar ${name}" class="leaderboard-avatar-framed">
+                </div>
+            `;
+        }
 
         // Basis Data Modul Tugas Lokal
         let questsData = {};
@@ -2367,17 +2467,56 @@
                 if (meData.loggedIn) {
                     currentUserNim = meData.nim;
                     currentUserName = meData.name;
-                    globalCoins = meData.coins || 0;
+                    globalCoins = meData.global_coins || 0;
                     document.querySelectorAll('.current-coins-display').forEach(el => {
                         el.innerText = globalCoins + ' Koin';
+                    });
+                    document.querySelectorAll('.current-xp-display').forEach(el => {
+                        el.innerText = (meData.global_xp || 0) + ' XP';
                     });
                     document.querySelectorAll('.navbar-user-name').forEach(el => {
                         el.innerText = meData.name;
                         el.title = meData.name;
                     });
-                    document.querySelectorAll('.navbar-profile-avatar').forEach(el => {
-                        el.src = meData.avatar;
-                    });
+                    const navAvatarBtn = document.getElementById('profileAvatarBtn');
+                    if (navAvatarBtn) {
+                        let decoIcons = '';
+                        if (meData.active_frame === 'frame_gold_crown') {
+                            decoIcons = `
+                                <span class="crown-overlay" style="font-size:0.6rem; top:-7px;"><i class="fa-solid fa-crown"></i></span>
+                            `;
+                        } else if (meData.active_frame === 'frame_silver_diamond') {
+                            decoIcons = `<span class="gem-indicator" style="font-size:0.4rem; bottom:-3px;"><i class="fa-solid fa-gem"></i></span>`;
+                        } else if (meData.active_frame === 'frame_emerald_ring') {
+                            decoIcons = `<span class="star-indicator" style="font-size:0.4rem; bottom:-3px;"><i class="fa-solid fa-star"></i></span>`;
+                        } else if (meData.active_frame === 'frame_neon_purple') {
+                            decoIcons = `
+                                <span class="bolt-left" style="font-size:0.4rem; left:-5px; top:6px;"><i class="fa-solid fa-bolt"></i></span>
+                                <span class="bolt-right" style="font-size:0.4rem; right:-5px; top:6px;"><i class="fa-solid fa-bolt"></i></span>
+                            `;
+                        }
+
+                        const cssClassMap = {
+                            'frame_gold_crown': 'avatar-frame-gold-decorated',
+                            'frame_silver_diamond': 'avatar-frame-silver-decorated',
+                            'frame_neon_purple': 'avatar-frame-purple-glow-decorated',
+                            'frame_emerald_ring': 'avatar-frame-emerald-decorated'
+                        };
+                        const frameCss = cssClassMap[meData.active_frame] || '';
+
+                        if (meData.active_frame) {
+                            navAvatarBtn.innerHTML = `
+                                <div class="${frameCss}" style="width:38px; height:38px; padding:2px;">
+                                    ${decoIcons}
+                                    <img src="${meData.avatar || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80'}" alt="Avatar" class="navbar-profile-avatar" id="navbarProfileAvatar" style="width:100%; height:100%; border:none; margin:0; box-shadow:none;">
+                                </div>
+                            `;
+                        } else {
+                            navAvatarBtn.innerHTML = `
+                                <img src="${meData.avatar || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80'}" alt="Avatar" class="navbar-profile-avatar" id="navbarProfileAvatar">
+                            `;
+                        }
+                    }
                 }
 
                 const classesRes = await fetch('/api/my-classes');
@@ -2408,22 +2547,18 @@
         // DYNAMIC BADGES & PROGRESS ROADMAP LOGIC
         // ==========================================
         const milestones = [
-            { xp: 150, title: 'Database Specialist', icon: 'fa-solid fa-database', desc: 'Desain relasi database & data warehouse', class: 'bg-badge-database' },
-            { xp: 300, title: 'System Analyst', icon: 'fa-solid fa-chart-pie', desc: 'Memetakan proses bisnis & use case', class: 'bg-badge-analyst' },
-            { xp: 500, title: 'Style Master', icon: 'fa-brands fa-css3-alt', desc: 'Layouting responsif & flexbox utilities', class: 'bg-badge-style' },
-            { xp: 700, title: 'API Architect', icon: 'fa-solid fa-plug', desc: 'Menghubungkan API & pertukaran data', class: 'bg-badge-api' },
-            { xp: 900, title: 'Security Warden', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security', desc: 'Mengaudit celah keamanan sistem', class: 'bg-badge-security' },
-            { xp: 1000, title: 'Grand Master SIM', icon: 'fa-solid fa-trophy', desc: 'Menguasai seluruh modul kelas SIM', class: 'bg-badge-grand' }
+            { xp: 500, title: 'Data Explorer', icon: 'fa-solid fa-compass', desc: 'Mencapai 500 XP di kelas ini', class: 'bg-badge-database' },
+            { xp: 1000, title: 'Query Master', icon: 'fa-solid fa-code', desc: 'Mencapai 1000 XP di kelas ini', class: 'bg-badge-analyst' },
+            { xp: 1500, title: 'Class Champion', icon: 'fa-solid fa-award', desc: 'Mencapai 1500 XP di kelas ini', class: 'bg-badge-style' },
+            { xp: 2000, title: 'Class Master', icon: 'fa-solid fa-trophy', desc: 'Mencapai 2000 XP di kelas ini', class: 'bg-badge-grand' }
         ];
 
         function getBadgesFromXP(xp) {
             const badges = [];
-            if (xp >= 150) badges.push('database');
-            if (xp >= 300) badges.push('analyst');
-            if (xp >= 500) badges.push('style');
-            if (xp >= 700) badges.push('api');
-            if (xp >= 900) badges.push('security');
-            if (xp >= 1000) badges.push('grand');
+            if (xp >= 500) badges.push('data_explorer');
+            if (xp >= 1000) badges.push('query_master');
+            if (xp >= 1500) badges.push('class_champion');
+            if (xp >= 2000) badges.push('class_master');
             return badges;
         }
 
@@ -2443,11 +2578,11 @@
             }
         }
 
-        function updateClassXpUI() {
-            // Update Progress Bar Level Kelas
+        async function updateClassXpUI() {
+            // Update Progress Bar Progres Kelas (Target: 2000 XP)
             const classProgress = document.getElementById('classProgress');
             if (classProgress) {
-                const progressPercent = Math.min((classXP / 1000) * 100, 100);
+                const progressPercent = Math.min((classXP / 2000) * 100, 100);
                 classProgress.style.width = progressPercent + '%';
                 classProgress.setAttribute('aria-valuenow', classXP);
             }
@@ -2455,18 +2590,10 @@
             // Update Level Badge text
             const classXpBadge = document.getElementById('classXpBadge');
             if (classXpBadge) {
-                let level = 1;
-                if (classXP >= 1000) level = 7;
-                else if (classXP >= 900) level = 6;
-                else if (classXP >= 700) level = 5;
-                else if (classXP >= 500) level = 4;
-                else if (classXP >= 300) level = 3;
-                else if (classXP >= 150) level = 2;
-                
-                classXpBadge.innerText = `LEVEL ${level} (${classXP} / 1000 XP)`;
+                classXpBadge.innerText = `PROGRES KELAS (${classXP} / 2000 XP)`;
             }
 
-            const neededXp = Math.max(1000 - classXP, 0);
+            const neededXp = Math.max(2000 - classXP, 0);
             const xpNeededText = document.getElementById('xpNeededText');
             if (xpNeededText) {
                 xpNeededText.innerText = neededXp + " XP";
@@ -2475,16 +2602,56 @@
             const container = document.getElementById('xpNeededContainer');
             if (container) {
                 if (neededXp > 0) {
-                    let nextLevel = 2;
-                    if (classXP >= 900) nextLevel = 7;
-                    else if (classXP >= 700) nextLevel = 6;
-                    else if (classXP >= 500) nextLevel = 5;
-                    else if (classXP >= 300) nextLevel = 4;
-                    else if (classXP >= 150) nextLevel = 3;
-                    container.innerHTML = `<i class="fa-solid fa-sparkles me-1 text-warning"></i> Butuh <strong id="xpNeededText">${neededXp} XP</strong> lagi untuk naik ke <strong>LEVEL ${nextLevel}</strong>!`;
+                    container.innerHTML = `<i class="fa-solid fa-sparkles me-1 text-warning"></i> Butuh <strong id="xpNeededText">${neededXp} XP</strong> lagi untuk menyelesaikan kelas ini!`;
                 } else {
-                    container.innerHTML = `<i class="fa-solid fa-crown me-1 text-warning animate-bounce"></i> Anda telah mencapai Level Maksimal (Grand Master)!`;
+                    // Check if already claimed coins
+                    try {
+                        const profRes = await fetch(`/api/student/${currentUserNim}/profile`);
+                        const profile = await profRes.json();
+                        const thisClass = profile.classes.find(c => c.classId === activeClassId);
+                        
+                        if (thisClass && thisClass.coinsClaimed) {
+                            container.innerHTML = `<i class="fa-solid fa-circle-check me-1 text-success"></i> Kelas Selesai! Koin global telah diklaim.`;
+                        } else {
+                            const extraXp = Math.max(0, classXP - 2000);
+                            const extraCoins = Math.floor(extraXp / 100) * 10;
+                            const totalClaimable = 200 + extraCoins;
+
+                            container.innerHTML = `
+                                <div class="d-flex align-items-center justify-content-between mt-2 flex-wrap gap-2">
+                                    <span class="text-success fw-bold"><i class="fa-solid fa-circle-check"></i> Kelas selesai! Anda mendapatkan ${totalClaimable} Koin Global!</span>
+                                    <button class="btn btn-warning btn-sm fw-bold px-3 py-1 rounded-pill" onclick="claimClassCoinsReward()">
+                                        <i class="fa-solid fa-gift me-1"></i> Klaim Koin Global
+                                    </button>
+                                </div>
+                            `;
+                        }
+                    } catch (e) {
+                        container.innerHTML = `<i class="fa-solid fa-circle-check me-1 text-success"></i> Kelas Selesai! Silakan klaim koin Anda.`;
+                    }
                 }
+            }
+        }
+
+        async function claimClassCoinsReward() {
+            try {
+                const res = await fetch(`/api/classes/${encodeURIComponent(activeClassId)}/claim-coins`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const result = await res.json();
+                if (result.error) {
+                    alert(result.error);
+                    return;
+                }
+
+                showToast(`🪙 Sukses! Berhasil mengklaim ${result.coinsClaimed} Koin Global!`, 'fa-circle-check');
+                
+                // Refresh context
+                await initClassContext();
+                await loadUserClassXP();
+            } catch (err) {
+                console.error("Gagal mengklaim koin:", err);
             }
         }
 
@@ -2568,7 +2735,17 @@
 
             try {
                 const res = await fetch(`/api/class-participants?classId=${encodeURIComponent(activeClassId)}`);
-                activeClassParticipantsList = await res.json();
+                if (!res.ok) {
+                    throw new Error('Gagal mengambil data dari server');
+                }
+                const data = await res.json();
+                if (data && data.error) {
+                    throw new Error(data.error);
+                }
+                if (!Array.isArray(data)) {
+                    throw new Error('Format data tidak valid');
+                }
+                activeClassParticipantsList = data;
             } catch (err) {
                 console.error('Gagal mengambil data dari server, fallback...', err);
                 activeClassParticipantsList = getParticipantsForClassFallback(activeClassName);
@@ -2582,47 +2759,9 @@
                 else if (student.rank === 2) rankClass = 'rank-silver';
                 else if (student.rank === 3) rankClass = 'rank-bronze';
 
-                let avatarMarkup = '';
-                if (student.frame) {
-                    let decoIcons = '';
-                    if (student.frame === 'avatar-frame-gold-decorated') {
-                        decoIcons = `
-                            <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
-                            <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
-                            <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
-                        `;
-                    } else if (student.frame === 'avatar-frame-silver-decorated') {
-                        decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
-                    } else if (student.frame === 'avatar-frame-bronze-decorated') {
-                        decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
-                    } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
-                        decoIcons = `
-                            <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
-                            <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
-                        `;
-                    }
-                    avatarMarkup = `
-                        <div class="${student.frame}">
-                            ${decoIcons}
-                            <img src="${student.avatar}" alt="Avatar ${student.name}" class="leaderboard-avatar-framed">
-                        </div>
-                    `;
-                } else {
-                    avatarMarkup = `
-                        <img src="${student.avatar}" alt="Avatar ${student.name}" class="leaderboard-avatar" style="margin-right: 0;">
-                    `;
-                }
+                let avatarMarkup = getAvatarMarkup(student.avatar, student.frame, student.name);
 
-                let badgesHtml = '';
-                const computedBadges = getBadgesFromXP(student.xp);
-                computedBadges.forEach(bId => {
-                    const badge = badgesReference[bId];
-                    if (badge) {
-                        badgesHtml += `
-                            <span class="mini-badge-dot ${badge.class}" title="${badge.title}"><i class="${badge.icon}"></i></span>
-                        `;
-                    }
-                });
+                let badgesHtml = renderStudentBadgesHtml(student);
 
                 const isCurrent = currentUserNim && student.NIM === currentUserNim;
 
@@ -2863,6 +3002,9 @@
             // Load quests dynamically
             await loadQuests();
 
+            // Load class activity logs dynamically
+            await loadClassLogs();
+
             // Event Listener Salin Kode Kelas
             const copyCodeBtn = document.querySelector('.btn-copy-code');
             if (copyCodeBtn) {
@@ -2918,6 +3060,29 @@
             });
         }
 
+        function isQuestOverdue(deadlineStr) {
+            if (!deadlineStr) return false;
+            if (deadlineStr.toLowerCase().includes('terlewati')) {
+                return true;
+            }
+            const monthMap = {
+                'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'mei': 4, 'jun': 5,
+                'jul': 6, 'agu': 7, 'sep': 8, 'okt': 9, 'nov': 10, 'des': 11,
+                'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+                'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+            };
+            const match = deadlineStr.match(/(\d+)\s+([A-Za-z]+)\s+(\d{4})/);
+            if (!match) return false;
+            const day = parseInt(match[1]);
+            const monthStr = match[2].toLowerCase();
+            const year = parseInt(match[3]);
+            const month = monthMap[monthStr] !== undefined ? monthMap[monthStr] : 0;
+            const deadlineDate = new Date(year, month, day);
+            deadlineDate.setHours(23, 59, 59, 999);
+            const now = new Date();
+            return now.getTime() > deadlineDate.getTime();
+        }
+
         // Fungsi Utama Membuka Detail Tugas & Render Konten Dinamis
         function openQuestDetail(questId) {
             const quest = questsData[questId];
@@ -2931,6 +3096,11 @@
             document.getElementById('btnSubmitTask').classList.add('d-none');
             document.getElementById('btnSubmitTask').disabled = true;
 
+            // Reset Overdue Alert Box
+            const overdueAlert = document.getElementById('overdueAlertContainer');
+            overdueAlert.classList.add('d-none');
+            overdueAlert.innerHTML = '';
+
             // 1. Render Basic Quest Info
             document.getElementById('modalQuestTitle').innerText = quest.title;
             document.getElementById('modalQuestDesc').innerText = quest.desc;
@@ -2939,14 +3109,19 @@
             // 2. Render Status Badge & Deadline
             const statusBadge = document.getElementById('modalQuestStatus');
             const deadlineSpan = document.getElementById('modalQuestDeadline');
+            const isOverdue = isQuestOverdue(quest.deadline);
 
             if (quest.status === 'completed') {
                 statusBadge.className = 'badge bg-success text-white';
                 statusBadge.innerText = 'Selesai';
                 deadlineSpan.innerHTML = `<i class="fa-solid fa-circle-check text-success me-1"></i> Selesai`;
+            } else if (quest.status === 'pending_grade') {
+                statusBadge.className = 'badge bg-primary text-white';
+                statusBadge.innerText = 'Telah terkumpul';
+                deadlineSpan.innerHTML = `<i class="fa-regular fa-clock me-1 text-primary"></i> Tunggu Penilaian`;
             } else if (quest.status === 'active') {
                 statusBadge.className = 'badge bg-warning text-dark';
-                statusBadge.innerText = 'Aktif';
+                statusBadge.innerText = 'Perlu dikumpulkan';
                 deadlineSpan.innerHTML = `<i class="fa-regular fa-clock me-1 text-danger"></i> ${quest.deadline}`;
             } else {
                 statusBadge.className = 'badge bg-secondary text-white';
@@ -2999,16 +3174,17 @@
             submitBtn.classList.add('d-none');
             completedText.classList.add('d-none');
 
+            // Setup Submit Button text & behavior
+            submitBtn.innerHTML = quest.status === 'pending_grade' ? `Kirim Ulang &amp; Perbarui Berkas <i class="fa-solid fa-paper-plane ms-1"></i>` : `Kirim Jawaban &amp; Klaim Reward <i class="fa-solid fa-paper-plane ms-1"></i>`;
+
             if (quest.status === 'locked') {
                 lockedArea.classList.remove('d-none');
             } else if (quest.status === 'completed') {
                 feedbackArea.classList.remove('d-none');
                 completedText.classList.remove('d-none');
-                // Fill submitted file info
                 document.getElementById('submittedFileName').innerText = quest.submittedFile;
                 document.getElementById('submittedFileMeta').innerText = `Diserahkan pada ${quest.submittedDate}`;
 
-                // Show grading card if values exist
                 const gradeCard = document.getElementById('gradeFeedbackCard');
                 if (quest.grade) {
                     gradeCard.classList.remove('d-none');
@@ -3017,9 +3193,63 @@
                 } else {
                     gradeCard.classList.add('d-none');
                 }
+            } else if (quest.status === 'pending_grade') {
+                // Show submitted file info
+                feedbackArea.classList.remove('d-none');
+                document.getElementById('submittedFileName').innerText = quest.submittedFile;
+                document.getElementById('submittedFileMeta').innerText = `Diserahkan pada ${quest.submittedDate}`;
+                document.getElementById('gradeFeedbackCard').classList.add('d-none'); // Hide grade card since it's not graded yet
+
+                // Allow re-submission/replace file depending on deadline
+                if (isOverdue) {
+                    if (quest.allowLateSubmission) {
+                        overdueAlert.classList.remove('d-none');
+                        overdueAlert.innerHTML = `
+                            <div class="alert alert-warning border-0 small mb-0 d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>Tenggat waktu terlewati. Anda masih bisa memperbarui berkas dengan penalti XP (-${quest.latePenalty} XP).</span>
+                            </div>
+                        `;
+                        uploadArea.classList.remove('d-none');
+                        submitBtn.classList.remove('d-none');
+                    } else {
+                        overdueAlert.classList.remove('d-none');
+                        overdueAlert.innerHTML = `
+                            <div class="alert alert-danger border-0 small mb-0 d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <span>Tenggat waktu terlewati. Pengumpulan terlambat ditutup, Anda tidak dapat mengubah file tugas lagi.</span>
+                            </div>
+                        `;
+                    }
+                } else {
+                    uploadArea.classList.remove('d-none');
+                    submitBtn.classList.remove('d-none');
+                }
             } else if (quest.status === 'active') {
-                uploadArea.classList.remove('d-none');
-                submitBtn.classList.remove('d-none');
+                if (isOverdue) {
+                    if (quest.allowLateSubmission) {
+                        overdueAlert.classList.remove('d-none');
+                        overdueAlert.innerHTML = `
+                            <div class="alert alert-warning border-0 small mb-0 d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span>Tugas ini terlambat. Anda masih bisa mengumpulkan dengan penalti XP (-${quest.latePenalty} XP).</span>
+                            </div>
+                        `;
+                        uploadArea.classList.remove('d-none');
+                        submitBtn.classList.remove('d-none');
+                    } else {
+                        overdueAlert.classList.remove('d-none');
+                        overdueAlert.innerHTML = `
+                            <div class="alert alert-danger border-0 small mb-0 d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                                <span>Tenggat waktu tugas ini telah terlewati dan pengumpulan terlambat ditutup.</span>
+                            </div>
+                        `;
+                    }
+                } else {
+                    uploadArea.classList.remove('d-none');
+                    submitBtn.classList.remove('d-none');
+                }
             }
 
             // Tampilkan Modal
@@ -3143,9 +3373,40 @@
                 await loadQuests();
                 await loadUserClassXP();
                 await loadLocalLeaderboard();
+                await loadClassLogs();
             } catch (err) {
                 console.error("Gagal mengirim tugas:", err);
                 showToast('❌ Terjadi kesalahan server saat mengirim tugas.', 'fa-circle-xmark');
+            }
+        }
+
+        async function loadClassLogs() {
+            const listContainer = document.getElementById('classLogsList');
+            if (!listContainer) return;
+            try {
+                const res = await fetch(`/api/classes/${encodeURIComponent(activeClassId)}/logs`);
+                const logs = await res.json();
+                listContainer.innerHTML = '';
+                if (!logs || logs.length === 0) {
+                    listContainer.innerHTML = '<div class="text-center text-muted py-3">Belum ada aktivitas kelas.</div>';
+                    return;
+                }
+                logs.forEach(log => {
+                    const time = log.created_at || log.createdAt || '';
+                    const date = time ? new Date(time).toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) : '';
+                    const logItem = document.createElement('div');
+                    logItem.className = 'd-flex justify-content-between align-items-start border-bottom border-light py-2';
+                    logItem.innerHTML = `
+                        <div class="text-start">
+                            <span class="d-block text-dark fw-semibold" style="font-size: 0.78rem;">${log.activityText || log.activity_text || log.text || ''}</span>
+                            <span class="text-muted" style="font-size: 0.65rem;">${date} WIB</span>
+                        </div>
+                    `;
+                    listContainer.appendChild(logItem);
+                });
+            } catch (err) {
+                console.error('Gagal memuat log kelas:', err);
+                listContainer.innerHTML = '<div class="text-center text-danger py-3">Gagal memuat log aktivitas.</div>';
             }
         }
 
@@ -3174,6 +3435,7 @@
                 questsList.innerHTML = '';
                 quests.forEach((quest, idx) => {
                     const isCompleted = quest.status === 'completed';
+                    const isPendingGrade = quest.status === 'pending_grade';
                     const isActive = quest.status === 'active';
                     const isLocked = quest.status === 'locked';
 
@@ -3186,7 +3448,7 @@
                     if (isCompleted) {
                         itemClass = 'quest-completed';
                         const isGraded = quest.grade && quest.grade !== 'Tunggu Penilaian';
-                        const badgeColor = isGraded ? 'bg-success' : 'bg-warning text-dark';
+                        const badgeColor = isGraded ? 'bg-success text-white' : 'bg-warning text-dark';
                         const badgeText = isGraded ? `Selesai (Nilai: ${quest.grade})` : 'Tunggu Penilaian';
                         
                         statusBadgeMarkup = `<span class="badge ${badgeColor} border rounded-pill" style="font-size: 0.65rem;">${badgeText}</span>`;
@@ -3198,9 +3460,22 @@
                             <span class="text-success fs-5 ms-3"><i class="fa-solid fa-circle-check"></i></span>
                         `;
                         titleMarkup = `<h6 class="mb-0 text-muted quest-title-strike" style="font-size: 0.9rem;">${quest.title}</h6>`;
+                    } else if (isPendingGrade) {
+                        itemClass = 'quest-active';
+                        statusBadgeMarkup = `<span class="badge bg-primary text-white border border-primary-subtle rounded-pill" style="font-size: 0.65rem;">Telah terkumpul</span>`;
+                        subtitleMarkup = `<p class="small text-muted mb-0" style="font-size: 0.75rem;"><i class="fa-regular fa-clock me-1"></i> Disubmit pada: ${quest.submittedDate || 'Baru saja'} • Menunggu Penilaian</p>`;
+                        actionAreaMarkup = `
+                            <div class="text-end">
+                                <span class="xp-text text-primary d-block" style="font-size: 0.85rem;"><i class="fa-solid fa-star me-1"></i> +${quest.xpReward} XP</span>
+                            </div>
+                            <button class="btn btn-quest btn-sm py-2 px-3 ms-3" onclick="event.stopPropagation(); openQuestDetail(${quest.id})">
+                                Lihat Berkas <i class="fa-solid fa-chevron-right ms-1" style="font-size: 0.75rem;"></i>
+                            </button>
+                        `;
+                        titleMarkup = `<h6 class="mb-0 fw-bold text-dark" style="font-size: 0.9rem;">${quest.title}</h6>`;
                     } else if (isActive) {
                         itemClass = 'quest-active';
-                        statusBadgeMarkup = `<span class="badge bg-warning text-dark border border-warning-subtle rounded-pill" style="font-size: 0.65rem;">Aktif</span>`;
+                        statusBadgeMarkup = `<span class="badge bg-warning-subtle text-warning border border-warning-subtle rounded-pill" style="font-size: 0.65rem;">Perlu dikumpulkan</span>`;
                         subtitleMarkup = `
                             <p class="small mb-0 text-muted" style="font-size: 0.75rem;">
                                 <i class="fa-regular fa-clock me-1 text-danger"></i> ${quest.deadline}
@@ -3282,47 +3557,9 @@
                     else if (student.rank === 2) rankClass = 'rank-silver';
                     else if (student.rank === 3) rankClass = 'rank-bronze';
 
-                    let avatarMarkup = '';
-                    if (student.frame) {
-                        let decoIcons = '';
-                        if (student.frame === 'avatar-frame-gold-decorated') {
-                            decoIcons = `
-                                <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
-                                <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
-                                <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
-                            `;
-                        } else if (student.frame === 'avatar-frame-silver-decorated') {
-                            decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
-                        } else if (student.frame === 'avatar-frame-bronze-decorated') {
-                            decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
-                        } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
-                            decoIcons = `
-                                <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
-                                <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
-                            `;
-                        }
-                        avatarMarkup = `
-                            <div class="${student.frame}">
-                                ${decoIcons}
-                                <img src="${student.avatar}" alt="Avatar ${student.name}" class="leaderboard-avatar-framed">
-                            </div>
-                        `;
-                    } else {
-                        avatarMarkup = `
-                            <img src="${student.avatar}" alt="Avatar ${student.name}" class="leaderboard-avatar" style="margin-right: 0;">
-                        `;
-                    }
+                    let avatarMarkup = getAvatarMarkup(student.avatar, student.frame, student.name);
 
-                    let badgesHtml = '';
-                    const computedBadges = getBadgesFromXP(student.xp);
-                    computedBadges.forEach(bId => {
-                        const badge = badgesReference[bId];
-                        if (badge) {
-                            badgesHtml += `
-                                <span class="mini-badge-dot ${badge.class}" title="${badge.title}"><i class="${badge.icon}"></i></span>
-                            `;
-                        }
-                    });
+                    let badgesHtml = renderStudentBadgesHtml(student);
 
                     const isCurrent = currentUserNim && student.NIM === currentUserNim;
 
@@ -3360,23 +3597,55 @@
         // DYNAMIC DATA STORAGE & FALLBACK
         // ==========================================
         const badgesReference = {
-            'database': { title: 'Database Specialist', icon: 'fa-solid fa-database', class: 'bg-badge-database', desc: 'Desain relasi database & data warehouse' },
-            'analyst': { title: 'System Analyst', icon: 'fa-solid fa-chart-pie', class: 'bg-badge-analyst', desc: 'Memetakan proses bisnis & use case' },
-            'style': { title: 'Style Master', icon: 'fa-brands fa-css3-alt', class: 'bg-badge-style', desc: 'Layouting responsif & flexbox utilities' },
-            'api': { title: 'API Architect', icon: 'fa-solid fa-plug', class: 'bg-badge-api', desc: 'Menghubungkan API & pertukaran data' },
-            'security': { title: 'Security Warden', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security', desc: 'Mengaudit celah keamanan sistem' },
-            'grand': { title: 'Grand Master SIM', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand', desc: 'Selesaikan seluruh modul kelas SIM' }
+            'data_explorer': { title: 'Data Explorer', icon: 'fa-solid fa-compass', class: 'bg-badge-database', desc: 'Mencapai 500 XP di kelas ini' },
+            'query_master': { title: 'Query Master', icon: 'fa-solid fa-code', class: 'bg-badge-analyst', desc: 'Mencapai 1000 XP di kelas ini' },
+            'class_champion': { title: 'Class Champion', icon: 'fa-solid fa-award', class: 'bg-badge-style', desc: 'Mencapai 1500 XP di kelas ini' },
+            'class_master': { title: 'Class Master', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand', desc: 'Mencapai 2000 XP di kelas ini' }
         };
 
-        let activeClassParticipantsList = [];
+        const globalBadgesReference = {
+            'database': { title: 'Database Master', icon: 'fa-solid fa-database', class: 'bg-badge-database' },
+            'analyst': { title: 'System Analyst', icon: 'fa-solid fa-chart-pie', class: 'bg-badge-analyst' },
+            'api_architect': { title: 'API Architect', icon: 'fa-solid fa-plug', class: 'bg-badge-api' },
+            'security': { title: 'Security Warden', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security' },
+            'design_guru': { title: 'Design Guru', icon: 'fa-brands fa-css3-alt', class: 'bg-badge-style' },
+            'grand_master': { title: 'Grand Master SIM', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand' }
+        };
+
+        function renderStudentBadgesHtml(student) {
+            let html = '';
+            // 1. Class milestones
+            const computed = getBadgesFromXP(student.xp);
+            computed.forEach(bId => {
+                const badge = badgesReference[bId];
+                if (badge) {
+                    html += `<span class="mini-badge-dot ${badge.class}" title="Kelas: ${badge.title}"><i class="${badge.icon}"></i></span>`;
+                }
+            });
+            return html || '<span class="text-muted small" style="font-size:0.7rem;">Belum ada lencana</span>';
+        }
 
         function getParticipantsForClassFallback(className) {
-            return [
+            const all = [
                 { name: 'Rangga Wijaya', NIM: '10201210001', rank: 1, xp: 980, level: 'Level 5', status: 'SIM Master', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-gold-decorated', badges: ['database', 'analyst', 'vocal', 'style', 'api'], skills: { db: 100, analysis: 95, layout: 80, api: 85, security: 0, vocal: 100 } },
                 { name: 'Aurelia Putri', NIM: '10201210002', rank: 2, xp: 950, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-silver-decorated', badges: ['database', 'analyst', 'vocal', 'style'], skills: { db: 90, analysis: 90, layout: 100, api: 0, security: 0, vocal: 90 } },
                 { name: 'Bobby Kertanegara', NIM: '10201210003', rank: 3, xp: 910, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-bronze-decorated', badges: ['database', 'analyst', 'vocal', 'api'], skills: { db: 85, analysis: 85, layout: 0, api: 90, security: 0, vocal: 90 } },
                 { name: 'Dimas Dwi Budi Sulistio', NIM: '10201210007', rank: 4, xp: 650, level: 'Level 4', status: 'SIM Apprentice', role: 'Mahasiswa (Anda)', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-purple-glow-decorated', badges: ['database', 'analyst', 'vocal'], skills: { db: 90, analysis: 85, layout: 0, api: 0, security: 0, vocal: 90 } }
             ];
+            if (!className) return all.filter(s => currentUserNim && s.NIM === currentUserNim);
+            const lowerName = className.toLowerCase();
+            if (lowerName.includes('sistem informasi manajemen') || lowerName.includes('sim-')) {
+                return all;
+            } else if (lowerName.includes('perpajakan') || lowerName.includes('pajak')) {
+                return all.filter(s => s.NIM === '10201210001' || s.NIM === '10201210002' || s.NIM === '10201210003');
+            } else if (lowerName.includes('lembaga') || lowerName.includes('lpk-')) {
+                return all.filter(s => s.NIM === '10201210001' || s.NIM === '10201210002');
+            } else if (lowerName.includes('keuangan') || lowerName.includes('fintech') || lowerName.includes('fin-')) {
+                return all.filter(s => s.NIM === '10201210001' || s.NIM === '10201210003');
+            } else if (lowerName.includes('inggris') || lowerName.includes('eng-')) {
+                return all.filter(s => s.NIM === '10201210001' || s.NIM === '10201210003' || s.NIM === '10201210007');
+            }
+            return all.filter(s => currentUserNim && s.NIM === currentUserNim);
         }
 
         // Tampilkan Modal Anggota Kelas Dinamis
@@ -3397,7 +3666,17 @@
 
             try {
                 const res = await fetch(`/api/class-participants?classId=${encodeURIComponent(resolvedClassId)}`);
-                activeClassParticipantsList = await res.json();
+                if (!res.ok) {
+                    throw new Error('Gagal mengambil data dari server');
+                }
+                const data = await res.json();
+                if (data && data.error) {
+                    throw new Error(data.error);
+                }
+                if (!Array.isArray(data)) {
+                    throw new Error('Format data tidak valid');
+                }
+                activeClassParticipantsList = data;
             } catch (err) {
                 console.error('Gagal mengambil data dari server, fallback...', err);
                 activeClassParticipantsList = getParticipantsForClassFallback(resolvedClassName);
@@ -3414,59 +3693,14 @@
             }
 
             activeClassParticipantsList.forEach(student => {
-                let badgesHtml = '';
-                const computedBadges = getBadgesFromXP(student.xp);
-                computedBadges.forEach(bId => {
-                    const badge = badgesReference[bId];
-                    if (badge) {
-                        badgesHtml += `
-                            <span class="mini-badge-dot ${badge.class}" title="${badge.title}">
-                                <i class="${badge.icon}"></i>
-                            </span>
-                        `;
-                    }
-                });
-                if (badgesHtml === '') badgesHtml = '<span class="text-muted small" style="font-size:0.7rem;">Belum ada lencana</span>';
+                let badgesHtml = renderStudentBadgesHtml(student);
 
                 let rankClass = 'rank-other';
                 if (student.rank === 1) rankClass = 'rank-gold';
                 else if (student.rank === 2) rankClass = 'rank-silver';
                 else if (student.rank === 3) rankClass = 'rank-bronze';
 
-                let avatarMarkup = '';
-                if (student.frame) {
-                    let decoIcons = '';
-                    if (student.frame === 'avatar-frame-gold-decorated') {
-                        decoIcons = `
-                            <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
-                            <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
-                            <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
-                        `;
-                    } else if (student.frame === 'avatar-frame-silver-decorated') {
-                        decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
-                    } else if (student.frame === 'avatar-frame-bronze-decorated') {
-                        decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
-                    } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
-                        decoIcons = `
-                            <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
-                            <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
-                        `;
-                    }
-                    avatarMarkup = `
-                        <div class="avatar-container">
-                            <div class="${student.frame}">
-                                ${decoIcons}
-                                <img src="${student.avatar}" alt="${student.name}" class="leaderboard-avatar-framed">
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    avatarMarkup = `
-                        <div class="avatar-container">
-                            <img src="${student.avatar}" alt="${student.name}" class="leaderboard-avatar" style="margin-right: 0;">
-                        </div>
-                    `;
-                }
+                let avatarMarkup = `<div class="avatar-container">${getAvatarMarkup(student.avatar, student.frame, student.name)}</div>`;
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -3505,113 +3739,202 @@
         }
 
         // Buka Profil Mahasiswa Dinamis
-        function openStudentProfile(studentName, className) {
-            let student = activeClassParticipantsList.find(s => s.name === studentName);
-            if (!student) {
-                const studentsFallback = getParticipantsForClassFallback(className || activeClassName);
-                student = studentsFallback.find(s => s.name === studentName);
-            }
-            if (!student) return;
-
-            document.getElementById('profileModalName').innerText = student.name;
-            document.getElementById('profileModalNim').innerText = `NIM: ${student.NIM}`;
-            document.getElementById('profileModalEmail').innerText = `${student.NIM}@student.universitaspertamina.ac.id`;
-            document.getElementById('profileModalRank').innerText = `#${student.rank}`;
-            document.getElementById('profileModalXp').innerText = `${student.xp} XP`;
-            document.getElementById('profileModalLevel').innerText = student.status;
-
-            const avatarArea = document.getElementById('profileModalAvatarArea');
-            if (avatarArea) {
-                let decoIcons = '';
-                if (student.frame === 'avatar-frame-gold-decorated') {
-                    decoIcons = `
-                        <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
-                        <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
-                        <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
-                    `;
-                } else if (student.frame === 'avatar-frame-silver-decorated') {
-                    decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
-                } else if (student.frame === 'avatar-frame-bronze-decorated') {
-                    decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
-                } else if (student.frame === 'avatar-frame-purple-glow-decorated') {
-                    decoIcons = `
-                        <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
-                        <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
-                    `;
-                }
-
-                if (student.frame) {
-                    avatarArea.innerHTML = `
-                        <div class="${student.frame}">
-                            ${decoIcons}
-                            <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
-                        </div>
-                    `;
+        async function openStudentProfile(studentNameOrNim, className) {
+            let nim = studentNameOrNim;
+            
+            // Check if input is a name instead of NIM
+            if (isNaN(studentNameOrNim)) {
+                // Try to find NIM from activeClassParticipantsList
+                const found = activeClassParticipantsList.find(s => s.name.toLowerCase() === studentNameOrNim.toLowerCase());
+                if (found) {
+                    nim = found.NIM;
                 } else {
-                    avatarArea.innerHTML = `
-                        <img src="${student.avatar}" alt="${student.name}" class="profile-modal-avatar-large">
-                    `;
+                    // Search in fallback
+                    const fallbackList = getParticipantsForClassFallback(className || activeClassName);
+                    const fallbackFound = fallbackList.find(s => s.name.toLowerCase() === studentNameOrNim.toLowerCase());
+                    if (fallbackFound) {
+                        nim = fallbackFound.NIM;
+                    } else {
+                        alert(`Profil untuk ${studentNameOrNim} tidak ditemukan.`);
+                        return;
+                    }
                 }
             }
 
-            const badgesGrid = document.getElementById('profileModalBadgesGrid');
-            if (badgesGrid) {
-                badgesGrid.innerHTML = '';
-                const badgeKeys = ['database', 'analyst', 'style', 'api', 'security', 'grand'];
-                const computedBadges = getBadgesFromXP(student.xp);
-                badgeKeys.forEach(key => {
-                    const badgeInfo = badgesReference[key];
-                    const isUnlocked = computedBadges.includes(key);
+            try {
+                const res = await fetch(`/api/student/${nim}/profile`);
+                const profile = await res.json();
+                if (profile.error) {
+                    alert(profile.error);
+                    return;
+                }
 
-                    const col = document.createElement('div');
-                    col.className = 'col';
-                    col.innerHTML = `
-                        <div class="student-modal-badge-card ${isUnlocked ? 'unlocked' : ''}" title="${isUnlocked ? 'Terbuka: ' + badgeInfo.desc : 'Terkunci: ' + badgeInfo.title}">
-                            <div class="student-modal-badge-icon ${isUnlocked ? badgeInfo.class : 'bg-secondary text-white'}">
-                                <i class="${badgeInfo.icon}"></i>
+                document.getElementById('profileModalName').innerText = profile.name;
+                document.getElementById('profileModalFacultyMajor').innerText = `${profile.faculty || 'Fakultas Sains dan Ilmu Komputer'} - ${profile.major || 'Ilmu Komputer'}`;
+                document.getElementById('profileModalNim').innerText = `NIM: ${profile.nim}`;
+                document.getElementById('profileModalEmail').innerText = `${profile.nim}@student.universitaspertamina.ac.id`;
+                
+                // Hitung total XP
+                const totalXp = profile.classes.reduce((sum, c) => sum + c.localXp, 0);
+                document.getElementById('profileModalXp').innerText = `${totalXp} XP`;
+
+                // Hitung XP kelas tersebut
+                const currentClassInfo = profile.classes.find(c => c.classId === activeClassId);
+                const classXpVal = currentClassInfo ? currentClassInfo.localXp : 0;
+                document.getElementById('profileModalClassXp').innerText = `${classXpVal} XP`;
+
+                // Hitung ranking di leaderboard
+                let studentRank = '-';
+                try {
+                    const lRes = await fetch(`/api/leaderboard?classId=${encodeURIComponent(activeClassId)}`);
+                    const leaderboard = await lRes.json();
+                    const rIndex = leaderboard.findIndex(s => s.nim === profile.nim);
+                    if (rIndex !== -1) studentRank = rIndex + 1;
+                } catch (e) {
+                    console.error(e);
+                }
+                document.getElementById('profileModalRank').innerText = `#${studentRank}`;
+
+                // Status/Rank label
+
+
+                // Avatar Frame
+                const avatarArea = document.getElementById('profileModalAvatarArea');
+                if (avatarArea) {
+                    let decoIcons = '';
+                    if (profile.activeFrame === 'frame_gold_crown') {
+                        decoIcons = `
+                            <span class="crown-overlay"><i class="fa-solid fa-crown"></i></span>
+                            <span class="laurel-left"><i class="fa-solid fa-leaf"></i></span>
+                            <span class="laurel-right"><i class="fa-solid fa-leaf"></i></span>
+                        `;
+                    } else if (profile.activeFrame === 'frame_silver_diamond') {
+                        decoIcons = `<span class="gem-indicator"><i class="fa-solid fa-gem"></i></span>`;
+                    } else if (profile.activeFrame === 'frame_emerald_ring') {
+                        decoIcons = `<span class="star-indicator"><i class="fa-solid fa-star"></i></span>`;
+                    } else if (profile.activeFrame === 'frame_neon_purple') {
+                        decoIcons = `
+                            <span class="bolt-left"><i class="fa-solid fa-bolt"></i></span>
+                            <span class="bolt-right"><i class="fa-solid fa-bolt"></i></span>
+                        `;
+                    }
+
+                    const cssClassMap = {
+                        'frame_gold_crown': 'avatar-frame-gold-decorated',
+                        'frame_silver_diamond': 'avatar-frame-silver-decorated',
+                        'frame_neon_purple': 'avatar-frame-purple-glow-decorated',
+                        'frame_emerald_ring': 'avatar-frame-emerald-decorated'
+                    };
+                    const frameCss = cssClassMap[profile.activeFrame] || '';
+
+                    if (profile.activeFrame) {
+                        avatarArea.innerHTML = `
+                            <div class="${frameCss}">
+                                ${decoIcons}
+                                <img src="${profile.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=60&q=80'}" alt="${profile.name}" class="profile-modal-avatar-large">
                             </div>
-                            <div class="student-modal-badge-title text-truncate">${badgeInfo.title}</div>
-                        </div>
-                    `;
-                    badgesGrid.appendChild(col);
-                });
+                        `;
+                    } else {
+                        avatarArea.innerHTML = `
+                            <img src="${profile.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=60&q=80'}" alt="${profile.name}" class="profile-modal-avatar-large">
+                        `;
+                    }
+                }
+
+                // Render all owned badges (global + class milestones)
+                const badgesGrid = document.getElementById('profileModalBadgesGrid');
+                if (badgesGrid) {
+                    badgesGrid.innerHTML = '';
+                    const allEarnedBadges = [];
+
+                    // Collect earned class milestones
+                    profile.classes.forEach(c => {
+                        const classMilestones = [
+                            { xp: 500, title: `${c.className.split('-')[0].trim()} (500 XP)`, icon: 'fa-solid fa-compass', class: 'bg-badge-database', desc: `Mencapai 500 XP di kelas ${c.className}` },
+                            { xp: 1000, title: `${c.className.split('-')[0].trim()} (1000 XP)`, icon: 'fa-solid fa-code', class: 'bg-badge-analyst', desc: `Mencapai 1000 XP di kelas ${c.className}` },
+                            { xp: 1500, title: `${c.className.split('-')[0].trim()} (1500 XP)`, icon: 'fa-solid fa-award', class: 'bg-badge-style', desc: `Mencapai 1500 XP di kelas ${c.className}` },
+                            { xp: 2000, title: `${c.className.split('-')[0].trim()} (2000 XP)`, icon: 'fa-solid fa-trophy', class: 'bg-badge-grand', desc: `Mencapai 2000 XP di kelas ${c.className}` }
+                        ];
+                        classMilestones.forEach(mil => {
+                            if (c.localXp >= mil.xp) {
+                                allEarnedBadges.push(mil);
+                            }
+                        });
+                    });
+
+                    // Collect owned global badges
+                    const globalKeys = ['database', 'analyst', 'api_architect', 'security', 'design_guru', 'grand_master'];
+                    globalKeys.forEach(key => {
+                        if (profile.ownedBadges.includes(key)) {
+                            const badgeInfo = {
+                                database: { title: 'DATABASE SPECIALIST', icon: 'fa-solid fa-database', class: 'bg-badge-database', desc: 'Lencana Global Database' },
+                                analyst: { title: 'SYSTEM ANALYST', icon: 'fa-solid fa-chart-pie', class: 'bg-badge-analyst', desc: 'Lencana Global Analyst' },
+                                api_architect: { title: 'API ARCHITECT', icon: 'fa-solid fa-plug', class: 'bg-badge-api', desc: 'Lencana Global API' },
+                                security: { title: 'SECURITY WARDEN', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security', desc: 'Lencana Global Security' },
+                                design_guru: { title: 'DESIGN GURU', icon: 'fa-brands fa-css3-alt', class: 'bg-badge-style', desc: 'Lencana Global Design' },
+                                grand_master: { title: 'GRAND MASTER SIM', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand', desc: 'Lencana Global Grand Master' }
+                            }[key];
+                            allEarnedBadges.push(badgeInfo);
+                        }
+                    });
+
+                    if (allEarnedBadges.length === 0) {
+                        badgesGrid.innerHTML = `
+                            <div class="col-12 text-center text-muted small py-3">
+                                <i class="fa-solid fa-medal opacity-50 me-1"></i> Belum memiliki lencana
+                            </div>
+                        `;
+                    } else {
+                        allEarnedBadges.forEach(badge => {
+                            const col = document.createElement('div');
+                            col.className = 'col';
+                            col.innerHTML = `
+                                <div class="student-modal-badge-card unlocked" title="Terbuka: ${badge.desc || badge.title}">
+                                    <div class="student-modal-badge-icon ${badge.class}">
+                                        <i class="${badge.icon}"></i>
+                                    </div>
+                                    <div class="student-modal-badge-title text-truncate" style="max-width: 80px;" title="${badge.title}">${badge.title}</div>
+                                </div>
+                            `;
+                            badgesGrid.appendChild(col);
+                        });
+                    }
+                }
+
+                // Classes local XP and achievements in profileModalSkillsArea
+                const classesArea = document.getElementById('profileModalSkillsArea');
+                if (classesArea) {
+                    classesArea.innerHTML = '';
+                    if (profile.classes.length === 0) {
+                        classesArea.innerHTML = '<p class="text-muted small text-center">Belum terdaftar di kelas mana pun.</p>';
+                    } else {
+                        profile.classes.forEach(c => {
+                            const percent = Math.min(Math.round((c.localXp / 2000) * 100), 100);
+                            const badgesList = c.classBadges.map(b => `<span class="badge bg-info-subtle text-info me-1" style="font-size:0.6rem;">${b}</span>`).join('');
+                            const div = document.createElement('div');
+                            div.className = 'mb-3 pb-2 border-bottom border-light';
+                            div.innerHTML = `
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="small fw-bold text-dark" style="font-size: 0.8rem;">${c.className}</span>
+                                    <span class="badge bg-primary-subtle text-primary" style="font-size: 0.7rem;">${c.localXp} / 2000 XP</span>
+                                </div>
+                                <div class="progress mb-2" style="height: 6px; border-radius: 3px; background-color: #f1f5f9;">
+                                    <div class="progress-bar ${percent >= 100 ? 'bg-success' : 'bg-primary'}" role="progressbar" style="width: ${percent}%"></div>
+                                </div>
+                                <div class="d-flex align-items-center gap-1">
+                                    <span class="text-muted small" style="font-size:0.65rem;">Lencana Kelas: </span>
+                                    ${badgesList || '<span class="text-muted small" style="font-size:0.65rem;">-</span>'}
+                                </div>
+                            `;
+                            classesArea.appendChild(div);
+                        });
+                    }
+                }
+
+                studentProfileModal.show();
+            } catch (err) {
+                console.error("Gagal memuat profil mahasiswa:", err);
             }
-
-            const skillsArea = document.getElementById('profileModalSkillsArea');
-            if (skillsArea) {
-                skillsArea.innerHTML = '';
-                const skillLabels = {
-                    db: 'Database & Data Warehouse',
-                    analysis: 'System Analysis & Use Case',
-                    layout: 'UI Layouting & Flexbox',
-                    api: 'API Integration',
-                    security: 'Security & Audit',
-                    vocal: 'Forum Participation'
-                };
-
-                Object.keys(student.skills).forEach(sKey => {
-                    const val = student.skills[sKey];
-                    const div = document.createElement('div');
-                    div.className = 'skill-bar-container';
-                    div.innerHTML = `
-                        <div class="skill-bar-label">
-                            <span>${skillLabels[sKey]}</span>
-                            <span>${val}%</span>
-                        </div>
-                        <div class="skill-bar-bg">
-                            <div class="skill-bar-fill" style="width: 0%;"></div>
-                        </div>
-                    `;
-                    skillsArea.appendChild(div);
-
-                    setTimeout(() => {
-                        const fill = div.querySelector('.skill-bar-fill');
-                        if (fill) fill.style.width = val + '%';
-                    }, 100);
-                });
-            }
-
-            studentProfileModal.show();
         }
 
         // Fungsi Helper Menampilkan Toast

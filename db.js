@@ -27,22 +27,22 @@ if (!fs.existsSync(dbDir)) {
 
 // Data awal (Seed) jika database belum terisi
 const defaultStudents = [
-    { name: 'Rangga Wijaya', NIM: '10201210001', rank: 1, xp: 980, coins: 450, level: 'Level 5', status: 'SIM Master', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-gold-decorated', badges: ['database', 'analyst', 'vocal', 'style', 'api'], skills: { db: 100, analysis: 95, layout: 80, api: 85, security: 0, vocal: 100 }, password: bcrypt.hashSync('rangga123', 10) },
-    { name: 'Aurelia Putri', NIM: '10201210002', rank: 2, xp: 950, coins: 420, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-silver-decorated', badges: ['database', 'analyst', 'vocal', 'style'], skills: { db: 90, analysis: 90, layout: 100, api: 0, security: 0, vocal: 90 }, password: bcrypt.hashSync('aurelia123', 10) },
-    { name: 'Bobby Kertanegara', NIM: '10201210003', rank: 3, xp: 910, coins: 390, level: 'Level 5', status: 'SIM Specialist', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-bronze-decorated', badges: ['database', 'analyst', 'vocal', 'api'], skills: { db: 85, analysis: 85, layout: 0, api: 90, security: 0, vocal: 90 }, password: bcrypt.hashSync('bobby123', 10) },
-    { name: 'Clarissa Amanda', NIM: '10201210004', rank: 4, xp: 840, coins: 350, level: 'Level 4', status: 'SIM Senior', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&q=80', frame: '', badges: ['database', 'analyst', 'vocal'], skills: { db: 80, analysis: 85, layout: 0, api: 0, security: 0, vocal: 95 }, password: bcrypt.hashSync('clarissa123', 10) },
-    { name: 'Farhan Ramadhan', NIM: '10201210005', rank: 5, xp: 780, coins: 310, level: 'Level 4', status: 'SIM Senior', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=60&q=80', frame: '', badges: ['database', 'analyst'], skills: { db: 80, analysis: 80, layout: 0, api: 0, security: 0, vocal: 0 }, password: bcrypt.hashSync('farhan123', 10) },
-    { name: 'Kevin Sanjaya', NIM: '10201210006', rank: 6, xp: 720, coins: 280, level: 'Level 4', status: 'SIM Senior', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80', frame: '', badges: ['database', 'vocal'], skills: { db: 70, analysis: 0, layout: 0, api: 0, security: 0, vocal: 95 }, password: bcrypt.hashSync('kevin123', 10) },
-    { name: 'Dimas Dwi Budi Sulistio', NIM: '10201210007', rank: 7, xp: 650, coins: 420, level: 'Level 4', status: 'SIM Apprentice', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80', frame: 'avatar-frame-purple-glow-decorated', badges: ['database', 'analyst', 'vocal'], skills: { db: 90, analysis: 85, layout: 0, api: 0, security: 0, vocal: 90 }, password: bcrypt.hashSync('dimas123', 10) },
-    { name: 'Siti Rahma', NIM: '10201210008', rank: 8, xp: 590, coins: 200, level: 'Level 3', status: 'SIM Junior', role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80', frame: '', badges: ['database'], skills: { db: 75, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 }, password: bcrypt.hashSync('siti123', 10) }
+    { name: 'Rangga Wijaya', NIM: '10201210001', rank: 1, global_coins: 450, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: ['database', 'analyst'], password: bcrypt.hashSync('rangga123', 10), faculty: 'Fakultas Sains dan Ilmu Komputer', major: 'Ilmu Komputer' },
+    { name: 'Aurelia Putri', NIM: '10201210002', rank: 2, global_coins: 320, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: ['database'], password: bcrypt.hashSync('aurelia123', 10), faculty: 'Fakultas Teknologi Industri', major: 'Teknik Kimia' },
+    { name: 'Bobby Kertanegara', NIM: '10201210003', rank: 3, global_coins: 290, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: [], password: bcrypt.hashSync('bobby123', 10), faculty: 'Fakultas Teknologi Industri', major: 'Teknik Elektro' },
+    { name: 'Clarissa Amanda', NIM: '10201210004', rank: 4, global_coins: 250, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: [], password: bcrypt.hashSync('clarissa123', 10), faculty: 'Fakultas Ekonomi dan Bisnis', major: 'Manajemen' },
+    { name: 'Farhan Ramadhan', NIM: '10201210005', rank: 5, global_coins: 210, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: [], password: bcrypt.hashSync('farhan123', 10), faculty: 'Fakultas Komunikasi dan Diplomasi', major: 'Hubungan Internasional' },
+    { name: 'Kevin Sanjaya', NIM: '10201210006', rank: 6, global_coins: 180, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: [], password: bcrypt.hashSync('kevin123', 10), faculty: 'Fakultas Perencanaan Infrastruktur', major: 'Teknik Sipil' },
+    { name: 'Dimas Dwi Budi Sulistio', NIM: '10201210007', rank: 7, global_coins: 420, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: ['database', 'analyst'], password: bcrypt.hashSync('dimas123', 10), faculty: 'Fakultas Sains dan Ilmu Komputer', major: 'Ilmu Komputer' },
+    { name: 'Siti Rahma', NIM: '10201210008', rank: 8, global_coins: 100, role: 'Mahasiswa', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80', frame: '', owned_frames: [], owned_badges: [], password: bcrypt.hashSync('siti123', 10), faculty: 'Fakultas Teknologi Eksplorasi dan Produksi', major: 'Teknik Perminyakan' }
 ];
 
 const defaultLecturers = [
-    { name: 'Prof. Hermawan Kartajaya', email: 'hermawan@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=60&q=80' },
-    { name: 'Sarah Wijaya, M.Si.', email: 'sarah.wijaya@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80' },
-    { name: 'Jafar Shadiq, M.Cs.', email: 'jafar.shadiq@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=60&q=80' },
-    { name: 'Dr. Irwan Prasetyo, M.E.', email: 'irwan.prasetyo@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80' },
-    { name: 'Alice Smith, M.Hum.', email: 'alice.smith@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=60&q=80' }
+    { name: 'Prof. Hermawan Kartajaya', email: 'hermawan@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=60&q=80', faculty: 'Fakultas Ekonomi dan Bisnis', major: 'Manajemen' },
+    { name: 'Sarah Wijaya, M.Si.', email: 'sarah.wijaya@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=60&q=80', faculty: 'Fakultas Teknologi Industri', major: 'Teknik Kimia' },
+    { name: 'Jafar Shadiq, M.Cs.', email: 'jafar.shadiq@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=60&q=80', faculty: 'Fakultas Sains dan Ilmu Komputer', major: 'Ilmu Komputer' },
+    { name: 'Dr. Irwan Prasetyo, M.E.', email: 'irwan.prasetyo@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=60&q=80', faculty: 'Fakultas Ekonomi dan Bisnis', major: 'Ekonomi' },
+    { name: 'Alice Smith, M.Hum.', email: 'alice.smith@universitaspertamina.ac.id', role: 'Dosen', password: bcrypt.hashSync('dosen123', 10), avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=60&q=80', faculty: 'Fakultas Komunikasi dan Diplomasi', major: 'Ilmu Komunikasi' }
 ];
 
 const defaultClasses = [
@@ -57,20 +57,38 @@ const defaultClasses = [
 const defaultEnrollments = defaultStudents.map((student, idx) => ({
     studentNim: student.NIM,
     classId: 'SIM-MN8-2025',
-    localXp: [120, 150, 110, 80, 70, 95, 90, 60][idx] || 0
+    localXp: [980, 950, 910, 840, 780, 720, 650, 590][idx] || 0,
+    classBadges: idx < 3 ? ['data_explorer', 'query_master'] : (idx < 6 ? ['data_explorer'] : []),
+    isCompleted: false,
+    coinsClaimed: false
 })).concat([
-    // Daftarkan beberapa ke kelas lain agar variatif
-    { studentNim: '10201210001', classId: 'LPK-MN8-2025', localXp: 180 },
-    { studentNim: '10201210002', classId: 'LPK-MN8-2025', localXp: 120 },
-    { studentNim: '10201210001', classId: 'PAJAK-MN8A-2025', localXp: 90 },
-    { studentNim: '10201210002', classId: 'PAJAK-MN8A-2025', localXp: 210 },
-    { studentNim: '10201210003', classId: 'PAJAK-MN8A-2025', localXp: 140 },
-    { studentNim: '10201210001', classId: 'FINTECH-MN8-2025', localXp: 75 },
-    { studentNim: '10201210003', classId: 'FINTECH-MN8-2025', localXp: 160 },
-    { studentNim: '10201210001', classId: 'ENG-II-2025', localXp: 50 },
-    { studentNim: '10201210003', classId: 'ENG-II-2025', localXp: 110 },
-    { studentNim: '10201210007', classId: 'ENG-II-2025', localXp: 150 }
+    { studentNim: '10201210001', classId: 'LPK-MN8-2025', localXp: 1800, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210002', classId: 'LPK-MN8-2025', localXp: 1200, classBadges: [], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210001', classId: 'PAJAK-MN8A-2025', localXp: 900, classBadges: [], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210002', classId: 'PAJAK-MN8A-2025', localXp: 2100, classBadges: ['data_explorer', 'query_master', 'class_champion'], isCompleted: true, coinsClaimed: true },
+    { studentNim: '10201210003', classId: 'PAJAK-MN8A-2025', localXp: 1400, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210001', classId: 'FINTECH-MN8-2025', localXp: 750, classBadges: [], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210003', classId: 'FINTECH-MN8-2025', localXp: 1600, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210001', classId: 'ENG-II-2025', localXp: 500, classBadges: [], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210003', classId: 'ENG-II-2025', localXp: 1100, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false },
+    { studentNim: '10201210007', classId: 'ENG-II-2025', localXp: 1500, classBadges: ['data_explorer'], isCompleted: false, coinsClaimed: false }
 ]);
+
+// Shop items seed
+const defaultShopItems = [
+    // Frames
+    { itemId: 'frame_gold_crown', itemType: 'frame', name: 'Gold Crown', description: 'Bingkai emas mewah dengan efek crown.', price: 500, icon: 'fa-solid fa-crown', cssClass: 'avatar-frame-gold-decorated', previewUrl: '' },
+    { itemId: 'frame_silver_diamond', itemType: 'frame', name: 'Silver Diamond', description: 'Bingkai perak elegan dengan kilau berlian.', price: 350, icon: 'fa-solid fa-gem', cssClass: 'avatar-frame-silver-decorated', previewUrl: '' },
+    { itemId: 'frame_neon_purple', itemType: 'frame', name: 'Neon Purple Glow', description: 'Bingkai neon ungu berpendar futuristik.', price: 300, icon: 'fa-solid fa-circle-radiation', cssClass: 'avatar-frame-purple-glow-decorated', previewUrl: '' },
+    { itemId: 'frame_emerald_ring', itemType: 'frame', name: 'Emerald Ring', description: 'Bingkai zamrud dengan aura hijau.', price: 250, icon: 'fa-solid fa-ring', cssClass: 'avatar-frame-emerald-decorated', previewUrl: '' },
+    // Global Badges
+    { itemId: 'database', itemType: 'badge', name: 'Database Master', description: 'Menguasai desain dan manajemen basis data.', price: 200, icon: 'fa-solid fa-database', cssClass: 'bg-badge-database', previewUrl: '' },
+    { itemId: 'analyst', itemType: 'badge', name: 'System Analyst', description: 'Ahli analisis dan perancangan sistem informasi.', price: 200, icon: 'fa-solid fa-chart-pie', cssClass: 'bg-badge-analyst', previewUrl: '' },
+    { itemId: 'api_architect', itemType: 'badge', name: 'API Architect', description: 'Pakar integrasi API dan pertukaran data.', price: 200, icon: 'fa-solid fa-plug', cssClass: 'bg-badge-api', previewUrl: '' },
+    { itemId: 'security', itemType: 'badge', name: 'Security Warden', description: 'Penjaga keamanan dan audit sistem.', price: 250, icon: 'fa-solid fa-shield-halved', cssClass: 'bg-badge-security', previewUrl: '' },
+    { itemId: 'design_guru', itemType: 'badge', name: 'Design Guru', description: 'Master desain UI/UX dan layouting.', price: 200, icon: 'fa-brands fa-css3-alt', cssClass: 'bg-badge-style', previewUrl: '' },
+    { itemId: 'grand_master', itemType: 'badge', name: 'Grand Master SIM', description: 'Pencapaian tertinggi: menguasai seluruh aspek SIM.', price: 500, icon: 'fa-solid fa-trophy', cssClass: 'bg-badge-grand', previewUrl: '' }
+];
 
 const defaultMaterials = [
     { id: 1, classId: 'SIM-MN8-2025', title: 'Pengantar Sistem Informasi Manajemen', fileName: 'Modul_1_Intro_to_MIS.pdf', fileType: 'pdf', fileSize: '1.8 MB', downloadUrl: '#', description: 'Materi ini membahas dasar-dasar Sistem Informasi Manajemen, sejarah perkembangannya, serta bagaimana SIM dapat membantu efisiensi bisnis perusahaan modern.', additionalFiles: [{ name: 'Slide_Intro_SIM_Tambahan.pptx', type: 'pptx', size: '2.1 MB' }, { name: 'Jurnal_Referensi_SIM_Global.pdf', type: 'pdf', size: '1.4 MB' }] },
@@ -111,6 +129,8 @@ const initialDb = {
     quests: defaultQuests,
     submissions: defaultSubmissions,
     studentMaterials: [],
+    shopItems: defaultShopItems,
+    purchases: [],
     logs: [
         { id: 1, action: 'Sistem Terbuka', detail: 'Inisialisasi database awal dengan seed data.', timestamp: new Date().toISOString() }
     ]
@@ -248,13 +268,13 @@ function mapUserToJs(row) {
         avatar: row.avatar,
         frame: row.frame || '',
         rank: row.rank,
-        xp: row.xp,
-        coins: row.coins !== undefined ? row.coins : 420,
-        level: row.level,
-        status: row.status,
-        badges: row.badges || [],
-        skills: typeof row.skills === 'string' ? JSON.parse(row.skills) : (row.skills || {}),
-        username: row.username
+        global_coins: row.global_coins !== undefined ? row.global_coins : (row.coins || 0),
+        owned_frames: typeof row.owned_frames === 'string' ? JSON.parse(row.owned_frames) : (row.owned_frames || []),
+        owned_badges: typeof row.owned_badges === 'string' ? JSON.parse(row.owned_badges) : (row.owned_badges || []),
+        active_frame: row.active_frame !== undefined ? row.active_frame : (row.frame || ''),
+        username: row.username,
+        faculty: row.faculty || '',
+        major: row.major || ''
     };
 }
 
@@ -278,7 +298,10 @@ function mapEnrollmentToJs(row) {
     return {
         studentNim: row.student_nim,
         classId: row.class_id,
-        localXp: row.local_xp || 0
+        localXp: row.local_xp || 0,
+        classBadges: typeof row.class_badges === 'string' ? JSON.parse(row.class_badges) : (row.class_badges || []),
+        isCompleted: row.is_completed || false,
+        coinsClaimed: row.coins_claimed || false
     };
 }
 
@@ -299,8 +322,8 @@ async function seedDatabase() {
         // Seed users
         for (const u of initialDb.users) {
             await pool.query(
-                `INSERT INTO sim_users (name, nim, email, password, role, avatar, frame, rank, xp, coins, level, status, badges, skills, username) 
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+                `INSERT INTO sim_users (name, nim, email, password, role, avatar, frame, rank, global_coins, owned_frames, owned_badges, username, faculty, major) 
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
                  ON CONFLICT (nim) DO NOTHING`,
                 [
                     u.name, 
@@ -311,13 +334,12 @@ async function seedDatabase() {
                     u.avatar || null, 
                     u.frame || '', 
                     u.rank || null, 
-                    u.xp !== undefined ? u.xp : (u.role === 'Mahasiswa' ? 0 : null), 
-                    u.coins !== undefined ? u.coins : (u.role === 'Mahasiswa' ? 420 : null),
-                    u.level || (u.role === 'Mahasiswa' ? 'Level 1' : null), 
-                    u.status || (u.role === 'Mahasiswa' ? 'Apprentice' : null), 
-                    u.badges || [], 
-                    u.skills || null,
-                    u.username || generateUsername(u.name)
+                    u.global_coins || 0,
+                    JSON.stringify(u.owned_frames || []),
+                    JSON.stringify(u.owned_badges || []),
+                    u.username || generateUsername(u.name),
+                    u.faculty || '',
+                    u.major || ''
                 ]
             );
         }
@@ -335,10 +357,14 @@ async function seedDatabase() {
         // Seed enrollments
         for (const e of initialDb.enrollments) {
             await pool.query(
-                `INSERT INTO sim_enrollments (student_nim, class_id, local_xp) 
-                 VALUES ($1, $2, $3)
-                 ON CONFLICT (student_nim, class_id) DO NOTHING`,
-                [e.studentNim, e.classId, e.localXp || 0]
+                `INSERT INTO sim_enrollments (student_nim, class_id, local_xp, class_badges, is_completed, coins_claimed) 
+                 VALUES ($1, $2, $3, $4, $5, $6)
+                 ON CONFLICT (student_nim, class_id) DO UPDATE 
+                 SET local_xp = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.local_xp ELSE sim_enrollments.local_xp END,
+                     class_badges = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.class_badges ELSE sim_enrollments.class_badges END,
+                     is_completed = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.is_completed ELSE sim_enrollments.is_completed END,
+                     coins_claimed = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.coins_claimed ELSE sim_enrollments.coins_claimed END`,
+                [e.studentNim, e.classId, e.localXp || 0, JSON.stringify(e.classBadges || []), e.isCompleted || false, e.coinsClaimed || false]
             );
         }
         
@@ -366,10 +392,21 @@ async function seedDatabase() {
         // Seed quests
         for (const q of initialDb.quests) {
             await pool.query(
-                `INSERT INTO sim_quests (id, class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files) 
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                `INSERT INTO sim_quests (id, class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files, allow_late_submission, late_penalty) 
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                  ON CONFLICT (id) DO NOTHING`,
-                [q.id, q.classId, q.title, q.description, q.xpReward, q.coinReward, q.deadline, JSON.stringify(q.lecturerFiles || [])]
+                [
+                    q.id,
+                    q.classId,
+                    q.title,
+                    q.description,
+                    q.xpReward,
+                    q.coinReward,
+                    q.deadline,
+                    JSON.stringify(q.lecturerFiles || []),
+                    q.allowLateSubmission !== undefined ? q.allowLateSubmission : true,
+                    q.latePenalty !== undefined ? q.latePenalty : 30
+                ]
             );
         }
         await pool.query(`SELECT setval('sim_quests_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_quests), 1), false)`);
@@ -384,6 +421,16 @@ async function seedDatabase() {
             );
         }
         await pool.query(`SELECT setval('sim_submissions_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_submissions), 1), false)`);
+
+        // Seed shop items
+        for (const item of initialDb.shopItems) {
+            await pool.query(
+                `INSERT INTO sim_shop_items (item_id, item_type, name, description, price, icon, css_class) 
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)
+                 ON CONFLICT (item_id) DO NOTHING`,
+                [item.itemId, item.itemType, item.name, item.description, item.price, item.icon, item.cssClass]
+            );
+        }
 
         // Sinkronkan sequence ID log
         await pool.query(`SELECT setval('sim_logs_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_logs), 1), false)`);
@@ -420,7 +467,9 @@ async function checkAndInitPg() {
                 status VARCHAR(100) DEFAULT 'Apprentice',
                 badges TEXT[] DEFAULT '{}',
                 skills JSONB DEFAULT '{"db": 0, "analysis": 0, "layout": 0, "api": 0, "security": 0, "vocal": 0}',
-                username VARCHAR(100) UNIQUE
+                username VARCHAR(100) UNIQUE,
+                faculty VARCHAR(100) DEFAULT '',
+                major VARCHAR(100) DEFAULT ''
             );
             
             CREATE TABLE IF NOT EXISTS sim_classes (
@@ -473,7 +522,9 @@ async function checkAndInitPg() {
                 xp_reward INTEGER DEFAULT 100,
                 coin_reward INTEGER DEFAULT 50,
                 deadline VARCHAR(100),
-                lecturer_files JSONB DEFAULT '[]'
+                lecturer_files JSONB DEFAULT '[]',
+                allow_late_submission BOOLEAN DEFAULT TRUE,
+                late_penalty INTEGER DEFAULT 30
             );
 
             CREATE TABLE IF NOT EXISTS sim_submissions (
@@ -495,7 +546,67 @@ async function checkAndInitPg() {
             ALTER TABLE sim_materials ADD COLUMN IF NOT EXISTS description TEXT;
             ALTER TABLE sim_materials ADD COLUMN IF NOT EXISTS additional_files JSONB DEFAULT '[]';
             ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS username VARCHAR(100) UNIQUE;
+            
+            -- Gamification V2: new columns
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS global_coins INTEGER DEFAULT 0;
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS owned_frames JSONB DEFAULT '[]';
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS owned_badges JSONB DEFAULT '[]';
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS active_frame VARCHAR(100) DEFAULT '';
+            
+            ALTER TABLE sim_enrollments ADD COLUMN IF NOT EXISTS class_badges JSONB DEFAULT '[]';
+            ALTER TABLE sim_enrollments ADD COLUMN IF NOT EXISTS is_completed BOOLEAN DEFAULT FALSE;
+            ALTER TABLE sim_enrollments ADD COLUMN IF NOT EXISTS coins_claimed BOOLEAN DEFAULT FALSE;
+
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS faculty VARCHAR(100) DEFAULT '';
+            ALTER TABLE sim_users ADD COLUMN IF NOT EXISTS major VARCHAR(100) DEFAULT '';
+
+            -- Late submission configurations on quests
+            ALTER TABLE sim_quests ADD COLUMN IF NOT EXISTS allow_late_submission BOOLEAN DEFAULT TRUE;
+            ALTER TABLE sim_quests ADD COLUMN IF NOT EXISTS late_penalty INTEGER DEFAULT 30;
         `);
+
+        // Gamification V2: new tables
+        await pool.query(`
+            CREATE TABLE IF NOT EXISTS sim_shop_items (
+                id SERIAL PRIMARY KEY,
+                item_id VARCHAR(50) UNIQUE NOT NULL,
+                item_type VARCHAR(20) NOT NULL,
+                name VARCHAR(100) NOT NULL,
+                description TEXT,
+                price INTEGER NOT NULL,
+                icon VARCHAR(100),
+                css_class VARCHAR(100)
+            );
+            
+            CREATE TABLE IF NOT EXISTS sim_purchases (
+                id SERIAL PRIMARY KEY,
+                student_nim VARCHAR(50) NOT NULL,
+                item_id VARCHAR(50) NOT NULL,
+                purchased_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS sim_class_logs (
+                id SERIAL PRIMARY KEY,
+                class_id VARCHAR(100) NOT NULL,
+                activity_text TEXT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+            );
+        `);
+
+        // Sync shop items seed data
+        for (const item of defaultShopItems) {
+            await pool.query(
+                `INSERT INTO sim_shop_items (item_id, item_type, name, description, price, icon, css_class)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7)
+                 ON CONFLICT (item_id) DO UPDATE SET
+                    name = EXCLUDED.name,
+                    description = EXCLUDED.description,
+                    price = EXCLUDED.price,
+                    icon = EXCLUDED.icon,
+                    css_class = EXCLUDED.css_class`,
+                [item.itemId, item.itemType, item.name, item.description, item.price, item.icon, item.cssClass]
+            );
+        }
 
         // Sinkronkan username & perbaiki role di PG
         const usersRes = await pool.query('SELECT id, name, username, role FROM sim_users');
@@ -549,16 +660,29 @@ async function checkAndInitPg() {
             console.log('[DATABASE] Menyinkronkan data quests ke Supabase...');
             for (const q of initialDb.quests) {
                 await pool.query(
-                    `INSERT INTO sim_quests (id, class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                    `INSERT INTO sim_quests (id, class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files, allow_late_submission, late_penalty) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
                      ON CONFLICT (id) DO UPDATE SET 
                         title = EXCLUDED.title,
                         description = EXCLUDED.description,
                         xp_reward = EXCLUDED.xp_reward,
                         coin_reward = EXCLUDED.coin_reward,
                         deadline = EXCLUDED.deadline,
-                        lecturer_files = EXCLUDED.lecturer_files`,
-                    [q.id, q.classId, q.title, q.description, q.xpReward, q.coinReward, q.deadline, JSON.stringify(q.lecturerFiles || [])]
+                        lecturer_files = EXCLUDED.lecturer_files,
+                        allow_late_submission = EXCLUDED.allow_late_submission,
+                        late_penalty = EXCLUDED.late_penalty`,
+                    [
+                        q.id,
+                        q.classId,
+                        q.title,
+                        q.description,
+                        q.xpReward,
+                        q.coinReward,
+                        q.deadline,
+                        JSON.stringify(q.lecturerFiles || []),
+                        q.allowLateSubmission !== undefined ? q.allowLateSubmission : true,
+                        q.latePenalty !== undefined ? q.latePenalty : 30
+                    ]
                 );
             }
             await pool.query(`SELECT setval('sim_quests_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_quests), 1), false)`);
@@ -579,6 +703,21 @@ async function checkAndInitPg() {
                 );
             }
             await pool.query(`SELECT setval('sim_submissions_id_seq', COALESCE((SELECT MAX(id)+1 FROM sim_submissions), 1), false)`);
+
+            // Sinkronkan data enrollments agar default local_xp, badges, dll. masuk
+            console.log('[DATABASE] Menyinkronkan data enrollments ke Supabase...');
+            for (const e of initialDb.enrollments) {
+                await pool.query(
+                    `INSERT INTO sim_enrollments (student_nim, class_id, local_xp, class_badges, is_completed, coins_claimed) 
+                     VALUES ($1, $2, $3, $4, $5, $6)
+                     ON CONFLICT (student_nim, class_id) DO UPDATE 
+                     SET local_xp = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.local_xp ELSE sim_enrollments.local_xp END,
+                         class_badges = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.class_badges ELSE sim_enrollments.class_badges END,
+                         is_completed = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.is_completed ELSE sim_enrollments.is_completed END,
+                         coins_claimed = CASE WHEN sim_enrollments.local_xp = 0 THEN EXCLUDED.coins_claimed ELSE sim_enrollments.coins_claimed END`,
+                    [e.studentNim, e.classId, e.localXp || 0, JSON.stringify(e.classBadges || []), e.isCompleted || false, e.coinsClaimed || false]
+                );
+            }
         }
         
         isInitialized = true;
@@ -605,6 +744,71 @@ async function executeQuery(pgQueryFn, jsonFallbackFn) {
         }
     }
     return jsonFallbackFn();
+}
+
+function calculateXpBonus(submittedDateStr, deadlineStr, grade, precedingCount, latePenalty) {
+    let timeBonus = 0;
+    let gradeBonus = 0;
+    
+    // Grade bonus: ≥90 = +50 XP, ≥75 = +25 XP, ≥60 = +10 XP, <60 = +0
+    const gradeNum = parseFloat(grade) || 0;
+    if (gradeNum >= 90) gradeBonus = 50;
+    else if (gradeNum >= 75) gradeBonus = 25;
+    else if (gradeNum >= 60) gradeBonus = 10;
+    
+    let fastBonus = 0;
+    if (precedingCount === 0) {
+        fastBonus = 20;
+    } else if (precedingCount >= 1 && precedingCount <= 4) {
+        fastBonus = 10;
+    }
+
+    const monthMap = {
+        'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'mei': 4, 'jun': 5,
+        'jul': 6, 'agu': 7, 'sep': 8, 'okt': 9, 'nov': 10, 'des': 11,
+        'januari': 0, 'februari': 1, 'maret': 2, 'april': 3, 'mei': 4, 'juni': 5,
+        'juli': 6, 'agustus': 7, 'september': 8, 'oktober': 9, 'november': 10, 'desember': 11
+    };
+
+    const parseDate = (str) => {
+        if (!str) return null;
+        const match = str.match(/(\d+)\s+([A-Za-z]+)\s+(\d{4})/);
+        if (!match) return null;
+        const day = parseInt(match[1]);
+        const monthStr = match[2].toLowerCase();
+        const year = parseInt(match[3]);
+        const month = monthMap[monthStr] !== undefined ? monthMap[monthStr] : 0;
+        return new Date(year, month, day);
+    };
+
+    const submittedDate = parseDate(submittedDateStr);
+    const deadlineDate = parseDate(deadlineStr);
+
+    let isLate = false;
+    if (submittedDate && deadlineDate) {
+        submittedDate.setHours(0, 0, 0, 0);
+        deadlineDate.setHours(0, 0, 0, 0);
+        if (submittedDate.getTime() > deadlineDate.getTime()) {
+            isLate = true;
+        }
+    }
+
+    if (isLate) {
+        timeBonus = -Math.abs(latePenalty !== undefined ? latePenalty : 30);
+    } else {
+        timeBonus = fastBonus;
+    }
+    
+    return { timeBonus, gradeBonus, totalBonus: timeBonus + gradeBonus };
+}
+
+function calculateClassBadges(localXp) {
+    const badges = [];
+    if (localXp >= 500) badges.push('data_explorer');
+    if (localXp >= 1000) badges.push('query_master');
+    if (localXp >= 1500) badges.push('class_champion');
+    if (localXp >= 2000) badges.push('class_master');
+    return badges;
 }
 
 const db = {
@@ -639,8 +843,8 @@ const db = {
                 const skills = userData.role === 'Mahasiswa' ? { db: 0, analysis: 0, layout: 0, api: 0, security: 0, vocal: 0 } : null;
                 
                 const res = await pool.query(
-                    `INSERT INTO sim_users (name, nim, email, password, role, avatar, frame, rank, xp, level, status, badges, skills, username)
-                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+                    `INSERT INTO sim_users (name, nim, email, password, role, avatar, frame, rank, xp, level, status, badges, skills, username, faculty, major)
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
                      RETURNING *`,
                     [
                         userData.name,
@@ -656,7 +860,9 @@ const db = {
                         status,
                         badges,
                         skills,
-                        generateUsername(userData.name)
+                        generateUsername(userData.name),
+                        userData.faculty || '',
+                        userData.major || ''
                     ]
                 );
                 
@@ -1014,6 +1220,38 @@ const db = {
         );
     },
 
+    getQuestById: (questId) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query('SELECT * FROM sim_quests WHERE id = $1', [questId]);
+                if (res.rows.length === 0) return null;
+                const row = res.rows[0];
+                return {
+                    id: row.id,
+                    classId: row.class_id,
+                    title: row.title,
+                    description: row.description,
+                    xpReward: row.xp_reward,
+                    coinReward: row.coin_reward,
+                    deadline: row.deadline,
+                    lecturerFiles: typeof row.lecturer_files === 'string' ? JSON.parse(row.lecturer_files) : (row.lecturer_files || []),
+                    allowLateSubmission: row.allow_late_submission !== false,
+                    latePenalty: row.late_penalty !== undefined ? row.late_penalty : 30
+                };
+            },
+            () => {
+                const data = readDb();
+                const q = (data.quests || []).find(x => x.id === parseInt(questId));
+                if (!q) return null;
+                return {
+                    ...q,
+                    allowLateSubmission: q.allowLateSubmission !== false,
+                    latePenalty: q.latePenalty !== undefined ? q.latePenalty : 30
+                };
+            }
+        );
+    },
+
     getQuests: (classId) => {
         return executeQuery(
             async () => {
@@ -1026,12 +1264,18 @@ const db = {
                     xpReward: row.xp_reward,
                     coinReward: row.coin_reward,
                     deadline: row.deadline,
-                    lecturerFiles: typeof row.lecturer_files === 'string' ? JSON.parse(row.lecturer_files) : (row.lecturer_files || [])
+                    lecturerFiles: typeof row.lecturer_files === 'string' ? JSON.parse(row.lecturer_files) : (row.lecturer_files || []),
+                    allowLateSubmission: row.allow_late_submission !== false,
+                    latePenalty: row.late_penalty !== undefined ? row.late_penalty : 30
                 }));
             },
             () => {
                 const data = readDb();
-                return (data.quests || []).filter(q => q.classId === classId);
+                return (data.quests || []).filter(q => q.classId === classId).map(q => ({
+                    ...q,
+                    allowLateSubmission: q.allowLateSubmission !== false,
+                    latePenalty: q.latePenalty !== undefined ? q.latePenalty : 30
+                }));
             }
         );
     },
@@ -1062,6 +1306,8 @@ const db = {
                         coinReward: q.coin_reward,
                         deadline: q.deadline,
                         lecturerFiles: typeof q.lecturer_files === 'string' ? JSON.parse(q.lecturer_files) : (q.lecturer_files || []),
+                        allowLateSubmission: q.allow_late_submission !== false,
+                        latePenalty: q.late_penalty !== undefined ? q.late_penalty : 30,
                         status: sub ? sub.status : defaultStatus,
                         submittedFile: sub ? sub.submitted_file : '',
                         submittedDate: sub ? sub.submitted_date : '',
@@ -1088,6 +1334,8 @@ const db = {
                     }
                     return {
                         ...q,
+                        allowLateSubmission: q.allowLateSubmission !== false,
+                        latePenalty: q.latePenalty !== undefined ? q.latePenalty : 30,
                         status: sub ? sub.status : defaultStatus,
                         submittedFile: sub ? sub.submittedFile : '',
                         submittedDate: sub ? sub.submittedDate : '',
@@ -1103,8 +1351,8 @@ const db = {
         return executeQuery(
             async () => {
                 const res = await pool.query(
-                    `INSERT INTO sim_quests (class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files) 
-                     VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+                    `INSERT INTO sim_quests (class_id, title, description, xp_reward, coin_reward, deadline, lecturer_files, allow_late_submission, late_penalty) 
+                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
                     [
                         questData.classId,
                         questData.title,
@@ -1112,7 +1360,9 @@ const db = {
                         questData.xpReward || 100,
                         questData.coinReward || 50,
                         questData.deadline || '',
-                        JSON.stringify(questData.lecturerFiles || [])
+                        JSON.stringify(questData.lecturerFiles || []),
+                        questData.allowLateSubmission !== false,
+                        questData.latePenalty !== undefined ? questData.latePenalty : 30
                     ]
                 );
                 await pool.query('UPDATE sim_classes SET total_quests = total_quests + 1 WHERE id = $1', [questData.classId]);
@@ -1126,7 +1376,9 @@ const db = {
                     xpReward: q.xp_reward,
                     coinReward: q.coin_reward,
                     deadline: q.deadline,
-                    lecturerFiles: typeof q.lecturer_files === 'string' ? JSON.parse(q.lecturer_files) : (q.lecturer_files || [])
+                    lecturerFiles: typeof q.lecturer_files === 'string' ? JSON.parse(q.lecturer_files) : (q.lecturer_files || []),
+                    allowLateSubmission: q.allow_late_submission !== false,
+                    latePenalty: q.late_penalty !== undefined ? q.late_penalty : 30
                 };
             },
             () => {
@@ -1140,7 +1392,9 @@ const db = {
                     xpReward: questData.xpReward || 100,
                     coinReward: questData.coinReward || 50,
                     deadline: questData.deadline || '',
-                    lecturerFiles: questData.lecturerFiles || []
+                    lecturerFiles: questData.lecturerFiles || [],
+                    allowLateSubmission: questData.allowLateSubmission !== false,
+                    latePenalty: questData.latePenalty !== undefined ? questData.latePenalty : 30
                 };
                 if (!data.quests) data.quests = [];
                 data.quests.push(newQuest);
@@ -1213,12 +1467,31 @@ const db = {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
                 const dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
                 
-                const res = await pool.query(
-                    `INSERT INTO sim_submissions (student_nim, quest_id, submitted_file, submitted_date, status)
-                     VALUES ($1, $2, $3, $4, 'pending_grade') RETURNING *`,
-                    [studentNim, questId, submittedFile, dateStr]
+                const checkRes = await pool.query(
+                    `SELECT * FROM sim_submissions WHERE student_nim = $1 AND quest_id = $2`,
+                    [studentNim, questId]
                 );
-                return res.rows[0];
+                
+                if (checkRes.rows.length > 0) {
+                    const existing = checkRes.rows[0];
+                    if (existing.status === 'completed') {
+                        return { error: 'Tugas sudah dinilai, tidak dapat diubah.' };
+                    }
+                    const updateRes = await pool.query(
+                        `UPDATE sim_submissions 
+                         SET submitted_file = $1, submitted_date = $2 
+                         WHERE student_nim = $3 AND quest_id = $4 RETURNING *`,
+                        [submittedFile, dateStr, studentNim, questId]
+                    );
+                    return updateRes.rows[0];
+                } else {
+                    const res = await pool.query(
+                        `INSERT INTO sim_submissions (student_nim, quest_id, submitted_file, submitted_date, status)
+                         VALUES ($1, $2, $3, $4, 'pending_grade') RETURNING *`,
+                        [studentNim, questId, submittedFile, dateStr]
+                    );
+                    return res.rows[0];
+                }
             },
             () => {
                 const data = readDb();
@@ -1226,21 +1499,33 @@ const db = {
                 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
                 const dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
                 
-                const newId = (data.submissions || []).reduce((max, s) => s.id > max ? s.id : max, 0) + 1;
-                const sub = {
-                    id: newId,
-                    studentNim,
-                    questId: parseInt(questId),
-                    submittedFile,
-                    submittedDate: dateStr,
-                    grade: '',
-                    feedback: '',
-                    status: 'pending_grade'
-                };
                 if (!data.submissions) data.submissions = [];
-                data.submissions.push(sub);
-                writeDb(data);
-                return sub;
+                const existing = data.submissions.find(s => s.studentNim === studentNim && s.questId === parseInt(questId));
+                
+                if (existing) {
+                    if (existing.status === 'completed') {
+                        return { error: 'Tugas sudah dinilai, tidak dapat diubah.' };
+                    }
+                    existing.submittedFile = submittedFile;
+                    existing.submittedDate = dateStr;
+                    writeDb(data);
+                    return existing;
+                } else {
+                    const newId = (data.submissions || []).reduce((max, s) => s.id > max ? s.id : max, 0) + 1;
+                    const sub = {
+                        id: newId,
+                        studentNim,
+                        questId: parseInt(questId),
+                        submittedFile,
+                        submittedDate: dateStr,
+                        grade: '',
+                        feedback: '',
+                        status: 'pending_grade'
+                    };
+                    data.submissions.push(sub);
+                    writeDb(data);
+                    return sub;
+                }
             }
         );
     },
@@ -1312,23 +1597,41 @@ const db = {
                 const questRes = await pool.query('SELECT * FROM sim_quests WHERE id = $1', [sub.quest_id]);
                 const quest = questRes.rows[0];
 
+                const orderRes = await pool.query(
+                    `SELECT COUNT(*) FROM sim_submissions WHERE quest_id = $1 AND id < $2`,
+                    [sub.quest_id, sub.id]
+                );
+                const precedingCount = parseInt(orderRes.rows[0].count);
+
+                const bonus = calculateXpBonus(sub.submitted_date, quest.deadline, grade, precedingCount, quest.late_penalty);
+                const totalXp = Math.max(0, quest.xp_reward + bonus.totalBonus);
+
                 await pool.query(
                     `UPDATE sim_submissions SET grade = $1, feedback = $2, status = 'completed' WHERE id = $3`,
                     [grade, feedback, submissionId]
                 );
 
                 await pool.query(
-                    `UPDATE sim_users 
-                     SET xp = COALESCE(xp, 0) + $1, coins = COALESCE(coins, 0) + $2 
-                     WHERE nim = $3`,
-                    [quest.xp_reward, quest.coin_reward, sub.student_nim]
-                );
-
-                await pool.query(
                     `UPDATE sim_enrollments 
                      SET local_xp = COALESCE(local_xp, 0) + $1 
                      WHERE student_nim = $2 AND class_id = $3`,
-                    [quest.xp_reward, sub.student_nim, quest.class_id]
+                    [totalXp, sub.student_nim, quest.class_id]
+                );
+
+                // Fetch new local_xp to compute badges and completeness
+                const enrollRes = await pool.query(
+                    `SELECT local_xp FROM sim_enrollments WHERE student_nim = $1 AND class_id = $2`,
+                    [sub.student_nim, quest.class_id]
+                );
+                const newLocalXp = enrollRes.rows[0] ? enrollRes.rows[0].local_xp : 0;
+                const badges = calculateClassBadges(newLocalXp);
+                const isCompleted = newLocalXp >= 2000;
+
+                await pool.query(
+                    `UPDATE sim_enrollments 
+                     SET class_badges = $1, is_completed = $2 
+                     WHERE student_nim = $3 AND class_id = $4`,
+                    [JSON.stringify(badges), isCompleted, sub.student_nim, quest.class_id]
                 );
 
                 const classEnrollRes = await pool.query('SELECT COUNT(*) FROM sim_enrollments WHERE class_id = $1', [quest.class_id]);
@@ -1352,7 +1655,7 @@ const db = {
                     [newProgressPercent, completedCount, quest.class_id]
                 );
 
-                return { success: true };
+                return { success: true, xpGained: totalXp };
             },
             () => {
                 const data = readDb();
@@ -1361,23 +1664,29 @@ const db = {
                 if (sub.status === 'completed') return { error: 'Submission sudah dinilai.' };
 
                 const quest = data.quests.find(q => q.id === sub.questId);
-                const xp = quest ? quest.xpReward : 100;
-                const coins = quest ? quest.coinReward : 50;
+                const baseXp = quest ? quest.xpReward : 100;
+
+                const questSubmissions = data.submissions.filter(s => s.questId === sub.questId).sort((a, b) => a.id - b.id);
+                const myIndex = questSubmissions.findIndex(s => s.id === sub.id);
+                const precedingCount = myIndex >= 0 ? myIndex : questSubmissions.length;
+                const latePenalty = quest ? quest.latePenalty : 30;
+
+                const bonus = calculateXpBonus(sub.submittedDate, quest ? quest.deadline : '', grade, precedingCount, latePenalty);
+                const totalXp = Math.max(0, baseXp + bonus.totalBonus);
 
                 sub.grade = grade;
                 sub.feedback = feedback;
                 sub.status = 'completed';
 
-                const student = data.users.find(u => u.NIM === sub.studentNim);
-                if (student) {
-                    student.xp = (student.xp || 0) + xp;
-                    student.coins = (student.coins || 0) + coins;
+                let enrollment = data.enrollments.find(e => e.studentNim === sub.studentNim && e.classId === (quest ? quest.classId : 'SIM-MN8-2025'));
+                if (!enrollment) {
+                    enrollment = { studentNim: sub.studentNim, classId: quest ? quest.classId : 'SIM-MN8-2025', localXp: 0, classBadges: [], isCompleted: false, coinsClaimed: false };
+                    data.enrollments.push(enrollment);
                 }
 
-                const enrollment = data.enrollments.find(e => e.studentNim === sub.studentNim && e.classId === (quest ? quest.classId : 'SIM-MN8-2025'));
-                if (enrollment) {
-                    enrollment.localXp = (enrollment.localXp || 0) + xp;
-                }
+                enrollment.localXp = (enrollment.localXp || 0) + totalXp;
+                enrollment.classBadges = calculateClassBadges(enrollment.localXp);
+                enrollment.isCompleted = enrollment.localXp >= 2000;
 
                 if (quest) {
                     const cls = data.classes.find(c => c.id === quest.classId);
@@ -1393,35 +1702,397 @@ const db = {
                 }
 
                 writeDb(data);
+                return { success: true, xpGained: totalXp };
+            }
+        );
+    },
+
+    getShopItems: () => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query('SELECT * FROM sim_shop_items ORDER BY price ASC');
+                return res.rows.map(row => ({
+                    itemId: row.item_id,
+                    itemType: row.item_type,
+                    name: row.name,
+                    description: row.description,
+                    price: row.price,
+                    icon: row.icon,
+                    cssClass: row.css_class
+                }));
+            },
+            () => {
+                const data = readDb();
+                return data.shopItems || [];
+            }
+        );
+    },
+
+    purchaseItem: (studentNim, itemId) => {
+        return executeQuery(
+            async () => {
+                const userRes = await pool.query('SELECT * FROM sim_users WHERE nim = $1', [studentNim]);
+                if (userRes.rows.length === 0) return { error: 'User tidak ditemukan.' };
+                const user = mapUserToJs(userRes.rows[0]);
+
+                const itemRes = await pool.query('SELECT * FROM sim_shop_items WHERE item_id = $1', [itemId]);
+                if (itemRes.rows.length === 0) return { error: 'Item toko tidak ditemukan.' };
+                const item = itemRes.rows[0];
+
+                if (user.global_coins < item.price) {
+                    return { error: 'Koin global tidak cukup!' };
+                }
+
+                if (item.item_type === 'frame') {
+                    if (user.owned_frames.includes(itemId)) {
+                        return { error: 'Anda sudah memiliki bingkai ini!' };
+                    }
+                    user.owned_frames.push(itemId);
+                    await pool.query(
+                        'UPDATE sim_users SET global_coins = global_coins - $1, owned_frames = $2 WHERE nim = $3',
+                        [item.price, JSON.stringify(user.owned_frames), studentNim]
+                    );
+                } else if (item.item_type === 'badge') {
+                    if (user.owned_badges.includes(itemId)) {
+                        return { error: 'Anda sudah memiliki lencana ini!' };
+                    }
+                    user.owned_badges.push(itemId);
+                    await pool.query(
+                        'UPDATE sim_users SET global_coins = global_coins - $1, owned_badges = $2 WHERE nim = $3',
+                        [item.price, JSON.stringify(user.owned_badges), studentNim]
+                    );
+                }
+
+                await pool.query(
+                    'INSERT INTO sim_purchases (student_nim, item_id) VALUES ($1, $2)',
+                    [studentNim, itemId]
+                );
+
+                return { success: true };
+            },
+            () => {
+                const data = readDb();
+                const user = data.users.find(u => u.NIM === studentNim);
+                if (!user) return { error: 'User tidak ditemukan.' };
+
+                const item = data.shopItems.find(i => i.itemId === itemId);
+                if (!item) return { error: 'Item toko tidak ditemukan.' };
+
+                if ((user.global_coins || 0) < item.price) {
+                    return { error: 'Koin global tidak cukup!' };
+                }
+
+                if (!user.owned_frames) user.owned_frames = [];
+                if (!user.owned_badges) user.owned_badges = [];
+
+                if (item.itemType === 'frame') {
+                    if (user.owned_frames.includes(itemId)) return { error: 'Anda sudah memiliki bingkai ini!' };
+                    user.owned_frames.push(itemId);
+                } else if (item.itemType === 'badge') {
+                    if (user.owned_badges.includes(itemId)) return { error: 'Anda sudah memiliki lencana ini!' };
+                    user.owned_badges.push(itemId);
+                }
+
+                user.global_coins = (user.global_coins || 0) - item.price;
+                if (!data.purchases) data.purchases = [];
+                data.purchases.push({ studentNim, itemId, purchasedAt: new Date().toISOString() });
+
+                writeDb(data);
                 return { success: true };
             }
         );
     },
 
-    markMaterialAsRead: (studentNim, materialId) => {
+    equipFrame: (studentNim, frameId) => {
         return executeQuery(
             async () => {
-                await pool.query(
-                    `INSERT INTO sim_student_materials (student_nim, material_id) 
-                     VALUES ($1, $2)
-                     ON CONFLICT (student_nim, material_id) DO NOTHING`,
-                    [studentNim, materialId]
-                );
+                const userRes = await pool.query('SELECT * FROM sim_users WHERE nim = $1', [studentNim]);
+                if (userRes.rows.length === 0) return { error: 'User tidak ditemukan.' };
+                const user = mapUserToJs(userRes.rows[0]);
+
+                if (frameId && !user.owned_frames.includes(frameId)) {
+                    return { error: 'Anda tidak memiliki bingkai ini!' };
+                }
+
+                await pool.query('UPDATE sim_users SET active_frame = $1 WHERE nim = $2', [frameId, studentNim]);
                 return { success: true };
             },
             () => {
                 const data = readDb();
-                if (!data.studentMaterials) data.studentMaterials = [];
-                const alreadyRead = data.studentMaterials.some(sm => sm.studentNim === studentNim && sm.materialId === parseInt(materialId));
-                if (!alreadyRead) {
-                    data.studentMaterials.push({ studentNim, materialId: parseInt(materialId), readAt: new Date().toISOString() });
-                    writeDb(data);
+                const user = data.users.find(u => u.NIM === studentNim);
+                if (!user) return { error: 'User tidak ditemukan.' };
+
+                if (frameId && (!user.owned_frames || !user.owned_frames.includes(frameId))) {
+                    return { error: 'Anda tidak memiliki bingkai ini!' };
                 }
+
+                user.active_frame = frameId;
+                writeDb(data);
                 return { success: true };
+            }
+        );
+    },
+
+    claimClassCoins: (studentNim, classId) => {
+        return executeQuery(
+            async () => {
+                const enrollRes = await pool.query(
+                    'SELECT * FROM sim_enrollments WHERE student_nim = $1 AND class_id = $2',
+                    [studentNim, classId]
+                );
+                if (enrollRes.rows.length === 0) return { error: 'Pendaftaran tidak ditemukan.' };
+                const enrollment = mapEnrollmentToJs(enrollRes.rows[0]);
+
+                if (!enrollment.isCompleted) {
+                    return { error: 'Kelas belum diselesaikan! Minimal butuh 2000 XP.' };
+                }
+                if (enrollment.coinsClaimed) {
+                    return { error: 'Koin untuk kelas ini sudah diklaim.' };
+                }
+
+                const extraXp = Math.max(0, enrollment.localXp - 2000);
+                const extraCoins = Math.floor(extraXp / 100) * 10;
+                const totalCoinsClaimed = 200 + extraCoins;
+
+                await pool.query(
+                    'UPDATE sim_enrollments SET coins_claimed = TRUE WHERE student_nim = $1 AND class_id = $2',
+                    [studentNim, classId]
+                );
+
+                await pool.query(
+                    'UPDATE sim_users SET global_coins = COALESCE(global_coins, 0) + $1 WHERE nim = $2',
+                    [totalCoinsClaimed, studentNim]
+                );
+
+                return { success: true, coinsClaimed: totalCoinsClaimed };
+            },
+            () => {
+                const data = readDb();
+                const enrollment = data.enrollments.find(e => e.studentNim === studentNim && e.classId === classId);
+                if (!enrollment) return { error: 'Pendaftaran tidak ditemukan.' };
+
+                if (enrollment.localXp < 2000) {
+                    return { error: 'Kelas belum diselesaikan! Minimal butuh 2000 XP.' };
+                }
+                if (enrollment.coinsClaimed) {
+                    return { error: 'Koin untuk kelas ini sudah diklaim.' };
+                }
+
+                const extraXp = Math.max(0, enrollment.localXp - 2000);
+                const extraCoins = Math.floor(extraXp / 100) * 10;
+                const totalCoinsClaimed = 200 + extraCoins;
+
+                enrollment.coinsClaimed = true;
+                enrollment.isCompleted = true;
+
+                const user = data.users.find(u => u.NIM === studentNim);
+                if (user) {
+                    user.global_coins = (user.global_coins || 0) + totalCoinsClaimed;
+                }
+
+                writeDb(data);
+                return { success: true, coinsClaimed: totalCoinsClaimed };
+            }
+        );
+    },
+
+    getStudentProfile: (studentNim) => {
+        return executeQuery(
+            async () => {
+                const userRes = await pool.query('SELECT * FROM sim_users WHERE nim = $1', [studentNim]);
+                if (userRes.rows.length === 0) return null;
+                const user = mapUserToJs(userRes.rows[0]);
+
+                const enrollRes = await pool.query(
+                    `SELECT e.local_xp, e.class_badges, e.is_completed, e.coins_claimed, c.name as class_name, c.id as class_id
+                     FROM sim_enrollments e
+                     JOIN sim_classes c ON e.class_id = c.id
+                     WHERE e.student_nim = $1`,
+                    [studentNim]
+                );
+
+                const classes = enrollRes.rows.map(row => ({
+                    classId: row.class_id,
+                    className: row.class_name,
+                    localXp: row.local_xp,
+                    classBadges: typeof row.class_badges === 'string' ? JSON.parse(row.class_badges) : (row.class_badges || []),
+                    isCompleted: row.is_completed,
+                    coinsClaimed: row.coins_claimed
+                }));
+
+                return {
+                    name: user.name,
+                    nim: user.NIM,
+                    avatar: user.avatar,
+                    activeFrame: user.active_frame,
+                    globalCoins: user.global_coins,
+                    ownedFrames: user.owned_frames,
+                    ownedBadges: user.owned_badges,
+                    faculty: user.faculty || '',
+                    major: user.major || '',
+                    classes: classes
+                };
+            },
+            () => {
+                const data = readDb();
+                const user = data.users.find(u => u.NIM === studentNim);
+                if (!user) return null;
+
+                const enrollments = data.enrollments.filter(e => e.studentNim === studentNim);
+                const classes = enrollments.map(e => {
+                    const cls = data.classes.find(c => c.id === e.classId);
+                    return {
+                        classId: e.classId,
+                        className: cls ? cls.name : e.classId,
+                        localXp: e.localXp || 0,
+                        classBadges: e.classBadges || [],
+                        isCompleted: e.isCompleted || false,
+                        coinsClaimed: e.coinsClaimed || false
+                    };
+                });
+
+                return {
+                    name: user.name,
+                    nim: user.NIM,
+                    avatar: user.avatar,
+                    activeFrame: user.active_frame || '',
+                    globalCoins: user.global_coins || 0,
+                    ownedFrames: user.owned_frames || [],
+                    ownedBadges: user.owned_badges || [],
+                    faculty: user.faculty || '',
+                    major: user.major || '',
+                    classes: classes
+                };
+            }
+        );
+    },
+
+    getLeaderboard: (classId, major) => {
+        return executeQuery(
+            async () => {
+                if (classId) {
+                    const res = await pool.query(
+                        `SELECT u.name, u.nim, u.avatar, u.active_frame, e.local_xp, e.class_badges 
+                         FROM sim_enrollments e 
+                         JOIN sim_users u ON e.student_nim = u.nim 
+                         WHERE e.class_id = $1 
+                         ORDER BY e.local_xp DESC`,
+                        [classId]
+                    );
+                    return res.rows.map(row => ({
+                        name: row.name,
+                        nim: row.nim,
+                        avatar: row.avatar,
+                        activeFrame: row.active_frame,
+                        xp: row.local_xp,
+                        badges: typeof row.class_badges === 'string' ? JSON.parse(row.class_badges) : (row.class_badges || [])
+                    }));
+                } else {
+                    let query = `
+                        SELECT u.name, u.nim, u.avatar, u.active_frame, u.owned_badges, COALESCE(SUM(e.local_xp), 0) as total_xp 
+                        FROM sim_users u 
+                        LEFT JOIN sim_enrollments e ON u.nim = e.student_nim 
+                        WHERE u.role = 'Mahasiswa'
+                    `;
+                    const params = [];
+                    if (major) {
+                        query += ` AND u.major = $1`;
+                        params.push(major);
+                    }
+                    query += `
+                        GROUP BY u.id, u.name, u.nim, u.avatar, u.active_frame, u.owned_badges 
+                        ORDER BY total_xp DESC
+                    `;
+                    const res = await pool.query(query, params);
+                    return res.rows.map(row => ({
+                        name: row.name,
+                        nim: row.nim,
+                        avatar: row.avatar,
+                        activeFrame: row.active_frame,
+                        xp: parseInt(row.total_xp),
+                        badges: typeof row.owned_badges === 'string' ? JSON.parse(row.owned_badges) : (row.owned_badges || [])
+                    }));
+                }
+            },
+            () => {
+                const data = readDb();
+                if (classId) {
+                    const enrolled = data.enrollments.filter(e => e.classId === classId);
+                    const list = enrolled.map(e => {
+                        const u = data.users.find(usr => usr.NIM === e.studentNim);
+                        return {
+                            name: u ? u.name : '',
+                            nim: e.studentNim,
+                            avatar: u ? u.avatar : '',
+                            activeFrame: u ? u.active_frame : '',
+                            xp: e.localXp || 0,
+                            badges: e.classBadges || []
+                        };
+                    });
+                    return list.sort((a, b) => b.xp - a.xp);
+                } else {
+                    const list = data.users.filter(u => u.role === 'Mahasiswa' && (!major || u.major === major)).map(u => {
+                        const studentEnrollments = data.enrollments.filter(e => e.studentNim === u.NIM);
+                        const totalXp = studentEnrollments.reduce((sum, e) => sum + (e.localXp || 0), 0);
+                        return {
+                            name: u.name,
+                            nim: u.NIM,
+                            avatar: u.avatar,
+                            activeFrame: u.active_frame || '',
+                            xp: totalXp,
+                            badges: u.owned_badges || []
+                        };
+                    });
+                    return list.sort((a, b) => b.xp - a.xp);
+                }
+            }
+        );
+    },
+
+    getClassLogs: (classId) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query('SELECT * FROM sim_class_logs WHERE class_id = $1 ORDER BY id DESC', [classId]);
+                return res.rows.map(row => ({
+                    id: row.id,
+                    classId: row.class_id,
+                    activityText: row.activity_text,
+                    createdAt: row.created_at
+                }));
+            },
+            () => {
+                const data = readDb();
+                if (!data.classLogs) data.classLogs = [];
+                return data.classLogs.filter(l => l.classId === classId).slice().reverse();
+            }
+        );
+    },
+
+    createClassLog: (classId, activityText) => {
+        return executeQuery(
+            async () => {
+                const res = await pool.query(
+                    `INSERT INTO sim_class_logs (class_id, activity_text) VALUES ($1, $2) RETURNING *`,
+                    [classId, activityText]
+                );
+                return res.rows[0];
+            },
+            () => {
+                const data = readDb();
+                if (!data.classLogs) data.classLogs = [];
+                const newId = data.classLogs.length + 1;
+                const newLog = {
+                    id: newId,
+                    classId,
+                    activityText,
+                    createdAt: new Date().toISOString()
+                };
+                data.classLogs.push(newLog);
+                writeDb(data);
+                return newLog;
             }
         );
     }
 };
 
 module.exports = db;
-

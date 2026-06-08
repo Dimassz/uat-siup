@@ -531,6 +531,20 @@
                                     </div>
                                 </div>
 
+                                <!-- Late submission settings -->
+                                <div class="row mb-3 g-3">
+                                    <div class="col-sm-6 d-flex align-items-center">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="questAllowLate" checked>
+                                            <label class="form-check-label form-label-custom ms-2" for="questAllowLate" style="font-size: 0.85rem;">Izinkan Kumpul Terlambat</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" id="latePenaltyContainer">
+                                        <label class="form-label form-label-custom" style="font-size: 0.85rem;"><i class="fa-solid fa-circle-minus text-danger me-1"></i> Penalti XP Terlambat</label>
+                                        <input type="number" class="form-control" id="questLatePenalty" value="30" min="0" style="border-radius:10px">
+                                    </div>
+                                </div>
+
                                 <!-- Drag & Drop for Quest Files -->
                                 <div class="mb-3">
                                     <label class="form-label form-label-custom">Berkas Pendukung Tugas (Opsional)</label>
@@ -928,22 +942,18 @@
 
         // ── Participants ──
         const badgesReference = {
-            'database': { title: 'Database Specialist', icon: 'fa-solid fa-database', class: 'bg-badge-database' },
-            'analyst': { title: 'System Analyst', icon: 'fa-solid fa-chart-pie', class: 'bg-badge-analyst' },
-            'style': { title: 'Style Master', icon: 'fa-brands fa-css3-alt', class: 'bg-badge-style' },
-            'api': { title: 'API Architect', icon: 'fa-solid fa-plug', class: 'bg-badge-api' },
-            'security': { title: 'Security Warden', icon: 'fa-solid fa-shield-halved', class: 'bg-badge-security' },
-            'grand': { title: 'Grand Master SIM', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand' }
+            'data_explorer': { title: 'Data Explorer', icon: 'fa-solid fa-compass', class: 'bg-badge-database' },
+            'query_master': { title: 'Query Master', icon: 'fa-solid fa-code', class: 'bg-badge-analyst' },
+            'class_champion': { title: 'Class Champion', icon: 'fa-solid fa-award', class: 'bg-badge-style' },
+            'class_master': { title: 'Class Master', icon: 'fa-solid fa-trophy', class: 'bg-badge-grand' }
         };
 
         function getBadgesFromXP(xp) {
             const badges = [];
-            if (xp >= 150) badges.push('database');
-            if (xp >= 300) badges.push('analyst');
-            if (xp >= 500) badges.push('style');
-            if (xp >= 700) badges.push('api');
-            if (xp >= 900) badges.push('security');
-            if (xp >= 1000) badges.push('grand');
+            if (xp >= 500) badges.push('data_explorer');
+            if (xp >= 1000) badges.push('query_master');
+            if (xp >= 1500) badges.push('class_champion');
+            if (xp >= 2000) badges.push('class_master');
             return badges;
         }
 
@@ -1083,6 +1093,9 @@
                 deadline = days > 0 ? `Tenggat: ${formatted} (${days} Hari lagi)` : `Tenggat Terlewati (${formatted})`;
             }
 
+            const allowLateSubmission = document.getElementById('questAllowLate').checked;
+            const latePenalty = parseInt(document.getElementById('questLatePenalty').value) || 0;
+
             const lecturerFiles = questFiles.map(f => ({
                 name: f.name,
                 type: f.name.split('.').pop().toLowerCase(),
@@ -1093,12 +1106,14 @@
                 const res = await fetch(`/api/classes/${activeClassId}/quests`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title, description, xpReward, coinReward, deadline, lecturerFiles })
+                    body: JSON.stringify({ title, description, xpReward, coinReward, deadline, lecturerFiles, allowLateSubmission, latePenalty })
                 });
                 const result = await res.json();
                 if (result.success) {
                     alert("⚔️ Misi tugas berhasil dirilis ke kelas!");
                     document.getElementById('questForm').reset();
+                    document.getElementById('questAllowLate').checked = true;
+                    document.getElementById('questLatePenalty').value = '30';
                     questFiles = [];
                     renderFileList('questFileList', 'questFiles');
                     // Reset deadline to 7 days ahead

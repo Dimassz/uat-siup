@@ -510,6 +510,26 @@
                                             <option value="avatar-frame-purple-glow-decorated">🔮 Purple Neon Glow (Spesial)</option>
                                         </select>
                                     </div>
+
+                                    <!-- Faculty & Major Selects -->
+                                    <div class="col-md-6">
+                                        <label for="userFaculty" class="form-label">Fakultas</label>
+                                        <select class="form-select" id="userFaculty" onchange="updateMajorOptions()" required>
+                                            <option value="" disabled selected>Pilih Fakultas</option>
+                                            <option value="Fakultas Teknologi Industri">Fakultas Teknologi Industri</option>
+                                            <option value="Fakultas Sains dan Ilmu Komputer">Fakultas Sains dan Ilmu Komputer</option>
+                                            <option value="Fakultas Perencanaan Infrastruktur">Fakultas Perencanaan Infrastruktur</option>
+                                            <option value="Fakultas Komunikasi dan Diplomasi">Fakultas Komunikasi dan Diplomasi</option>
+                                            <option value="Fakultas Teknologi Eksplorasi dan Produksi">Fakultas Teknologi Eksplorasi dan Produksi</option>
+                                            <option value="Fakultas Ekonomi dan Bisnis">Fakultas Ekonomi dan Bisnis</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="userMajor" class="form-label">Jurusan</label>
+                                        <select class="form-select" id="userMajor" required>
+                                            <option value="" disabled selected>Pilih Jurusan</option>
+                                        </select>
+                                    </div>
                                     
                                     <div class="col-12 mt-4">
                                         <button type="submit" class="btn btn-premium w-100">
@@ -793,8 +813,7 @@
                         
                         const gamificationInfo = user.role === 'Mahasiswa'
                             ? `<div class="d-flex flex-column">
-                                  <span class="text-info fw-bold small">${user.level || 'Level 1'}</span>
-                                  <span class="text-muted extra-small" style="font-size: 0.75rem;">${user.xp || 0} XP • ${user.status || 'Apprentice'}</span>
+                                  <span class="text-warning fw-bold small"><i class="fa-solid fa-coins me-1"></i>${user.global_coins || 0} Koin</span>
                                </div>`
                             : `<span class="text-muted small">-</span>`;
 
@@ -857,6 +876,29 @@
                 .catch(err => console.error('Gagal mengambil data kelas', err));
         }
 
+        const facultyMajorMap = {
+            "Fakultas Teknologi Industri": ["Teknik Kimia", "Teknik Mesin", "Teknik Elektro", "Teknik Logistik"],
+            "Fakultas Sains dan Ilmu Komputer": ["Ilmu Komputer", "Kimia"],
+            "Fakultas Perencanaan Infrastruktur": ["Teknik Sipil", "Teknik Lingkungan"],
+            "Fakultas Komunikasi dan Diplomasi": ["Ilmu Komunikasi", "Hubungan Internasional"],
+            "Fakultas Teknologi Eksplorasi dan Produksi": ["Teknik Geofisika", "Teknik Geologi", "Teknik Perminyakan"],
+            "Fakultas Ekonomi dan Bisnis": ["Manajemen", "Ekonomi"]
+        };
+
+        function updateMajorOptions() {
+            const faculty = document.getElementById('userFaculty').value;
+            const majorSelect = document.getElementById('userMajor');
+            majorSelect.innerHTML = '<option value="" disabled selected>Pilih Jurusan</option>';
+            if (facultyMajorMap[faculty]) {
+                facultyMajorMap[faculty].forEach(m => {
+                    const opt = document.createElement('option');
+                    opt.value = m;
+                    opt.innerText = m;
+                    majorSelect.appendChild(opt);
+                });
+            }
+        }
+
         // Action: Create User Account
         function handleCreateUser(e) {
             e.preventDefault();
@@ -867,12 +909,14 @@
             const nim = document.getElementById('userNim').value;
             const email = document.getElementById('userEmail').value;
             const frame = document.getElementById('userFrame').value;
+            const faculty = document.getElementById('userFaculty').value;
+            const major = document.getElementById('userMajor').value;
 
             logToTerminal(`[BCRYPT] Menginisialisasi password hashing untuk user: ${name}...`, 'info');
             logToTerminal(`[BCRYPT] Password Plain: "${password}"`, 'info');
             logToTerminal(`[BCRYPT] Melakukan salt generation (rounds: 10)...`, 'info');
 
-            const payload = { name, role, password, nim, email, frame };
+            const payload = { name, role, password, nim, email, frame, faculty, major };
 
             fetch('/api/users', {
                 method: 'POST',
